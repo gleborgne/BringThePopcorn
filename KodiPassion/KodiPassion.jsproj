@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+      <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+      <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+      <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>14538270-1c70-4b16-af89-b8cb2ebeae3b</ProjectGuid>
+    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
+  <PropertyGroup>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <PackageCertificateKeyFile>KodiPassion_TemporaryKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <Content Include="css\default.css" />
+    <Content Include="default.html" />
+    <Content Include="images\LockScreenLogo.scale-200.png" />
+    <Content Include="images\SplashScreen.scale-200.png" />
+    <Content Include="images\Square150x150Logo.scale-200.png" />
+    <Content Include="images\Square44x44Logo.scale-200.png" />
+    <Content Include="images\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="images\StoreLogo.png" />
+    <Content Include="images\Wide310x150Logo.scale-200.png" />
+    <Content Include="js\default.js" />
+    <Content Include="css\default.less" />
+    <Content Include="kodi\API\Kodi.API.Input.js" />
+    <Content Include="kodi\API\Kodi.API.js" />
+    <Content Include="kodi\API\Kodi.API.Music.js" />
+    <Content Include="kodi\API\Kodi.API.Player.js" />
+    <Content Include="kodi\API\Kodi.API.TVShows.js" />
+    <Content Include="kodi\API\Kodi.API.Videos.js" />
+    <Content Include="kodi\API\Kodi.API.Websocket.js" />
+    <Content Include="kodi\Kodi.App.js" />
+    <Content Include="kodi\Kodi.Data.js" />
+    <Content Include="kodi\Kodi.NowPlaying.js" />
+    <Content Include="kodi\Kodi.Settings.js" />
+    <Content Include="kodi\Kodi.Utils.js" />
+    <Content Include="kodi\Kodi.WOL.js" />
+    <Content Include="scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="scripts\jquery-2.1.4.js" />
+    <Content Include="scripts\jquery-2.1.4.min.js" />
+    <Content Include="scripts\jquery-2.1.4.min.map" />
+    <Content Include="scripts\lodash.js" />
+    <Content Include="scripts\lodash.min.js" />
+    <Content Include="scripts\moment-with-locales.js" />
+    <Content Include="scripts\moment-with-locales.min.js" />
+    <Content Include="scripts\moment.js" />
+    <Content Include="scripts\moment.min.js" />
+    <Content Include="scripts\velocity\velocity.js" />
+    <Content Include="scripts\velocity\velocity.min.js" />
+    <Content Include="scripts\velocity\velocity.ui.js" />
+    <Content Include="scripts\velocity\velocity.ui.min.js" />
+    <Content Include="scripts\winjscontrib\css\segoe.symbol.css" />
+    <Content Include="scripts\winjscontrib\css\segoe.symbol.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.mixin.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.mixin.less" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.mixin.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.childviewflyout.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.childviewflyout.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.dataform.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.dataform.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.datetimescroller.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.datetimescroller.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.extended-splashscreen.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.extended-splashscreen.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.flipsnap.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.flipsnap.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.flipviewpager.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.flipviewpager.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.flyoutpage.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.flyoutpage.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.globalprogress.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.globalprogress.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.hamburger.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.hamburger.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.hub.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.hub.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.masterdetailview.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.masterdetailview.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.tabcontrol.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.tabcontrol.min.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.tilemenu.css" />
+    <Content Include="scripts\winjscontrib\css\winjscontrib.ui.tilemenu.min.css" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.bindings.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.bindings.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.core.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.core.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.crossplatform.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.crossplatform.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.datacontainer.cordova.database.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.datacontainer.cordova.database.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.datacontainer.cordova.file.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.datacontainer.cordova.file.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.datacontainer.localstorage.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.datacontainer.localstorage.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.datacontainer.winrt.file.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.datacontainer.winrt.file.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.date.utils.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.date.utils.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.dynamicscripts.html" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.dynamicscripts.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.dynamicscripts.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.logger.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.logger.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.messenger.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.messenger.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.messenger.worker.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.messenger.worker.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.search.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.search.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.search.worker.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.search.worker.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.animation.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.animation.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.boilerplate.control.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.boilerplate.control.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.boilerplate.observable.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.boilerplate.observable.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.childviewflyout.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.childviewflyout.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.dataform.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.dataform.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.datasourcemanager.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.datasourcemanager.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.elasticinput.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.elasticinput.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.extended-splashscreen.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.extended-splashscreen.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.flipsnap.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.flipsnap.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.flipviewpager.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.flipviewpager.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.flyoutpage.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.flyoutpage.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.globalprogress.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.globalprogress.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.grid.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.grid.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.hamburger.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.hamburger.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.hubcontrol.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.hubcontrol.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.jquery.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.jquery.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.masterdetailview.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.masterdetailview.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.morph.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.morph.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.multipass-renderer.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.multipass-renderer.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.navigator.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.navigator.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.pages.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.pages.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.pivotmultidevice.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.pivotmultidevice.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.semanticzoom-wrapper.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.semanticzoom-wrapper.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.smartlistlayout.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.smartlistlayout.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.statebutton.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.statebutton.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.swipeslide.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.swipeslide.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.tabcontrol.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.tabcontrol.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.tilemenu.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.tilemenu.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.webcomponents.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.webcomponents.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.audiorecording.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.audiorecording.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.backgrounddownloads.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.backgrounddownloads.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.backgrounddownloads.tracker.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.backgrounddownloads.tracker.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.bgtask.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.bgtask.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.contacts.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.contacts.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.core.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.core.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.multipleviews.child.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.multipleviews.child.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.multipleviews.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.multipleviews.main.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.multipleviews.main.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.multipleviews.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.ssm.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.ssm.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.upnp.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.upnp.min.js" />
+    <Content Include="scripts\WinJS\css\ui-dark.css" />
+    <Content Include="scripts\WinJS\css\ui-light.css" />
+    <Content Include="scripts\WinJS\fonts\Symbols.ttf" />
+    <Content Include="scripts\WinJS\js\base.js" />
+    <Content Include="scripts\WinJS\js\en-US\ui.strings.js" />
+    <Content Include="scripts\WinJS\js\ui.js" />
+    <TypeScriptCompile Include="kodi\API\Kodi.API.Input.ts" />
+    <TypeScriptCompile Include="kodi\API\Kodi.API.Music.ts" />
+    <TypeScriptCompile Include="kodi\API\Kodi.API.Player.ts" />
+    <TypeScriptCompile Include="kodi\API\Kodi.API.ts" />
+    <TypeScriptCompile Include="kodi\API\Kodi.API.TVShows.ts" />
+    <TypeScriptCompile Include="kodi\API\Kodi.API.Videos.ts" />
+    <TypeScriptCompile Include="kodi\API\Kodi.API.Websocket.ts" />
+    <TypeScriptCompile Include="kodi\Kodi.App.ts" />
+    <TypeScriptCompile Include="kodi\Kodi.Data.ts" />
+    <TypeScriptCompile Include="kodi\Kodi.NowPlaying.ts" />
+    <TypeScriptCompile Include="kodi\Kodi.Settings.ts" />
+    <TypeScriptCompile Include="kodi\Kodi.Utils.ts" />
+    <TypeScriptCompile Include="kodi\Kodi.WOL.ts" />
+    <TypeScriptCompile Include="typings\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="typings\typings\lodash\lodash.d.ts" />
+    <TypeScriptCompile Include="typings\typings\moment\moment-node.d.ts" />
+    <TypeScriptCompile Include="typings\typings\moment\moment.d.ts" />
+    <TypeScriptCompile Include="typings\typings\snapsvg\snapsvg.d.ts" />
+    <TypeScriptCompile Include="typings\typings\tsd.d.ts" />
+    <TypeScriptCompile Include="typings\typings\winjs\winjs.d.ts" />
+    <TypeScriptCompile Include="typings\typings\winrt\winrt.d.ts" />
+    <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.core.d.ts" />
+    <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.logger.d.ts" />
+    <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.search.d.ts" />
+    <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.ui.animation.d.ts" />
+    <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.ui.pages.d.ts" />
+    <None Include="KodiPassion_TemporaryKey.pfx" />
+    <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.winrt.core.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4a0dddb5-7a95-4fbf-97cc-616d07737a77}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.jsproj.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.jsproj.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below then uncomment
+       that target and the DisableFastUpToDateCheck PropertyGroup. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+  -->
+</Project>
