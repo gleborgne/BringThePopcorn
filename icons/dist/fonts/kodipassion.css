@@ -29,8 +29,10 @@ this is a template for icon fonts
 .kdp-photo:before,
 .kdp-play:before,
 .kdp-power:before,
+.kdp-remotecontrol:before,
 .kdp-rewind:before,
 .kdp-settings:before,
+.kdp-share:before,
 .kdp-speaker-mute:before,
 .kdp-speaker-off:before,
 .kdp-speaker-on:before,
@@ -65,12 +67,14 @@ this is a template for icon fonts
 .kdp-photo:before { content: "\E00E" }
 .kdp-play:before { content: "\E00F" }
 .kdp-power:before { content: "\E010" }
-.kdp-rewind:before { content: "\E011" }
-.kdp-settings:before { content: "\E012" }
-.kdp-speaker-mute:before { content: "\E013" }
-.kdp-speaker-off:before { content: "\E014" }
-.kdp-speaker-on:before { content: "\E015" }
-.kdp-stop:before { content: "\E016" }
-.kdp-television:before { content: "\E017" }
-.kdp-zoom-minus:before { content: "\E018" }
-.kdp-zoom-plus:before { content: "\E019" }
+.kdp-remotecontrol:before { content: "\E011" }
+.kdp-rewind:before { content: "\E012" }
+.kdp-settings:before { content: "\E013" }
+.kdp-share:before { content: "\E014" }
+.kdp-speaker-mute:before { content: "\E015" }
+.kdp-speaker-off:before { content: "\E016" }
+.kdp-speaker-on:before { content: "\E017" }
+.kdp-stop:before { content: "\E018" }
+.kdp-television:before { content: "\E019" }
+.kdp-zoom-minus:before { content: "\E01A" }
+.kdp-zoom-plus:before { content: "\E01B" }
