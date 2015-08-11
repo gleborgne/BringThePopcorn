@@ -4,17 +4,29 @@
  * sources available at https://github.com/gleborgne/winjscontrib
  */
 
-//polyfill setimmediate
-if (!this.setImmediate) {
-    this.setImmediate = function (callback) {
-        var args = [];
-        for (var _i = 1; _i < arguments.length; _i++) {
-            args[_i - 1] = arguments[_i];
-        }
-        setTimeout(callback, 0);
-        return 0;
-    };
-}
+(function (_global) {
+    //polyfill setimmediate
+    if (!this.setImmediate) {
+        this.setImmediate = function (callback) {
+            var args = [];
+            for (var _i = 1; _i < arguments.length; _i++) {
+                args[_i - 1] = arguments[_i];
+            }
+            setTimeout(callback, 0);
+            return 0;
+        };
+    }
+    //Windows 10 doesn't have it anymore, polyfill for backward compat
+    if (!this.toStaticHTML) {
+        this.toStaticHTML = function (text) {
+            return text;
+        };
+    }
+    var msapp = _global.MSApp;
+    if (msapp && !msapp.execUnsafeLocalFunction) {
+        msapp.execUnsafeLocalFunction = function (c) { c(); };
+    }
+})(this);
 if (!Object.map) {
     Object.map = function (obj, mapping) {
         var mapped = {};
@@ -1405,6 +1417,15 @@ var WinJSContrib;
             var actionName = el.dataset.pageAction || el.getAttribute('tap');
             var action = control[actionName];
             if (action && typeof action === 'function') {
+                var options = el.dataset.pageActionOptions || el.getAttribute('tap-options');
+                if (options) {
+                    try {
+                        options = WinJS.UI.optionsParser(options, window);
+                    }
+                    catch (exception) {
+                        return;
+                    }
+                }
                 WinJSContrib.UI.tap(el, function (eltarg) {
                     var p = WinJS.Promise.wrap();
                     var actionArgs = eltarg.dataset.pageActionArgs || el.getAttribute('tap-args');
@@ -1427,10 +1448,10 @@ var WinJSContrib;
                         else {
                         }
                     }
-                    p.then(function () {
-                        control[actionName].bind(control)({ elt: eltarg, args: actionArgs });
+                    return p.then(function () {
+                        return control[actionName].bind(control)({ elt: eltarg, args: actionArgs });
                     });
-                });
+                }, options);
             }
         }
         /**
@@ -1462,6 +1483,15 @@ var WinJSContrib;
                 }
             }
             if (target) {
+                var options = el.dataset.pageActionOptions || el.getAttribute('tap-options');
+                if (options) {
+                    try {
+                        options = WinJS.UI.optionsParser(options, window);
+                    }
+                    catch (exception) {
+                        return;
+                    }
+                }
                 WinJSContrib.UI.tap(el, function (eltarg) {
                     var p = WinJS.Promise.wrap();
                     var actionArgs = eltarg.dataset.pageActionArgs || el.getAttribute('linkto-args');
@@ -1478,16 +1508,16 @@ var WinJSContrib;
                             return val;
                         });
                     }
-                    p.then(function (actionArgs) {
+                    return p.then(function (actionArgs) {
                         if (!applink && WinJSContrib.UI.parentNavigator && WinJSContrib.UI.parentNavigator(eltarg)) {
                             var nav = WinJSContrib.UI.parentNavigator(eltarg);
-                            nav.navigate(target, actionArgs);
+                            return nav.navigate(target, actionArgs);
                         }
                         else {
-                            WinJS.Navigation.navigate(target, actionArgs);
+                            return WinJS.Navigation.navigate(target, actionArgs);
                         }
                     });
-                });
+                }, options);
             }
         }
         /**
@@ -1852,7 +1882,15 @@ var WinJSContrib;
                                     event.stopImmediatePropagation();
                                     event.stopPropagation();
                                     event.preventDefault();
-                                    tracking.callback(elt, event);
+                                    var res = tracking.callback(elt, event);
+                                    if (WinJS.Promise.is(res)) {
+                                        elt.disabled = true;
+                                        WinJS.Utilities.addClass(elt, 'working');
+                                        res.then(function () {
+                                            elt.disabled = false;
+                                            WinJS.Utilities.removeClass(elt, 'working');
+                                        });
+                                    }
                                 }
                                 if (tracking && tracking.pointerdown)
                                     tracking.pointerdown = undefined;

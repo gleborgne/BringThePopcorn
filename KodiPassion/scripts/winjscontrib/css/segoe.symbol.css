@@ -1,9 +1,3 @@
-/* 
- * WinJS Contrib v2.1.0.2
- * licensed under MIT license (see http://opensource.org/licenses/MIT)
- * sources available at https://github.com/gleborgne/winjscontrib
- */
-
 /* adapted from https://github.com/geekytime/segoe-symbol-css */
 [class^="sgicon-"],
 [class*=" sgicon-"] {
@@ -828,9 +822,6 @@ ul.icons li [class*=" sgicon-"] {
 }
 .sgicon-sort:before {
   content: "\E174";
-}
-.sgicon-list-invert:before {
-  content: "\E175";
 }
 .sgicon-all-applications:before {
   content: "\E179";
