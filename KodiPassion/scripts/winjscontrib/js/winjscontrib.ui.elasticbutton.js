@@ -1,3 +1,10 @@
+/// <reference path="winjscontrib.core.js" />
+/* 
+ * WinJS Contrib v2.1.0.2
+ * licensed under MIT license (see http://opensource.org/licenses/MIT)
+ * sources available at https://github.com/gleborgne/winjscontrib
+ */
+
 //this control requires snap.svg
 
 (function () {
@@ -48,8 +55,7 @@
 			    if (!ctrl.contentElement) {
 			        ctrl.contentElement = document.createElement('DIV');
 			        ctrl.contentElement.className = 'mcn-elasticbutton-content';
-			        ctrl.contentElement.innerHTML = ctrl.element.innerHTML;
-			        ctrl.element.innerHTML = '';
+			        WinJSContrib.Utils.moveChilds(ctrl.element, ctrl.contentElement);
 			        contentCreated = true;
 			    }
 
@@ -98,7 +104,7 @@
 			},
 
 			dispose: function () {
-			    if (ctrl.eventTracker) ctrl.eventTracker.dispose();
+			    if (this.eventTracker) this.eventTracker.dispose();
 			    WinJS.Utilities.disposeSubTree(this.element);
 			    this.element = null;
 			}

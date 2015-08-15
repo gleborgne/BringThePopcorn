@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>home</title>
+
+    <link href="home.css" rel="stylesheet" />
+    <script src="home.js"></script>
+</head>
+<body>
+    <div class="page-home fragment" data-win-control="WinJSContrib.UI.FOWrapper" member="fowrapper">
+        <header class="page-header" aria-label="Header content" role="banner">
+            <button class="back-button" data-win-control="WinJS.UI.BackButton"></button>
+            <h1 class="titlearea win-type-ellipsis">
+                <span class="pagetitle">Welcome to home</span>
+            </h1>
+        </header>
+        <section class="page-section" aria-label="Main content" role="main">
+            <p>Content goes here.</p>
+            <button linkto="/pages/settings/settings.html">go to settings</button>
+            <button tap="blur">BLUR</button><br />
+            <button tap="unblur">UNBLUR</button>
+        </section>
+    </div>
+</body>
+</html>

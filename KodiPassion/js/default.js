@@ -14,7 +14,9 @@
 				// TODO: This application was suspended and then terminated.
 				// To create a smooth user experience, restore application state here so that it looks like the app never stopped running.
 			}
-			args.setPromise(WinJS.UI.processAll());
+			args.setPromise(WinJS.UI.processAll().then(function(){
+			    WinJS.Navigation.navigate("/pages/settings/settings.html");
+			}));
 		}
 	};
 

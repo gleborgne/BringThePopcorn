@@ -6,14 +6,49 @@
 
     <!-- WinJS references -->
     <link href="/scripts/WinJS/css/ui-dark.css" rel="stylesheet" />
+    <link href="/scripts/winjscontrib/css/winjscontrib.ui.css" rel="stylesheet" />
+    <link href="scripts/winjscontrib/css/winjscontrib.ui.extended-splashscreen.css" rel="stylesheet" />
+    <link href="scripts/winjscontrib/css/winjscontrib.ui.globalprogress.css" rel="stylesheet" />
+    <link href="scripts/winjscontrib/css/winjscontrib.ui.hamburger.css" rel="stylesheet" />
+    <link href="scripts/winjscontrib/css/winjscontrib.ui.elasticbutton.css" rel="stylesheet" />
     <script src="/scripts/WinJS/js/base.js"></script>
     <script src="/scripts/WinJS/js/ui.js"></script>
+    <script src="scripts/snap.svg-min.js"></script>
 
+    <!--<script src="scripts/winjscontrib/js/winjscontrib.core.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.ui.webcomponents.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.winrt.core.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.winrt.upnp.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.bindings.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.date.utils.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.ui.navigator.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.ui.animation.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.ui.extended-splashscreen.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.ui.globalprogress.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.ui.hamburger.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.ui.elasticbutton.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.ui.fowrapper.js"></script>-->
+    <script src="/dist/winjscontrib-custom.js"></script>
+
+    <!--<script src="kodi/Kodi.Data.js"></script>
+    <script src="kodi/Kodi.App.js"></script>
+    <script src="kodi/Kodi.Settings.js"></script>
+    <script src="kodi/Kodi.Utils.js"></script>
+    <script src="kodi/Kodi.WOL.js"></script>
+    <script src="kodi/Kodi.NowPlaying.js"></script>
+    <script src="kodi/API/Kodi.API.js"></script>
+    <script src="kodi/API/Kodi.API.Input.js"></script>
+    <script src="kodi/API/Kodi.API.Music.js"></script>
+    <script src="kodi/API/Kodi.API.Player.js"></script>
+    <script src="kodi/API/Kodi.API.TVShows.js"></script>
+    <script src="kodi/API/Kodi.API.Videos.js"></script>
+    <script src="kodi/API/Kodi.API.Websocket.js"></script>-->
+    <script src="/dist/kodi.js"></script>
     <!-- KodiPassion references -->
     <link href="/css/default.css" rel="stylesheet" />
     <script src="/js/default.js"></script>
 </head>
 <body class="win-type-body">
-    <p>Content goes here</p>
+    <div id="contenthost" data-win-control="WinJSContrib.UI.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}"></div>
 </body>
 </html>
