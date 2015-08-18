@@ -1,26 +1,26 @@
 ﻿@import "apptheme.less";
 
-body{
-    padding:0;
-    margin:0;
+body {
+    padding: 0;
+    margin: 0;
     position: relative;
-    background-color: #222;    
+    background-color: #222;
 }
 
-.applayout(@menusize, @nowplayingsize){
-    #menu{
+.applayout(@menusize, @nowplayingsize) {
+    #menu {
         position: absolute;
         left: 0;
         top: 0;
         bottom: 0;
-        width: 400px;        
+        width: 400px;
 
-        .main-menu{
+        .main-menu {
             width: 100%;
             height: 100%;
             .hflex(auto);
 
-            .sidemenu{
+            .sidemenu {
                 width: @menusize;
                 height: 100%;
                 background-color: #000;
@@ -29,16 +29,17 @@ body{
                     width: @menusize;
                     height: @menusize - 10px;
                     line-height: @menusize;
-                    text-align:center;
+                    text-align: center;
                 }
             }
 
-            .menu-content{
+            .menu-content {
                 flex: 1;
                 height: 100%;
             }
         }
     }
+
     #appcontent {
         position: absolute;
         left: @menusize;
@@ -46,12 +47,12 @@ body{
         bottom: 0;
         right: 0;
 
-        #contentwrapper{
-            position : relative;
+        #contentwrapper {
+            position: relative;
             width: 100%;
             height: 100%;
 
-            #pageshost{
+            #pageshostwrapper {
                 position: absolute;
                 left: 0;
                 right: 0;
@@ -59,29 +60,48 @@ body{
                 height: auto;
                 bottom: @nowplayingsize;
 
-                >.mcn-fowrapper{
+                #pageshost {
+                    position: relative;
                     width: 100%;
                     height: 100%;
-                    transition: opacity 200ms ease-out;
 
-                    body{
-                        >.pagecontrol{
+                    > .pagecontrolproxy {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+
+                        > .mcn-fowrapper {
                             width: 100%;
                             height: 100%;
+                            transition-delay: 80ms;
+                            transition: opacity 100ms ease-out;
+
+                            body {
+                                background-color: transparent;
+                                width: 100%;
+                                height: 100%;
+
+                                > .pagecontrol {
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
                         }
                     }
                 }
             }
 
-            #nowplaying{
+            #nowplaying {
                 position: absolute;
-                bottom : 0;
+                bottom: 0;
                 left: 0;
                 right: 0;
                 height: @nowplayingsize;
                 background-color: #111;
 
-                #nowplayingbar{
+                #nowplayingbar {
                     width: 100%;
                     height: @nowplayingsize;
                 }

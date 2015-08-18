@@ -11,14 +11,25 @@
 	function appInit() {
 	    var settingName = Kodi.Settings.defaultConnection();
 	    var pageshost = document.getElementById("pageshost");
-	    pageshost.winControl.fragmentInjector = function (element) {
+	    pageshost.winControl.fragmentInjector = function (pagecontrol) {
+	        var parent = pagecontrol.element.parentElement;
 	        var wrapper = new WinJSContrib.UI.FOWrapper();
-	        wrapper.content.appendChild(element);
-	        setImmediate(function () { 
-	            element.winControl.foWrapper = wrapper;
-	        });
-	        return wrapper.element;
+	        var _unload = pagecontrol.unload;
+	        var proxy = document.createElement("DIV");
+	        proxy.className = "pagecontrolproxy";
+	        proxy.winControl = pagecontrol;
+	        proxy.winControl.unload = function () {
+	            $(proxy).remove();
+	            if (_unload) {
+	                _unload.apply(this);
+	            }
+	        }
+	        proxy.appendChild(wrapper.element);
+	        parent.appendChild(proxy);
+	        wrapper.content.appendChild(pagecontrol.element);
+	        pagecontrol.foWrapper = wrapper;
 	    }
+
 	    if (settingName) {
 	        var currentSetting = Kodi.Settings.getSetting(settingName);
 	        if (currentSetting && currentSetting.host) {

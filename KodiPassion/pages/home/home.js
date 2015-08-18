@@ -11,21 +11,28 @@
                     return Windows.Storage.FileIO.writeTextAsync(file, JSON.stringify(api));
                 });
             });
+
             Kodi.Data.loadRootData().then(function (data) {
                 page.splitviewtemplate = new WinJS.Binding.Template(null, { href: '/templates/moviesplitview.html', extractChild: true });
                 page.mainsplitview.itemTemplate = function (itemPromise) {
                     return itemPromise.then(function (item) {
                         return page.splitviewtemplate.render(item.data).then(function (rendered) {
                             WinJSContrib.UI.tap(rendered, function (elt) {
-                                if (!page.blurred) {
-                                    page.foWrapper.element.style.opacity = '0.2';
-                                    page.foWrapper.blurTo(20, 300);
-                                    page.blurred = true;
-                                } else {
-                                    page.foWrapper.element.style.opacity = '';
-                                    page.foWrapper.blurTo(0, 160);
-                                    page.blurred = false;
+                                if (!page.element.classList.contains("inactive")) {
+                                    //page.foWrapper.element.style.opacity = '0.2';
+                                    //page.foWrapper.blurTo(20, 300);
+                                    //page.blurred = true;
+                                    WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true, skipHistory: true });
                                 }
+                                //if (!page.blurred) {
+                                //    page.foWrapper.element.style.opacity = '0.2';
+                                //    page.foWrapper.blurTo(20, 300);
+                                //    page.blurred = true;
+                                //} else {
+                                //    page.foWrapper.element.style.opacity = '';
+                                //    page.foWrapper.blurTo(0, 160);
+                                //    page.blurred = false;
+                                //}
                             }, { disableAnimation: true })
                             return rendered;
                         });
@@ -41,6 +48,18 @@
                 }
                 page.tvshowslist.itemDataSource = new WinJS.Binding.List(data.tvshowRecentEpisodes.episodes).dataSource;
             });
+        },
+
+        navdeactivate: function () {
+            this.foWrapper.element.style.opacity = '0.2';
+            this.foWrapper.blurTo(20, 160);
+            return WinJS.Promise.timeout(100);
+        },
+
+        navactivate: function () {
+            this.foWrapper.element.style.opacity = '';
+            this.foWrapper.blurTo(0, 90);
+            return WinJS.Promise.timeout(3000);
         },
 
         ready: function (element, options) {

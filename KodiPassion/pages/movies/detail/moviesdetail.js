@@ -1,13 +1,12 @@
-﻿// For an introduction to the Page Control template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkId=232511
-(function () {
+﻿(function () {
     "use strict";
 
     WinJS.UI.Pages.define("/pages/movies/detail/moviesdetail.html", {
-        // This function is called whenever a user navigates to this page. It
-        // populates the page elements with the app's data.
-        ready: function (element, options) {
-            // TODO: Initialize the page here.
+        processed: function (element, options) {
+            var page = this;
+
+            page.movieTitle.innerText = options.movie.title;
+            return WinJS.Binding.processAll(element, options.movie);
         },
 
         unload: function () {

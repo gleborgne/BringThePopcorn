@@ -26,15 +26,16 @@
 
             render: function () {
                 var ctrl = this;
+                ctrl.wrapperId = WinJSContrib.Utils.guid();
                 var body = document.createElement("BODY");
                 body.style.width = '100%';
                 body.style.height = '100%';
                 WinJSContrib.Utils.moveChilds(ctrl.element, body);
-                ctrl.element.innerHTML = '<svg class="mcn-fowrapper-svg" xmlns="http://www.w3.org/2000/svg" style="width:100%; height: 100%">' +
+                ctrl.element.innerHTML = '<svg id="' + ctrl.wrapperId + '" class="mcn-fowrapper-svg" xmlns="http://www.w3.org/2000/svg" style="width:100%; height: 100%">' +
 		            '<defs>' +
-		                '<filter id="blur" x="0" y="0"><feGaussianBlur class="gblur" in="SourceGraphic" stdDeviation="0" /></filter>' +
+		                '<filter id="blur-' + ctrl.wrapperId + '" x="0" y="0"><feGaussianBlur class="gblur" in="SourceGraphic" stdDeviation="0" /></filter>' +
 	   	            '</defs>' +
-		            '<foreignObject id="fowrapper" width="100%" height="100%" requiredExtensions="http://www.w3.org/1999/xhtml" filter="url(#blur)">' +
+		            '<foreignObject id="fowrapper" width="100%" height="100%" requiredExtensions="http://www.w3.org/1999/xhtml" filter="url(#blur-' + ctrl.wrapperId + ')">' +
 		            '</foreignObject>' +
 	            '</svg>';
                 var container = ctrl.element.querySelector("#fowrapper");
@@ -57,7 +58,7 @@
             },
 
             dispose: function () {
-                WinJS.Utilities.disposeSubTree(this.element);
+                WinJS.Utilities.disposeSubTree(this.element);                
                 this.element = null;
             }
         }),

@@ -16,6 +16,7 @@
 
     <link href="dist/winjscontrib-custom.css" rel="stylesheet" />
     <script src="/dist/winjscontrib-custom.js"></script>
+    <script src="scripts/winjscontrib/js/winjscontrib.ui.navigator.js"></script>
     <script src="/dist/kodi.js"></script>
 
     <!-- KodiPassion references -->
@@ -28,7 +29,9 @@
     <div id="menu" data-win-control="KodiPassion.UI.MainMenu"></div>
     <div id="appcontent">
         <div id="contentwrapper">
-            <div id="pageshost" data-win-control="WinJSContrib.UI.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}"></div>
+            <div id="pageshostwrapper">
+                <div id="pageshost" data-win-control="WinJSContrib.UI.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}"></div>
+            </div>
             <div id="nowplaying">
                 <div id="nowplayingbar" data-win-control="KodiPassion.UI.NowPlayingSummary"></div>
                 <div id="nowplayingcontent"></div>

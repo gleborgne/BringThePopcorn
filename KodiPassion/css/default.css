@@ -54,7 +54,7 @@ body {
   width: 100%;
   height: 100%;
 }
-#appcontent #contentwrapper #pageshost {
+#appcontent #contentwrapper #pageshostwrapper {
   position: absolute;
   left: 0;
   right: 0;
@@ -62,12 +62,30 @@ body {
   height: auto;
   bottom: 60px;
 }
-#appcontent #contentwrapper #pageshost > .mcn-fowrapper {
+#appcontent #contentwrapper #pageshostwrapper #pageshost {
+  position: relative;
   width: 100%;
   height: 100%;
-  transition: opacity 200ms ease-out;
 }
-#appcontent #contentwrapper #pageshost > .mcn-fowrapper body > .pagecontrol {
+#appcontent #contentwrapper #pageshostwrapper #pageshost > .pagecontrolproxy {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+#appcontent #contentwrapper #pageshostwrapper #pageshost > .pagecontrolproxy > .mcn-fowrapper {
+  width: 100%;
+  height: 100%;
+  transition-delay: 80ms;
+  transition: opacity 100ms ease-out;
+}
+#appcontent #contentwrapper #pageshostwrapper #pageshost > .pagecontrolproxy > .mcn-fowrapper body {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+}
+#appcontent #contentwrapper #pageshostwrapper #pageshost > .pagecontrolproxy > .mcn-fowrapper body > .pagecontrol {
   width: 100%;
   height: 100%;
 }

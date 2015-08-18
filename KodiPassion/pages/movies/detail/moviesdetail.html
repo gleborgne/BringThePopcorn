@@ -10,13 +10,15 @@
 <body>
     <div class="moviesdetail fragment">
         <header class="page-header" aria-label="Header content" role="banner">
-            <button class="back-button" data-win-control="WinJS.UI.BackButton"></button>
-            <h1 class="titlearea win-type-ellipsis">
-                <span class="pagetitle">Welcome to moviesdetail</span>
-            </h1>
+            
         </header>
         <section class="page-section" aria-label="Main content" role="main">
-            <p>Content goes here.</p>
+            <div class="description">
+                <div class="poster" data-win-bind="display: art.poster Kodi.Utils.toThumbnailBg"></div>
+                <div class="moviedetails">
+                    <div class="movie-title" member="movieTitle"></div>
+                </div>
+            </div>
         </section>
     </div>
 </body>
