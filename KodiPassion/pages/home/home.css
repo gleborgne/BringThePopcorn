@@ -1,0 +1,80 @@
+.page-home {
+  width: 100%;
+  height: 100%;
+  display: -ms-grid;
+  -ms-grid-columns: 1fr;
+  -ms-grid-rows: auto 1fr;
+  overflow-y: auto;
+}
+.page-home .sectiontitle {
+  background-color: #12b2e7;
+  height: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.page-home .sectiontitle .sectiontitle-item {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.page-home .sectiontitle .stretch {
+  flex: 1;
+}
+.page-home .mainbloc {
+  -ms-grid-column: 1;
+  -ms-grid-row: 1;
+}
+.page-home .mainbloc .mainsplitview {
+  width: 100%;
+  height: 600px;
+}
+.page-home .secondbloc {
+  -ms-grid-column: 1;
+  -ms-grid-row: 2;
+}
+.page-home .thirdbloc {
+  -ms-grid-column: 2;
+  -ms-grid-row-span: 2;
+}
+.page-home .movie-splitview {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.page-home .movie-splitview .bg,
+.page-home .movie-splitview .content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+}
+.page-home .movie-splitview .content h3 {
+  background-color: gold;
+  padding: 4px 24px;
+  display: inline-block;
+  color: black;
+  font-size: 2.6rem;
+  font-weight: 400;
+}
+.page-home .tvshowlistview {
+  height: 300px;
+}
+.page-home .tvshow-episode {
+  width: 400px;
+  height: 300px;
+  position: relative;
+}
+.page-home .tvshow-episode .bg,
+.page-home .tvshow-episode .content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+}

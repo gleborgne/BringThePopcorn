@@ -1,7 +1,7 @@
 ﻿module Kodi.Settings {
 
     var applicationData = Windows.Storage.ApplicationData.current;
-    var kodiServers = 'xbmcAPISettings';
+    var kodiServers = 'kodiAPISettings';
     var currentSettings;
 
     function saveSetting(name, settings) {
@@ -27,10 +27,10 @@
             servers: {
                 Default: {
                     name: 'Default',
-                    host: '',
-                    port: '',
-                    user: '',
-                    password: '',
+                    host: 'localhost',
+                    port: '8080',
+                    user: 'gle',
+                    password: 'gle',
                     macAddress: []
                 }
             }

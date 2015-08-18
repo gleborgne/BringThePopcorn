@@ -1,0 +1,80 @@
+/*
+this is a template for icon fonts
+ */
+
+ @font-face {
+  font-family: "kodipassion";
+  src: url('kodipassion.eot');
+  src: url('kodipassion.eot?#iefix') format('eot'),
+    url('kodipassion.woff') format('woff'),
+    url('kodipassion.ttf') format('truetype'),
+    url('kodipassion.svg#kodipassion') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.kdp-check:before,
+.kdp-chevron-down:before,
+.kdp-chevron-left:before,
+.kdp-chevron-right:before,
+.kdp-chevron-up:before,
+.kdp-close:before,
+.kdp-download:before,
+.kdp-favourites:before,
+.kdp-forward:before,
+.kdp-home:before,
+.kdp-movie:before,
+.kdp-music:before,
+.kdp-pause:before,
+.kdp-photo:before,
+.kdp-play:before,
+.kdp-power:before,
+.kdp-remotecontrol:before,
+.kdp-rewind:before,
+.kdp-settings:before,
+.kdp-share:before,
+.kdp-speaker-mute:before,
+.kdp-speaker-off:before,
+.kdp-speaker-on:before,
+.kdp-stop:before,
+.kdp-television:before,
+.kdp-zoom-minus:before,
+.kdp-zoom-plus:before {
+  font-family: "kodipassion";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+.kdp-check:before { content: "\E001" }
+.kdp-chevron-down:before { content: "\E002" }
+.kdp-chevron-left:before { content: "\E003" }
+.kdp-chevron-right:before { content: "\E004" }
+.kdp-chevron-up:before { content: "\E005" }
+.kdp-close:before { content: "\E006" }
+.kdp-download:before { content: "\E007" }
+.kdp-favourites:before { content: "\E008" }
+.kdp-forward:before { content: "\E009" }
+.kdp-home:before { content: "\E00A" }
+.kdp-movie:before { content: "\E00B" }
+.kdp-music:before { content: "\E00C" }
+.kdp-pause:before { content: "\E00D" }
+.kdp-photo:before { content: "\E00E" }
+.kdp-play:before { content: "\E00F" }
+.kdp-power:before { content: "\E010" }
+.kdp-remotecontrol:before { content: "\E011" }
+.kdp-rewind:before { content: "\E012" }
+.kdp-settings:before { content: "\E013" }
+.kdp-share:before { content: "\E014" }
+.kdp-speaker-mute:before { content: "\E015" }
+.kdp-speaker-off:before { content: "\E016" }
+.kdp-speaker-on:before { content: "\E017" }
+.kdp-stop:before { content: "\E018" }
+.kdp-television:before { content: "\E019" }
+.kdp-zoom-minus:before { content: "\E01A" }
+.kdp-zoom-plus:before { content: "\E01B" }

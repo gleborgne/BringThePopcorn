@@ -46,13 +46,13 @@ gulp.task('Iconfont', function(){
           className: 'kdp'
         }))
         .pipe(rename('kodipassion.css'))
-        .pipe(gulp.dest('dist/fonts/'));
+        .pipe(gulp.dest('../KodiPassion/dist/fonts/'));
     })
 
-    .pipe(gulp.dest('dist/fonts/'));
+    .pipe(gulp.dest('../KodiPassion/dist/fonts/'));
 });
 
 
-gulp.task('default', ['clean'], function() {
+gulp.task('default', function() {
 	gulp.start('Iconfont');
 });

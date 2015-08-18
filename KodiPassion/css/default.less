@@ -1,7 +1,23 @@
-﻿body {
+﻿@import "apptheme.less";
+@import "reset.less";
+@import "applayout.less";
+
+body {
 }
 
-.fragment{
+.fragment {
     width: 100%;
     height: 100%;
+}
+
+.win-listview.no-itemsmargin {
+    > .win-horizontal {
+        .win-surface.win-listlayout {
+            margin: 0;
+
+            .win-container {
+                margin: 0;
+            }
+        }
+    }
 }

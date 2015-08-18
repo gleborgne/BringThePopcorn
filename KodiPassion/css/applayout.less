@@ -1,0 +1,93 @@
+﻿@import "apptheme.less";
+
+body{
+    padding:0;
+    margin:0;
+    position: relative;
+    background-color: #222;    
+}
+
+.applayout(@menusize, @nowplayingsize){
+    #menu{
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 400px;        
+
+        .main-menu{
+            width: 100%;
+            height: 100%;
+            .hflex(auto);
+
+            .sidemenu{
+                width: @menusize;
+                height: 100%;
+                background-color: #000;
+
+                .menu-item {
+                    width: @menusize;
+                    height: @menusize - 10px;
+                    line-height: @menusize;
+                    text-align:center;
+                }
+            }
+
+            .menu-content{
+                flex: 1;
+                height: 100%;
+            }
+        }
+    }
+    #appcontent {
+        position: absolute;
+        left: @menusize;
+        top: 0;
+        bottom: 0;
+        right: 0;
+
+        #contentwrapper{
+            position : relative;
+            width: 100%;
+            height: 100%;
+
+            #pageshost{
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                height: auto;
+                bottom: @nowplayingsize;
+
+                >.mcn-fowrapper{
+                    width: 100%;
+                    height: 100%;
+                    transition: opacity 200ms ease-out;
+
+                    body{
+                        >.pagecontrol{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+
+            #nowplaying{
+                position: absolute;
+                bottom : 0;
+                left: 0;
+                right: 0;
+                height: @nowplayingsize;
+                background-color: #111;
+
+                #nowplayingbar{
+                    width: 100%;
+                    height: @nowplayingsize;
+                }
+            }
+        }
+    }
+}
+
+.applayout(60px, 60px);

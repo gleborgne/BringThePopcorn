@@ -1,0 +1,19 @@
+.main-menu .sidemenu {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.main-menu .sidemenu .menu-item {
+  font-size: 16pt;
+  color: #12b2e7;
+}
+.main-menu .sidemenu .menu-item-spacer {
+  height: 20px;
+}
+.main-menu .sidemenu .topicons {
+  flex: 1;
+}
+.main-menu .sidemenu .topicons .logo img {
+  max-width: 80%;
+  padding-top: 10%;
+}

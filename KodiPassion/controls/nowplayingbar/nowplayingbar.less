@@ -1,0 +1,39 @@
+﻿@import "../../css/apptheme.less";
+
+.nowplayingbar {
+    .hflex();
+    height: 100%;
+
+    .playercommands{
+        flex: 1;
+        height: 100%;
+        .hflex();
+
+        .playercommands-items{
+            height: 100%;
+            font-size : 18pt;
+            color: #444;
+
+            .hflex();
+
+            .cmd{
+                display: block;
+                background-color:transparent;
+                border: none;
+                padding: 0;
+                margin-left: 10px;
+                width: 40px;
+                height: 40px;
+                text-align:center;
+                line-height: 40px;
+                color: inherit;
+                font-size: inherit;
+            }
+        }
+    }
+
+    .actions{
+        height: 100%;
+        .hflex();
+    }
+}

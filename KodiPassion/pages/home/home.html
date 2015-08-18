@@ -8,19 +8,40 @@
     <script src="home.js"></script>
 </head>
 <body>
-    <div class="page-home fragment" data-win-control="WinJSContrib.UI.FOWrapper" member="fowrapper">
-        <header class="page-header" aria-label="Header content" role="banner">
-            <button class="back-button" data-win-control="WinJS.UI.BackButton"></button>
-            <h1 class="titlearea win-type-ellipsis">
-                <span class="pagetitle">Welcome to home</span>
-            </h1>
-        </header>
-        <section class="page-section" aria-label="Main content" role="main">
-            <p>Content goes here.</p>
-            <button linkto="/pages/settings/settings.html">go to settings</button>
-            <button tap="blur">BLUR</button><br />
-            <button tap="unblur">UNBLUR</button>
-        </section>
+    <div class="page-home" >
+        <div class="mainbloc">            
+            <div class="mainsplitview" member="mainsplitview" data-win-control="WinJS.UI.FlipView"></div>
+            <div class="sectiontitle">
+                <div class="sectiontitle-item stretch">
+                    <i class="kdp-movie"></i>
+                    all movies
+                </div>
+                <div class="sectiontitle-item">
+                    by source
+                </div>
+                <div class="sectiontitle-item">
+                    by genre
+                </div>
+            </div>
+        </div>
+        <div class="secondbloc">
+            <div class="tvshowlistview no-itemsmargin" member="tvshowslist" data-win-control="WinJS.UI.ListView" data-win-options="{ layout : { type: WinJS.UI.ListLayout, orientation: 'horizontal'}}"></div>
+            <div class="sectiontitle">
+                <div class="sectiontitle-item stretch">
+                    <i class="kdp-movie"></i>
+                    all tv shows
+                </div>
+                <div class="sectiontitle-item">
+                    by source
+                </div>
+                <div class="sectiontitle-item">
+                    by genre
+                </div>
+            </div>
+        </div>
+        <div class="thirdbloc">
+
+        </div>
     </div>
 </body>
 </html>

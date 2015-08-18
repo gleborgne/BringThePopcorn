@@ -6,6 +6,35 @@
 	var app = WinJS.Application;
 	var activation = Windows.ApplicationModel.Activation;
 
+	WinJSContrib.UI.enableSystemBackButton = true;
+
+	function appInit() {
+	    var settingName = Kodi.Settings.defaultConnection();
+	    var pageshost = document.getElementById("pageshost");
+	    pageshost.winControl.fragmentInjector = function (element) {
+	        var wrapper = new WinJSContrib.UI.FOWrapper();
+	        wrapper.content.appendChild(element);
+	        setImmediate(function () { 
+	            element.winControl.foWrapper = wrapper;
+	        });
+	        return wrapper.element;
+	    }
+	    if (settingName) {
+	        var currentSetting = Kodi.Settings.getSetting(settingName);
+	        if (currentSetting && currentSetting.host) {
+	            return Kodi.Data.loadRootData(true).then(function (data) {
+	                return WinJS.Navigation.navigate("/pages/home/home.html");
+	            },
+                function (err) {
+                    console.error(err);
+                    return WinJS.Navigation.navigate("/pages/settings/settings.html");
+	            });
+	        }
+	    }
+	    
+	    return WinJS.Navigation.navigate("/pages/settings/settings.html");
+	}
+
 	app.onactivated = function (args) {
 		if (args.detail.kind === activation.ActivationKind.launch) {
 			if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
@@ -15,7 +44,7 @@
 				// To create a smooth user experience, restore application state here so that it looks like the app never stopped running.
 			}
 			args.setPromise(WinJS.UI.processAll().then(function(){
-			    WinJS.Navigation.navigate("/pages/settings/settings.html");
+			    return appInit();
 			}));
 		}
 	};

@@ -1,0 +1,77 @@
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 200;
+    src: url('CooperHewitt-Thin.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 200;
+    font-style:italic;
+    src: url('CooperHewitt-ThinItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 300;
+    src: url('CooperHewitt-Light.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 300;
+    font-style:italic;
+    src: url('CooperHewitt-LightItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 400;
+    src: url('CooperHewitt-Book.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 400;
+    font-style:italic;
+    src: url('CooperHewitt-BookItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 500;
+    src: url('CooperHewitt-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 500;
+    font-style:italic;
+    src: url('CooperHewitt-MediumItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 600;
+    src: url('CooperHewitt-Bold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 600;
+    font-style:italic;
+    src: url('CooperHewitt-BoldItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 700;
+    src: url('CooperHewitt-Heavy.otf') format('opentype');
+}
+
+@font-face {
+    font-family: CooperHewitt;
+    font-weight: 700;
+    font-style:italic;
+    src: url('CooperHewitt-Heavy.otf') format('opentype');
+}

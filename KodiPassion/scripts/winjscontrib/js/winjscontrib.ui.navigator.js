@@ -602,6 +602,8 @@
                             //	return parented;
                             //}),
 
+                            getFragmentElement : navigator.fragmentInjector,
+
                             closeOldPagePromise: closeOldPagePromise.then(function () { }, function () { }),
 
                             oninit: function (element, options) {
@@ -666,7 +668,7 @@
                                     if (control.updateLayout) {
                                         control.updateLayout.call(control, element, vw, navigator._lastViewstate);
                                     }
-                                    var layoutCtrls = element.element.querySelectorAll('.mcn-layout-ctrl');
+                                    var layoutCtrls = element.querySelectorAll('.mcn-layout-ctrl');
                                     if (layoutCtrls && layoutCtrls.length) {
                                         for (var i = 0 ; i < layoutCtrls.length; i++) {
                                             var ctrl = layoutCtrls[i].winControl;

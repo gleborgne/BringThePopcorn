@@ -9,6 +9,8 @@
             this.element = element || document.createElement('DIV');
             options = options || {};
             this.element.winControl = this;
+            this.element.classList.add('mcn-fowrapper');
+            this.element.classList.add('mcn-layout-ctrl');
             this.element.classList.add('win-disposable');
             WinJS.UI.setOptions(this, options);
             this.render();
@@ -25,8 +27,10 @@
             render: function () {
                 var ctrl = this;
                 var body = document.createElement("BODY");
+                body.style.width = '100%';
+                body.style.height = '100%';
                 WinJSContrib.Utils.moveChilds(ctrl.element, body);
-                ctrl.element.innerHTML = '<svg class="mcn-fowrapper" xmlns="http://www.w3.org/2000/svg" style="width:100%; height: 100%">' +
+                ctrl.element.innerHTML = '<svg class="mcn-fowrapper-svg" xmlns="http://www.w3.org/2000/svg" style="width:100%; height: 100%">' +
 		            '<defs>' +
 		                '<filter id="blur" x="0" y="0"><feGaussianBlur class="gblur" in="SourceGraphic" stdDeviation="0" /></filter>' +
 	   	            '</defs>' +
@@ -34,6 +38,7 @@
 		            '</foreignObject>' +
 	            '</svg>';
                 var container = ctrl.element.querySelector("#fowrapper");
+                ctrl.content = body;
                 ctrl.blurFilter = ctrl.element.querySelector(".gblur");
                 ctrl.sblurFilter = Snap(ctrl.blurFilter);
                 container.appendChild(body);

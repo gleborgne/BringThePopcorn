@@ -1,0 +1,40 @@
+.nowplayingbar {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 100%;
+}
+.nowplayingbar .playercommands {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.nowplayingbar .playercommands .playercommands-items {
+  height: 100%;
+  font-size: 18pt;
+  color: #444;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.nowplayingbar .playercommands .playercommands-items .cmd {
+  display: block;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: inherit;
+  font-size: inherit;
+}
+.nowplayingbar .actions {
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}

@@ -1,2 +1,94 @@
-﻿.page-home {
+﻿@import "../../css/apptheme.less";
+
+.page-home {
+    width: 100%;
+    height: 100%;
+    display: -ms-grid;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: auto 1fr;
+    overflow-y: auto;
+
+    .sectiontitle {
+        background-color: @kodiBlue;
+        height: 30px;
+        .hflex();
+
+        .sectiontitle-item{
+            height: 100%;
+            box-sizing: border-box;
+            padding : 10px;
+        }
+
+        .stretch{
+            flex: 1;
+        }
+    }
+
+    .mainbloc {
+        -ms-grid-column: 1;
+        -ms-grid-row: 1;
+
+        .mainsplitview {
+            width: 100%;
+            height: 600px;
+        }
+    }
+
+    .secondbloc {
+        -ms-grid-column: 1;
+        -ms-grid-row: 2;
+    }
+
+    .thirdbloc {
+        -ms-grid-column: 2;
+        -ms-grid-row-span: 2;
+    }
+
+
+    .movie-splitview {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .bg, .content {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .content {
+            h3 {
+                background-color: gold;
+                padding: 4px 24px;
+                display: inline-block;
+                color: black;
+                font-size: 2.6rem;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .tvshowlistview{
+        height: 300px;
+    }
+
+    .tvshow-episode{
+        width: 400px;
+        height: 300px;
+        position: relative;
+
+        .bg, .content {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+        }
+    }
 }

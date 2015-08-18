@@ -502,7 +502,7 @@ var Kodi;
     var Settings;
     (function (Settings) {
         var applicationData = Windows.Storage.ApplicationData.current;
-        var kodiServers = 'xbmcAPISettings';
+        var kodiServers = 'kodiAPISettings';
         var currentSettings;
         function saveSetting(name, settings) {
             applicationData.roamingSettings.values[name] = JSON.stringify(settings);
@@ -523,10 +523,10 @@ var Kodi;
                 servers: {
                     Default: {
                         name: 'Default',
-                        host: '',
-                        port: '',
-                        user: '',
-                        password: '',
+                        host: 'localhost',
+                        port: '8080',
+                        user: 'gle',
+                        password: 'gle',
                         macAddress: []
                     }
                 }

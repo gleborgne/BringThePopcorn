@@ -85,6 +85,7 @@ gulp.task('compilewinjscontrib', function () {
             'scripts/winjscontrib/js/winjscontrib.ui.animation.js',
             'scripts/winjscontrib/js/winjscontrib.ui.elasticbutton.js',
             'scripts/winjscontrib/js/winjscontrib.ui.fowrapper.js',
+            'scripts/winjscontrib/js/winjscontrib.search.js'
             
         ], { base: '.', cwd: 'KodiPassion' })
 	    .pipe(plumber({ errorHandler: onError }))
@@ -108,6 +109,10 @@ gulp.task('compilewinjscontrib', function () {
         gulp.src([
 		    'scripts/winjscontrib/css/winjscontrib.ui.css',
 		    'scripts/winjscontrib/css/segoe.symbol.css',
+            'scripts/winjscontrib/css/winjscontrib.ui.extended-splashscreen.css',
+            'scripts/winjscontrib/css/winjscontrib.ui.globalprogress.css',
+            'scripts/winjscontrib/css/winjscontrib.ui.hamburger.css',
+            'scripts/winjscontrib/css/winjscontrib.ui.elasticbutton.css',
         ], { base: '.', cwd: 'KodiPassion' })
 	    .pipe(plumber({ errorHandler: onError }))
 	    .pipe(sourcemaps.init())
