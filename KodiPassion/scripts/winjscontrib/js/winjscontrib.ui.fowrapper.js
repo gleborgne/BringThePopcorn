@@ -28,6 +28,7 @@
                 var ctrl = this;
                 ctrl.wrapperId = WinJSContrib.Utils.guid();
                 var body = document.createElement("BODY");
+                body.className = "mcn-fowrapper-content";
                 body.style.width = '100%';
                 body.style.height = '100%';
                 WinJSContrib.Utils.moveChilds(ctrl.element, body);
@@ -35,10 +36,12 @@
 		            '<defs>' +
 		                '<filter id="blur-' + ctrl.wrapperId + '" x="0" y="0"><feGaussianBlur class="gblur" in="SourceGraphic" stdDeviation="0" /></filter>' +
 	   	            '</defs>' +
-		            '<foreignObject id="fowrapper" width="100%" height="100%" requiredExtensions="http://www.w3.org/1999/xhtml" filter="url(#blur-' + ctrl.wrapperId + ')">' +
+		            '<foreignObject class="fowrapper" width="100%" height="100%" requiredExtensions="http://www.w3.org/1999/xhtml" filter="url(#blur-' + ctrl.wrapperId + ')">' +
 		            '</foreignObject>' +
 	            '</svg>';
-                var container = ctrl.element.querySelector("#fowrapper");
+                var container = ctrl.element.querySelector(".fowrapper");
+                ctrl.svg = ctrl.element.querySelector("svg");
+                ctrl.container = container;
                 ctrl.content = body;
                 ctrl.blurFilter = ctrl.element.querySelector(".gblur");
                 ctrl.sblurFilter = Snap(ctrl.blurFilter);
@@ -55,6 +58,14 @@
                 }
 
                 ctrl.sblurFilter.animate({ stdDeviation: blur }, duration, easing || mina.easeout);
+                ctrl.dispatchEvent('blur');
+            },
+
+            updateLayout: function () {
+                if (this.container) {
+                    this.container.setAttribute("width", "100%");
+                    this.container.setAttribute("height", "100%");
+                }
             },
 
             dispose: function () {
@@ -63,6 +74,6 @@
             }
         }),
 		WinJS.Utilities.eventMixin,
-		WinJS.Utilities.createEventProperties("myevent"))
+		WinJS.Utilities.createEventProperties("blur"))
     });
 })();

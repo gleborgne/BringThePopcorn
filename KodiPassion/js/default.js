@@ -15,6 +15,7 @@
 	        var parent = pagecontrol.element.parentElement;
 	        var wrapper = new WinJSContrib.UI.FOWrapper();
 	        var _unload = pagecontrol.unload;
+	        var _updateLayout = pagecontrol.updateLayout;
 	        var proxy = document.createElement("DIV");
 	        proxy.className = "pagecontrolproxy";
 	        proxy.winControl = pagecontrol;
@@ -22,6 +23,12 @@
 	            $(proxy).remove();
 	            if (_unload) {
 	                _unload.apply(this);
+	            }
+	        }
+	        proxy.winControl.updateLayout = function () {
+	            wrapper.updateLayout();
+	            if (_updateLayout) {
+	                _updateLayout.apply(this);
 	            }
 	        }
 	        proxy.appendChild(wrapper.element);

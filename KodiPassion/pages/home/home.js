@@ -52,13 +52,13 @@
 
         navdeactivate: function () {
             this.foWrapper.element.style.opacity = '0.2';
-            this.foWrapper.blurTo(20, 160);
-            return WinJS.Promise.timeout(100);
+            this.foWrapper.blurTo(20, 300);
+            return WinJS.Promise.timeout(200);
         },
 
         navactivate: function () {
             this.foWrapper.element.style.opacity = '';
-            this.foWrapper.blurTo(0, 90);
+            this.foWrapper.blurTo(0, 160);
             return WinJS.Promise.timeout(3000);
         },
 
