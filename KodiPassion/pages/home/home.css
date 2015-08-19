@@ -8,7 +8,7 @@
 }
 .page-home .sectiontitle {
   background-color: #12b2e7;
-  height: 30px;
+  height: 40px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -16,7 +16,17 @@
 .page-home .sectiontitle .sectiontitle-item {
   height: 100%;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 0 20px;
+  min-width: 25%;
+  text-transform: uppercase;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  border-right: 1px solid #222;
+}
+.page-home .sectiontitle .sectiontitle-item i {
+  display: block;
+  width: 40px;
 }
 .page-home .sectiontitle .stretch {
   flex: 1;
@@ -59,14 +69,15 @@
   color: black;
   font-size: 2.5rem;
   font-weight: 400;
-}
-.page-home .tvshowlistview {
-  height: 300px;
+  max-width: 90%;
 }
 .page-home .tvshow-episode {
-  width: 400px;
-  height: 300px;
+  width: 25%;
   position: relative;
+}
+.page-home .tvshow-episode > .tvshow-episode {
+  width: 100%;
+  height: 100%;
 }
 .page-home .tvshow-episode .bg,
 .page-home .tvshow-episode .content {

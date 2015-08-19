@@ -41,26 +41,18 @@
                 page.mainsplitview.itemDataSource = new WinJS.Binding.List(data.recentMovies.movies).dataSource;
 
                 page.listseriestemplate = new WinJS.Binding.Template(null, { href: '/templates/tvshowepisode.html', extractChild: true });
-                page.tvshowslist.itemTemplate = function (itemPromise) {
-                    return itemPromise.then(function (item) {
-                        return page.listseriestemplate.render(item.data);
-                    })
-                }
-                page.tvshowslist.itemDataSource = new WinJS.Binding.List(data.tvshowRecentEpisodes.episodes).dataSource;
+                //page.tvshowslist.itemTemplate = function (itemPromise) {
+                //    return itemPromise.then(function (item) {
+                //        return page.listseriestemplate.render(item.data);
+                //    })
+                //}
+                page.tvshowslist.renderer.orientation = "vertical";
+                page.tvshowslist.scrollContainer = page.element;
+                page.tvshowslist.prepareItems(data.tvshowRecentEpisodes.episodes, { itemClassName: 'tvshow-episode', template: page.listseriestemplate });
             });
         },
 
-        navdeactivate: function () {
-            this.foWrapper.element.style.opacity = '0.2';
-            this.foWrapper.blurTo(20, 300);
-            return WinJS.Promise.timeout(200);
-        },
-
-        navactivate: function () {
-            this.foWrapper.element.style.opacity = '';
-            this.foWrapper.blurTo(0, 160);
-            return WinJS.Promise.timeout(3000);
-        },
+        
 
         ready: function (element, options) {
         },

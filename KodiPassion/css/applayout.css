@@ -29,6 +29,9 @@ body {
   line-height: 60px;
   text-align: center;
 }
+#menu .main-menu .sidemenu .bottomicons .menu-item {
+  height: 60px;
+}
 #menu .main-menu .menu-content {
   flex: 1;
   height: 100%;

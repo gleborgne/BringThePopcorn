@@ -85,6 +85,8 @@ gulp.task('compilewinjscontrib', function () {
             'scripts/winjscontrib/js/winjscontrib.ui.animation.js',
             'scripts/winjscontrib/js/winjscontrib.ui.elasticbutton.js',
             'scripts/winjscontrib/js/winjscontrib.ui.fowrapper.js',
+            //'scripts/winjscontrib/js/winjscontrib.ui.multipass-renderer.js',
+            //'scripts/winjscontrib/js/winjscontrib.ui.grid.js',
             'scripts/winjscontrib/js/winjscontrib.search.js'
             
         ], { base: '.', cwd: 'KodiPassion' })

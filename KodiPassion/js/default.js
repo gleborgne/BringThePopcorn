@@ -11,6 +11,21 @@
 	function appInit() {
 	    var settingName = Kodi.Settings.defaultConnection();
 	    var pageshost = document.getElementById("pageshost");
+
+	    WinJSContrib.UI.Pages.defaultFragmentMixins.push({
+	        navdeactivate: function () {
+	            this.foWrapper.element.style.opacity = '0.2';
+	            this.foWrapper.blurTo(20, 300);
+	            return WinJS.Promise.timeout(100);
+	        },
+
+	        navactivate: function () {
+	            this.foWrapper.element.style.opacity = '';
+	            this.foWrapper.blurTo(0, 160);
+	            return WinJS.Promise.timeout(3000);
+	        }
+	    });
+
 	    pageshost.winControl.fragmentInjector = function (pagecontrol) {
 	        var parent = pagecontrol.element.parentElement;
 	        var wrapper = new WinJSContrib.UI.FOWrapper();
