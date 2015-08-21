@@ -70,7 +70,7 @@ var Kodi;
                 }
                 TVShows.processTVShows = processTVShows;
                 function getAllTVShows() {
-                    var data = TVShowOptions();
+                    var data = TVShowOptions(true);
                     return API.kodiRequest('VideoLibrary.GetTVShows', data, false, true).then(function (tvshows) {
                         processTVShows(tvshows);
                         return WinJS.Promise.wrap(tvshows);
@@ -82,7 +82,7 @@ var Kodi;
                 }
                 TVShows.getTVShowsGenres = getTVShowsGenres;
                 function getRecentEpisodes() {
-                    var data = TVShowEpisodeOptions();
+                    var data = TVShowEpisodeOptions(true);
                     return API.kodiRequest('VideoLibrary.GetRecentlyAddedEpisodes', data, false, true);
                 }
                 TVShows.getRecentEpisodes = getRecentEpisodes;
@@ -93,7 +93,7 @@ var Kodi;
                 }
                 TVShows.getTVShowDetails = getTVShowDetails;
                 function getTVShowSeasons(tvshowid) {
-                    var data = TVShowSeasonOptions();
+                    var data = TVShowSeasonOptions(true);
                     data.tvshowid = tvshowid;
                     return API.kodiRequest('VideoLibrary.GetSeasons', data);
                 }

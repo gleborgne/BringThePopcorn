@@ -144,7 +144,7 @@
     }
     
     export function getAllTVShows() {
-        var data = TVShowOptions();
+        var data = TVShowOptions(true);
         return API.kodiRequest<TVShowsResultSet>('VideoLibrary.GetTVShows', data, false, true).then(function (tvshows) {
             processTVShows(tvshows);
             return WinJS.Promise.wrap(tvshows);
@@ -156,7 +156,7 @@
     }
 
     export function getRecentEpisodes() {
-        var data = TVShowEpisodeOptions();
+        var data = TVShowEpisodeOptions(true);
         return API.kodiRequest<EpisodesResultSet>('VideoLibrary.GetRecentlyAddedEpisodes', data, false, true);
     }
 
@@ -167,7 +167,7 @@
     }
 
     export function getTVShowSeasons(tvshowid) {
-        var data = TVShowSeasonOptions();
+        var data = TVShowSeasonOptions(true);
         data.tvshowid = tvshowid;
         return API.kodiRequest<SeasonsResultSet>('VideoLibrary.GetSeasons', data);
     }

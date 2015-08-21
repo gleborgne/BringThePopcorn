@@ -317,12 +317,13 @@
 
                     closeAllPages: function () {
                         var navigator = this;
-                        var pages = navigator.element.querySelectorAll('.pagecontrol');
-                        for (var i = 0, l = pages.length ; i < l ; i++) {
+                        var pages = navigator.element.children;
+                        
+                        for (var i = pages.length-1 ; i >= 0 ; i--) {
                             var page = pages[i];
-                            if (page.parentElement == navigator.element) {
-                                page.winControl.dispose();
+                            if (page.classList.contains("pagecontrol")) {
                                 navigator.element.removeChild(page);
+                                page.winControl.dispose();
                             }
                         }
                     },
@@ -391,6 +392,8 @@
                         args.detail.state = args.detail.state || {};
                         var openStacked = navigator.stackNavigation == true || args.detail.navigateStacked || args.detail.state.navigateStacked;
 
+                        
+
                         if (this.locks > 0) {
                             var p = new WinJS.Promise(function (c) { });
                             args.detail.setPromise(p);
@@ -424,6 +427,16 @@
                                 return;
                             }
                             return;
+                        }
+
+                        if (navigator.global && !openStacked && WinJS.Navigation.history.current.state && WinJS.Navigation.history.current.state.navigateStacked) {
+                            navigator.closeAllPages();
+                            var backstack = WinJS.Navigation.history.backStack;
+                            for (var i = backstack.length - 1 ; i >= 0 ; i--) {
+                                if (backstack[i].state && backstack[i].state.navigateStacked) {
+                                    backstack.splice(i, 1);
+                                }
+                            }
                         }
 
                         navigator.triggerPageExit();
@@ -583,6 +596,16 @@
                         else {
                             var closeOldPagePromise = navigator.closePage(oldElement, args);
                         }
+
+                        if (navigator.global && !openStacked) {
+                            var backstack = WinJS.Navigation.history.backStack;
+                            for (var i = backstack.length - 1 ; i >= 0 ; i--) {
+                                if (backstack[i].state && backstack[i].state.navigateStacked) {
+                                    backstack.splice(i, 1);
+                                }
+                            }
+                        }
+
                         //if (this._handleSystemBackBtn && Windows && Windows.UI && Windows.UI.Core && Windows.UI.Core.SystemNavigationManager) {
                         //    if (navigator.canGoBack)
                         //        Windows.UI.Core.SystemNavigationManager.getForCurrentView().appViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility.visible;

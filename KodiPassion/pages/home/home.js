@@ -5,12 +5,12 @@
     WinJS.UI.Pages.define("/pages/home/home.html", {
         processed: function (element, options) {
             var page = this;
-            Kodi.API.introspect().then(function (api) {
-                Windows.Storage.ApplicationData.current.localFolder.createFileAsync("kodiapi.json", Windows.Storage.CreationCollisionOption.replaceExisting).then(function (file) {
-                    console.log("kodi api details at " + file.path);
-                    return Windows.Storage.FileIO.writeTextAsync(file, JSON.stringify(api));
-                });
-            });
+            //Kodi.API.introspect().then(function (api) {
+            //    Windows.Storage.ApplicationData.current.localFolder.createFileAsync("kodiapi.json", Windows.Storage.CreationCollisionOption.replaceExisting).then(function (file) {
+            //        console.log("kodi api details at " + file.path);
+            //        return Windows.Storage.FileIO.writeTextAsync(file, JSON.stringify(api));
+            //    });
+            //});
 
             Kodi.Data.loadRootData().then(function (data) {
                 page.splitviewtemplate = new WinJS.Binding.Template(null, { href: '/templates/moviesplitview.html', extractChild: true });
@@ -19,20 +19,8 @@
                         return page.splitviewtemplate.render(item.data).then(function (rendered) {
                             WinJSContrib.UI.tap(rendered, function (elt) {
                                 if (!page.element.classList.contains("inactive")) {
-                                    //page.foWrapper.element.style.opacity = '0.2';
-                                    //page.foWrapper.blurTo(20, 300);
-                                    //page.blurred = true;
-                                    WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true, skipHistory: true });
+                                    WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true });
                                 }
-                                //if (!page.blurred) {
-                                //    page.foWrapper.element.style.opacity = '0.2';
-                                //    page.foWrapper.blurTo(20, 300);
-                                //    page.blurred = true;
-                                //} else {
-                                //    page.foWrapper.element.style.opacity = '';
-                                //    page.foWrapper.blurTo(0, 160);
-                                //    page.blurred = false;
-                                //}
                             }, { disableAnimation: true })
                             return rendered;
                         });

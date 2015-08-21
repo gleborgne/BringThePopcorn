@@ -95,3 +95,23 @@ body {
   width: 100%;
   height: 60px;
 }
+.fragment {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: auto;
+}
+.fragment > header[role=banner] {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  background-color: #12b2e7;
+  color: white;
+  height: 50px;
+}
+.fragment > header[role=banner] .titlearea {
+  flex: 1;
+  font-size: 1.8rem;
+}
+.fragment > section[role=main] {
+  flex: 1;
+}

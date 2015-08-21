@@ -1,11 +1,12 @@
-﻿(function () {
+﻿/// <reference path="../../../dist/kodi.js" />
+(function () {
     "use strict";
 
     WinJS.UI.Pages.define("/pages/movies/detail/moviesdetail.html", {
         processed: function (element, options) {
             var page = this;
-
-            page.movieTitle.innerText = options.movie.title;
+            page.movie = options.movie;
+            
             return WinJS.Binding.processAll(element, options.movie);
         },
 

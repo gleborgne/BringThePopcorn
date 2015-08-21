@@ -8,17 +8,24 @@
     <script src="moviesdetail.js"></script>
 </head>
 <body>
-    <div class="moviesdetail fragment">
-        <header class="page-header" aria-label="Header content" role="banner">
-            
+    <div class="page-moviesdetail">
+        <header role="banner" class="fanart">
+            <div class="fanart-bg" data-win-bind="display: fanart Kodi.Utils.toThumbnailBg"></div>
         </header>
+        <header role="banner" class="poster">
+            <div class="poster" data-win-bind="display: art.poster Kodi.Utils.toThumbnailBg"></div>
+        </header>
+
         <section class="page-section" aria-label="Main content" role="main">
+
             <div class="description">
-                <div class="poster" data-win-bind="display: art.poster Kodi.Utils.toThumbnailBg"></div>
                 <div class="moviedetails">
-                    <div class="movie-title" member="movieTitle"></div>
+                    <div class="movie-title" data-win-bind="innerHTML: title"></div>
+                    <div class="movie-tagline" data-win-bind="innerHTML: tagline"></div>
+                    <div class="movie-plot" data-win-bind="innerHTML: plot"></div>
                 </div>
             </div>
+
         </section>
     </div>
 </body>

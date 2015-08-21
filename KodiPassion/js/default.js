@@ -32,7 +32,7 @@
 	        var _unload = pagecontrol.unload;
 	        var _updateLayout = pagecontrol.updateLayout;
 	        var proxy = document.createElement("DIV");
-	        proxy.className = "pagecontrolproxy";
+	        proxy.className = "pagecontrolproxy pagecontrol";
 	        proxy.winControl = pagecontrol;
 	        proxy.winControl.unload = function () {
 	            $(proxy).remove();

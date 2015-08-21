@@ -145,7 +145,7 @@
     }
 
     export function getAllMovies() {
-        var data = MovieOptions();
+        var data = MovieOptions(true);
         return API.kodiRequest<MoviesResultSet>('VideoLibrary.GetMovies', data, false, true).then(function (movies) {
             processMovies(movies);
             return WinJS.Promise.wrap(movies);
@@ -164,7 +164,7 @@
     }
 
     export function getRecentMovies() {
-        var data = MovieOptions();
+        var data = MovieOptions(true);
         return API.kodiRequest<MoviesResultSet>('VideoLibrary.GetRecentlyAddedMovies', data, false, true);
     }
 

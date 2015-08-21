@@ -114,6 +114,25 @@ body {
             }
         }
     }
+
+    .fragment {
+        .vflex(auto);
+
+        > header[role=banner] {
+            .hflex();
+            background-color: @kodiBlue;
+            color: white;
+            height: @menusize - 10px;
+            .titlearea{
+                flex: 1;
+                font-size: 1.8rem;
+            }
+        }
+
+        > section[role=main] {
+            flex: 1;
+        }
+    }
 }
 
 .applayout(60px, 60px);

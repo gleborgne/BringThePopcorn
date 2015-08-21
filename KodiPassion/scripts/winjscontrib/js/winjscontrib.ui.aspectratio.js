@@ -92,6 +92,7 @@
             },
 
             dispose: function () {
+                var ctrl = this;
                 ctrl.parentpage = null;
                 ctrl.styleElt.parentElement.removeChild(ctrl.styleElt);
                 WinJS.Utilities.disposeSubTree(this.element);

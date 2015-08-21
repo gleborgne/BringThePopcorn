@@ -71,7 +71,7 @@ var Kodi;
                 }
                 Movies.getMovieGenres = getMovieGenres;
                 function getAllMovies() {
-                    var data = MovieOptions();
+                    var data = MovieOptions(true);
                     return API.kodiRequest('VideoLibrary.GetMovies', data, false, true).then(function (movies) {
                         processMovies(movies);
                         return WinJS.Promise.wrap(movies);
@@ -90,7 +90,7 @@ var Kodi;
                 }
                 Movies.getMovieDetails = getMovieDetails;
                 function getRecentMovies() {
-                    var data = MovieOptions();
+                    var data = MovieOptions(true);
                     return API.kodiRequest('VideoLibrary.GetRecentlyAddedMovies', data, false, true);
                 }
                 Movies.getRecentMovies = getRecentMovies;

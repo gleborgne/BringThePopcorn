@@ -322,6 +322,7 @@
     <Content Include="scripts\WinJS\js\en-US\ui.strings.js" />
     <Content Include="scripts\WinJS\js\ui.js" />
     <Content Include="templates\moviesplitview.html" />
+    <Content Include="templates\movieposter.html" />
     <Content Include="templates\tvshowepisode.html" />
     <TypeScriptCompile Include="kodi\API\Kodi.API.Input.ts" />
     <TypeScriptCompile Include="kodi\API\Kodi.API.Music.ts" />
