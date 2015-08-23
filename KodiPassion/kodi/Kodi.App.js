@@ -11,6 +11,12 @@ var Kodi;
             hor: { query: '(orientation: landscape)', layout: WinJS.UI.GridLayout, options: { orientation: 'horizontal', groupHeaderPosition: 'left' } },
             vert: { query: '(orientation: portrait)', layout: WinJS.UI.GridLayout, options: { orientation: 'vertical', groupHeaderPosition: 'top' } }
         };
+        App.PictureRatios = {
+            fanart: 1.7778,
+            movieposter: 0.6667,
+            tvshowepisode: 1.7778,
+            album: 1.1
+        };
     })(App = Kodi.App || (Kodi.App = {}));
 })(Kodi || (Kodi = {}));
 //# sourceMappingURL=Kodi.App.js.map

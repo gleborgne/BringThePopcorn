@@ -1,0 +1,8 @@
+.page-loader-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #12b2e7;
+  width: 100%;
+  height: 100%;
+}

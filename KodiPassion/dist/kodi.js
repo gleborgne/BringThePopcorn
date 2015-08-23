@@ -11,6 +11,12 @@ var Kodi;
             hor: { query: '(orientation: landscape)', layout: WinJS.UI.GridLayout, options: { orientation: 'horizontal', groupHeaderPosition: 'left' } },
             vert: { query: '(orientation: portrait)', layout: WinJS.UI.GridLayout, options: { orientation: 'vertical', groupHeaderPosition: 'top' } }
         };
+        App.PictureRatios = {
+            fanart: 1.7778,
+            movieposter: 0.6667,
+            tvshowepisode: 1.7778,
+            album: 1.1
+        };
     })(App = Kodi.App || (Kodi.App = {}));
 })(Kodi || (Kodi = {}));
 
@@ -229,6 +235,14 @@ var Kodi;
                 $('#menupictures').hide();
             }
         }
+        function checkConnectivity() {
+            if (!Kodi.API.currentSettings || !Kodi.API.currentSettings.host) {
+                Kodi.API.currentSettings = Kodi.Settings.load();
+                Kodi.API.Websocket.close();
+            }
+            return Kodi.API.properties();
+        }
+        Data.checkConnectivity = checkConnectivity;
         function loadRootData(forceLoad) {
             if (!Kodi.API.currentSettings || !Kodi.API.currentSettings.host) {
                 Kodi.API.currentSettings = Kodi.Settings.load();
@@ -523,10 +537,10 @@ var Kodi;
                 servers: {
                     Default: {
                         name: 'Default',
-                        host: 'localhost',
-                        port: '8080',
-                        user: 'gle',
-                        password: 'gle',
+                        host: '',
+                        port: '80',
+                        user: 'kodi',
+                        password: '',
                         macAddress: []
                     }
                 }

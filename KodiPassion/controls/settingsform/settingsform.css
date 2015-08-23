@@ -1,0 +1,35 @@
+.settingsform .formfield {
+  margin-bottom: 0.4rem;
+}
+.settingsform .formfield label {
+  display: block;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  margin-top: 2px;
+  color: #666666;
+}
+.settingsform .formfield input[type=text],
+.settingsform .formfield input[type=number],
+.settingsform .formfield input[type=password] {
+  border: none;
+  border-bottom: 1px solid #666;
+  width: 100%;
+  background-color: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+.settingsform .formfield input[type=text]::-ms-input-placeholder,
+.settingsform .formfield input[type=number]::-ms-input-placeholder,
+.settingsform .formfield input[type=password]::-ms-input-placeholder {
+  color: #999;
+  font-weight: 300;
+}
+.settingsform .formfield.field2 {
+  display: -ms-grid;
+  -ms-grid-columns: 3fr 1fr;
+  -ms-grid-rows: auto;
+}
+.settingsform .formfield.field2 > .formfield:nth-child(2) {
+  margin-left: 10px;
+  -ms-grid-column: 2;
+}

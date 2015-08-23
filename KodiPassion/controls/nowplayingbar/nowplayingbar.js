@@ -1,24 +1,60 @@
-﻿// For an introduction to the Page Control template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkId=232511
-(function () {
+﻿(function () {
     "use strict";
 
     var ctor = WinJS.UI.Pages.define("/controls/nowplayingbar/nowplayingbar.html", {
-        // This function is called whenever a user navigates to this page. It
-        // populates the page elements with the app's data.
-        ready: function (element, options) {
-            // TODO: Initialize the page here.
+        processed: function (element, options) {
+            var ctrl = this;
+            ctrl.container = document.getElementById("contentwrapper");
+            ctrl.playingElt = document.getElementById("nowplaying");
+            ctrl.contentElt = document.getElementById("nowplayingcontent");
+
+            WinJS.Navigation.onbeforenavigate = function () {
+                ctrl.minimize(true);
+            }
         },
 
-        unload: function () {
-            // TODO: Respond to navigations away from this page.
+        toggleView: function () {
+            var ctrl = this;
+
+            if (document.body.classList.contains("nowplaying-expanded")) {                
+                ctrl.minimize();
+            } else {
+                ctrl.maximize();
+            }
         },
 
-        updateLayout: function (element) {
-            /// <param name="element" domElement="true" />
+        maximize: function () {
+            var ctrl = this;
+            if (!document.body.classList.contains("nowplaying-expanded")) {
+                var target = ctrl.container.clientHeight - ctrl.element.clientHeight;
+                ctrl.playingElt.style.height = 'auto';
+                $.Velocity.hook(ctrl.playingElt, "top", target + "px");
+                WinJSContrib.UI.Application.navigator.pageControl.foWrapper.blurTo(20, 120);
+                $.Velocity(ctrl.playingElt, { top: '0px' }, { duration: 120, easing: 'ease-out' }).then(function () {
+                    document.body.classList.add("nowplaying-expanded");
+                });
+            }
+        },
 
-            // TODO: Respond to changes in layout.
-        }
+        minimize: function (instantly) {
+            var ctrl = this;
+            if (document.body.classList.contains("nowplaying-expanded")) {
+                if (instantly) {
+                    ctrl.playingElt.style.top = '';
+                    ctrl.playingElt.style.height = '';
+                    document.body.classList.remove("nowplaying-expanded");
+                    return;
+                }
+                var target = ctrl.container.clientHeight - ctrl.element.clientHeight;
+                $.Velocity.hook(ctrl.playingElt, "top", "0");
+                WinJSContrib.UI.Application.navigator.pageControl.foWrapper.blurTo(0, 90);
+                $.Velocity(ctrl.playingElt, { top: target + 'px' }, { duration: 90, easing: 'ease-out' }).then(function () {
+                    ctrl.playingElt.style.height = '';
+                    ctrl.playingElt.style.top = '';
+                    document.body.classList.remove("nowplaying-expanded");
+                });
+            }
+        },
     });
 
     WinJS.Namespace.define("KodiPassion.UI", {

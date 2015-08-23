@@ -9,7 +9,14 @@ module Kodi.App {
     export var DefaultListLayout = {
         hor: { query: '(orientation: landscape)', layout: WinJS.UI.GridLayout, options: { orientation: 'horizontal', groupHeaderPosition: 'left' } },
         vert: { query: '(orientation: portrait)', layout: WinJS.UI.GridLayout, options: { orientation: 'vertical', groupHeaderPosition: 'top' } }
-    };       
+    };      
+    
+    export var PictureRatios = {
+        fanart: 1.7778,
+        movieposter: 0.6667,
+        tvshowepisode: 1.7778,
+        album : 1.1
+    }; 
 }
 
 interface JQuery {

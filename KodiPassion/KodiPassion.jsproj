@@ -61,6 +61,10 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="controls\loader\loader.css" />
+    <Content Include="controls\loader\loader.html" />
+    <Content Include="controls\loader\loader.js" />
+    <Content Include="controls\loader\loader.less" />
     <Content Include="controls\menu\menu.css" />
     <Content Include="controls\menu\menu.less" />
     <Content Include="controls\menu\menu.html" />
@@ -69,9 +73,14 @@
     <Content Include="controls\nowplayingbar\nowplayingbar.less" />
     <Content Include="controls\nowplayingbar\nowplayingbar.html" />
     <Content Include="controls\nowplayingbar\nowplayingbar.js" />
+    <Content Include="controls\settingsform\settingsform.css" />
+    <Content Include="controls\settingsform\settingsform.less" />
+    <Content Include="controls\settingsform\settingsform.html" />
+    <Content Include="controls\settingsform\settingsform.js" />
     <Content Include="css\applayout.less" />
     <Content Include="css\apptheme.less" />
     <Content Include="css\default.css" />
+    <Content Include="css\items.less" />
     <Content Include="css\reset.less" />
     <Content Include="default.html" />
     <Content Include="dist\fonts\kodipassion.css" />
@@ -150,6 +159,10 @@
     <Content Include="pages\albums\list\albumslist.less" />
     <Content Include="pages\albums\list\albumslist.html" />
     <Content Include="pages\albums\list\albumslist.js" />
+    <Content Include="pages\bootstrap\bootstrap.css" />
+    <Content Include="pages\bootstrap\bootstrap.less" />
+    <Content Include="pages\bootstrap\bootstrap.html" />
+    <Content Include="pages\bootstrap\bootstrap.js" />
     <Content Include="pages\home\home.css" />
     <Content Include="pages\home\home.less" />
     <Content Include="pages\home\home.html" />
@@ -165,6 +178,10 @@
     <Content Include="pages\settings\settings.css" />
     <Content Include="pages\settings\settings.html" />
     <Content Include="pages\settings\settings.js" />
+    <Content Include="pages\startup\startup.css" />
+    <Content Include="pages\startup\startup.less" />
+    <Content Include="pages\startup\startup.html" />
+    <Content Include="pages\startup\startup.js" />
     <Content Include="pages\tvshows\list\tvshowslist.css" />
     <Content Include="pages\tvshows\list\tvshowslist.less" />
     <Content Include="pages\tvshows\list\tvshowslist.html" />
@@ -181,6 +198,9 @@
     <Content Include="scripts\jquery-2.1.4.js" />
     <Content Include="scripts\jquery-2.1.4.min.js" />
     <Content Include="scripts\jquery-2.1.4.min.map" />
+    <Content Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
     <Content Include="scripts\lodash.js" />
     <Content Include="scripts\lodash.min.js" />
     <Content Include="scripts\moment-with-locales.js" />
@@ -188,6 +208,8 @@
     <Content Include="scripts\moment.js" />
     <Content Include="scripts\moment.min.js" />
     <Content Include="scripts\snap.svg-min.js" />
+    <Content Include="scripts\tooltipster\jquery.tooltipster.js" />
+    <Content Include="scripts\tooltipster\tooltipster.css" />
     <Content Include="scripts\velocity\velocity.js" />
     <Content Include="scripts\velocity\velocity.min.js" />
     <Content Include="scripts\velocity\velocity.ui.js" />

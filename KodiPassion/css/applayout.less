@@ -105,7 +105,6 @@ body {
                 left: 0;
                 right: 0;
                 height: @nowplayingsize;
-                background-color: #111;
 
                 #nowplayingbar {
                     width: 100%;
@@ -115,7 +114,43 @@ body {
         }
     }
 
+    body.unconnected {
+        #menu {
+            display: none;
+            }
+
+        #appcontent {
+            left: 0;
+
+            #contentwrapper {
+                #pageshostwrapper {
+                    bottom: 0;
+                }
+
+                #nowplaying {
+                    bottom: -@nowplayingsize;
+                }
+            }
+        }
+    }
+
+    #nowplaying {
+        display: -ms-grid;
+        -ms-grid-rows: auto 1fr;
+        -ms-grid-columns: 1fr;
+        background-color: fadeout(#111, 10%);
+
+        #nowplayingbar {
+        }
+
+        #nowplayingcontent {
+            -ms-grid-row: 2;
+        }
+    }
+
     .fragment {
+        width: 100%;
+        height: 100%;
         .vflex(auto);
 
         > header[role=banner] {
@@ -123,7 +158,8 @@ body {
             background-color: @kodiBlue;
             color: white;
             height: @menusize - 10px;
-            .titlearea{
+
+            .titlearea {
                 flex: 1;
                 font-size: 1.8rem;
             }
@@ -136,3 +172,8 @@ body {
 }
 
 .applayout(60px, 60px);
+
+.nowplaying-expanded #appcontent #contentwrapper #nowplaying {
+    height: auto;
+    top: 0;
+}

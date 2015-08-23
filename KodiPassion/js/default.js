@@ -8,8 +8,7 @@
 
 	WinJSContrib.UI.enableSystemBackButton = true;
 
-	function appInit() {
-	    var settingName = Kodi.Settings.defaultConnection();
+	function appInit(args) {
 	    var pageshost = document.getElementById("pageshost");
 
 	    WinJSContrib.UI.Pages.defaultFragmentMixins.push({
@@ -52,20 +51,26 @@
 	        pagecontrol.foWrapper = wrapper;
 	    }
 
+	    var settingName = Kodi.Settings.defaultConnection();
 	    if (settingName) {
 	        var currentSetting = Kodi.Settings.getSetting(settingName);
 	        if (currentSetting && currentSetting.host) {
-	            return Kodi.Data.loadRootData(true).then(function (data) {
-	                return WinJS.Navigation.navigate("/pages/home/home.html");
-	            },
-                function (err) {
-                    console.error(err);
-                    return WinJS.Navigation.navigate("/pages/settings/settings.html");
+	            return Kodi.Data.checkConnectivity().then(function (p) {
+	                return KodiPassion.UI.DataLoader.showLoader(false, args);
+	            }, function (err) {
+	                return WinJS.Navigation.navigate("/pages/startup/startup.html");
 	            });
+	            //return Kodi.Data.loadRootData(true).then(function (data) {
+	            //    return WinJS.Navigation.navigate("/pages/home/home.html");
+	            //},
+                //function (err) {
+                //    console.error(err);
+                //    return WinJS.Navigation.navigate("/pages/settings/settings.html");
+	            //});
 	        }
 	    }
 	    
-	    return WinJS.Navigation.navigate("/pages/settings/settings.html");
+	    return WinJS.Navigation.navigate("/pages/bootstrap/bootstrap.html");
 	}
 
 	app.onactivated = function (args) {
@@ -77,7 +82,7 @@
 				// To create a smooth user experience, restore application state here so that it looks like the app never stopped running.
 			}
 			args.setPromise(WinJS.UI.processAll().then(function(){
-			    return appInit();
+			    return appInit(args);
 			}));
 		}
 	};

@@ -27,10 +27,10 @@
             servers: {
                 Default: {
                     name: 'Default',
-                    host: 'localhost',
-                    port: '8080',
-                    user: 'gle',
-                    password: 'gle',
+                    host: '',
+                    port: '80',
+                    user: 'kodi',
+                    password: '',
                     macAddress: []
                 }
             }

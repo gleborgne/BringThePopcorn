@@ -1,0 +1,40 @@
+.page-bootstrap {
+  background-color: #222;
+  display: -ms-grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: 1fr;
+  width: 100%;
+  height: 100%;
+}
+.page-bootstrap .page-bootstrap-content {
+  -ms-grid-row-align: center;
+  -ms-grid-column-align: center;
+  padding: 80px;
+  max-width: 500px;
+}
+.page-bootstrap .page-bootstrap-content h1 {
+  color: #12b2e7;
+  font-weight: 400;
+}
+.page-bootstrap .page-bootstrap-content .intro {
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+.page-bootstrap .page-bootstrap-content .settingsform {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.page-bootstrap .page-bootstrap-content .actions {
+  text-align: right;
+}
+.page-bootstrap .page-bootstrap-content .actions button {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #777;
+  font-size: 1rem;
+  padding: 0.4rem 1rem;
+}
+.page-bootstrap .page-bootstrap-content .messages {
+  min-height: 4rem;
+}

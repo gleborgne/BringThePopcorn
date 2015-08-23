@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>settingsform</title>
+    <link href="/scripts/tooltipster/tooltipster.css" rel="stylesheet" />
+    <script src="/scripts/tooltipster/jquery.tooltipster.js"></script>
+    <script src="/scripts/jquery.validate.js"></script>
+    <script src="/scripts/winjscontrib/js/winjscontrib.ui.dataform.js"></script>
+    <link href="settingsform.css" rel="stylesheet" />
+    <script src="settingsform.js"></script>
+</head>
+<body>
+    <form class="settingsform" data-win-control="WinJSContrib.UI.DataForm">
+        <div class="formfield">
+            <input type="text" id="servername" name="servername" required placeholder="give a name to this connection" />
+            <label for="servername">server name</label>
+        </div>
+        <div class="formfield field2">
+            <div class="formfield">
+                <input type="text" id="serveraddress" name="serveraddress" required placeholder="server name or IP address" />
+                <label for="serveraddress">server address</label>
+            </div>
+            <div class="formfield">
+                <input type="number" id="port" name="port" required />
+                <label for="port">port</label>
+            </div>
+        </div>
+        <div class="formfield">
+            <input type="text" id="username" name="username" placeholder="enter kodi api identifier" />
+            <label for="username">api user name</label>
+        </div>
+        <div class="formfield">
+            <input type="password" id="userpwd" name="userpwd"  placeholder="enter kodi api password"/>
+            <label for="userpwd">api password</label>
+        </div>
+    </form>
+</body>
+</html>

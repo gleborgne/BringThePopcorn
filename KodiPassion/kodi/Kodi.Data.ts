@@ -263,6 +263,15 @@
         }
     }
 
+    export function checkConnectivity() {
+        if (!Kodi.API.currentSettings || !Kodi.API.currentSettings.host) {
+            Kodi.API.currentSettings = Kodi.Settings.load();
+            Kodi.API.Websocket.close();
+        }
+
+        return Kodi.API.properties();
+    }
+
     export function loadRootData(forceLoad) {
         if (!Kodi.API.currentSettings || !Kodi.API.currentSettings.host) {
             Kodi.API.currentSettings = Kodi.Settings.load();

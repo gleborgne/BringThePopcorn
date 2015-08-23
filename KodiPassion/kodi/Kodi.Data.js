@@ -213,6 +213,14 @@ var Kodi;
                 $('#menupictures').hide();
             }
         }
+        function checkConnectivity() {
+            if (!Kodi.API.currentSettings || !Kodi.API.currentSettings.host) {
+                Kodi.API.currentSettings = Kodi.Settings.load();
+                Kodi.API.Websocket.close();
+            }
+            return Kodi.API.properties();
+        }
+        Data.checkConnectivity = checkConnectivity;
         function loadRootData(forceLoad) {
             if (!Kodi.API.currentSettings || !Kodi.API.currentSettings.host) {
                 Kodi.API.currentSettings = Kodi.Settings.load();

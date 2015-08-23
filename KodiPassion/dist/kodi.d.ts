@@ -31,6 +31,12 @@ declare module Kodi.App {
             };
         };
     };
+    var PictureRatios: {
+        fanart: number;
+        movieposter: number;
+        tvshowepisode: number;
+        album: number;
+    };
 }
 interface JQuery {
     winControl(): any;
@@ -92,6 +98,7 @@ declare module Kodi.Data {
             };
         };
     };
+    function checkConnectivity(): WinJS.Promise<any>;
     function loadRootData(forceLoad: any): WinJS.IPromise<IMediaLibrary>;
     function checkSystemProperties(): void;
     function search(queryText: any): WinJS.Promise<{}>;

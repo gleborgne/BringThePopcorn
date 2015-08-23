@@ -8,6 +8,7 @@
 .page-moviesdetail header.fanart {
   -ms-grid-column-span: 2;
   height: 160px;
+  position: relative;
 }
 .page-moviesdetail header.fanart .fanart-bg {
   width: 100%;
@@ -19,6 +20,32 @@
 }
 .page-moviesdetail header.fanart .fanart-bg.imageLoaded {
   opacity: 1;
+}
+.page-moviesdetail header.fanart .actions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+.page-moviesdetail header.fanart .actions .mcn-elasticbutton {
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  text-align: center;
+  margin-right: 8px;
+}
+.page-moviesdetail header.fanart .actions .mcn-elasticbutton svg {
+  fill: #222;
+  stroke: #12b2e7;
+  stroke-width: 8px;
+}
+.page-moviesdetail header.fanart .actions .mcn-elasticbutton i {
+  font-size: 18pt;
+  color: #12b2e7;
 }
 .page-moviesdetail header.poster {
   position: relative;

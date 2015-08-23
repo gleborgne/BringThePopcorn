@@ -10,6 +10,7 @@
     header.fanart {
         -ms-grid-column-span: 2;
         height: 160px;
+        position: relative;
 
         .fanart-bg {
             width: 100%;
@@ -21,6 +22,36 @@
 
             &.imageLoaded {
                 opacity: 1;
+            }
+        }
+
+        .actions{
+            position: absolute;
+            left:0;
+            right: 0;
+            bottom: 8px;
+
+            .hflex();
+            justify-content: flex-end;
+
+            .mcn-elasticbutton{
+                @size : 56px;
+                width: @size;
+                height: @size;
+                line-height: @size;
+                text-align: center;
+                margin-right: 8px;
+
+                svg{
+                    fill: #222;
+                    stroke: @kodiBlue;
+                    stroke-width: 8px;
+                }
+
+                i{
+                    font-size : 18pt;
+                    color:@kodiBlue;
+                }
             }
         }
     }

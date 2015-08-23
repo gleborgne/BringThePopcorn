@@ -71,21 +71,3 @@
   font-weight: 400;
   max-width: 90%;
 }
-.page-home .tvshow-episode {
-  width: 25%;
-  position: relative;
-}
-.page-home .tvshow-episode > .tvshow-episode {
-  width: 100%;
-  height: 100%;
-}
-.page-home .tvshow-episode .bg,
-.page-home .tvshow-episode .content {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-size: cover;
-  background-position: center;
-}
