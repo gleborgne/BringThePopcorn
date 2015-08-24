@@ -32,7 +32,7 @@ gulp.task('Iconfont', function(){
   gulp.src(['basefont/*.svg'])
   	.pipe(iconfont({
       fontName: 'kodipassion',
-      fixedWidth: true,
+      //fixedWidth: true,
       normalize: true,
       centerHorizontally: true,
       //descent: 0

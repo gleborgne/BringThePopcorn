@@ -1,4 +1,10 @@
-﻿/// <reference path="winjscontrib.core.js" />
+/* 
+ * WinJS Contrib v2.1.0.2
+ * licensed under MIT license (see http://opensource.org/licenses/MIT)
+ * sources available at https://github.com/gleborgne/winjscontrib
+ */
+
+/// <reference path="winjscontrib.core.js" />
 
 //this controls requires snap.svg
 
@@ -33,12 +39,12 @@
                 body.style.height = '100%';
                 WinJSContrib.Utils.moveChilds(ctrl.element, body);
                 ctrl.element.innerHTML = '<svg id="' + ctrl.wrapperId + '" class="mcn-fowrapper-svg" xmlns="http://www.w3.org/2000/svg" style="width:100%; height: 100%">' +
-		            '<defs>' +
-		                '<filter id="blur-' + ctrl.wrapperId + '" x="0" y="0"><feGaussianBlur class="gblur" in="SourceGraphic" stdDeviation="0" /></filter>' +
-	   	            '</defs>' +
-		            '<foreignObject class="fowrapper" width="100%" height="100%" requiredExtensions="http://www.w3.org/1999/xhtml" filter="url(#blur-' + ctrl.wrapperId + ')">' +
-		            '</foreignObject>' +
-	            '</svg>';
+                    '<defs>' +
+                        '<filter id="blur-' + ctrl.wrapperId + '" x="0" y="0"><feGaussianBlur class="gblur" in="SourceGraphic" stdDeviation="0" /></filter>' +
+                    '</defs>' +
+                    '<foreignObject class="fowrapper" width="100%" height="100%" requiredExtensions="http://www.w3.org/1999/xhtml" filter="url(#blur-' + ctrl.wrapperId + ')">' +
+                    '</foreignObject>' +
+                '</svg>';
                 var container = ctrl.element.querySelector(".fowrapper");
                 ctrl.svg = ctrl.element.querySelector("svg");
                 ctrl.container = container;
@@ -73,7 +79,7 @@
                 this.element = null;
             }
         }),
-		WinJS.Utilities.eventMixin,
-		WinJS.Utilities.createEventProperties("blur"))
+        WinJS.Utilities.eventMixin,
+        WinJS.Utilities.createEventProperties("blur"))
     });
 })();

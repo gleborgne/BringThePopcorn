@@ -25,7 +25,7 @@ var Kodi;
                     Default: {
                         name: 'Default',
                         host: '',
-                        port: '80',
+                        port: 80,
                         user: 'kodi',
                         password: '',
                         macAddress: []

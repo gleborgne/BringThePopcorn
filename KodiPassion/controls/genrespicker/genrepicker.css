@@ -1,0 +1,40 @@
+.genrepickerctrl {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.genrepickerctrl .btnclose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  font-size: 20pt;
+}
+.genrepickerctrl .genre-items {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: auto;
+  box-sizing: border-box;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 60px;
+}
+.genrepickerctrl .genre-items .genre {
+  min-width: 250px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  padding: 0.5em 1em;
+  background-color: rgba(60, 60, 60, 0.3);
+}
+.genrepickerctrl .genre-items .genre.genre-all {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+}

@@ -26,27 +26,27 @@ var Kodi;
         //ws.onerror = function (evt) {
         //    console.log(evt.data)
         //};
-        function kodiRequest(methodname, params, forceCheck, ignoreXBMCErrors, retries) {
+        function kodiServerRequest(setting, methodname, params, forceCheck, ignoreXBMCErrors, retries) {
             var p, completed = false, completeCallback, errorCallback = null;
             p = new WinJS.Promise(function (complete, error) {
                 completeCallback = complete;
                 errorCallback = error;
             });
-            if (!API.currentSettings) {
+            if (!setting) {
                 var err = { message: 'not initialized' };
-                return errorCallback(err);
+                setImmediate(function () {
+                    errorCallback(err);
+                });
+                return p;
             }
             var reqdata = {
                 "jsonrpc": apiVersion, "method": methodname, "id": apiId
             };
             if (params)
                 reqdata.params = params;
-            if (API.version && API.version.major >= 12 && !Kodi.API.Websocket.current) {
-                Kodi.API.Websocket.init(API.currentSettings);
-            }
-            var url = API.currentSettings.host + '/jsonrpc';
-            if (API.currentSettings.port !== '80') {
-                url = API.currentSettings.host + ':' + API.currentSettings.port + '/jsonrpc';
+            var url = setting.host + '/jsonrpc';
+            if (setting.port !== 80) {
+                url = setting.host + ':' + setting.port + '/jsonrpc';
             }
             if (!WinJSContrib.Utils.startsWith(url, 'http://')) {
                 url = 'http://' + url;
@@ -56,8 +56,8 @@ var Kodi;
             $.ajax({
                 url: url,
                 type: 'POST',
-                username: API.currentSettings.user,
-                password: API.currentSettings.password,
+                username: setting.user,
+                password: setting.password,
                 xhrFields: {
                     withCredentials: true
                 },
@@ -117,6 +117,19 @@ var Kodi;
             });
             //});
             return WinJS.Promise.timeout(API.defaultCallTimeout * 1000, p);
+        }
+        API.kodiServerRequest = kodiServerRequest;
+        function testServerSetting(setting) {
+            return kodiServerRequest(setting, 'Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, false);
+        }
+        API.testServerSetting = testServerSetting;
+        function kodiRequest(methodname, params, forceCheck, ignoreXBMCErrors, retries) {
+            return kodiServerRequest(API.currentSettings, methodname, params, forceCheck, ignoreXBMCErrors, retries).then(function (data) {
+                if (API.version && API.version.major >= 12 && !Kodi.API.Websocket.current) {
+                    Kodi.API.Websocket.init(API.currentSettings);
+                }
+                return data;
+            });
         }
         API.kodiRequest = kodiRequest;
         function kodiThumbnail(thumburl) {

@@ -2,6 +2,7 @@
   width: 280px;
   height: 400px;
   position: relative;
+  background-color: #111;
 }
 .movieslist .movie .bg,
 .movieslist .movie .content {
@@ -12,4 +13,15 @@
   bottom: 0;
   background-size: cover;
   background-position: center;
+}
+.movieslist .movie .bg.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.view-wall .win-listview .win-gridlayout .win-container {
+  margin: 0 1px 1px 0;
+}
+.view-wall .win-listview .win-vertical .win-gridlayout.win-surface {
+  margin: 0;
 }

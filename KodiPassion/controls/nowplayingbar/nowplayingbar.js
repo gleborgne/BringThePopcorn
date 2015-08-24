@@ -8,9 +8,9 @@
             ctrl.playingElt = document.getElementById("nowplaying");
             ctrl.contentElt = document.getElementById("nowplayingcontent");
 
-            WinJS.Navigation.onbeforenavigate = function () {
+            WinJS.Navigation.addEventListener("beforenavigate", function () {
                 ctrl.minimize(true);
-            }
+            });
         },
 
         toggleView: function () {

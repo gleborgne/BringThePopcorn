@@ -13,7 +13,7 @@ var worker = this;
 (function () {
     'use strict';
 
-    importScripts('/scripts/winjs/js/base.js');
+    importScripts('//Microsoft.WinJS.2.0/js/base.js');
     importScripts('/scripts/winjscontrib/winjscontrib.core.js');
     importScripts('/scripts/winjscontrib/winjscontrib.messenger.js');
     importScripts('/scripts/winjscontrib/winjscontrib.search.js');

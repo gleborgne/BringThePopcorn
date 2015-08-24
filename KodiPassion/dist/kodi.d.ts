@@ -150,6 +150,14 @@ declare module Kodi.NowPlaying {
 }
 
 declare module Kodi.Settings {
+    interface KodiServerSetting {
+        name: string;
+        host: string;
+        port: number;
+        user: string;
+        password: string;
+        macAddress: string[];
+    }
     function save(initialName: any, setting: any, setDefault: any): void;
     function remove(name: any): void;
     function getSetting(name: any): any;
@@ -279,7 +287,7 @@ declare module Kodi.API.Player {
 
 declare module Kodi.API {
     var defaultCallTimeout: number;
-    var currentSettings: any;
+    var currentSettings: Kodi.Settings.KodiServerSetting;
     var version: any;
     interface KodiRequest {
         albumid?: number;
@@ -295,6 +303,8 @@ declare module Kodi.API {
         };
     }
     function redirectToSettings(error: any): WinJS.IPromise<{}>;
+    function kodiServerRequest<T>(setting: Kodi.Settings.KodiServerSetting, methodname: any, params?: any, forceCheck?: any, ignoreXBMCErrors?: any, retries?: any): WinJS.Promise<T>;
+    function testServerSetting(setting: Kodi.Settings.KodiServerSetting): WinJS.Promise<any>;
     function kodiRequest<T>(methodname: any, params?: any, forceCheck?: any, ignoreXBMCErrors?: any, retries?: any): WinJS.Promise<T>;
     function kodiThumbnail(thumburl: any): string;
     function getFilePath(path: any): string;

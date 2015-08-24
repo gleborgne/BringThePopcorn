@@ -1,8 +1,9 @@
 ﻿.movieslist {
-    .movie{
+    .movie {
         width: 280px;
-        height  : 400px;
+        height: 400px;
         position: relative;
+        background-color: #111;
 
 
         .bg, .content {
@@ -14,5 +15,24 @@
             background-size: cover;
             background-position: center;
         }
+
+        .bg.title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .label {
+            }
+        }
+    }
+}
+
+.view-wall {
+    .win-listview .win-gridlayout .win-container {
+        margin: 0 1px 1px 0;
+    }
+
+    .win-listview .win-vertical .win-gridlayout.win-surface {
+        margin: 0;
     }
 }

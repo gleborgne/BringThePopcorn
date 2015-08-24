@@ -1,0 +1,44 @@
+﻿@import "../../css/apptheme.less";
+
+.genrepickerctrl {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .btnclose {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        font-size: 20pt;
+    }
+
+    .genre-items {
+        .hflex(auto);
+        box-sizing: border-box;
+        width: 100%;
+        flex-wrap: wrap;
+        padding: 60px;
+
+        .genre {
+            min-width: 250px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            padding: 0.5em 1em;
+            background-color : rgba(60,60,60,0.3);
+
+            &.genre-all {
+                width: 100%;
+                text-align: center;
+                text-transform: uppercase;
+            }
+        }
+    }
+}

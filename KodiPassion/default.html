@@ -14,6 +14,12 @@
     <script src="/scripts/WinJS/js/ui.js"></script>
     <script src="scripts/velocity/velocity.js"></script>
     <script src="scripts/velocity/velocity.ui.js"></script>
+    <script type="text/javascript">
+        //hack pour que Velocity utilise les promises si le navigateur n'a pas en stock
+        if (!window.Promise) {
+            window.Promise = WinJS.Promise;
+        }
+    </script>
 
     <link href="dist/winjscontrib-custom.css" rel="stylesheet" />
     <script src="/dist/winjscontrib-custom.js"></script>
@@ -26,6 +32,8 @@
     <script src="/controls/menu/menu.js"></script>
     <script src="/controls/nowplayingbar/nowplayingbar.js"></script>
     <script src="/controls/loader/loader.js"></script>
+    <script src="/controls/genrespicker/genrepicker.js"></script>
+
     <link href="/css/default.css" rel="stylesheet" />
     <script src="/js/default.js"></script>
 </head>

@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <title>movieslist</title>
-    <script src="/scripts/winjscontrib/js/winjscontrib.ui.datasourcemanager.js"></script>
     <link href="movieslist.css" rel="stylesheet" />
     <script src="movieslist.js"></script>
 </head>
@@ -13,7 +12,7 @@
             <h1 class="titlearea win-type-ellipsis">
                 <span class="pagetitle">movies</span>
             </h1>
-            <h2 class="genre">
+            <h2 class="genre" member="genretitle" tap="pickGenre">
                 All
             </h2>
             <div class="stretch"></div>
@@ -36,9 +35,7 @@
             <mcn-semanticlistviews id="semanticzoom" member class="mcn-fullsize"
                                    listview.groupHeaderTemplate="select:#groupItemTemplate"
                                    zoomedoutlistview.itemTemplate="select:#semanticItemTemplate"
-                                   defaultGroupLimit="12"
-                                   groupKind="global:WinJSContrib.UI.DataSources.Grouping.alphabetic"
-                                   items="prom:ctrl:itemsPromise">
+                                   defaultGroupLimit="12">
             </mcn-semanticlistviews>
         </section>
     </div>

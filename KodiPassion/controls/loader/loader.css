@@ -6,3 +6,15 @@
   width: 100%;
   height: 100%;
 }
+.page-loader-wrapper .page-loader {
+  width: 100%;
+  height: 100%;
+  display: -ms-grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: 1fr;
+}
+.page-loader-wrapper .page-loader .content {
+  -ms-grid-row-align: center;
+  -ms-grid-column-align: center;
+  font-size: 2rem;
+}

@@ -1,4 +1,12 @@
 ﻿module Kodi.Settings {
+    export interface KodiServerSetting {
+        name: string;
+        host: string;
+        port: number;
+        user: string;
+        password: string;
+        macAddress: string[];
+    }
 
     var applicationData = Windows.Storage.ApplicationData.current;
     var kodiServers = 'kodiAPISettings';
@@ -25,10 +33,10 @@
         currentSettings = {
             defaultSetting: 'Default',
             servers: {
-                Default: {
+                Default: <KodiServerSetting>{
                     name: 'Default',
                     host: '',
-                    port: '80',
+                    port: 80,
                     user: 'kodi',
                     password: '',
                     macAddress: []

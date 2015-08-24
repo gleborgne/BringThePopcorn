@@ -18,6 +18,11 @@
   color: inherit;
   font-size: inherit;
 }
+.settingsform .formfield input[type=text].error,
+.settingsform .formfield input[type=number].error,
+.settingsform .formfield input[type=password].error {
+  border-bottom-color: red;
+}
 .settingsform .formfield input[type=text]::-ms-input-placeholder,
 .settingsform .formfield input[type=number]::-ms-input-placeholder,
 .settingsform .formfield input[type=password]::-ms-input-placeholder {

@@ -61,6 +61,9 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="controls\genrespicker\genrepicker.css" />
+    <Content Include="controls\genrespicker\genrepicker.js" />
+    <Content Include="controls\genrespicker\genrepicker.less" />
     <Content Include="controls\loader\loader.css" />
     <Content Include="controls\loader\loader.html" />
     <Content Include="controls\loader\loader.js" />
@@ -151,6 +154,10 @@
     <Content Include="kodi\Kodi.Utils.js.map" />
     <Content Include="kodi\Kodi.WOL.js" />
     <Content Include="kodi\Kodi.WOL.js.map" />
+    <Content Include="pages\albums\artists\artists.css" />
+    <Content Include="pages\albums\artists\artists.less" />
+    <Content Include="pages\albums\artists\artists.html" />
+    <Content Include="pages\albums\artists\artists.js" />
     <Content Include="pages\albums\detail\albumsdetail.css" />
     <Content Include="pages\albums\detail\albumsdetail.less" />
     <Content Include="pages\albums\detail\albumsdetail.html" />

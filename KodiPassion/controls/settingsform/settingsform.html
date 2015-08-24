@@ -11,27 +11,27 @@
     <script src="settingsform.js"></script>
 </head>
 <body>
-    <form class="settingsform" data-win-control="WinJSContrib.UI.DataForm">
+    <form class="settingsform" member="dataForm" data-win-control="WinJSContrib.UI.DataForm">
         <div class="formfield">
-            <input type="text" id="servername" name="servername" required placeholder="give a name to this connection" />
+            <input type="text" id="servername" name="servername" required placeholder="give a name to this connection" data-formfield="name" />
             <label for="servername">server name</label>
         </div>
         <div class="formfield field2">
             <div class="formfield">
-                <input type="text" id="serveraddress" name="serveraddress" required placeholder="server name or IP address" />
+                <input type="text" id="serveraddress" name="serveraddress" required placeholder="server name or IP address" data-formfield="host" />
                 <label for="serveraddress">server address</label>
             </div>
             <div class="formfield">
-                <input type="number" id="port" name="port" required />
+                <input type="number" id="port" name="port" required  data-formfield="port" />
                 <label for="port">port</label>
             </div>
         </div>
         <div class="formfield">
-            <input type="text" id="username" name="username" placeholder="enter kodi api identifier" />
+            <input type="text" id="username" name="username" placeholder="enter kodi api identifier"  data-formfield="user" />
             <label for="username">api user name</label>
         </div>
         <div class="formfield">
-            <input type="password" id="userpwd" name="userpwd"  placeholder="enter kodi api password"/>
+            <input type="password" id="userpwd" name="userpwd"  placeholder="enter kodi api password"  data-formfield="password" />
             <label for="userpwd">api password</label>
         </div>
     </form>

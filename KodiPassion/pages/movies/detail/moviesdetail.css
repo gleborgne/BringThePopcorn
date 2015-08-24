@@ -34,17 +34,17 @@
 .page-moviesdetail header.fanart .actions .mcn-elasticbutton {
   width: 56px;
   height: 56px;
-  line-height: 56px;
+  line-height: 60px;
   text-align: center;
   margin-right: 8px;
 }
 .page-moviesdetail header.fanart .actions .mcn-elasticbutton svg {
-  fill: #222;
+  fill: rgba(40, 40, 40, 0.7);
   stroke: #12b2e7;
   stroke-width: 8px;
 }
 .page-moviesdetail header.fanart .actions .mcn-elasticbutton i {
-  font-size: 18pt;
+  font-size: 20pt;
   color: #12b2e7;
 }
 .page-moviesdetail header.poster {

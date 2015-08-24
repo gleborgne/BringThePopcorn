@@ -92,7 +92,8 @@
                     "originaltitle", "lastplayed", "playcount", "writer", "studio", "mpaa", "cast", "country",
                     "set", "showlink", "streamdetails",
                     "votes", "fanart", "thumbnail", "file", "sorttitle", "resume", "setid"
-                ]
+                ],
+                "sort": { "method": "label", "order": "ascending" }
             };
 
             if (API.version && API.version.major >= 12) {

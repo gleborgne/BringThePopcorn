@@ -5,7 +5,7 @@
     var apiVersion = '2.0';
     export var defaultCallTimeout = 10;
 
-    export var currentSettings;
+    export var currentSettings: Kodi.Settings.KodiServerSetting;
     export var version;
     export interface KodiRequest {
         albumid?: number;
@@ -40,17 +40,20 @@
     //ws.onerror = function (evt) {
     //    console.log(evt.data)
     //};
-    export function kodiRequest<T>(methodname, params?, forceCheck?, ignoreXBMCErrors?, retries?): WinJS.Promise<T> {
-        
+
+    export function kodiServerRequest<T>(setting: Kodi.Settings.KodiServerSetting, methodname, params?, forceCheck?, ignoreXBMCErrors?, retries?): WinJS.Promise<T> {
         var p, completed = false, completeCallback, errorCallback = null;
         p = new WinJS.Promise<T>(function (complete, error) {
             completeCallback = complete;
             errorCallback = error;
         });
 
-        if (!API.currentSettings) {
+        if (!setting) {
             var err = { message: 'not initialized' };
-            return errorCallback(err);
+            setImmediate(function () {
+                errorCallback(err);
+            });
+            return p;
         }
 
         var reqdata = <any>{
@@ -59,14 +62,12 @@
         if (params)
             reqdata.params = params;
 
-        if (API.version && API.version.major >= 12 && !Kodi.API.Websocket.current) {
-            Kodi.API.Websocket.init(API.currentSettings);
-        }
+        
 
 
-        var url = API.currentSettings.host + '/jsonrpc';
-        if (API.currentSettings.port !== '80') {
-            url = API.currentSettings.host + ':' + API.currentSettings.port + '/jsonrpc';
+        var url = setting.host + '/jsonrpc';
+        if (setting.port !== 80) {
+            url = setting.host + ':' + setting.port + '/jsonrpc';
         }
 
         if (!WinJSContrib.Utils.startsWith(url, 'http://')) {
@@ -78,8 +79,8 @@
         $.ajax({
             url: url,
             type: 'POST',
-            username: API.currentSettings.user,
-            password: API.currentSettings.password,
+            username: setting.user,
+            password: setting.password,
             xhrFields: {
                 withCredentials: true
             },
@@ -140,6 +141,20 @@
         //});
 
         return WinJS.Promise.timeout(API.defaultCallTimeout * 1000, p);
+    }
+
+    export function testServerSetting(setting: Kodi.Settings.KodiServerSetting): WinJS.Promise<any> {
+        return kodiServerRequest(setting, 'Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, false);
+    }
+
+    export function kodiRequest<T>(methodname, params?, forceCheck?, ignoreXBMCErrors?, retries?): WinJS.Promise<T> {
+        return kodiServerRequest(API.currentSettings, methodname, params, forceCheck, ignoreXBMCErrors, retries).then(function (data) {
+            if (API.version && API.version.major >= 12 && !Kodi.API.Websocket.current) {
+                Kodi.API.Websocket.init(API.currentSettings);
+            }
+
+            return data;
+        });
     }
     
     export function kodiThumbnail(thumburl) {
