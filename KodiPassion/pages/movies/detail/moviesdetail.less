@@ -34,13 +34,14 @@
             .hflex();
             justify-content: flex-end;
 
-            .mcn-elasticbutton{
+            button, .mcn-elasticbutton{
                 @size : 56px;
                 width: @size;
                 height: @size;
-                line-height: @size + 4px;
+                line-height: @size;
                 text-align: center;
                 margin-right: 8px;
+                border-radius: 50%;
 
                 svg{
                     fill: rgba(40,40,40,0.7);
@@ -52,6 +53,11 @@
                     font-size : 20pt;
                     color:@kodiBlue;
                 }
+            }
+
+            button{
+                background-color: rgba(40,40,40,0.7);
+                border: 2px solid @kodiBlue;
             }
         }
     }

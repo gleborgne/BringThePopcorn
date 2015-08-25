@@ -81,14 +81,15 @@ gulp.task('compilewinjscontrib', function () {
 		    'scripts/winjscontrib/js/winjscontrib.winrt.upnp.js',
             'scripts/winjscontrib/js/winjscontrib.bindings.js',
             'scripts/winjscontrib/js/winjscontrib.date.utils.js',
-            //'scripts/winjscontrib/js/winjscontrib.ui.navigator.js',
+            'scripts/winjscontrib/js/winjscontrib.search.js',
+            'scripts/winjscontrib/js/winjscontrib.ui.navigator.js',
             'scripts/winjscontrib/js/winjscontrib.ui.animation.js',
             'scripts/winjscontrib/js/winjscontrib.ui.elasticbutton.js',
             'scripts/winjscontrib/js/winjscontrib.ui.fowrapper.js',
             'scripts/winjscontrib/js/winjscontrib.ui.multipass-renderer.js',
             'scripts/winjscontrib/js/winjscontrib.ui.grid.js',
-            'scripts/winjscontrib/js/winjscontrib.search.js',
             'scripts/winjscontrib/js/winjscontrib.ui.datasourcemanager.js',
+            'scripts/winjscontrib/js/winjscontrib.ui.aspectratio.js',
             
         ], { base: '.', cwd: 'KodiPassion' })
 	    .pipe(plumber({ errorHandler: onError }))
@@ -137,9 +138,46 @@ gulp.task('compilewinjscontrib', function () {
     ]);
 });
 
+var tsPagesProject = ts.createProject({
+    declarationFiles: false,
+    noExternalResolve: true,
+    target: 'ES5',
+    noEmitOnError: false,
+    isolatedCompilation: true
+});
+
+gulp.task('compilepages', function () {
+    var tsResult = gulp.src([
+		'KodiPassion/typings/**/*.d.ts',
+		'KodiPassion/dist/kodi.d.ts',
+		'KodiPassion/pages/**/*.ts',
+    ], { base: '.' })
+	.pipe(plumber({ errorHandler: onError }))
+	.pipe(sourcemaps.init())
+	.pipe(ts(tsKodiProject));
+
+    return merge([
+        tsResult.js
+            .pipe(sourcemaps.write(".", {
+        	    sourceRoot: function (file) {
+        	        var sources = [];
+        	        file.sourceMap.sources.forEach(function (s) {
+        	            var filename = s.substr(s.lastIndexOf('/') + 1);
+        	            console.log(filename)
+        	            sources.push(filename);
+        	        });
+        	        file.sourceMap.sources = sources;
+        	        return ' ';
+        	    }
+        	}))
+        	.pipe(gulp.dest(''))
+    ]);
+});
+
 gulp.task('watch', function() {
     gulp.watch(['KodiPassion/**/*.less', '!KodiPassion/**/bin/**/*.less', '!KodiPassion/**/bld/**/*.less'], ['styles']);
     gulp.watch(['KodiPassion/kodi/**/*.ts'], ['compilekodi']);
+    gulp.watch(['KodiPassion/pages/**/*.ts'], ['compilepages']);
 });
 
 gulp.task('default', ['clean', 'styles'], function() {

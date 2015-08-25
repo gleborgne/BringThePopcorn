@@ -19,18 +19,18 @@ body {
   align-items: auto;
 }
 #menu .main-menu .sidemenu {
-  width: 60px;
+  width: 48px;
   height: 100%;
   background-color: #000;
 }
 #menu .main-menu .sidemenu .menu-item {
-  width: 60px;
-  height: 50px;
-  line-height: 60px;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
   text-align: center;
 }
 #menu .main-menu .sidemenu .bottomicons .menu-item {
-  height: 60px;
+  height: 48px;
 }
 #menu .main-menu .menu-content {
   flex: 1;
@@ -38,7 +38,7 @@ body {
 }
 #appcontent {
   position: absolute;
-  left: 60px;
+  left: 48px;
   top: 0;
   bottom: 0;
   right: 0;
@@ -54,7 +54,7 @@ body {
   right: 0;
   top: 0;
   height: auto;
-  bottom: 60px;
+  bottom: 48px;
 }
 #appcontent #contentwrapper #pageshostwrapper #pageshost {
   position: relative;
@@ -88,11 +88,11 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 48px;
 }
 #appcontent #contentwrapper #nowplaying #nowplayingbar {
   width: 100%;
-  height: 60px;
+  height: 48px;
 }
 body.unconnected #menu {
   display: none;
@@ -104,7 +104,7 @@ body.unconnected #appcontent #contentwrapper #pageshostwrapper {
   bottom: 0;
 }
 body.unconnected #appcontent #contentwrapper #nowplaying {
-  bottom: -60px;
+  bottom: -48px;
 }
 #nowplaying {
   display: -ms-grid;
@@ -128,7 +128,7 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
   align-items: center;
   background-color: #12b2e7;
   color: white;
-  height: 50px;
+  height: 48px;
   padding: 0 1rem;
 }
 .fragment > header[role=banner] .titlearea {

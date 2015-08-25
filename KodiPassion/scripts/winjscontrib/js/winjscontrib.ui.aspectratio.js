@@ -70,22 +70,18 @@
                                 classname = ctrl.prefix + ' ' + classname;
                             }
                             if (ctrl.basedOn == "height" && eltH > 0) {
-                                let targetW = (eltH * ctrl.ratio) << 0;
+                                var targetW = (eltH * ctrl.ratio) << 0;
                                 ctrl.styleElt.innerHTML = classname + "{ width:" + targetW + "px}";
                             } else if (eltW > 0) {
-                                let targetH = (eltW / ctrl.ratio) << 0;
+                                var targetH = (eltW / ctrl.ratio) << 0;
                                 if (ctrl.max) {
-                                    let maxH = (ctrl.parentpage.element.clientHeight * ctrl.max / 100) << 0;
+                                    var maxH = (ctrl.parentpage.element.clientHeight * ctrl.max / 100) << 0;
                                     if (targetH > maxH) {
                                         targetH = maxH;
                                     }
                                 }
                                 ctrl.styleElt.innerHTML = classname + "{ height:" + targetH + "px}";
-                            } /*else if (retry < 10) {
-                            setImmediate(function () {
-                                ctrl.updateLayout(retry+1);
-                            })
-                        }*/
+                            }
                         }
                     }
                 });

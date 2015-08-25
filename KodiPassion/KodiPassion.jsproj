@@ -175,9 +175,11 @@
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\home.js" />
     <Content Include="pages\movies\detail\moviesdetail.css" />
+    <Content Include="pages\movies\detail\moviesdetail.js" />
+    <Content Include="pages\movies\detail\moviesdetail.js.map" />
     <Content Include="pages\movies\detail\moviesdetail.less" />
     <Content Include="pages\movies\detail\moviesdetail.html" />
-    <Content Include="pages\movies\detail\moviesdetail.js" />
+    <TypeScriptCompile Include="pages\movies\detail\moviesdetail.ts" />
     <Content Include="pages\movies\list\movieslist.css" />
     <Content Include="pages\movies\list\movieslist.less" />
     <Content Include="pages\movies\list\movieslist.html" />
@@ -201,6 +203,7 @@
     <Content Include="pages\tvshows\seriedetail\tvshowsseriedetail.less" />
     <Content Include="pages\tvshows\seriedetail\tvshowsseriedetail.html" />
     <Content Include="pages\tvshows\seriedetail\tvshowsseriedetail.js" />
+    <Content Include="scripts\dynamics.js" />
     <Content Include="scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="scripts\jquery-2.1.4.js" />
     <Content Include="scripts\jquery-2.1.4.min.js" />

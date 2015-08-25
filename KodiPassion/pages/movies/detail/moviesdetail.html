@@ -12,15 +12,15 @@
         <header role="banner" class="fanart">
             <div class="fanart-bg" data-win-bind="display: fanart Kodi.Utils.toThumbnailBg"></div>
             <div class="actions">
-                <div data-win-control="WinJSContrib.UI.ElasticButton" data-win-options="{ kind: 'round' }">
+                <button member="btnDownloadMovie" tap="downloadMovie" style="display: none">
                     <i class="kdp-download"></i>
-                </div>
-                <div data-win-control="WinJSContrib.UI.ElasticButton" data-win-options="{ kind: 'round' }">
+                </button>
+                <button member="btnPlayMovieLocal" data-win-options="{ kind: 'round' }" tap="playMovieLocal" style="display: none">
                     <i class="kdp-play"></i>
-                </div>
-                <div data-win-control="WinJSContrib.UI.ElasticButton" data-win-options="{ kind: 'round' }">
+                </button>
+                <button member="btnPlayMovie" data-win-options="{ kind: 'round' }" tap="playMovie">
                     <i class="kdp-play"></i>
-                </div>
+                </button>
             </div>
         </header>
         <header role="banner" class="poster">
