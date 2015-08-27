@@ -1,23 +1,20 @@
-﻿// For an introduction to the Page Control template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkId=232511
-(function () {
-    "use strict";
-
-    WinJS.UI.Pages.define("/pages/albums/artists/artists.html", {
-        // This function is called whenever a user navigates to this page. It
-        // populates the page elements with the app's data.
-        ready: function (element, options) {
-            // TODO: Initialize the page here.
-        },
-
-        unload: function () {
-            // TODO: Respond to navigations away from this page.
-        },
-
-        updateLayout: function (element) {
-            /// <param name="element" domElement="true" />
-
-            // TODO: Respond to changes in layout.
-        }
-    });
-})();
+var KodiPassion;
+(function (KodiPassion) {
+    var UI;
+    (function (UI) {
+        var Pages;
+        (function (Pages) {
+            var AlbumsArtistsPage = (function () {
+                function AlbumsArtistsPage() {
+                }
+                AlbumsArtistsPage.prototype.processed = function (element, options) {
+                };
+                AlbumsArtistsPage.url = "/pages/albums/artists/artists.html";
+                return AlbumsArtistsPage;
+            })();
+            Pages.AlbumsArtistsPage = AlbumsArtistsPage;
+            WinJS.UI.Pages.define(AlbumsArtistsPage.url, AlbumsArtistsPage);
+        })(Pages = UI.Pages || (UI.Pages = {}));
+    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
+})(KodiPassion || (KodiPassion = {}));
+//# sourceMappingURL=artists.js.map

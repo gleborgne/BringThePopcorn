@@ -376,7 +376,7 @@ declare module WinJSContrib.UI {
          * @param {boolean} capture
          * @returns {function} function to call for unregistering the event
          */
-        addEvent(e: any, eventName: string, handler: any, capture: boolean): () => void;
+        addEvent(e: any, eventName: string, handler: any, capture?: boolean): () => void;
         /**
          * register binding event
          * @function WinJSContrib.UI.EventTracker.prototype.addBinding
@@ -543,6 +543,7 @@ declare module WinJSContrib.UI {
         animDown: (element: any) => WinJS.Promise<any>;
         animUp: (element: any) => WinJS.Promise<any>;
         disableAnimation: boolean;
+        awaitAnim: boolean;
     };
     /**
      * add tap behavior to an element, tap manages quirks like click delay, visual feedback, etc

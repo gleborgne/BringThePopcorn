@@ -29,3 +29,41 @@
   font-size: 0.6rem;
   color: #CCC;
 }
+.serveritem {
+  padding: 6px 16px;
+  background-color: rgba(60, 60, 60, 0.8);
+  margin-bottom: 4px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.serveritem.current {
+  background-color: rgba(18, 178, 231, 0.7);
+}
+.serveritem.current button {
+  border-color: white;
+  color: white;
+}
+.serveritem .name {
+  flex: 1;
+}
+.serveritem button {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  box-sizing: border-box;
+  line-height: 41px;
+  border: 1px solid #12b2e7;
+  background-color: transparent;
+  font-size: 16pt;
+  color: #12b2e7;
+  margin-left: 10px;
+  transition: background-color 100ms ease, color 100ms ease, border-color 100ms ease;
+}
+.serveritem button.working {
+  background-color: #12b2e7;
+  border-color: white;
+  color: white;
+}

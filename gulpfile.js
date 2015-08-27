@@ -150,7 +150,9 @@ gulp.task('compilepages', function () {
     var tsResult = gulp.src([
 		'KodiPassion/typings/**/*.d.ts',
 		'KodiPassion/dist/kodi.d.ts',
+        'KodiPassion/js/**/*.ts',
 		'KodiPassion/pages/**/*.ts',
+        'KodiPassion/controls/**/*.ts',
     ], { base: '.' })
 	.pipe(plumber({ errorHandler: onError }))
 	.pipe(sourcemaps.init())
@@ -177,7 +179,7 @@ gulp.task('compilepages', function () {
 gulp.task('watch', function() {
     gulp.watch(['KodiPassion/**/*.less', '!KodiPassion/**/bin/**/*.less', '!KodiPassion/**/bld/**/*.less'], ['styles']);
     gulp.watch(['KodiPassion/kodi/**/*.ts'], ['compilekodi']);
-    gulp.watch(['KodiPassion/pages/**/*.ts'], ['compilepages']);
+    gulp.watch(['KodiPassion/pages/**/*.ts', 'KodiPassion/controls/**/*.ts', 'KodiPassion/js/**/*.ts'], ['compilepages']);
 });
 
 gulp.task('default', ['clean', 'styles'], function() {

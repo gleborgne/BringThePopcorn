@@ -48,6 +48,7 @@ var KodiPassion;
                 MovieDetailPage.url = "/pages/movies/detail/moviesdetail.html";
                 return MovieDetailPage;
             })();
+            Pages.MovieDetailPage = MovieDetailPage;
             WinJS.UI.Pages.define(MovieDetailPage.url, MovieDetailPage);
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));

@@ -99,7 +99,7 @@ declare module Kodi.Data {
         };
     };
     function checkConnectivity(): WinJS.Promise<any>;
-    function loadRootData(forceLoad: any): WinJS.IPromise<IMediaLibrary>;
+    function loadRootData(forceLoad?: boolean): WinJS.IPromise<IMediaLibrary>;
     function checkSystemProperties(): void;
     function search(queryText: any): WinJS.Promise<{}>;
     function scanMovies(): void;
@@ -160,7 +160,7 @@ declare module Kodi.Settings {
     }
     function save(initialName: any, setting: any, setDefault: any): void;
     function remove(name: any): void;
-    function getSetting(name: any): any;
+    function getSetting(name: any): KodiServerSetting;
     function load(): any;
     function defaultConnection(): any;
     function list(): any[];

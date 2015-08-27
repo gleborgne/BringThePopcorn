@@ -6,14 +6,16 @@
     var ctor = WinJS.UI.Pages.define("/controls/loader/loader.html", {
         ready: function (element, options) {
             var page = this;
+            WinJSContrib.UI.Application.navigator.closeAllPages();
             return WinJS.Promise.join({
                 mintime: WinJS.Promise.timeout(1000),
                 data: Kodi.Data.loadRootData(true)
             }).then(function (data) {
-                WinJSContrib.UI.Application.navigator.closeAllPages();
+                
                 document.body.classList.remove("unconnected");
                 return WinJS.Navigation.navigate("/pages/home/home.html")
             }, function (err) {
+                document.body.classList.add("unconnected");
                 return WinJS.Navigation.navigate("/pages/startup/startup.html");
             }).then(function () {
                 return WinJS.UI.Animation.exitPage(page.element).then(function () {

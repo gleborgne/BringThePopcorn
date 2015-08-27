@@ -1,4 +1,6 @@
-﻿.tvshow-episode {
+﻿@import "apptheme.less";
+
+.tvshow-episode {
     width: 25%;
     position: relative;
 
@@ -30,6 +32,44 @@
             text-transform: uppercase;
             font-size: 0.6rem;
             color: #CCC;
+        }
+    }
+}
+
+.serveritem{
+    padding: 6px 16px;
+    background-color: rgba(60,60,60,0.8);            
+    margin-bottom: 4px;
+
+    &.current{
+        background-color: fadeout(@kodiBlue, 30%); 
+        button{
+            border-color: white;
+            color: white;
+        }
+    }
+
+    .hflex();
+
+    .name{
+        flex: 1;
+    }
+
+    button{
+        .roundButton(40px);
+        box-sizing: border-box;
+        line-height: 41px;
+        border : 1px solid @kodiBlue;
+        background-color: transparent;
+        font-size: 16pt;
+        color: @kodiBlue;
+        margin-left : 10px;
+        transition : background-color 100ms ease, color 100ms ease, border-color 100ms ease;
+
+        &.working{
+            background-color: @kodiBlue;
+            border-color: white;
+            color: white;
         }
     }
 }

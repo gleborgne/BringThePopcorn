@@ -101,7 +101,7 @@ var Kodi;
                     }
                     if (data.status === 0 && !retries) {
                         console.log('API call retry ' + url + ' ' + callData);
-                        kodiRequest(methodname, params, forceCheck, ignoreXBMCErrors, (retries || 0) + 1).done(function (data) {
+                        kodiServerRequest(setting, methodname, params, forceCheck, ignoreXBMCErrors, (retries || 0) + 1).done(function (data) {
                             completed = true;
                             completeCallback(data);
                         }, function (err) {
@@ -120,7 +120,7 @@ var Kodi;
         }
         API.kodiServerRequest = kodiServerRequest;
         function testServerSetting(setting) {
-            return kodiServerRequest(setting, 'Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, false);
+            return kodiServerRequest(setting, 'Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, false, 2);
         }
         API.testServerSetting = testServerSetting;
         function kodiRequest(methodname, params, forceCheck, ignoreXBMCErrors, retries) {

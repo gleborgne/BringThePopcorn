@@ -1,24 +1,20 @@
-﻿// For an introduction to the Page Control template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkId=232511
-(function () {
-    "use strict";
-
-    WinJS.UI.Pages.define("/pages/startup/startup.html", {
-        init : function(){
-            document.body.classList.add("unconnected");
-        },
-        ready: function (element, options) {
-            // TODO: Initialize the page here.
-        },
-
-        unload: function () {
-            // TODO: Respond to navigations away from this page.
-        },
-
-        updateLayout: function (element) {
-            /// <param name="element" domElement="true" />
-
-            // TODO: Respond to changes in layout.
-        }
-    });
-})();
+var KodiPassion;
+(function (KodiPassion) {
+    var UI;
+    (function (UI) {
+        var Pages;
+        (function (Pages) {
+            var StartUpPage = (function () {
+                function StartUpPage() {
+                }
+                StartUpPage.prototype.processed = function (element, options) {
+                };
+                StartUpPage.url = "/pages/startup/startup.html";
+                return StartUpPage;
+            })();
+            Pages.StartUpPage = StartUpPage;
+            WinJS.UI.Pages.define(StartUpPage.url, StartUpPage);
+        })(Pages = UI.Pages || (UI.Pages = {}));
+    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
+})(KodiPassion || (KodiPassion = {}));
+//# sourceMappingURL=startup.js.map

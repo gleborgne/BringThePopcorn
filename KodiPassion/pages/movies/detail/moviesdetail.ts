@@ -1,7 +1,7 @@
 ﻿module KodiPassion.UI.Pages {
     
-    class MovieDetailPage {
-        static url = "/pages/movies/detail/moviesdetail.html";
+    export class MovieDetailPage {
+        public static url = "/pages/movies/detail/moviesdetail.html";
 
         element: HTMLElement;
         movie: Kodi.API.Videos.Movies.Movie;

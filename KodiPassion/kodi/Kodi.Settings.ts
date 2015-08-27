@@ -61,8 +61,8 @@
         delete currentSettings.servers[name];
         saveSetting(kodiServers, currentSettings);
     }
-    
-    export function getSetting(name) {
+
+    export function getSetting(name): KodiServerSetting {
         return currentSettings.servers[name];
     }
     

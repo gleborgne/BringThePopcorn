@@ -1,0 +1,13 @@
+.settingslist .availablesettings {
+  margin-bottom: 10px;
+}
+.settingslist .addsetting {
+  text-align: right;
+}
+.settingslist .addsetting button {
+  border: 1px solid #12b2e7;
+  color: #12b2e7;
+  background-color: transparent;
+  padding: 0.6em 1.5em;
+  font-size: 1.1rem;
+}

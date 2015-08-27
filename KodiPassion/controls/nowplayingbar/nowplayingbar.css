@@ -4,23 +4,9 @@
   align-items: center;
   height: 100%;
   background-color: #111;
-}
-.nowplayingbar .playercommands {
-  flex: 1;
-  height: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-}
-.nowplayingbar .playercommands .playercommands-items {
-  height: 100%;
-  font-size: 18pt;
   color: #444;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
 }
-.nowplayingbar .playercommands .playercommands-items .cmd {
+.nowplayingbar .cmd {
   display: block;
   background-color: transparent;
   border: none;
@@ -33,9 +19,26 @@
   color: inherit;
   font-size: inherit;
 }
+.nowplayingbar .playercommands {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.nowplayingbar .playercommands .playercommands-items {
+  height: 100%;
+  font-size: 18pt;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
 .nowplayingbar .actions {
   height: 100%;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+}
+.nowplayingbar .actions .btntoggle {
+  font-size: 30pt;
 }

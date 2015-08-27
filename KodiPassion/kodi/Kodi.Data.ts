@@ -272,7 +272,7 @@
         return Kodi.API.properties();
     }
 
-    export function loadRootData(forceLoad) {
+    export function loadRootData(forceLoad?: boolean) {
         if (!Kodi.API.currentSettings || !Kodi.API.currentSettings.host) {
             Kodi.API.currentSettings = Kodi.Settings.load();
             Kodi.API.Websocket.close();

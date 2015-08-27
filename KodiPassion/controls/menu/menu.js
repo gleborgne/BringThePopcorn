@@ -1,27 +1,17 @@
-﻿// For an introduction to the Page Control template, see the following documentation:
-// http://go.microsoft.com/fwlink/?LinkId=232511
-(function () {
-    "use strict";
-
-    var ctor = WinJS.UI.Pages.define("/controls/menu/menu.html", {
-        // This function is called whenever a user navigates to this page. It
-        // populates the page elements with the app's data.
-        ready: function (element, options) {
-            // TODO: Initialize the page here.
-        },
-
-        unload: function () {
-            // TODO: Respond to navigations away from this page.
-        },
-
-        updateLayout: function (element) {
-            /// <param name="element" domElement="true" />
-
-            // TODO: Respond to changes in layout.
-        }
-    });
-
-    WinJS.Namespace.define("KodiPassion.UI", {
-        MainMenu : ctor
-    })
-})();
+var KodiPassion;
+(function (KodiPassion) {
+    var UI;
+    (function (UI) {
+        var MainMenuControl = (function () {
+            function MainMenuControl() {
+            }
+            MainMenuControl.prototype.openremote = function () {
+                WinJS.Navigation.navigate("/pages/remote/remote.html", { navigateStacked: true });
+            };
+            MainMenuControl.url = "/controls/menu/menu.html";
+            return MainMenuControl;
+        })();
+        UI.MainMenu = WinJS.UI.Pages.define(MainMenuControl.url, MainMenuControl);
+    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
+})(KodiPassion || (KodiPassion = {}));
+//# sourceMappingURL=menu.js.map
