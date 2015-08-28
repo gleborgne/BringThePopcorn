@@ -1,11 +1,11 @@
-.movieslist .movie {
+.page-movieslist .movieslist .movie {
   width: 280px;
   height: 400px;
   position: relative;
   background-color: #111;
 }
-.movieslist .movie .bg,
-.movieslist .movie .content {
+.page-movieslist .movieslist .movie .bg,
+.page-movieslist .movieslist .movie .content {
   position: absolute;
   left: 0;
   right: 0;
@@ -14,15 +14,15 @@
   background-size: cover;
   background-position: center;
 }
-.movieslist .movie .bg.title {
+.page-movieslist .movieslist .movie .bg.title {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
-.view-wall .win-listview .win-gridlayout .win-container {
+.page-movieslist.view-wall .win-listview .win-gridlayout .win-container {
   margin: 0 1px 1px 0;
 }
-.view-wall .win-listview .win-vertical .win-gridlayout.win-surface {
+.page-movieslist.view-wall .win-listview .win-vertical .win-gridlayout.win-surface {
   margin: 0;
 }

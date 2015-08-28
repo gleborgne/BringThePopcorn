@@ -9,6 +9,7 @@ var KodiPassion;
                 }
                 MoviesListPage.prototype.init = function (element, options) {
                     var page = this;
+                    element.classList.add("page-movieslist");
                     var view = MoviesListPage.moviesViews["wall"];
                     page.itemsPromise = Kodi.Data.loadRootData();
                     if (options && options.genre) {
@@ -91,7 +92,7 @@ var KodiPassion;
                         var nbitems = ((w / 260) << 0) + 1;
                         var posterW = ((w / nbitems) << 0) - 1;
                         var posterH = (posterW / Kodi.App.PictureRatios.movieposter) << 0;
-                        page.itemsStyle.innerHTML = ".view-wall .movie { width:" + posterW + "px; height:" + posterH + "px}";
+                        page.itemsStyle.innerHTML = ".page-movieslist.view-wall .movie { width:" + posterW + "px; height:" + posterH + "px}";
                     }
                 };
                 MoviesListPage.url = "/pages/movies/list/movieslist.html";

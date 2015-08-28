@@ -38,7 +38,7 @@ var KodiPassion;
                             }
                             else {
                                 complete();
-                                WinJSContrib.Alerts.message('unable to play media', 'cannot play this media. Check the network path you set in your XBMC (path with XBMC IP will not work, use server name instead)');
+                                WinJSContrib.Alerts.message('unable to play media', 'cannot play this media. Check the network path you set in your Kodi/XBMC (due to Windows constraints, path with server IP will not work, use server name instead within your media server)');
                             }
                         }, error);
                     });

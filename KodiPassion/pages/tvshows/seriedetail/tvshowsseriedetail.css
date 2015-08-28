@@ -1,0 +1,144 @@
+.tvshowsseriedetail {
+  display: -ms-grid;
+  -ms-grid-rows: auto 1fr;
+  -ms-grid-columns: auto 1fr;
+  width: 100%;
+  height: 100%;
+}
+.tvshowsseriedetail header.fanart {
+  -ms-grid-column-span: 2;
+  height: 160px;
+  position: relative;
+}
+.tvshowsseriedetail header.fanart .fanart-bg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+}
+.tvshowsseriedetail header.fanart .fanart-bg.imageLoaded {
+  opacity: 1;
+}
+.tvshowsseriedetail header.fanart .actions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+.tvshowsseriedetail header.fanart .actions button,
+.tvshowsseriedetail header.fanart .actions .mcn-elasticbutton {
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+.tvshowsseriedetail header.fanart .actions button i,
+.tvshowsseriedetail header.fanart .actions .mcn-elasticbutton i {
+  font-size: 18pt;
+  color: #12b2e7;
+}
+.tvshowsseriedetail header.fanart .actions button {
+  background-color: rgba(40, 40, 40, 0.7);
+  border: 2px solid #12b2e7;
+}
+.tvshowsseriedetail header.poster {
+  position: relative;
+  -ms-grid-column: 1;
+  -ms-grid-row-span: 2;
+  box-sizing: border-box;
+  padding-left: 40px;
+  padding-top: 110px;
+  width: 340px;
+  max-width: 30vw;
+}
+.tvshowsseriedetail header.poster .poster {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+}
+.tvshowsseriedetail header.poster .poster.imageLoaded {
+  opacity: 1;
+}
+.tvshowsseriedetail section[role=main] {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 40px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.tvshowsseriedetail section[role=main] .description .movie-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.tvshowsseriedetail section[role=main] .description .movie-tagline {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #BBB;
+}
+.tvshowsseriedetail section[role=main] .description .movie-plot {
+  font-size: 1.3rem;
+  margin-top: 1em;
+}
+.tvshowsseriedetail section[role=main] .seasons-items .season {
+  margin-bottom: 20px;
+}
+.tvshowsseriedetail section[role=main] .seasons-items .season .season-desc {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.tvshowsseriedetail section[role=main] .seasons-items .season .season-desc .poster {
+  flex-shrink: 0;
+  width: 93px;
+  height: 140px;
+  margin-right: 10px;
+  background-size: cover;
+  background-position: center;
+}
+.tvshowsseriedetail section[role=main] .seasons-items .season .season-desc .label {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.tvshowsseriedetail section[role=main] .seasons-items .season:not(.expanded) .season-episodes {
+  display: none;
+}
+.tvshowsseriedetail section[role=main] .seasons-items .season .season-episodes {
+  padding-left: 40px;
+  margin-top: 10px;
+}
+.tvshowsseriedetail section[role=main] .seasons-items .season .season-episodes .episode {
+  margin-bottom: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+}
+.tvshowsseriedetail section[role=main] .seasons-items .season .season-episodes .episode .poster {
+  width: 178px;
+  height: 100px;
+  margin-right: 10px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+}
+.tvshowsseriedetail section[role=main] .seasons-items .season .season-episodes .episode .label {
+  font-weight: 500;
+}
+.tvshowsseriedetail section[role=main] .seasons-items .season .season-episodes .episode .plot {
+  color: #AAA;
+  font-size: 0.9rem;
+  line-height: 1.2em;
+}

@@ -32,8 +32,8 @@
             <div class="description">
                 <div class="moviedetails">
                     <div class="movie-title" data-win-bind="innerHTML: title"></div>
-                    <div class="movie-tagline" data-win-bind="innerHTML: tagline"></div>
-                    <div class="movie-plot" data-win-bind="innerHTML: plot"></div>
+                    <div class="movie-tagline" data-win-bind="innerHTML: tagline; innerHTML: tagline WinJSContrib.Bindings.showIf"></div>
+                    <div class="movie-plot" data-win-bind="innerHTML: plot; innerHTML: plot WinJSContrib.Bindings.showIf"></div>
                 </div>
             </div>
 

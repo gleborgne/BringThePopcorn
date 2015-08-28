@@ -9,6 +9,7 @@ var KodiPassion;
                 var page = this;
                 WinJSContrib.UI.Application.navigator.closeAllPages();
                 Kodi.API.Websocket.init(Kodi.API.currentSettings);
+                WinJS.Navigation.history.backstack = [];
                 return WinJS.Promise.join({
                     mintime: WinJS.Promise.timeout(1000),
                     data: Kodi.Data.loadRootData(true)
