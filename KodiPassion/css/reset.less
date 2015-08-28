@@ -1,8 +1,46 @@
-﻿html, body {
+﻿@import "apptheme.less";
+
+html, body {
     font-family: 'CooperHewitt';
     font-size: 12pt;
 }
 
-h1,h2,h3{
+h1, h2, h3 {
     font-weight: 300;
+}
+
+input[type=range] {
+    height: 12px;
+
+    &::-ms-fill-lower {
+        background-color: @kodiBlue;
+    }
+
+    &::-ms-fill-upper {
+        background-color: #444;
+    }
+
+    &::-ms-thumb {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 1px solid @kodiBlue;
+        background-color: #111;
+        box-sizing: border-box;
+    }
+
+    &::-ms-track {
+        height: 2px;
+        color: transparent;
+        border: none;
+    }
+
+    &::-ms-tooltip {
+    }
+
+    &::-ms-ticks-before {
+    }
+
+    &::-ms-ticks-after {
+    }
 }
