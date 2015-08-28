@@ -13,6 +13,16 @@ var KodiPassion;
                 WinJS.Navigation.addEventListener("beforenavigate", function () {
                     _this.minimize(true);
                 });
+                this.rangeSeek.onchange = function () {
+                    var progressval = parseInt(_this.rangeSeek.value);
+                    console.log("seek to " + progressval);
+                    Kodi.API.Player.seek(Kodi.NowPlaying.current.playerid, progressval).then(function (r) {
+                        Kodi.NowPlaying.current.progress = progressval;
+                    }, function (err) {
+                        var e = err;
+                    });
+                };
+                KodiPassion.mapKodiApi(element);
                 return WinJS.Binding.processAll(this.element, Kodi.NowPlaying.current);
             };
             NowPlayingBarControl.prototype.toggleView = function () {

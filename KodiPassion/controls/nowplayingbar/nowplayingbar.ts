@@ -9,6 +9,7 @@ module KodiPassion.UI{
         container: HTMLElement;
         playingElt: HTMLElement;
         contentElt: HTMLElement;
+        rangeSeek: HTMLInputElement;
 
         processed(element, options) {
             this.container = <HTMLElement>document.getElementById("contentwrapper");
@@ -19,6 +20,17 @@ module KodiPassion.UI{
                 this.minimize(true);
             });
 
+            this.rangeSeek.onchange = () => {
+                var progressval = parseInt(this.rangeSeek.value);
+                console.log("seek to " + progressval);
+                Kodi.API.Player.seek(Kodi.NowPlaying.current.playerid, progressval).then(function (r) {
+                    Kodi.NowPlaying.current.progress = progressval;
+                }, function (err) {
+                    var e = err;
+                });
+            }
+
+            KodiPassion.mapKodiApi(element);
             return WinJS.Binding.processAll(this.element, Kodi.NowPlaying.current);
         }
 

@@ -75,11 +75,11 @@ var Kodi;
             }
             Input.openTvShows = openTvShows;
             function openMusic() {
-                return activateWindow("musiclibrary", ["musicdb://albums/ "]);
+                return activateWindow("musiclibrary", ["musicdb://albums/"]);
             }
             Input.openMusic = openMusic;
             function openPictures() {
-                return activateWindow("pictures", []);
+                return activateWindow("pictures", ["picturedb://"]);
             }
             Input.openPictures = openPictures;
         })(Input = API.Input || (API.Input = {}));

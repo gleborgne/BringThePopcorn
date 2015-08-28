@@ -70,10 +70,10 @@
     }
 
     export function openMusic() {
-        return activateWindow("musiclibrary", ["musicdb://albums/ "]);
+        return activateWindow("musiclibrary", ["musicdb://albums/"]);
     }
 
     export function openPictures() {
-        return activateWindow("pictures", []);
+        return activateWindow("pictures", ["picturedb://"]);
     }
 }

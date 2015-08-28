@@ -94,10 +94,10 @@ var Kodi;
             NowPlaying.current.isPlayingVideo = NowPlaying.current.isPlayingMovie || NowPlaying.current.isPlayingTvShow;
             NowPlaying.current.isPlaying = NowPlaying.current.isPlayingVideo || NowPlaying.current.isPlayingMusic || item.type == 'unknown';
             NowPlaying.current.subtitles = properties.subtitles;
-            if (idChanged || !NowPlaying.current.currentsubtitle || NowPlaying.current.currentsubtitle.index != properties.currentsubtitle.index)
+            if (idChanged || !NowPlaying.current.currentsubtitle || (NowPlaying.current.currentsubtitle && properties.currentsubtitle && NowPlaying.current.currentsubtitle.index != properties.currentsubtitle.index))
                 NowPlaying.current.currentsubtitle = properties.currentsubtitle;
             NowPlaying.current.audiostreams = properties.audiostreams;
-            if (idChanged || !NowPlaying.current.currentaudiostream || NowPlaying.current.currentaudiostream.index != properties.currentaudiostream.index)
+            if (idChanged || !NowPlaying.current.currentaudiostream || (NowPlaying.current.currentaudiostream && properties.currentaudiostream && NowPlaying.current.currentaudiostream.index != properties.currentaudiostream.index))
                 NowPlaying.current.currentaudiostream = properties.currentaudiostream;
             NowPlaying.current.subtitleenabled = properties.subtitleenabled;
             NowPlaying.current.hasLanguages = properties.audiostreams && properties.audiostreams.length > 1;

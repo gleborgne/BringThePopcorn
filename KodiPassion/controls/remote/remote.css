@@ -1,10 +1,15 @@
 .remote-controller {
   padding: 20px 40px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .remote-controller button {
   width: 40px;
   height: 40px;
-  line-height: 40px;
+  line-height: 44px;
   font-size: 18pt;
   border: none;
   background-color: transparent;
@@ -96,6 +101,25 @@
   color: white;
   border-radius: 50%;
 }
+.remote-controller .playercommands {
+  margin-top: 10px;
+}
+.remote-controller .playercommands .playercommands-items {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+.remote-controller .playercommands .playercommands-items button {
+  margin: 0 10px;
+  color: #555;
+}
+.remote-controller .playercommands .playercommands-items button:first-child {
+  margin-left: 0;
+}
+.remote-controller .playercommands .playercommands-items button:last-child {
+  margin-right: 0;
+}
 .remote-controller .languagescontrol {
   margin-top: 10px;
 }
@@ -118,7 +142,7 @@
   background-color: white;
   color: black;
 }
-.remote-controller .seekprogress .label {
+.remote-controller .itemlabel {
   font-weight: 500;
   font-size: 1.1rem;
 }
@@ -138,11 +162,14 @@
   flex: 1;
 }
 .remote-controller .volume {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  display: -ms-grid;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: auto 1fr;
+  width: 100%;
 }
 .remote-controller .volume input[type=range] {
   margin-left: 10px;
-  flex: 1;
+  -ms-grid-column: 2;
+  -ms-grid-row-align: center;
+  width: 100%;
 }

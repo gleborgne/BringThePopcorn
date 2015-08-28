@@ -38,6 +38,10 @@
   max-width: 400px;
   font-size: 9pt;
 }
+.nowplayingbar .desc .desc-progress #rangeSeek {
+  display: block;
+  width: 100%;
+}
 .nowplayingbar .desc .desc-progress .progress {
   width: 100%;
   height: 4px;
@@ -52,7 +56,9 @@
   background-color: #AAA;
 }
 .nowplayingbar .desc .desc-progress .progresstime {
+  margin-top: -4px;
   font-size: 8pt;
+  color: #AAA;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;

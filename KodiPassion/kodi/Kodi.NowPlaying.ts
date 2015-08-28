@@ -139,10 +139,10 @@
         current.isPlayingVideo = current.isPlayingMovie || current.isPlayingTvShow;
         current.isPlaying = current.isPlayingVideo || current.isPlayingMusic || item.type == 'unknown';
         current.subtitles = properties.subtitles;
-        if (idChanged || !current.currentsubtitle || current.currentsubtitle.index != properties.currentsubtitle.index)
+        if (idChanged || !current.currentsubtitle || (current.currentsubtitle && properties.currentsubtitle && current.currentsubtitle.index != properties.currentsubtitle.index))
             current.currentsubtitle = properties.currentsubtitle;
         current.audiostreams = properties.audiostreams;
-        if (idChanged || !current.currentaudiostream || current.currentaudiostream.index != properties.currentaudiostream.index)
+        if (idChanged || !current.currentaudiostream || (current.currentaudiostream && properties.currentaudiostream && current.currentaudiostream.index != properties.currentaudiostream.index))
             current.currentaudiostream = properties.currentaudiostream;
         current.subtitleenabled = properties.subtitleenabled;
         current.hasLanguages = properties.audiostreams && properties.audiostreams.length > 1;

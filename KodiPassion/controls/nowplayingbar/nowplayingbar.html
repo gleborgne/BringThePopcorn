@@ -9,13 +9,11 @@
 </head>
 <body>
     <div class="nowplayingbar">
-        <div class="desc" data-win-bind="display : enabled WinJSContrib.Bindings.showIf" tap="toggleView">
+        <div class="desc" data-win-bind="display : enabled WinJSContrib.Bindings.showIf" tap="toggleView" tap-options="{disableAnimation : true}">
             <img class="thumb" data-win-bind="src : thumbnail Kodi.Utils.toThumbnailBg" />
             <div class="desc-progress">
                 <div class="label" data-win-bind="innerText : label"></div>
-                <div class="progress">
-                    <div class="progressTrack" data-win-bind="width : progress WinJSContrib.Bindings.toWidth"></div>
-                </div>
+                <input type="range" max="100" id="rangeSeek" member data-win-bind="value : progress" />
                 <div class="progresstime">
                     <div class="ellapsed" data-win-bind="innerText : time"></div>
                     <div class="total" data-win-bind="innerText : totaltime"></div>
@@ -24,10 +22,11 @@
         </div>
         <div class="playercommands" data-win-bind="display : enabled WinJSContrib.Bindings.showIf">
             <div class="playercommands-items">
-                <button class="cmd kdp-rewind"></button>
-                <button class="cmd kdp-play"></button>
-                <button class="cmd kdp-stop"></button>
-                <button class="cmd kdp-forward"></button>
+                <button class="cmd kdp-rewind"  kodiapi="Kodi.API.Player.previous"></button>
+                <button class="cmd kdp-play" kodiapi="Kodi.API.Player.play" data-win-bind="display: speed WinJSContrib.Bindings.hideIf"></button>
+                <button class="cmd kdp-pause" kodiapi="Kodi.API.Player.pause" data-win-bind="display: speed WinJSContrib.Bindings.showIf"></button>
+                <button class="cmd kdp-stop" kodiapi="Kodi.API.Player.stop"></button>
+                <button class="cmd kdp-forward" kodiapi="Kodi.API.Player.next"></button>
             </div>
         </div>
         <div class="spacer" tap="toggleView"></div>
