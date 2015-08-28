@@ -110,8 +110,11 @@
                 } else {
                     completed = true;
                     completeCallback(data.result);
-                    if (forceCheck)
-                        WinJS.Application.queueEvent({ type: 'xbmcplayercheck' });
+                    if (forceCheck) {
+                        setTimeout(function () {
+                            WinJS.Application.queueEvent({ type: 'xbmcplayercheck' });
+                        }, 150);
+                    }
                 }
             },
             error: function (data) {
@@ -174,6 +177,8 @@
     export function introspect() {
         return kodiRequest('JSONRPC.Introspect');
     }
+
+    
 
     export function properties(): WinJS.Promise<any> {
         return kodiRequest('Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, true);

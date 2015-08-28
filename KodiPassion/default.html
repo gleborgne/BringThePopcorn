@@ -34,6 +34,7 @@
     <script src="/controls/nowplayingbar/nowplayingbar.js"></script>
     <script src="/controls/loader/loader.js"></script>
     <script src="/controls/genrespicker/genrepicker.js"></script>
+    <script src="/controls/remote/remote.js"></script>
 
     <link href="/css/default.css" rel="stylesheet" />
     <script src="/js/default.js"></script>
@@ -47,7 +48,10 @@
             </div>
             <div id="nowplaying">
                 <div id="nowplayingbar" data-win-control="KodiPassion.UI.NowPlayingSummary"></div>
-                <div id="nowplayingcontent"></div>
+                <div id="nowplayingcontent">
+                    <div class="playlist"></div>
+                    <div class="remote" data-win-control="KodiPassion.UI.RemoteController"></div>
+                </div>
             </div>
         </div>
     </div>

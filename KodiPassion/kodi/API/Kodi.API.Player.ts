@@ -151,4 +151,8 @@
     export function setSubtitle(playerid, subtitle) {
         return playerCall<any>('Player.SetSubtitle', { subtitle: subtitle }, playerid);
     }
+
+    export function seek(playerid, val) {
+        return playerCall<any>('Player.Seek', { value: val }, playerid, true);
+    }
 }

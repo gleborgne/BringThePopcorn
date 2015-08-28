@@ -14,7 +14,7 @@ var KodiPassion;
                     //        console.log("kodi api details at " + file.path);
                     //        return Windows.Storage.FileIO.writeTextAsync(file, JSON.stringify(api));
                     //    });
-                    //});
+                    //});            
                     Kodi.Data.loadRootData().then(function (data) {
                         page.splitviewtemplate = new WinJS.Binding.Template(null, { href: '/templates/moviesplitview.html', extractChild: true });
                         page.mainsplitview.itemTemplate = function (itemPromise) {

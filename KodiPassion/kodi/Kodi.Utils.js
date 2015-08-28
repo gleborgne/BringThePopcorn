@@ -3,13 +3,21 @@ var Kodi;
     var Utils;
     (function (Utils) {
         function bgImage(source, sourceProperty, dest, destProperty, defaultImage) {
+            function setImage(url) {
+                if (dest.nodeName === "IMG") {
+                    dest.src = url;
+                }
+                else {
+                    dest.style.backgroundImage = 'url("' + url + '")';
+                }
+            }
             function setBg() {
                 var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
                 if (!data || !data.length) {
                     WinJS.Utilities.addClass(dest, 'imageLoaded');
                     dest.innerHTML = '';
                     if (defaultImage) {
-                        dest.style.backgroundImage = 'url("' + defaultImage + '")';
+                        setImage(defaultImage);
                         dest.style.backgroundSize = 'contain';
                     }
                     return;
@@ -17,7 +25,7 @@ var Kodi;
                 if (data === 'DefaultAlbumCover.png') {
                     WinJS.Utilities.addClass(dest, 'imageLoaded');
                     dest.innerHTML = '';
-                    dest.style.backgroundImage = 'url("/images/cd.png")';
+                    setImage("/images/cd.png");
                     return;
                 }
                 var imgUrl = Kodi.API.kodiThumbnail(data);
@@ -25,12 +33,12 @@ var Kodi;
                     WinJSContrib.UI.loadImage(imgUrl).done(function () {
                         WinJS.Utilities.addClass(dest, 'imageLoaded');
                         dest.innerHTML = '';
-                        dest.style.backgroundImage = 'url("' + imgUrl + '")';
+                        setImage(imgUrl);
                     }, function () {
                         WinJS.Utilities.addClass(dest, 'imageLoaded');
                         dest.innerHTML = '';
                         if (defaultImage) {
-                            dest.style.backgroundImage = 'url("' + defaultImage + '")';
+                            setImage(defaultImage);
                         }
                     });
                 }, 150);

@@ -114,6 +114,14 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
 }
 #nowplaying #nowplayingcontent {
   -ms-grid-row: 2;
+  display: -ms-grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: 1fr auto;
+}
+#nowplaying #nowplayingcontent .remote {
+  -ms-grid-column: 2;
+  width: 350px;
+  background-color: rgba(20, 20, 20, 0.5);
 }
 .fragment {
   width: 100%;

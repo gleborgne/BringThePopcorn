@@ -8,6 +8,28 @@ h2,
 h3 {
   font-weight: 300;
 }
+input[type=range] {
+  height: 12px;
+}
+input[type=range]::-ms-fill-lower {
+  background-color: #12b2e7;
+}
+input[type=range]::-ms-fill-upper {
+  background-color: #444;
+}
+input[type=range]::-ms-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #12b2e7;
+  background-color: #111;
+  box-sizing: border-box;
+}
+input[type=range]::-ms-track {
+  height: 2px;
+  color: transparent;
+  border: none;
+}
 body {
   padding: 0;
   margin: 0;
@@ -124,6 +146,14 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
 }
 #nowplaying #nowplayingcontent {
   -ms-grid-row: 2;
+  display: -ms-grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: 1fr auto;
+}
+#nowplaying #nowplayingcontent .remote {
+  -ms-grid-column: 2;
+  width: 350px;
+  background-color: rgba(20, 20, 20, 0.5);
 }
 .fragment {
   width: 100%;
@@ -263,4 +293,152 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
   width: 100%;
   text-align: center;
   text-transform: uppercase;
+}
+.remote-controller {
+  padding: 20px 40px;
+}
+.remote-controller button {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18pt;
+  border: none;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0;
+  box-sizing: border-box;
+}
+.remote-controller .main-menus {
+  margin-top: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+.remote-controller .main-menus button {
+  margin: 0 10px;
+  color: #12b2e7;
+}
+.remote-controller .main-menus button:first-child {
+  margin-left: 0;
+}
+.remote-controller .main-menus button:last-child {
+  margin-right: 0;
+}
+.remote-controller .navigation {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.remote-controller .navigation .wheel {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: -ms-grid;
+  -ms-grid-rows: 1fr 1fr 1fr;
+  -ms-grid-columns: 1fr 1fr 1fr;
+}
+.remote-controller .navigation .wheel .wheelbtn {
+  -ms-grid-row-align: center;
+  -ms-grid-column-align: center;
+  width: 60px;
+  height: 60px;
+  line-height: 68px;
+  font-size: 30pt;
+  color: #222;
+}
+.remote-controller .navigation .wheel .kdp-rewind {
+  -ms-grid-row-align: start;
+  -ms-grid-column-align: start;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  margin-left: -36px;
+}
+.remote-controller .navigation .wheel .kdp-menu {
+  -ms-grid-row-align: start;
+  -ms-grid-column-align: end;
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  margin-right: -36px;
+}
+.remote-controller .navigation .wheel .kdp-info {
+  -ms-grid-row-align: end;
+  -ms-grid-column-align: start;
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  margin-left: -36px;
+}
+.remote-controller .navigation .wheel .kdp-chevron-up {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+}
+.remote-controller .navigation .wheel .kdp-chevron-down {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+}
+.remote-controller .navigation .wheel .kdp-chevron-left {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+}
+.remote-controller .navigation .wheel .kdp-chevron-right {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+}
+.remote-controller .navigation .wheel .kdp-check {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  background-color: #333;
+  color: white;
+  border-radius: 50%;
+}
+.remote-controller .languagescontrol {
+  margin-top: 10px;
+}
+.remote-controller .languagescontrol .lngitem {
+  display: -ms-grid;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 80px 1fr;
+  margin-bottom: 3px;
+}
+.remote-controller .languagescontrol .lngitem label {
+  display: block;
+}
+.remote-controller .languagescontrol .lngitem select {
+  -ms-grid-column: 2;
+  background-color: transparent;
+  border: 1px solid #555;
+  color: white;
+}
+.remote-controller .languagescontrol .lngitem select:focus {
+  background-color: white;
+  color: black;
+}
+.remote-controller .seekprogress .label {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.remote-controller .seekprogress input[type=range] {
+  display: block;
+  width: 100%;
+}
+.remote-controller .seekprogress .timing {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-top: -2px;
+  font-size: 9pt;
+  color: #AAA;
+}
+.remote-controller .seekprogress .timing .ellapsed {
+  flex: 1;
+}
+.remote-controller .volume {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.remote-controller .volume input[type=range] {
+  margin-left: 10px;
+  flex: 1;
 }

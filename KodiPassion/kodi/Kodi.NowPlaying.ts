@@ -44,7 +44,7 @@
     });
 
     export var current: Playing = new ObservablePlaying();
-    var intervaldelay = 10000;
+    export var intervaldelay = 10000;
 
     function forceCheck() {
         check(true);
@@ -79,12 +79,18 @@
 
         current.checking = false;
     }
-    
+
     export function check(standby?) {
         return new WinJS.Promise(function (complete, error) {
             if (standby) {
                 current.checking = true;
             }
+
+            Kodi.API.properties().then(function (p) {
+                current.muted = p.muted;
+                current.volume = p.volume;
+            }, function () {
+            });
 
             Kodi.API.Player.currentItem(undefined).done(function (currentItem) {
                 var id = Kodi.API.Player.currentPlayer.playerid;
@@ -131,7 +137,7 @@
         current.isPlayingMovie = item.type == 'movie';
         current.isPlayingTvShow = item.type == 'episode';
         current.isPlayingVideo = current.isPlayingMovie || current.isPlayingTvShow;
-        current.isPlaying = current.isPlayingMusic || item.type == 'unknown';
+        current.isPlaying = current.isPlayingVideo || current.isPlayingMusic || item.type == 'unknown';
         current.subtitles = properties.subtitles;
         if (idChanged || !current.currentsubtitle || current.currentsubtitle.index != properties.currentsubtitle.index)
             current.currentsubtitle = properties.currentsubtitle;
@@ -146,7 +152,12 @@
         if (properties.percentage < 0) {
             current.progress = 0;
         } else {
-            current.progress = properties.percentage;
+            if (properties.percentage > 100)
+                current.progress = 100;
+            else if (properties.percentage < 0)
+                current.progress = 0;
+            else
+                current.progress = properties.percentage;
         }
 
         if (properties.time.minutes < 0) {
@@ -166,9 +177,8 @@
         if (!item.type) {
             current.enabled = false;
         } else {
-            if (!current.enabled || $('#nowplaying').css('display') === 'none') {
+            if (!current.enabled) {
                 current.enabled = true;
-                $('#nowplaying').css('display', '').css('opacity', '1');
             }
         }
     }
@@ -178,17 +188,11 @@
     export function init() {
         if (nowPlayingInterval)
             clearInterval(nowPlayingInterval);
-        
+
         current.enabled = false;
         current.reachable = false;
-        $('#nowplaying').css('opacity', '0');
 
         nowPlayingInterval = setInterval(check, intervaldelay);
         check();
-        
-        $('#nowplaying, #nowplayingAppBar').tap(function (args) {
-            var e = args;            
-            WinJS.Navigation.navigate("/pages/playlistfull/playlistfull.html");
-        });
     }
 }

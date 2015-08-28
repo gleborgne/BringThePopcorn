@@ -164,6 +164,10 @@ var Kodi;
                 return playerCall('Player.SetSubtitle', { subtitle: subtitle }, playerid);
             }
             Player.setSubtitle = setSubtitle;
+            function seek(playerid, val) {
+                return playerCall('Player.Seek', { value: val }, playerid, true);
+            }
+            Player.seek = seek;
         })(Player = API.Player || (API.Player = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));

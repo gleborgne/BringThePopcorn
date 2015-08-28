@@ -375,7 +375,7 @@ var Kodi;
             isPlaying: false, isPlayingMusic: false, isPlayingVideo: false, isPlayingTvShow: false, isPlayingMovie: false
         });
         NowPlaying.current = new ObservablePlaying();
-        var intervaldelay = 10000;
+        NowPlaying.intervaldelay = 10000;
         function forceCheck() {
             check(true);
         }
@@ -411,6 +411,11 @@ var Kodi;
                 if (standby) {
                     NowPlaying.current.checking = true;
                 }
+                Kodi.API.properties().then(function (p) {
+                    NowPlaying.current.muted = p.muted;
+                    NowPlaying.current.volume = p.volume;
+                }, function () {
+                });
                 Kodi.API.Player.currentItem(undefined).done(function (currentItem) {
                     var id = Kodi.API.Player.currentPlayer.playerid;
                     Kodi.API.Player.properties(id).done(function (props) {
@@ -431,7 +436,7 @@ var Kodi;
                 });
                 if (nowPlayingInterval)
                     clearInterval(nowPlayingInterval);
-                nowPlayingInterval = setInterval(check, intervaldelay);
+                nowPlayingInterval = setInterval(check, NowPlaying.intervaldelay);
             });
         }
         NowPlaying.check = check;
@@ -452,7 +457,7 @@ var Kodi;
             NowPlaying.current.isPlayingMovie = item.type == 'movie';
             NowPlaying.current.isPlayingTvShow = item.type == 'episode';
             NowPlaying.current.isPlayingVideo = NowPlaying.current.isPlayingMovie || NowPlaying.current.isPlayingTvShow;
-            NowPlaying.current.isPlaying = NowPlaying.current.isPlayingMusic || item.type == 'unknown';
+            NowPlaying.current.isPlaying = NowPlaying.current.isPlayingVideo || NowPlaying.current.isPlayingMusic || item.type == 'unknown';
             NowPlaying.current.subtitles = properties.subtitles;
             if (idChanged || !NowPlaying.current.currentsubtitle || NowPlaying.current.currentsubtitle.index != properties.currentsubtitle.index)
                 NowPlaying.current.currentsubtitle = properties.currentsubtitle;
@@ -467,7 +472,12 @@ var Kodi;
                 NowPlaying.current.progress = 0;
             }
             else {
-                NowPlaying.current.progress = properties.percentage;
+                if (properties.percentage > 100)
+                    NowPlaying.current.progress = 100;
+                else if (properties.percentage < 0)
+                    NowPlaying.current.progress = 0;
+                else
+                    NowPlaying.current.progress = properties.percentage;
             }
             if (properties.time.minutes < 0) {
                 NowPlaying.current.time = '00:00';
@@ -487,9 +497,8 @@ var Kodi;
                 NowPlaying.current.enabled = false;
             }
             else {
-                if (!NowPlaying.current.enabled || $('#nowplaying').css('display') === 'none') {
+                if (!NowPlaying.current.enabled) {
                     NowPlaying.current.enabled = true;
-                    $('#nowplaying').css('display', '').css('opacity', '1');
                 }
             }
         }
@@ -499,13 +508,8 @@ var Kodi;
                 clearInterval(nowPlayingInterval);
             NowPlaying.current.enabled = false;
             NowPlaying.current.reachable = false;
-            $('#nowplaying').css('opacity', '0');
-            nowPlayingInterval = setInterval(check, intervaldelay);
+            nowPlayingInterval = setInterval(check, NowPlaying.intervaldelay);
             check();
-            $('#nowplaying, #nowplayingAppBar').tap(function (args) {
-                var e = args;
-                WinJS.Navigation.navigate("/pages/playlistfull/playlistfull.html");
-            });
         }
         NowPlaying.init = init;
     })(NowPlaying = Kodi.NowPlaying || (Kodi.NowPlaying = {}));
@@ -603,13 +607,21 @@ var Kodi;
     var Utils;
     (function (Utils) {
         function bgImage(source, sourceProperty, dest, destProperty, defaultImage) {
+            function setImage(url) {
+                if (dest.nodeName === "IMG") {
+                    dest.src = url;
+                }
+                else {
+                    dest.style.backgroundImage = 'url("' + url + '")';
+                }
+            }
             function setBg() {
                 var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
                 if (!data || !data.length) {
                     WinJS.Utilities.addClass(dest, 'imageLoaded');
                     dest.innerHTML = '';
                     if (defaultImage) {
-                        dest.style.backgroundImage = 'url("' + defaultImage + '")';
+                        setImage(defaultImage);
                         dest.style.backgroundSize = 'contain';
                     }
                     return;
@@ -617,7 +629,7 @@ var Kodi;
                 if (data === 'DefaultAlbumCover.png') {
                     WinJS.Utilities.addClass(dest, 'imageLoaded');
                     dest.innerHTML = '';
-                    dest.style.backgroundImage = 'url("/images/cd.png")';
+                    setImage("/images/cd.png");
                     return;
                 }
                 var imgUrl = Kodi.API.kodiThumbnail(data);
@@ -625,12 +637,12 @@ var Kodi;
                     WinJSContrib.UI.loadImage(imgUrl).done(function () {
                         WinJS.Utilities.addClass(dest, 'imageLoaded');
                         dest.innerHTML = '';
-                        dest.style.backgroundImage = 'url("' + imgUrl + '")';
+                        setImage(imgUrl);
                     }, function () {
                         WinJS.Utilities.addClass(dest, 'imageLoaded');
                         dest.innerHTML = '';
                         if (defaultImage) {
-                            dest.style.backgroundImage = 'url("' + defaultImage + '")';
+                            setImage(defaultImage);
                         }
                     });
                 }, 150);
@@ -807,6 +819,14 @@ var Kodi;
                 return API.kodiRequest('Application.SetMute', { mute: mute });
             }
             Input.mute = mute;
+            function volumeMute() {
+                return mute(true);
+            }
+            Input.volumeMute = volumeMute;
+            function volumeUnmute() {
+                return mute(false);
+            }
+            Input.volumeUnmute = volumeUnmute;
             function volume(volume) {
                 Kodi.NowPlaying.current.volume = volume;
                 return API.kodiRequest('Application.SetVolume', { volume: volume });
@@ -848,6 +868,26 @@ var Kodi;
                 return API.kodiRequest('Input.Right');
             }
             Input.right = right;
+            function activateWindow(window, parameters) {
+                return API.kodiRequest('GUI.ActivateWindow', { window: window, parameters: parameters }, false, true);
+            }
+            Input.activateWindow = activateWindow;
+            function openMovies() {
+                return activateWindow("videos", ["videodb://movies/titles/"]);
+            }
+            Input.openMovies = openMovies;
+            function openTvShows() {
+                return activateWindow("videos", ["videodb://tvshows/titles/"]);
+            }
+            Input.openTvShows = openTvShows;
+            function openMusic() {
+                return activateWindow("musiclibrary", ["musicdb://albums/ "]);
+            }
+            Input.openMusic = openMusic;
+            function openPictures() {
+                return activateWindow("pictures", []);
+            }
+            Input.openPictures = openPictures;
         })(Input = API.Input || (API.Input = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
@@ -1148,6 +1188,10 @@ var Kodi;
                 return playerCall('Player.SetSubtitle', { subtitle: subtitle }, playerid);
             }
             Player.setSubtitle = setSubtitle;
+            function seek(playerid, val) {
+                return playerCall('Player.Seek', { value: val }, playerid, true);
+            }
+            Player.seek = seek;
         })(Player = API.Player || (API.Player = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
@@ -1241,8 +1285,11 @@ var Kodi;
                     else {
                         completed = true;
                         completeCallback(data.result);
-                        if (forceCheck)
-                            WinJS.Application.queueEvent({ type: 'xbmcplayercheck' });
+                        if (forceCheck) {
+                            setTimeout(function () {
+                                WinJS.Application.queueEvent({ type: 'xbmcplayercheck' });
+                            }, 150);
+                        }
                     }
                 },
                 error: function (data) {
@@ -1701,8 +1748,8 @@ var Kodi;
                 Websocket.current.onmessage = socketMessage;
                 Websocket.current.onerror = socketError;
             }
-            function init(settings) {
-                Websocket.current = new WebSocket('ws://' + settings.host + ':9090/jsonrpc');
+            function init(setting) {
+                Websocket.current = new WebSocket('ws://' + setting.host + ':9090/jsonrpc');
                 register();
             }
             Websocket.init = init;

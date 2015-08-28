@@ -28,8 +28,8 @@ var Kodi;
                 Websocket.current.onmessage = socketMessage;
                 Websocket.current.onerror = socketError;
             }
-            function init(settings) {
-                Websocket.current = new WebSocket('ws://' + settings.host + ':9090/jsonrpc');
+            function init(setting) {
+                Websocket.current = new WebSocket('ws://' + setting.host + ':9090/jsonrpc');
                 register();
             }
             Websocket.init = init;

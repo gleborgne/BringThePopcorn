@@ -117,6 +117,7 @@ module KodiPassion{
             var currentSetting = Kodi.Settings.getSetting(settingName);
             if (currentSetting && currentSetting.host) {
                 return Kodi.API.testServerSetting(currentSetting).then(function (p) {
+                    Kodi.API.currentSettings = currentSetting;
                     return KodiPassion.UI.DataLoader.showLoader(false, args);
                 }, function (err) {
                     return WinJS.Navigation.navigate("/pages/startup/startup.html");
@@ -148,4 +149,23 @@ module KodiPassion{
     };
 
     app.start();
+
+    export function mapKodiApi(element: HTMLElement) {
+        var items = element.querySelectorAll("*[kodiapi]");
+        var processItem = function (item: HTMLElement) {
+            var api = item.getAttribute("kodiapi");
+            if (api) {
+                var fn = WinJSContrib.Utils.resolveValue(item, "global:" + api);
+                if (fn && typeof fn === "function") {
+                    WinJSContrib.UI.tap(item, function (arg) {
+                        return fn();
+                    });
+                }
+            }
+        }
+
+        for (var i = 0, l = items.length; i < l; i++) {
+            processItem(<HTMLElement>items[i]);            
+        }
+    }
 }

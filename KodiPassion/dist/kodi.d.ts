@@ -144,6 +144,7 @@ declare module Kodi.NowPlaying {
         hasLanguagesOrSubtitles: boolean;
     }
     var current: Playing;
+    var intervaldelay: number;
     function checkError(err: any): void;
     function check(standby?: any): WinJS.Promise<{}>;
     function init(): void;
@@ -187,7 +188,9 @@ declare module Kodi.WOL {
 
 declare module Kodi.API.Input {
     function properties(): WinJS.Promise<any>;
-    function mute(mute: any): WinJS.Promise<any>;
+    function mute(mute: boolean): WinJS.Promise<any>;
+    function volumeMute(): WinJS.Promise<any>;
+    function volumeUnmute(): WinJS.Promise<any>;
     function volume(volume: any): WinJS.Promise<any>;
     function back(): WinJS.Promise<any>;
     function home(): WinJS.Promise<any>;
@@ -198,6 +201,11 @@ declare module Kodi.API.Input {
     function down(): WinJS.Promise<any>;
     function left(): WinJS.Promise<any>;
     function right(): WinJS.Promise<any>;
+    function activateWindow(window: any, parameters: any): WinJS.Promise<{}>;
+    function openMovies(): WinJS.Promise<{}>;
+    function openTvShows(): WinJS.Promise<{}>;
+    function openMusic(): WinJS.Promise<{}>;
+    function openPictures(): WinJS.Promise<{}>;
 }
 
 declare module Kodi.API.Music {
@@ -283,6 +291,7 @@ declare module Kodi.API.Player {
     function rotate(playerid: any): WinJS.Promise<any>;
     function setAudioStream(playerid: any, stream: any): WinJS.Promise<any>;
     function setSubtitle(playerid: any, subtitle: any): WinJS.Promise<any>;
+    function seek(playerid: any, val: any): WinJS.Promise<any>;
 }
 
 declare module Kodi.API {
@@ -534,7 +543,7 @@ declare module Kodi.API.Videos.Movies {
 
 declare module Kodi.API.Websocket {
     var current: any;
-    function init(settings: any): void;
+    function init(setting: Kodi.Settings.KodiServerSetting): void;
     function close(): void;
     function isReady(): boolean;
     function sendData(data: any, forceCheck: any, ignoreXBMCErrors: any): WinJS.IPromise<{

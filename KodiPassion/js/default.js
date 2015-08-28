@@ -98,6 +98,7 @@ var KodiPassion;
             var currentSetting = Kodi.Settings.getSetting(settingName);
             if (currentSetting && currentSetting.host) {
                 return Kodi.API.testServerSetting(currentSetting).then(function (p) {
+                    Kodi.API.currentSettings = currentSetting;
                     return KodiPassion.UI.DataLoader.showLoader(false, args);
                 }, function (err) {
                     return WinJS.Navigation.navigate("/pages/startup/startup.html");
@@ -123,5 +124,23 @@ var KodiPassion;
         // If you need to complete an asynchronous operation before your application is suspended, call args.setPromise().
     };
     app.start();
+    function mapKodiApi(element) {
+        var items = element.querySelectorAll("*[kodiapi]");
+        var processItem = function (item) {
+            var api = item.getAttribute("kodiapi");
+            if (api) {
+                var fn = WinJSContrib.Utils.resolveValue(item, "global:" + api);
+                if (fn && typeof fn === "function") {
+                    WinJSContrib.UI.tap(item, function (arg) {
+                        return fn();
+                    });
+                }
+            }
+        };
+        for (var i = 0, l = items.length; i < l; i++) {
+            processItem(items[i]);
+        }
+    }
+    KodiPassion.mapKodiApi = mapKodiApi;
 })(KodiPassion || (KodiPassion = {}));
 //# sourceMappingURL=default.js.map

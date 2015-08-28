@@ -31,8 +31,8 @@
         current.onerror = socketError;
     }
 
-    export function init(settings) {
-        current = new WebSocket('ws://' + settings.host + ':9090/jsonrpc');
+    export function init(setting: Kodi.Settings.KodiServerSetting) {
+        current = new WebSocket('ws://' + setting.host + ':9090/jsonrpc');
 
         register();
     }

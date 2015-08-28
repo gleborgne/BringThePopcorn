@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>remote</title>
+</head>
+<body>
+    <div class="remote-controller">
+        <div class="main-menus">
+            <button class="kdp-home" kodiapi="Kodi.API.Input.home"></button>
+            <button class="kdp-movie" kodiapi="Kodi.API.Input.openMovies"></button>
+            <button class="kdp-television" kodiapi="Kodi.API.Input.openTvShows"></button>
+            <button class="kdp-music" kodiapi="Kodi.API.Input.openMusic"></button>
+            <button class="kdp-photo" kodiapi="Kodi.API.Input.openPictures"></button>
+        </div>
+        <div class="navigation">
+            <div class="wheel">                
+                <button class="kdp-rewind" kodiapi="Kodi.API.Input.back"></button>
+                <button class="kdp-menu" kodiapi="Kodi.API.Input.menu"></button>
+                <button class="kdp-info" kodiapi="Kodi.API.Input.info"></button>
+
+                <button class="wheelbtn kdp-chevron-up" kodiapi="Kodi.API.Input.up"></button>
+                <button class="wheelbtn kdp-chevron-down" kodiapi="Kodi.API.Input.down"></button>
+                <button class="wheelbtn kdp-chevron-left" kodiapi="Kodi.API.Input.left"></button>
+                <button class="wheelbtn kdp-chevron-right" kodiapi="Kodi.API.Input.right"></button>
+                <button class="wheelbtn kdp-check" kodiapi="Kodi.API.Input.select"></button>
+            </div>
+        </div>
+        
+        <div class="volume">
+            <div class="icon">
+                <button class="kdp-speaker-on" data-win-bind="display: muted WinJSContrib.Bindings.hideIf" kodiapi="Kodi.API.Input.volumeMute"></button>
+                <button class="kdp-speaker-mute" data-win-bind="display: muted WinJSContrib.Bindings.showIf" kodiapi="Kodi.API.Input.volumeUnmute"></button>
+            </div>
+            <input type="range" max="100" id="rangeVolume" member data-win-bind="value: volume" />
+        </div>
+
+        <div class="seekprogress" data-win-bind="display: isPlaying WinJSContrib.Bindings.showIf">
+            <div class="label" data-win-bind="innerText : label"></div>
+            <input type="range" max="100" id="rangeSeek" member data-win-bind="value : progress" />
+            <div class="timing">
+                <div class="ellapsed" data-win-bind="innerText : time"></div>
+                <div class="total" data-win-bind="innerText : totaltime"></div>
+            </div>
+        </div>
+
+        <div class="languagescontrol" data-win-bind="display: hasLanguagesOrSubtitles WinJSContrib.Bindings.showIf">
+            <div class="lngitem language" data-win-bind="display: hasLanguages WinJSContrib.Bindings.showIf">
+                <label for="language">language</label>
+                <select id="language" member>
+                    <option>none</option>
+                </select>
+            </div>
+            <div class="lngitem subtitles" data-win-bind="display: hasSubtitles WinJSContrib.Bindings.showIf">
+                <label for="subtitle">subtitles</label>
+                <select id="subtitle" member>
+                    <option>none</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

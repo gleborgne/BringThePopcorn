@@ -33,22 +33,16 @@
 }
 .page-moviesdetail header.fanart .actions button,
 .page-moviesdetail header.fanart .actions .mcn-elasticbutton {
-  width: 56px;
-  height: 56px;
-  line-height: 56px;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
   text-align: center;
   margin-right: 8px;
   border-radius: 50%;
 }
-.page-moviesdetail header.fanart .actions button svg,
-.page-moviesdetail header.fanart .actions .mcn-elasticbutton svg {
-  fill: rgba(40, 40, 40, 0.7);
-  stroke: #12b2e7;
-  stroke-width: 8px;
-}
 .page-moviesdetail header.fanart .actions button i,
 .page-moviesdetail header.fanart .actions .mcn-elasticbutton i {
-  font-size: 20pt;
+  font-size: 18pt;
   color: #12b2e7;
 }
 .page-moviesdetail header.fanart .actions button {

@@ -13,6 +13,14 @@ var Kodi;
                 return API.kodiRequest('Application.SetMute', { mute: mute });
             }
             Input.mute = mute;
+            function volumeMute() {
+                return mute(true);
+            }
+            Input.volumeMute = volumeMute;
+            function volumeUnmute() {
+                return mute(false);
+            }
+            Input.volumeUnmute = volumeUnmute;
             function volume(volume) {
                 Kodi.NowPlaying.current.volume = volume;
                 return API.kodiRequest('Application.SetVolume', { volume: volume });
@@ -54,6 +62,26 @@ var Kodi;
                 return API.kodiRequest('Input.Right');
             }
             Input.right = right;
+            function activateWindow(window, parameters) {
+                return API.kodiRequest('GUI.ActivateWindow', { window: window, parameters: parameters }, false, true);
+            }
+            Input.activateWindow = activateWindow;
+            function openMovies() {
+                return activateWindow("videos", ["videodb://movies/titles/"]);
+            }
+            Input.openMovies = openMovies;
+            function openTvShows() {
+                return activateWindow("videos", ["videodb://tvshows/titles/"]);
+            }
+            Input.openTvShows = openTvShows;
+            function openMusic() {
+                return activateWindow("musiclibrary", ["musicdb://albums/ "]);
+            }
+            Input.openMusic = openMusic;
+            function openPictures() {
+                return activateWindow("pictures", []);
+            }
+            Input.openPictures = openPictures;
         })(Input = API.Input || (API.Input = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));

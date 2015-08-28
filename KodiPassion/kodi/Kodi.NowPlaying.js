@@ -10,7 +10,7 @@ var Kodi;
             isPlaying: false, isPlayingMusic: false, isPlayingVideo: false, isPlayingTvShow: false, isPlayingMovie: false
         });
         NowPlaying.current = new ObservablePlaying();
-        var intervaldelay = 10000;
+        NowPlaying.intervaldelay = 10000;
         function forceCheck() {
             check(true);
         }
@@ -46,6 +46,11 @@ var Kodi;
                 if (standby) {
                     NowPlaying.current.checking = true;
                 }
+                Kodi.API.properties().then(function (p) {
+                    NowPlaying.current.muted = p.muted;
+                    NowPlaying.current.volume = p.volume;
+                }, function () {
+                });
                 Kodi.API.Player.currentItem(undefined).done(function (currentItem) {
                     var id = Kodi.API.Player.currentPlayer.playerid;
                     Kodi.API.Player.properties(id).done(function (props) {
@@ -66,7 +71,7 @@ var Kodi;
                 });
                 if (nowPlayingInterval)
                     clearInterval(nowPlayingInterval);
-                nowPlayingInterval = setInterval(check, intervaldelay);
+                nowPlayingInterval = setInterval(check, NowPlaying.intervaldelay);
             });
         }
         NowPlaying.check = check;
@@ -87,7 +92,7 @@ var Kodi;
             NowPlaying.current.isPlayingMovie = item.type == 'movie';
             NowPlaying.current.isPlayingTvShow = item.type == 'episode';
             NowPlaying.current.isPlayingVideo = NowPlaying.current.isPlayingMovie || NowPlaying.current.isPlayingTvShow;
-            NowPlaying.current.isPlaying = NowPlaying.current.isPlayingMusic || item.type == 'unknown';
+            NowPlaying.current.isPlaying = NowPlaying.current.isPlayingVideo || NowPlaying.current.isPlayingMusic || item.type == 'unknown';
             NowPlaying.current.subtitles = properties.subtitles;
             if (idChanged || !NowPlaying.current.currentsubtitle || NowPlaying.current.currentsubtitle.index != properties.currentsubtitle.index)
                 NowPlaying.current.currentsubtitle = properties.currentsubtitle;
@@ -102,7 +107,12 @@ var Kodi;
                 NowPlaying.current.progress = 0;
             }
             else {
-                NowPlaying.current.progress = properties.percentage;
+                if (properties.percentage > 100)
+                    NowPlaying.current.progress = 100;
+                else if (properties.percentage < 0)
+                    NowPlaying.current.progress = 0;
+                else
+                    NowPlaying.current.progress = properties.percentage;
             }
             if (properties.time.minutes < 0) {
                 NowPlaying.current.time = '00:00';
@@ -122,9 +132,8 @@ var Kodi;
                 NowPlaying.current.enabled = false;
             }
             else {
-                if (!NowPlaying.current.enabled || $('#nowplaying').css('display') === 'none') {
+                if (!NowPlaying.current.enabled) {
                     NowPlaying.current.enabled = true;
-                    $('#nowplaying').css('display', '').css('opacity', '1');
                 }
             }
         }
@@ -134,13 +143,8 @@ var Kodi;
                 clearInterval(nowPlayingInterval);
             NowPlaying.current.enabled = false;
             NowPlaying.current.reachable = false;
-            $('#nowplaying').css('opacity', '0');
-            nowPlayingInterval = setInterval(check, intervaldelay);
+            nowPlayingInterval = setInterval(check, NowPlaying.intervaldelay);
             check();
-            $('#nowplaying, #nowplayingAppBar').tap(function (args) {
-                var e = args;
-                WinJS.Navigation.navigate("/pages/playlistfull/playlistfull.html");
-            });
         }
         NowPlaying.init = init;
     })(NowPlaying = Kodi.NowPlaying || (Kodi.NowPlaying = {}));

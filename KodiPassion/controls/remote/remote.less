@@ -1,0 +1,175 @@
+﻿@import "../../css/apptheme.less";
+
+.remote-controller {
+    padding: 20px 40px;
+
+    button {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 18pt;
+        border: none;
+        background-color: transparent;
+        color: rgba(255,255,255,0.8);
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .main-menus {
+        margin-top: 10px;
+        .hflex(center);
+        justify-content: center;
+
+        button {
+            margin: 0 10px;
+            color: @kodiBlue;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .navigation {
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        .wheel {
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.8);
+            display: -ms-grid;
+            -ms-grid-rows: 1fr 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr 1fr;
+
+            .wheelbtn {
+                -ms-grid-row-align: center;
+                -ms-grid-column-align: center;
+                width: 60px;
+                height: 60px;
+                line-height: 68px;
+                font-size: 30pt;
+                color: #222;
+            }
+
+            .kdp-rewind {
+                -ms-grid-row-align: start;
+                -ms-grid-column-align: start;
+                -ms-grid-row: 1;
+                -ms-grid-column: 1;
+                margin-left: -36px;
+            }
+
+            .kdp-menu {
+                -ms-grid-row-align: start;
+                -ms-grid-column-align: end;
+                -ms-grid-row: 1;
+                -ms-grid-column: 3;
+                margin-right: -36px;
+            }
+
+            .kdp-info {
+                -ms-grid-row-align: end;
+                -ms-grid-column-align: start;
+                -ms-grid-row: 3;
+                -ms-grid-column: 1;
+                margin-left: -36px;
+            }
+
+            .kdp-chevron-up {
+                -ms-grid-row: 1;
+                -ms-grid-column: 2;
+            }
+
+            .kdp-chevron-down {
+                -ms-grid-row: 3;
+                -ms-grid-column: 2;
+            }
+
+            .kdp-chevron-left {
+                -ms-grid-row: 2;
+                -ms-grid-column: 1;
+            }
+
+            .kdp-chevron-right {
+                -ms-grid-row: 2;
+                -ms-grid-column: 3;
+            }
+
+            .kdp-check {
+                -ms-grid-row: 2;
+                -ms-grid-column: 2;
+                background-color: #333;
+                color: white;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .languagescontrol {
+        margin-top: 10px;
+
+        .lngitem {
+           display: -ms-grid;
+           -ms-grid-rows : auto;
+           -ms-grid-columns: 80px 1fr;
+           margin-bottom: 3px;
+
+            label {                
+                display: block;
+            }
+
+            select {
+                -ms-grid-column: 2;
+                background-color: transparent;
+                border: 1px solid #555;
+                color: white;
+
+                &:focus {
+                    background-color: white;
+                    color: black;
+                }
+            }
+        }
+    }
+
+    .seekprogress {
+        .label{
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        input[type=range] {
+            display: block;
+            width: 100%;
+        }
+
+        .timing {
+            .hflex();
+            margin-top: -2px;
+            font-size: 9pt;
+            color: #AAA;
+
+            .ellapsed {
+                flex: 1;
+            }
+        }
+    }
+
+    .volume {
+        .hflex();
+
+        input[type=range] {
+            margin-left: 10px;
+            flex: 1;
+        }
+    }
+
+    
+}

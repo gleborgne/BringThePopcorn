@@ -1,5 +1,12 @@
 ﻿module Kodi.Utils {
     function bgImage(source, sourceProperty, dest, destProperty, defaultImage) {
+        function setImage(url) {
+            if (dest.nodeName === "IMG") {
+                dest.src = url;
+            } else {
+                dest.style.backgroundImage = 'url("' + url + '")';
+            }
+        }
         function setBg() {
             var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
             if (!data || !data.length) {
@@ -7,7 +14,7 @@
                 dest.innerHTML = '';
 
                 if (defaultImage) {
-                    dest.style.backgroundImage = 'url("' + defaultImage + '")';
+                    setImage(defaultImage);
                     dest.style.backgroundSize = 'contain';
                 }
                 return;
@@ -15,7 +22,7 @@
             if (data === 'DefaultAlbumCover.png') {
                 WinJS.Utilities.addClass(dest, 'imageLoaded');
                 dest.innerHTML = '';
-                dest.style.backgroundImage = 'url("/images/cd.png")';
+                setImage("/images/cd.png");
                 return;
             }
 
@@ -24,12 +31,12 @@
                 WinJSContrib.UI.loadImage(imgUrl).done(function () {
                     WinJS.Utilities.addClass(dest, 'imageLoaded');
                     dest.innerHTML = '';
-                    dest.style.backgroundImage = 'url("' + imgUrl + '")';
+                    setImage(imgUrl);
                 }, function () {
                     WinJS.Utilities.addClass(dest, 'imageLoaded');
                     dest.innerHTML = '';
                     if (defaultImage) {
-                        dest.style.backgroundImage = 'url("' + defaultImage + '")';
+                        setImage(defaultImage);
                     }
                 });
             }, 150);

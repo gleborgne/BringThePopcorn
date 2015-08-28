@@ -31,6 +31,7 @@
                     WinJSContrib.UI.tap(btnconnect, () => {
                         return Kodi.API.testServerSetting(setting).then((res) => {
                             Kodi.API.currentSettings = setting;
+
                             return KodiPassion.UI.DataLoader.showLoader(true);
                         }, function (err) {
                             console.error(err);
