@@ -13,3 +13,13 @@
   max-width: 90%;
   padding-bottom: 40px;
 }
+.page-startup .content .logo {
+  margin-top: 120px;
+}
+.page-startup .content .logo img {
+  width: 100%;
+}
+.page-startup .content .servers header {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}

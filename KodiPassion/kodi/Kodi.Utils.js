@@ -3,9 +3,16 @@ var Kodi;
     var Utils;
     (function (Utils) {
         function bgImage(source, sourceProperty, dest, destProperty, defaultImage) {
-            function setImage(url) {
+            function setImage(url, img) {
+                WinJS.Utilities.addClass(dest, 'imageLoaded');
                 if (dest.nodeName === "IMG") {
                     dest.src = url;
+                    dest.style.width = "";
+                    if (img && img.element) {
+                        var ratio = img.element.naturalWidth / img.element.naturalHeight;
+                        var w = dest.clientHeight * ratio;
+                        dest.style.width = w + "px";
+                    }
                 }
                 else {
                     dest.style.backgroundImage = 'url("' + url + '")';
@@ -13,9 +20,8 @@ var Kodi;
             }
             function setBg() {
                 var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
+                WinJS.Utilities.removeClass(dest, 'imageLoaded');
                 if (!data || !data.length) {
-                    WinJS.Utilities.addClass(dest, 'imageLoaded');
-                    dest.innerHTML = '';
                     if (defaultImage) {
                         setImage(defaultImage);
                         dest.style.backgroundSize = 'contain';
@@ -23,20 +29,14 @@ var Kodi;
                     return;
                 }
                 if (data === 'DefaultAlbumCover.png') {
-                    WinJS.Utilities.addClass(dest, 'imageLoaded');
-                    dest.innerHTML = '';
                     setImage("/images/cd.png");
                     return;
                 }
                 var imgUrl = Kodi.API.kodiThumbnail(data);
                 setTimeout(function () {
-                    WinJSContrib.UI.loadImage(imgUrl).done(function () {
-                        WinJS.Utilities.addClass(dest, 'imageLoaded');
-                        dest.innerHTML = '';
-                        setImage(imgUrl);
+                    WinJSContrib.UI.loadImage(imgUrl).done(function (img) {
+                        setImage(imgUrl, img);
                     }, function () {
-                        WinJS.Utilities.addClass(dest, 'imageLoaded');
-                        dest.innerHTML = '';
                         if (defaultImage) {
                             setImage(defaultImage);
                         }
