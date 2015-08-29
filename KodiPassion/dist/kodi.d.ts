@@ -37,6 +37,7 @@ declare module Kodi.App {
         tvshowepisode: number;
         album: number;
     };
+    function playLocalMedia(kodipath: any): WinJS.Promise<{}>;
 }
 interface JQuery {
     winControl(): any;

@@ -12,12 +12,15 @@ module KodiPassion{
     WinJSContrib.UI.enableSystemBackButton = true;
     WinJSContrib.UI.defaultTapBehavior.awaitAnim = true;
     WinJSContrib.UI.defaultTapBehavior.animDown = function (elt) {
-        var target = { scaleX: 0.95, scaleY: 1.07 };
+        var w = elt.clientWidth;
+        var h = elt.clientHeight;
 
-        if (elt.clientWidth < 70 && elt.clientHeight < 70)
-            target = { scaleX: 0.8, scaleY: 1.2 };
-        else if (elt.clientWidth < 100 && elt.clientHeight < 100)
-            target = { scaleX: 0.9, scaleY: 1.1 };
+        var target = { scaleX: (w - 10) / w, scaleY: (h + 10)/h };
+
+        //if (elt.clientWidth < 70 && elt.clientHeight < 70)
+        //    target = { scaleX: 0.8, scaleY: 1.2 };
+        //else if (elt.clientWidth < 100 && elt.clientHeight < 100)
+        //    target = { scaleX: 0.9, scaleY: 1.1 };
 
         //    return $.Velocity(elt, target, { duration: 90 });
 

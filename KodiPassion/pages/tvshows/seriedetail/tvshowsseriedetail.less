@@ -107,9 +107,15 @@
             }
         }
 
+        .seasons {
+            margin-top: 1em;
+        }
+
         .seasons-items {
             .season {
                 margin-bottom: 20px;
+                padding-bottom: 20px;
+                border-bottom: 3px solid #333;
 
                 .season-desc {
                     .hflex();
@@ -123,7 +129,7 @@
                         background-position: center;
                     }
 
-                    .label{
+                    .label {
                         font-weight: 600;
                         font-size: 1.2rem;
                     }
@@ -138,30 +144,64 @@
                 .season-episodes {
                     padding-left: 40px;
                     margin-top: 10px;
+                }
+            }
+        }
 
-                    .episode {
-                        margin-bottom: 10px;
-                        .hflex(flex-start);
+        .episode {
+            margin-bottom: 10px;
+            .hflex(flex-start);
 
-                        .poster {
-                            width: 178px;
-                            height: 100px;
-                            margin-right: 10px;
-                            flex-shrink: 0;
-                            background-size: cover;
-                            background-position: center;
-                        }
+            .desc {
+                flex: 1;
+            }
 
-                        .label{
-                            font-weight: 500;
-                        }
+            .poster {
+                width: 178px;
+                height: 100px;
+                position: relative;
+                margin-right: 10px;
+                flex-shrink: 0;
 
-                        .plot{
-                            color: #AAA;
-                            font-size: 0.9rem;
-                            line-height: 1.2em;
-                        }
-                    }
+                .bg {
+                    width: 100%;
+                    height: 100%;
+                    background-size: cover;
+                    background-position: center;
+                }
+
+                .played{
+                    position: absolute;
+                    top: -5px;
+                    right : -5px;
+                    .roundButton(20px);
+                    line-height: 25px;
+                    background-color: @kodiBlue;
+                    color : white;
+                }
+            }
+
+            .label {
+                font-weight: 500;
+            }
+
+            .plot {
+                color: #AAA;
+                font-size: 0.9rem;
+                line-height: 1.2em;
+            }
+
+            .actions {
+                .hflex();
+
+                button {
+                    .roundButton(40px);
+                    box-sizing: border-box;
+                    margin-left: 10px;
+                    border: 2px solid @kodiBlue;
+                    color: @kodiBlue;
+                    background-color: transparent;
+                    font-size: 18pt;
                 }
             }
         }

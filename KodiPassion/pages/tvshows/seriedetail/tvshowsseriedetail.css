@@ -93,8 +93,13 @@
   font-size: 1.3rem;
   margin-top: 1em;
 }
+.tvshowsseriedetail section[role=main] .seasons {
+  margin-top: 1em;
+}
 .tvshowsseriedetail section[role=main] .seasons-items .season {
   margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid #333;
 }
 .tvshowsseriedetail section[role=main] .seasons-items .season .season-desc {
   display: flex;
@@ -120,25 +125,64 @@
   padding-left: 40px;
   margin-top: 10px;
 }
-.tvshowsseriedetail section[role=main] .seasons-items .season .season-episodes .episode {
+.tvshowsseriedetail section[role=main] .episode {
   margin-bottom: 10px;
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;
 }
-.tvshowsseriedetail section[role=main] .seasons-items .season .season-episodes .episode .poster {
+.tvshowsseriedetail section[role=main] .episode .desc {
+  flex: 1;
+}
+.tvshowsseriedetail section[role=main] .episode .poster {
   width: 178px;
   height: 100px;
+  position: relative;
   margin-right: 10px;
   flex-shrink: 0;
+}
+.tvshowsseriedetail section[role=main] .episode .poster .bg {
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
 }
-.tvshowsseriedetail section[role=main] .seasons-items .season .season-episodes .episode .label {
+.tvshowsseriedetail section[role=main] .episode .poster .played {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 25px;
+  background-color: #12b2e7;
+  color: white;
+}
+.tvshowsseriedetail section[role=main] .episode .label {
   font-weight: 500;
 }
-.tvshowsseriedetail section[role=main] .seasons-items .season .season-episodes .episode .plot {
+.tvshowsseriedetail section[role=main] .episode .plot {
   color: #AAA;
   font-size: 0.9rem;
   line-height: 1.2em;
+}
+.tvshowsseriedetail section[role=main] .episode .actions {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.tvshowsseriedetail section[role=main] .episode .actions button {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  box-sizing: border-box;
+  margin-left: 10px;
+  border: 2px solid #12b2e7;
+  color: #12b2e7;
+  background-color: transparent;
+  font-size: 18pt;
 }

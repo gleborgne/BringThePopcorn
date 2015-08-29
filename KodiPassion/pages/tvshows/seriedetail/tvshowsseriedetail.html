@@ -8,9 +8,38 @@
     <script src="tvshowsseriedetail.js"></script>
 </head>
 <body>
+    <div id="seasonTemplate" member data-win-control="WinJS.Binding.Template" data-win-options="{extractChild : true }">
+        <div class="season">
+            <div class="season-desc">
+                <div class="poster" data-win-bind="display: thumbnail Kodi.Utils.toThumbnailBg"></div>
+                <div class="label" data-win-bind="innerText: label"></div>
+            </div>
+            <div class="season-episodes">
+            </div>
+        </div>
+    </div>
+    <div id="episodeTemplate" member data-win-control="WinJS.Binding.Template" data-win-options="{extractChild : true }">
+        <div class="episode">
+            <div class="poster">
+                <div class="bg" data-win-bind="display: thumbnail Kodi.Utils.toThumbnailBg"></div>
+                <div class="played kdp-check" data-win-bind="display: lastplayed WinJSContrib.Bindings.showIf"></div>
+            </div>
+            <div class="desc">
+                <div class="label" data-win-bind="innerText: label"></div>
+                <div class="plot" data-win-bind="innerText: plot"></div>
+            </div>
+            <div class="actions">
+                <button class="btndownload kdp-download" style="display:none"></button>
+                <button class="btnplaylocal kdp-playlocal" style="display:none"></button>
+                <button class="btnplay kdp-play"></button>
+            </div>
+        </div>
+    </div>
     <div class="tvshowsseriedetail">
         <header role="banner" class="fanart">
-            <div class="fanart-bg" data-win-bind="display: fanart Kodi.Utils.toThumbnailBg"></div>
+            <div class="fanart-bg" data-win-bind="display: fanart Kodi.Utils.toThumbnailBg">
+
+            </div>
             <!--<div class="actions">
                 <button member="btnDownloadMovie" tap="downloadMovie" style="display: none">
                     <i class="kdp-download"></i>
@@ -26,25 +55,7 @@
         <header role="banner" class="poster">
             <div class="poster" data-win-bind="display: art.poster Kodi.Utils.toThumbnailBg"></div>
         </header>
-        <div id="seasonTemplate" member data-win-control="WinJS.Binding.Template" data-win-options="{extractChild : true }">
-            <div class="season">
-                <div class="season-desc">
-                    <div class="poster" data-win-bind="display: thumbnail Kodi.Utils.toThumbnailBg"></div>
-                    <div class="label" data-win-bind="innerText: label"></div>
-                </div>
-                <div class="season-episodes">
-                </div>
-            </div>
-        </div>
-        <div id="episodeTemplate" member data-win-control="WinJS.Binding.Template" data-win-options="{extractChild : true }">
-            <div class="episode">
-                <div class="poster" data-win-bind="display: thumbnail Kodi.Utils.toThumbnailBg"></div>
-                <div class="desc">
-                    <div class="label" data-win-bind="innerText: label"></div>
-                    <div class="plot" data-win-bind="innerText: plot"></div>
-                </div>
-            </div>
-        </div>
+        
 
         <section class="page-section" aria-label="Main content" role="main">
 

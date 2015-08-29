@@ -4,4 +4,7 @@
     <ReferenceCachePath>C:\Users\gleborgne\AppData\Local\Temp\KodiPassion_refcache</ReferenceCachePath>
     <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>AppHostDeviceDebugger</DebuggerFlavor>
+  </PropertyGroup>
 </Project>
