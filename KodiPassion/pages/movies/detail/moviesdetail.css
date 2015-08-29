@@ -93,3 +93,26 @@
   font-size: 1.3rem;
   margin-top: 1em;
 }
+.page-moviesdetail.state-medium header.fanart {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+}
+.page-moviesdetail.state-medium header.poster {
+  width: 106px;
+  max-width: none;
+  height: 160px;
+  padding: 0;
+  -ms-grid-column: 1;
+  -ms-grid-row-span: 1;
+}
+.page-moviesdetail.state-medium header.poster .poster {
+  background-size: cover;
+}
+.page-moviesdetail.state-medium section[role=main] {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+}
+.page-moviesdetail.state-small section[role=main] {
+  padding: 20px;
+}

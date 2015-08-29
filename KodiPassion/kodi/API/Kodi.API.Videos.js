@@ -86,6 +86,7 @@ var Kodi;
                 Movies.getAllMovieSets = getAllMovieSets;
                 function getMovieDetails(movieid) {
                     var data = MovieOptions(true);
+                    delete data.sort;
                     data.movieid = movieid;
                     return API.kodiRequest('VideoLibrary.GetMovieDetails', data);
                 }
@@ -95,8 +96,12 @@ var Kodi;
                     return API.kodiRequest('VideoLibrary.GetRecentlyAddedMovies', data, false, true);
                 }
                 Movies.getRecentMovies = getRecentMovies;
-                function playMovie(movieid) {
-                    return API.kodiRequest('Player.Open', { "item": { "movieid": movieid } }, true);
+                function playMovie(movieid, resume) {
+                    var data = { "item": { "movieid": movieid } };
+                    if (resume) {
+                        data.options = { resume: true };
+                    }
+                    return API.kodiRequest('Player.Open', data, true);
                 }
                 Movies.playMovie = playMovie;
                 function scan() {

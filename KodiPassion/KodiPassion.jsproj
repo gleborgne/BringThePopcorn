@@ -381,6 +381,7 @@
     <Content Include="scripts\winjscontrib\js\winjscontrib.ui.tabcontrol.min.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.ui.tilemenu.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.ui.tilemenu.min.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.visualstate.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.ui.webcomponents.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.ui.webcomponents.min.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.audiorecording.js" />

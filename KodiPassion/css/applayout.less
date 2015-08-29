@@ -1,5 +1,10 @@
 ﻿@import "apptheme.less";
 
+html, body {
+    font-family: 'CooperHewitt';
+    font-size: 12pt;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -190,4 +195,16 @@ body {
 .nowplaying-expanded #appcontent #contentwrapper #nowplaying {
     height: auto;
     top: 0;
+}
+
+@media screen and (max-width: 1024px){
+    html, body {
+        font-size : 11pt;
+    }
+}
+
+@media screen and (max-width: 800px){
+    html, body {
+        font-size : 10pt;
+    }
 }

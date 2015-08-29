@@ -109,8 +109,12 @@ var Kodi;
                     return API.kodiRequest('VideoLibrary.GetEpisodes', { episodeid: episodeid });
                 }
                 TVShows.getTVShowEpisodeDetails = getTVShowEpisodeDetails;
-                function playEpisode(episodeid) {
-                    return API.kodiRequest('Player.Open', { "item": { "episodeid": episodeid } }, true);
+                function playEpisode(episodeid, resume) {
+                    var data = { "item": { "episodeid": episodeid } };
+                    if (resume) {
+                        data.options = { resume: true };
+                    }
+                    return API.kodiRequest('Player.Open', data, true);
                 }
                 TVShows.playEpisode = playEpisode;
                 function queueEpisode(episodeid) {

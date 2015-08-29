@@ -13,6 +13,7 @@
             var settings = Kodi.Settings.list();
             this.availablesettings.innerHTML = "";
             var container = document.createDocumentFragment();
+            var defaultsetting = Kodi.Settings.defaultConnection();
             var servertemplate = new WinJS.Binding.Template(null, { href: "/templates/serveritem.html" });
             var p = [];
             settings.forEach((s) => {
@@ -23,6 +24,11 @@
                     var btnedit = <HTMLElement>elt.querySelector(".btnedit");
                     var btnconnect = <HTMLElement>elt.querySelector(".btnconnect");
                     var btnwakeup = <HTMLElement>elt.querySelector(".btnwakeup");
+
+                    if (s == defaultsetting) {
+                        var e = <HTMLElement>elt.querySelector(".name")
+                        e.innerText = setting.name + ' (default)';
+                    }
 
                     WinJSContrib.UI.tap(btnedit, () => {
                         WinJS.Navigation.navigate("/pages/settings/serverdetail/serverdetail.html", { setting: s, navigateStacked: true });
@@ -46,6 +52,7 @@
                     }
 
                     container.appendChild(elt);
+
                     if (Kodi.API.currentSettings && setting.host == Kodi.API.currentSettings.host) {
                         elt.classList.add("current");
                     }

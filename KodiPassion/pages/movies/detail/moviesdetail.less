@@ -25,17 +25,16 @@
             }
         }
 
-        .actions{
+        .actions {
             position: absolute;
-            left:0;
+            left: 0;
             right: 0;
             bottom: 8px;
-
             .hflex();
             justify-content: flex-end;
 
-            button, .mcn-elasticbutton{
-                @size : 48px;
+            button, .mcn-elasticbutton {
+                @size: 48px;
                 width: @size;
                 height: @size;
                 line-height: @size;
@@ -43,13 +42,13 @@
                 margin-right: 8px;
                 border-radius: 50%;
 
-                i{
-                    font-size : 18pt;
-                    color:@kodiBlue;
+                i {
+                    font-size: 18pt;
+                    color: @kodiBlue;
                 }
             }
 
-            button{
+            button {
                 background-color: rgba(40,40,40,0.7);
                 border: 2px solid @kodiBlue;
             }
@@ -62,19 +61,18 @@
         -ms-grid-row-span: 2;
         box-sizing: border-box;
         padding-left: 40px;
-        padding-top: 110px;   
+        padding-top: 110px;
         width: 340px;
         max-width: 30vw;
-        
+
         .poster {
             width: 100%;
             height: 100%;
             background-size: contain;
             background-repeat: no-repeat;
-                     
             opacity: 0;
             transition: opacity 200ms ease-in;
-            
+
             &.imageLoaded {
                 opacity: 1;
             }
@@ -108,5 +106,37 @@
                 margin-top: 1em;
             }
         }
+    }
+}
+
+.page-moviesdetail.state-medium {
+    header.fanart {
+        -ms-grid-column: 2;
+        -ms-grid-column-span: 1;
+    }
+
+    header.poster {
+        width: 106px;
+        max-width: none;
+        height: 160px;
+        padding: 0;
+        -ms-grid-column: 1;
+        -ms-grid-row-span: 1;
+
+        .poster {
+            background-size: cover;
+        }
+    }
+
+    section[role=main] {
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 2;
+    }
+}
+
+.page-moviesdetail.state-small {
+    section[role=main] {
+        padding: 20px;
     }
 }

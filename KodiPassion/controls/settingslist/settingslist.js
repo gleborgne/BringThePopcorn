@@ -13,6 +13,7 @@ var KodiPassion;
                 var settings = Kodi.Settings.list();
                 this.availablesettings.innerHTML = "";
                 var container = document.createDocumentFragment();
+                var defaultsetting = Kodi.Settings.defaultConnection();
                 var servertemplate = new WinJS.Binding.Template(null, { href: "/templates/serveritem.html" });
                 var p = [];
                 settings.forEach(function (s) {
@@ -22,6 +23,10 @@ var KodiPassion;
                         var btnedit = elt.querySelector(".btnedit");
                         var btnconnect = elt.querySelector(".btnconnect");
                         var btnwakeup = elt.querySelector(".btnwakeup");
+                        if (s == defaultsetting) {
+                            var e = elt.querySelector(".name");
+                            e.innerText = setting.name + ' (default)';
+                        }
                         WinJSContrib.UI.tap(btnedit, function () {
                             WinJS.Navigation.navigate("/pages/settings/serverdetail/serverdetail.html", { setting: s, navigateStacked: true });
                         });

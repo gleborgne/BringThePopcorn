@@ -1609,8 +1609,12 @@ var Kodi;
                     return API.kodiRequest('VideoLibrary.GetEpisodes', { episodeid: episodeid });
                 }
                 TVShows.getTVShowEpisodeDetails = getTVShowEpisodeDetails;
-                function playEpisode(episodeid) {
-                    return API.kodiRequest('Player.Open', { "item": { "episodeid": episodeid } }, true);
+                function playEpisode(episodeid, resume) {
+                    var data = { "item": { "episodeid": episodeid } };
+                    if (resume) {
+                        data.options = { resume: true };
+                    }
+                    return API.kodiRequest('Player.Open', data, true);
                 }
                 TVShows.playEpisode = playEpisode;
                 function queueEpisode(episodeid) {
@@ -1714,6 +1718,7 @@ var Kodi;
                 Movies.getAllMovieSets = getAllMovieSets;
                 function getMovieDetails(movieid) {
                     var data = MovieOptions(true);
+                    delete data.sort;
                     data.movieid = movieid;
                     return API.kodiRequest('VideoLibrary.GetMovieDetails', data);
                 }
@@ -1723,8 +1728,12 @@ var Kodi;
                     return API.kodiRequest('VideoLibrary.GetRecentlyAddedMovies', data, false, true);
                 }
                 Movies.getRecentMovies = getRecentMovies;
-                function playMovie(movieid) {
-                    return API.kodiRequest('Player.Open', { "item": { "movieid": movieid } }, true);
+                function playMovie(movieid, resume) {
+                    var data = { "item": { "movieid": movieid } };
+                    if (resume) {
+                        data.options = { resume: true };
+                    }
+                    return API.kodiRequest('Player.Open', data, true);
                 }
                 Movies.playMovie = playMovie;
                 function scan() {

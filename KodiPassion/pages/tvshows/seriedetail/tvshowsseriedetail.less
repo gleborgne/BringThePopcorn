@@ -131,7 +131,8 @@
 
                     .label {
                         font-weight: 600;
-                        font-size: 1.2rem;
+                        font-size: 1.4rem;
+                        text-transform: uppercase;
                     }
                 }
 
@@ -170,14 +171,14 @@
                     background-position: center;
                 }
 
-                .played{
+                .played {
                     position: absolute;
                     top: -5px;
-                    right : -5px;
+                    right: -5px;
                     .roundButton(20px);
                     line-height: 25px;
-                    background-color: @kodiBlue;
-                    color : white;
+                    background-color: gold;
+                    color: black;
                 }
             }
 
@@ -202,6 +203,64 @@
                     color: @kodiBlue;
                     background-color: transparent;
                     font-size: 18pt;
+                }
+            }
+        }
+    }
+}
+
+.tvshowsseriedetail.state-medium {
+    header.fanart {
+        -ms-grid-column: 2;
+        -ms-grid-column-span: 1;
+    }
+
+    header.poster {
+        width: 106px;
+        max-width: none;
+        height: 160px;
+        padding: 0;
+        -ms-grid-column: 1;
+        -ms-grid-row-span: 1;
+
+        .poster{
+            background-size:cover;
+        }
+    }
+
+    section[role=main] {
+        -ms-grid-row: 2;
+        -ms-grid-column: 1;
+        -ms-grid-column-span: 2;
+    }
+}
+
+.tvshowsseriedetail.state-small {
+    section[role=main] {
+        padding: 20px;
+
+        .seasons-items {
+            .season {
+                .season-episodes {
+                    padding-left: 0;
+                }
+            }
+        }
+
+        .episode {
+            flex-wrap: wrap;
+            margin-top: 10px;
+
+            .poster {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .actions {
+                flex-flow: column nowrap;
+
+                button {
+                    margin-bottom: 10px;
                 }
             }
         }

@@ -9,10 +9,10 @@
 </head>
 <body>
     <div class="nowplayingbar">
-        <div class="desc" data-win-bind="display : enabled WinJSContrib.Bindings.showIf" tap="toggleView" tap-options="{disableAnimation : true}">
-            <img class="thumb" data-win-bind="src : thumbnail Kodi.Utils.toThumbnailBg" />
+        <div class="desc" data-win-bind="display : enabled WinJSContrib.Bindings.showIf">
+            <img class="thumb" data-win-bind="src : thumbnail Kodi.Utils.toThumbnailBg" tap="toggleView" />
             <div class="desc-progress">
-                <div class="label" data-win-bind="innerText : label"></div>
+                <div class="label win-type-ellipsis" data-win-bind="innerText : label"></div>
                 <input type="range" max="100" id="rangeSeek" member data-win-bind="value : progress" />
                 <div class="progresstime">
                     <div class="ellapsed" data-win-bind="innerText : time"></div>
@@ -29,7 +29,7 @@
                 <button class="cmd kdp-forward" kodiapi="Kodi.API.Player.next"></button>
             </div>
         </div>
-        <div class="spacer" tap="toggleView"></div>
+        <div class="spacer" tap="toggleView" data-win-bind="display : enabled WinJSContrib.Bindings.hideIf"></div>
         <div class="actions" tap="toggleView">
             <button class="cmd btntoggle kdp-chevron-up" member="togglebtn"></button>
         </div>

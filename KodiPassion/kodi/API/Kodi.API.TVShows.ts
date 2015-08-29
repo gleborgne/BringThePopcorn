@@ -73,7 +73,7 @@
         fanart: string;
         thumbnail: string;
         file: string;
-        resume: string;
+        resume?: { position: number, total: number };
         tvshowid: number;
     }
 
@@ -183,8 +183,12 @@
         return API.kodiRequest<any>('VideoLibrary.GetEpisodes', { episodeid: episodeid });
     }
 
-    export function playEpisode(episodeid) {
-        return API.kodiRequest<any>('Player.Open', { "item": { "episodeid": episodeid } }, true);
+    export function playEpisode(episodeid, resume?: boolean) {
+        var data = <any>{ "item": { "episodeid": episodeid } };
+        if (resume) {
+            data.options = { resume: true };
+        }
+        return API.kodiRequest<any>('Player.Open', data, true);
     }
 
     export function queueEpisode(episodeid) {

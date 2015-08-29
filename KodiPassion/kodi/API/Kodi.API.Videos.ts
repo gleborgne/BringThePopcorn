@@ -28,7 +28,7 @@
         thumbnail: string;
         file?: string;
         sorttitle?: string;
-        resume?: string;
+        resume?: { position: number, total: number };
         setid?: string;
         art?: any;
         reducedtitle: string;
@@ -72,6 +72,10 @@
         role: string;
         thumbnail: string;
         name: string;
+    }
+
+    export interface MovieResultSet extends ApiResultSet {
+        moviedetails: Movie;
     }
 
     export interface MoviesResultSet extends ApiResultSet {
@@ -160,8 +164,9 @@
 
     export function getMovieDetails(movieid) {
         var data = MovieOptions(true);
+        delete data.sort;
         data.movieid = movieid;
-        return API.kodiRequest<any>('VideoLibrary.GetMovieDetails', data);
+        return API.kodiRequest<MovieResultSet>('VideoLibrary.GetMovieDetails', data);
     }
 
     export function getRecentMovies() {
@@ -169,8 +174,12 @@
         return API.kodiRequest<MoviesResultSet>('VideoLibrary.GetRecentlyAddedMovies', data, false, true);
     }
 
-    export function playMovie(movieid) {
-        return API.kodiRequest<any>('Player.Open', { "item": { "movieid": movieid } }, true);
+    export function playMovie(movieid, resume?:boolean) {
+        var data = <any>{ "item": { "movieid": movieid } };
+        if (resume) {
+            data.options = { resume: true };
+        }
+        return API.kodiRequest<any>('Player.Open', data, true);
     }
 
     export function scan() {

@@ -19,9 +19,12 @@
   color: inherit;
   font-size: inherit;
 }
+.nowplayingbar .spacer {
+  flex: 1;
+}
 .nowplayingbar .desc {
-  width: 30%;
-  max-width: 400px;
+  flex: 1;
+  width: 100%;
   height: 100%;
   margin-right: 10px;
   display: -ms-grid;
@@ -80,17 +83,22 @@
   flex-flow: row nowrap;
   align-items: center;
 }
-.nowplayingbar .spacer {
-  height: 100%;
-  flex: 1;
-}
 .nowplayingbar .actions {
   height: 100%;
   justify-content: flex-end;
+  margin-left: 10px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
 }
 .nowplayingbar .actions .btntoggle {
   font-size: 30pt;
+  margin: 0;
+  background-color: black;
+}
+@media screen and (max-width: 800px) {
+  .nowplayingbar .playercommands,
+  .nowplayingbar .spacer {
+    display: none;
+  }
 }

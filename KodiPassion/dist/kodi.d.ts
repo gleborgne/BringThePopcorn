@@ -429,7 +429,10 @@ declare module Kodi.API.Videos.TVShows {
         fanart: string;
         thumbnail: string;
         file: string;
-        resume: string;
+        resume?: {
+            position: number;
+            total: number;
+        };
         tvshowid: number;
     }
     interface EpisodesResultSet extends ApiResultSet {
@@ -446,7 +449,7 @@ declare module Kodi.API.Videos.TVShows {
     function getTVShowSeasons(tvshowid: any): WinJS.Promise<SeasonsResultSet>;
     function getTVShowEpisodes(tvshowid: any, seasonid: any): WinJS.Promise<EpisodesResultSet>;
     function getTVShowEpisodeDetails(episodeid: any): WinJS.Promise<any>;
-    function playEpisode(episodeid: any): WinJS.Promise<any>;
+    function playEpisode(episodeid: any, resume?: boolean): WinJS.Promise<any>;
     function queueEpisode(episodeid: any): WinJS.Promise<any>;
     function scan(): WinJS.Promise<any>;
 }
@@ -481,7 +484,10 @@ declare module Kodi.API.Videos.Movies {
         thumbnail: string;
         file?: string;
         sorttitle?: string;
-        resume?: string;
+        resume?: {
+            position: number;
+            total: number;
+        };
         setid?: string;
         art?: any;
         reducedtitle: string;
@@ -524,6 +530,9 @@ declare module Kodi.API.Videos.Movies {
         thumbnail: string;
         name: string;
     }
+    interface MovieResultSet extends ApiResultSet {
+        moviedetails: Movie;
+    }
     interface MoviesResultSet extends ApiResultSet {
         movies: Movie[];
     }
@@ -536,9 +545,9 @@ declare module Kodi.API.Videos.Movies {
     function getMovieGenres(): WinJS.Promise<{}>;
     function getAllMovies(): WinJS.IPromise<MoviesResultSet>;
     function getAllMovieSets(): WinJS.Promise<MoviesSetResultSet>;
-    function getMovieDetails(movieid: any): WinJS.Promise<any>;
+    function getMovieDetails(movieid: any): WinJS.Promise<MovieResultSet>;
     function getRecentMovies(): WinJS.Promise<MoviesResultSet>;
-    function playMovie(movieid: any): WinJS.Promise<any>;
+    function playMovie(movieid: any, resume?: boolean): WinJS.Promise<any>;
     function scan(): WinJS.Promise<any>;
 }
 

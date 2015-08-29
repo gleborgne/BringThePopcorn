@@ -9,16 +9,23 @@
 </head>
 <body>
     <div class="page-moviesdetail">
+        <div data-win-control="WinJSContrib.UI.VisualState" data-win-options="{states:{
+                medium : { wLt: 1024 },
+                small : { wLt: 800 },
+             }}"></div>
         <header role="banner" class="fanart">
             <div class="fanart-bg" data-win-bind="display: fanart Kodi.Utils.toThumbnailBg"></div>
             <div class="actions">
-                <button member="btnDownloadMovie" tap="downloadMovie" style="display: none">
+                <button member="btnDownloadMovie" tap="downloadMovie" style="display: none" title="download movie">
                     <i class="kdp-download"></i>
                 </button>
-                <button member="btnPlayMovieLocal" data-win-options="{ kind: 'round' }" tap="playMovieLocal" style="display: none">
+                <button member="btnPlayMovieLocal" tap="playMovieLocal" style="display: none" title="play movie on this device">
                     <i class="kdp-playlocal"></i>
                 </button>
-                <button member="btnPlayMovie" data-win-options="{ kind: 'round' }" tap="playMovie">
+                <button member="btnResumeMovie" tap="resumeMovie" style="display: none" title="resume movie">
+                    <i class="kdp-refresh"></i>
+                </button>
+                <button member="btnPlayMovie" tap="playMovie" title="play movie">
                     <i class="kdp-play"></i>
                 </button>
             </div>
