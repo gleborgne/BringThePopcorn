@@ -58,14 +58,23 @@ var KodiPassion;
     };
     WinJSContrib.UI.Pages.defaultFragmentMixins.push({
         navdeactivate: function () {
-            this.foWrapper.element.style.opacity = '0.2';
-            this.foWrapper.blurTo(20, 300);
-            return WinJS.Promise.timeout(100);
+            if (this.foWrapper) {
+                this.foWrapper.element.style.opacity = '0.2';
+                this.foWrapper.blurTo(20, 200);
+                return WinJS.Promise.timeout(50);
+            }
+            else {
+                console.error("fowrapper not present");
+            }
         },
         navactivate: function () {
-            this.foWrapper.element.style.opacity = '';
-            this.foWrapper.blurTo(0, 160);
-            return WinJS.Promise.timeout(3000);
+            if (this.foWrapper) {
+                this.foWrapper.element.style.opacity = '';
+                this.foWrapper.blurTo(0, 160);
+            }
+            else {
+                console.error("fowrapper not present");
+            }
         }
     });
     function appInit(args) {
@@ -135,7 +144,7 @@ var KodiPassion;
                 if (fn && typeof fn === "function") {
                     WinJSContrib.UI.tap(item, function (arg) {
                         return fn();
-                    });
+                    }, { tapOnDown: true });
                 }
             }
         };

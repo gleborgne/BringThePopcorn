@@ -309,7 +309,7 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
   font-size: 18pt;
   border: none;
   background-color: transparent;
-  color: rgba(255, 255, 255, 0.8);
+  color: #777777;
   padding: 0;
   box-sizing: border-box;
 }
@@ -322,7 +322,6 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
 }
 .remote-controller .main-menus button {
   margin: 0 10px;
-  color: #12b2e7;
 }
 .remote-controller .main-menus button:first-child {
   margin-left: 0;
