@@ -5,9 +5,36 @@
   width: 100%;
   height: 100%;
 }
+.page-moviesdetail .actions {
+  position: absolute;
+  right: 8px;
+  top: 16px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+.page-moviesdetail .actions button,
+.page-moviesdetail .actions .mcn-elasticbutton {
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+.page-moviesdetail .actions button i,
+.page-moviesdetail .actions .mcn-elasticbutton i {
+  font-size: 18pt;
+}
+.page-moviesdetail .actions button {
+  background-color: #12b2e7;
+  border: 2px solid #12b2e7;
+  color: white;
+}
 .page-moviesdetail header.fanart {
   -ms-grid-column-span: 2;
-  height: 160px;
+  height: 360px;
   position: relative;
 }
 .page-moviesdetail header.fanart .fanart-bg {
@@ -21,41 +48,13 @@
 .page-moviesdetail header.fanart .fanart-bg.imageLoaded {
   opacity: 1;
 }
-.page-moviesdetail header.fanart .actions {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 8px;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-end;
-}
-.page-moviesdetail header.fanart .actions button,
-.page-moviesdetail header.fanart .actions .mcn-elasticbutton {
-  width: 48px;
-  height: 48px;
-  line-height: 48px;
-  text-align: center;
-  margin-right: 8px;
-  border-radius: 50%;
-}
-.page-moviesdetail header.fanart .actions button i,
-.page-moviesdetail header.fanart .actions .mcn-elasticbutton i {
-  font-size: 18pt;
-  color: #12b2e7;
-}
-.page-moviesdetail header.fanart .actions button {
-  background-color: rgba(40, 40, 40, 0.7);
-  border: 2px solid #12b2e7;
-}
 .page-moviesdetail header.poster {
   position: relative;
   -ms-grid-column: 1;
   -ms-grid-row-span: 2;
   box-sizing: border-box;
   padding-left: 40px;
-  padding-top: 110px;
+  padding-top: 40px;
   width: 340px;
   max-width: 30vw;
 }
@@ -71,14 +70,17 @@
   opacity: 1;
 }
 .page-moviesdetail section[role=main] {
-  -ms-grid-row: 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
   -ms-grid-column: 2;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 40px;
+  padding-top: 400px;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 .page-moviesdetail section[role=main] .description .movie-title {
   font-size: 1.8rem;
@@ -93,14 +95,109 @@
   font-size: 1.3rem;
   margin-top: 1em;
 }
+.page-moviesdetail section[role=main] .seasons {
+  margin-top: 1em;
+}
+.page-moviesdetail section[role=main] .seasons-items .season {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid #333;
+}
+.page-moviesdetail section[role=main] .seasons-items .season .season-desc {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.page-moviesdetail section[role=main] .seasons-items .season .season-desc .poster {
+  flex-shrink: 0;
+  width: 93px;
+  height: 140px;
+  margin-right: 10px;
+  background-size: cover;
+  background-position: center;
+}
+.page-moviesdetail section[role=main] .seasons-items .season .season-desc .label {
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+.page-moviesdetail section[role=main] .seasons-items .season:not(.expanded) .season-episodes {
+  display: none;
+}
+.page-moviesdetail section[role=main] .seasons-items .season .season-episodes {
+  padding-left: 40px;
+  margin-top: 10px;
+}
+.page-moviesdetail section[role=main] .episode {
+  margin-bottom: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+}
+.page-moviesdetail section[role=main] .episode .desc {
+  flex: 1;
+}
+.page-moviesdetail section[role=main] .episode .poster {
+  width: 178px;
+  height: 100px;
+  position: relative;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.page-moviesdetail section[role=main] .episode .poster .bg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+.page-moviesdetail section[role=main] .episode .poster .played {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 25px;
+  background-color: gold;
+  color: black;
+}
+.page-moviesdetail section[role=main] .episode .label {
+  font-weight: 500;
+}
+.page-moviesdetail section[role=main] .episode .plot {
+  color: #AAA;
+  font-size: 0.9rem;
+  line-height: 1.2em;
+}
+.page-moviesdetail section[role=main] .episode .actions {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.page-moviesdetail section[role=main] .episode .actions button {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  box-sizing: border-box;
+  margin-left: 10px;
+  border: 2px solid #12b2e7;
+  color: #12b2e7;
+  background-color: transparent;
+  font-size: 18pt;
+}
 .page-moviesdetail.state-medium header.fanart {
   -ms-grid-column: 2;
   -ms-grid-column-span: 1;
+  height: 260px;
 }
 .page-moviesdetail.state-medium header.poster {
-  width: 106px;
+  width: 174px;
   max-width: none;
-  height: 160px;
+  height: 260px;
   padding: 0;
   -ms-grid-column: 1;
   -ms-grid-row-span: 1;
@@ -109,10 +206,44 @@
   background-size: cover;
 }
 .page-moviesdetail.state-medium section[role=main] {
-  -ms-grid-row: 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
+  padding-top: 320px;
+}
+.page-moviesdetail.state-small header.fanart {
+  height: 160px;
+}
+.page-moviesdetail.state-small header.poster {
+  width: 106px;
+  height: 160px;
 }
 .page-moviesdetail.state-small section[role=main] {
   padding: 20px;
+  padding-top: 180px;
+}
+.page-moviesdetail.state-small section[role=main] .seasons-items .season .season-episodes {
+  padding-left: 0;
+}
+.page-moviesdetail.state-xsmall section[role=main] {
+  padding: 20px;
+  padding-top: 180px;
+}
+.page-moviesdetail.state-xsmall section[role=main] .seasons-items .season .season-episodes {
+  padding-left: 0;
+}
+.page-moviesdetail.state-xsmall section[role=main] .episode {
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.page-moviesdetail.state-xsmall section[role=main] .episode .poster {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.page-moviesdetail.state-xsmall section[role=main] .episode .actions {
+  flex-flow: column nowrap;
+}
+.page-moviesdetail.state-xsmall section[role=main] .episode .actions button {
+  margin-bottom: 10px;
 }

@@ -7,7 +7,7 @@
 }
 .tvshowsseriedetail header.fanart {
   -ms-grid-column-span: 2;
-  height: 160px;
+  height: 360px;
   position: relative;
 }
 .tvshowsseriedetail header.fanart .fanart-bg {
@@ -55,7 +55,7 @@
   -ms-grid-row-span: 2;
   box-sizing: border-box;
   padding-left: 40px;
-  padding-top: 110px;
+  padding-top: 40px;
   width: 340px;
   max-width: 30vw;
 }
@@ -71,14 +71,17 @@
   opacity: 1;
 }
 .tvshowsseriedetail section[role=main] {
-  -ms-grid-row: 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
   -ms-grid-column: 2;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 40px;
+  padding-top: 400px;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 .tvshowsseriedetail section[role=main] .description .movie-title {
   font-size: 1.8rem;
@@ -190,11 +193,12 @@
 .tvshowsseriedetail.state-medium header.fanart {
   -ms-grid-column: 2;
   -ms-grid-column-span: 1;
+  height: 260px;
 }
 .tvshowsseriedetail.state-medium header.poster {
-  width: 106px;
+  width: 174px;
   max-width: none;
-  height: 160px;
+  height: 260px;
   padding: 0;
   -ms-grid-column: 1;
   -ms-grid-row-span: 1;
@@ -203,27 +207,44 @@
   background-size: cover;
 }
 .tvshowsseriedetail.state-medium section[role=main] {
-  -ms-grid-row: 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
+  padding-top: 320px;
+}
+.tvshowsseriedetail.state-small header.fanart {
+  height: 160px;
+}
+.tvshowsseriedetail.state-small header.poster {
+  width: 106px;
+  height: 160px;
 }
 .tvshowsseriedetail.state-small section[role=main] {
   padding: 20px;
+  padding-top: 180px;
 }
 .tvshowsseriedetail.state-small section[role=main] .seasons-items .season .season-episodes {
   padding-left: 0;
 }
-.tvshowsseriedetail.state-small section[role=main] .episode {
+.tvshowsseriedetail.state-xsmall section[role=main] {
+  padding: 20px;
+  padding-top: 180px;
+}
+.tvshowsseriedetail.state-xsmall section[role=main] .seasons-items .season .season-episodes {
+  padding-left: 0;
+}
+.tvshowsseriedetail.state-xsmall section[role=main] .episode {
   flex-wrap: wrap;
   margin-top: 10px;
 }
-.tvshowsseriedetail.state-small section[role=main] .episode .poster {
+.tvshowsseriedetail.state-xsmall section[role=main] .episode .poster {
   width: 100%;
   margin-bottom: 10px;
 }
-.tvshowsseriedetail.state-small section[role=main] .episode .actions {
+.tvshowsseriedetail.state-xsmall section[role=main] .episode .actions {
   flex-flow: column nowrap;
 }
-.tvshowsseriedetail.state-small section[role=main] .episode .actions button {
+.tvshowsseriedetail.state-xsmall section[role=main] .episode .actions button {
   margin-bottom: 10px;
 }

@@ -727,19 +727,24 @@
                             cancelAnimationFrame(navigator.layoutProcess);
                             navigator.layoutProcess = requestAnimationFrame(function () {
                                 var vw = appView ? appView.value : null;
-                                if (control.__checkLayout) {
-                                    control.__checkLayout(element, vw, navigator._lastViewstate);
-                                }
-                                else {
-                                    if (control.updateLayout) {
-                                        control.updateLayout.call(control, element, vw, navigator._lastViewstate);
-                                    }
-                                    var layoutCtrls = element.querySelectorAll('.mcn-layout-ctrl');
-                                    if (layoutCtrls && layoutCtrls.length) {
-                                        for (var i = 0 ; i < layoutCtrls.length; i++) {
-                                            var ctrl = layoutCtrls[i].winControl;
-                                            if (ctrl.updateLayout)
-                                                ctrl.updateLayout(ctrl.element, vw, navigator._lastViewstate);
+                                for (var i = 0, l = navigator.element.children.length; i < l; i++) {
+                                    var control = navigator.element.children[i].winControl;
+                                    if (control) {
+                                        if (control.__checkLayout) {
+                                            control.__checkLayout(element, vw, navigator._lastViewstate);
+                                        }
+                                        else {
+                                            if (control.updateLayout) {
+                                                control.updateLayout.call(control, element, vw, navigator._lastViewstate);
+                                            }
+                                            var layoutCtrls = element.querySelectorAll('.mcn-layout-ctrl');
+                                            if (layoutCtrls && layoutCtrls.length) {
+                                                for (var i = 0 ; i < layoutCtrls.length; i++) {
+                                                    var ctrl = layoutCtrls[i].winControl;
+                                                    if (ctrl.updateLayout)
+                                                        ctrl.updateLayout(ctrl.element, vw, navigator._lastViewstate);
+                                                }
+                                            }
                                         }
                                     }
                                 }

@@ -4,13 +4,19 @@
         public static url = "/pages/tvshows/seriedetail/tvshowsseriedetail.html";
 
         element: HTMLElement;
+        eventTracker: WinJSContrib.UI.EventTracker;
         seasonsItems: HTMLElement;
         seasonTemplate: WinJS.Binding.Template;
         episodeTemplate: WinJS.Binding.Template;
         tvshow: Kodi.API.Videos.TVShows.TVShow;
         btnDownloadMovie: HTMLElement;
         btnPlayMovieLocal: HTMLElement;
+        headerbanner: HTMLElement;
+        headerposter: HTMLElement;
         seasonsPromise: WinJS.Promise<Kodi.API.Videos.TVShows.SeasonsResultSet>;
+        visualstate: any;
+        scrollContainer: HTMLElement;
+        scrollDelay: number;
 
         init(element, options) {
             this.tvshow = options.tvshow;
@@ -28,7 +34,37 @@
         }
 
         processed(element, options) {
+            this.eventTracker.addEvent(this.scrollContainer, "scroll", () => {
+                cancelAnimationFrame(this.scrollDelay);
+                this.scrollDelay = requestAnimationFrame(() => {
+                    this.checkScroll();
+                });
+            });
             return WinJS.Binding.processAll(element.querySelector('.tvshowsseriedetail'), options.tvshow);
+        }
+
+        checkScroll() {
+            var h = this.headerbanner.clientHeight;
+            var posterinbanner = this.visualstate.states.medium.active;
+            if (!posterinbanner && this.headerposter.style.opacity) {
+                this.headerposter.style.opacity = '';
+            }
+                
+            var dif = (h - this.scrollContainer.scrollTop);
+            if (dif < 0) {
+                if (this.headerbanner.style.opacity != '0') {
+                    this.headerbanner.style.opacity = '0';                    
+                }
+                if (posterinbanner && this.headerposter.style.opacity != '0') {
+                    this.headerposter.style.opacity = '0';
+                }
+            } else {
+                var val = (dif / h) + '';
+                this.headerbanner.style.opacity = val;
+                if (posterinbanner) {
+                    this.headerposter.style.opacity = val;
+                }
+            }
         }
 
         ready(element, options) {
@@ -112,6 +148,10 @@
             WinJSContrib.UI.tap(btnplaylocal, () => {
                 return Kodi.App.playLocalMedia(episode.file);
             });
+        }
+
+        updateLayout() {
+            this.checkScroll();
         }
     }
 

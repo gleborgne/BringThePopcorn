@@ -21,7 +21,37 @@ var KodiPassion;
                     });
                 };
                 TvShowsDetailPage.prototype.processed = function (element, options) {
+                    var _this = this;
+                    this.eventTracker.addEvent(this.scrollContainer, "scroll", function () {
+                        cancelAnimationFrame(_this.scrollDelay);
+                        _this.scrollDelay = requestAnimationFrame(function () {
+                            _this.checkScroll();
+                        });
+                    });
                     return WinJS.Binding.processAll(element.querySelector('.tvshowsseriedetail'), options.tvshow);
+                };
+                TvShowsDetailPage.prototype.checkScroll = function () {
+                    var h = this.headerbanner.clientHeight;
+                    var posterinbanner = this.visualstate.states.medium.active;
+                    if (!posterinbanner && this.headerposter.style.opacity) {
+                        this.headerposter.style.opacity = '';
+                    }
+                    var dif = (h - this.scrollContainer.scrollTop);
+                    if (dif < 0) {
+                        if (this.headerbanner.style.opacity != '0') {
+                            this.headerbanner.style.opacity = '0';
+                        }
+                        if (posterinbanner && this.headerposter.style.opacity != '0') {
+                            this.headerposter.style.opacity = '0';
+                        }
+                    }
+                    else {
+                        var val = (dif / h) + '';
+                        this.headerbanner.style.opacity = val;
+                        if (posterinbanner) {
+                            this.headerposter.style.opacity = val;
+                        }
+                    }
                 };
                 TvShowsDetailPage.prototype.ready = function (element, options) {
                     var _this = this;
@@ -99,6 +129,9 @@ var KodiPassion;
                     WinJSContrib.UI.tap(btnplaylocal, function () {
                         return Kodi.App.playLocalMedia(episode.file);
                     });
+                };
+                TvShowsDetailPage.prototype.updateLayout = function () {
+                    this.checkScroll();
                 };
                 TvShowsDetailPage.url = "/pages/tvshows/seriedetail/tvshowsseriedetail.html";
                 return TvShowsDetailPage;

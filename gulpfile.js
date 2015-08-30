@@ -89,7 +89,8 @@ gulp.task('compilewinjscontrib', function () {
             'scripts/winjscontrib/js/winjscontrib.ui.multipass-renderer.js',
             'scripts/winjscontrib/js/winjscontrib.ui.grid.js',
             'scripts/winjscontrib/js/winjscontrib.ui.datasourcemanager.js',
-            'scripts/winjscontrib/js/winjscontrib.ui.aspectratio.js',
+            //'scripts/winjscontrib/js/winjscontrib.ui.aspectratio.js',
+            //'scripts/winjscontrib/js/winjscontrib.ui.visualstate.js',
             
         ], { base: '.', cwd: 'KodiPassion' })
 	    .pipe(plumber({ errorHandler: onError }))

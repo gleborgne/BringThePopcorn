@@ -16,19 +16,19 @@
         .sectiontitle-item {
             height: 100%;
             box-sizing: border-box;
-            padding : 0 20px;
+            padding: 0 20px;
             min-width: 25%;
             text-transform: uppercase;
             .hflex();
-            border-right : 1px solid #222;
+            border-right: 1px solid #222;
 
-            i{
+            i {
                 display: block;
                 width: 40px;
             }
         }
 
-        .stretch{
+        .stretch {
             flex: 1;
         }
     }
@@ -36,11 +36,6 @@
     .mainbloc {
         -ms-grid-column: 1;
         -ms-grid-row: 1;
-
-        .mainsplitview {
-            width: 100%;
-            height: 600px;
-        }
     }
 
     .secondbloc {
@@ -53,6 +48,31 @@
         -ms-grid-row-span: 2;
     }
 
+    .mainsplitview {
+        width: 100%;
+        height: 60px;
+
+        .win-navbutton {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: @kodiBlue;
+            width: auto;
+            cursor: pointer;
+            font-size : 20pt;
+            height: 48px;
+
+            &.win-navleft{
+                padding-left: 20px;
+                padding-right: 10px;
+            }
+
+            &.win-navright{
+                right : 0;
+                left: auto;
+                padding-right: 20px;
+                padding-left: 10px;
+            }
+        }
+    }
 
     .movie-splitview {
         width: 100%;
@@ -72,16 +92,57 @@
         .content {
             h3 {
                 background-color: gold;
-                padding: 4px 24px;
+                padding: 0.2em 0.4em 0.2em 1.5em;
+                margin-top: 7%;
                 display: inline-block;
                 color: black;
                 font-size: 2.5rem;
                 font-weight: 400;
-                max-width: 90%;
+                max-width: 70%;
             }
         }
     }
 
-    .tvshowlistview{
-    }    
+    .tvshowlistview {
+    }
+}
+
+html.win-hoverable .page-home .win-flipview .win-navbutton:hover{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+@media screen and (max-width: 1024px) {
+    .page-home {
+        .movie-splitview {
+            .content {
+                h3 {
+                    font-size: 2.2rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .page-home {
+        .movie-splitview {
+            .content {
+                h3 {
+                    font-size: 1.9rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .page-home {
+        .movie-splitview {
+            .content {
+                h3 {
+                    font-size: 1.6rem;
+                }
+            }
+        }
+    }
 }

@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="page-home" >
-        <div data-win-control="WinJSContrib.UI.AspectRatio" data-win-options="{ ratio: Kodi.App.PictureRatios.fanart, max: 90, prefix: '.page-home', target: '.mainbloc .mainsplitview'}"></div>
-        <div data-win-control="WinJSContrib.UI.AspectRatio" data-win-options="{ ratio: Kodi.App.PictureRatios.tvshowepisode, prefix: '.page-home', target: '.tvshow-episode'}"></div>
-<div class="mainbloc">            
+        <div data-win-control="WinJSContrib.UI.AspectRatio" data-win-options="{ ratio: Kodi.App.PictureRatios.fanart, max: 90, prefix: '.page-home', target: '.mainsplitview'}"></div>
+        <div data-win-control="WinJSContrib.UI.AspectRatio" data-win-options="{ ratio: Kodi.App.PictureRatios.tvshowepisode, baseWidth: 500, prefix: '.page-home', target: '.tvshow-episode'}"></div>
+        <div class="mainbloc">            
             <div class="mainsplitview" member="mainsplitview" data-win-control="WinJS.UI.FlipView"></div>
             <div class="sectiontitle">
                 <div class="sectiontitle-item stretch" linkto="/pages/movies/list/movieslist.html">
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="secondbloc">
-            <div class="tvshowlistview no-itemsmargin" member="tvshowslist" data-win-control="WinJSContrib.UI.GridControl" data-win-options="{ layout : 'flexvertical'}"></div>
+            <div class="mainsplitview" member="tvshowsflipview" data-win-control="WinJS.UI.FlipView"></div>
             <div class="sectiontitle">
                 <div class="sectiontitle-item stretch" linkto="/pages/tvshows/list/tvshowslist.html">
                     <i class="kdp-movie"></i>

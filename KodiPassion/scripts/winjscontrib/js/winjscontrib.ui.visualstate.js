@@ -54,8 +54,10 @@
                     evaluate = evaluate && targetH < state.hLt;
 
                 if (evaluate) {
+                    state.active = true;
                     target.classList.add("state-" + name);
                 } else {
+                    state.active = false;
                     target.classList.remove("state-" + name);
                 }
             },

@@ -9,32 +9,20 @@
 </head>
 <body>
     <div class="page-moviesdetail">
-        <div data-win-control="WinJSContrib.UI.VisualState" data-win-options="{states:{
+        <div data-win-control="WinJSContrib.UI.VisualState" member="visualstate" data-win-options="{states:{
                 medium : { wLt: 1024 },
                 small : { wLt: 800 },
+                xsmall : { wLt: 700 },
              }}"></div>
-        <header role="banner" class="fanart">
+        <header role="banner" member="headerbanner" class="fanart">
             <div class="fanart-bg" data-win-bind="display: fanart Kodi.Utils.toThumbnailBg"></div>
-            <div class="actions">
-                <button member="btnDownloadMovie" tap="downloadMovie" style="display: none" title="download movie">
-                    <i class="kdp-download"></i>
-                </button>
-                <button member="btnPlayMovieLocal" tap="playMovieLocal" style="display: none" title="play movie on this device">
-                    <i class="kdp-playlocal"></i>
-                </button>
-                <button member="btnResumeMovie" tap="resumeMovie" style="display: none" title="resume movie">
-                    <i class="kdp-refresh"></i>
-                </button>
-                <button member="btnPlayMovie" tap="playMovie" title="play movie">
-                    <i class="kdp-play"></i>
-                </button>
-            </div>
+            
         </header>
-        <header role="banner" class="poster">
+        <header role="banner" member="headerposter" class="poster">
             <div class="poster" data-win-bind="display: art.poster Kodi.Utils.toThumbnailBg"></div>
         </header>
 
-        <section class="page-section" aria-label="Main content" role="main">
+        <section class="page-section" member="scrollContainer" aria-label="Main content" role="main">
 
             <div class="description">
                 <div class="moviedetails">
@@ -45,6 +33,20 @@
             </div>
 
         </section>
+        <div class="actions">
+            <button member="btnDownloadMovie" tap="downloadMovie" style="display: none" title="download movie">
+                <i class="kdp-download"></i>
+            </button>
+            <button member="btnPlayMovieLocal" tap="playMovieLocal" style="display: none" title="play movie on this device">
+                <i class="kdp-playlocal"></i>
+            </button>
+            <button member="btnResumeMovie" tap="resumeMovie" style="display: none" title="resume movie">
+                <i class="kdp-refresh"></i>
+            </button>
+            <button member="btnPlayMovie" tap="playMovie" title="play movie">
+                <i class="kdp-play"></i>
+            </button>
+        </div>
     </div>
 </body>
 </html>
