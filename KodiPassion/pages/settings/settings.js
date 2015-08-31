@@ -9,6 +9,9 @@ var KodiPassion;
                 }
                 SettingsPage.prototype.processed = function (element, options) {
                 };
+                SettingsPage.prototype.pageNavActivate = function () {
+                    this.serversettings.renderSettings();
+                };
                 SettingsPage.url = "/pages/settings/settings.html";
                 return SettingsPage;
             })();

@@ -3,9 +3,11 @@
     export class HomePage {
         public static url = "/pages/home/home.html";
         element: HTMLElement;
+        eventTracker: WinJSContrib.UI.EventTracker;
         flipviewtemplate: WinJS.Binding.Template;        
         mainsplitview: WinJS.UI.FlipView<any>;
         tvshowsflipview: WinJS.UI.FlipView<any>;
+        allowAutoFlip: boolean = true;
         
         processed(element, options) {
             var page = this;
@@ -14,7 +16,11 @@
             //        console.log("kodi api details at " + file.path);
             //        return Windows.Storage.FileIO.writeTextAsync(file, JSON.stringify(api));
             //    });
-            //});            
+            //});        
+            var registerpointerdown = page.eventTracker.addEvent(page.element, "pointerdown", () => {
+                this.allowAutoFlip = false;
+                registerpointerdown();
+            }, true);
 
             Kodi.Data.loadRootData().then((data) => {
                 this.loadMovies(data);
@@ -22,56 +28,100 @@
             });
         }
 
-        loadMovies(data: Kodi.Data.IMediaLibrary) {
-            this.flipviewtemplate = new WinJS.Binding.Template(null, { href: '/templates/moviesplitview.html', extractChild: true });
-            this.mainsplitview.itemTemplate = (itemPromise) => {
-                return itemPromise.then((item) => {
-                    return this.flipviewtemplate.render(item.data).then((rendered) => {
-                        WinJSContrib.UI.tap(rendered, (elt) => {
-                            if (!this.element.classList.contains("inactive")) {
-                                WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true });
-                            }
-                        }, { disableAnimation: true })
-                        return rendered;
-                    });
-                })
+        flipMovies() {
+            if (this.allowAutoFlip) {
+                this.mainsplitview.itemDataSource.getCount().then((nbitems) => {
+                    if (this.mainsplitview.currentPage < nbitems-1) {
+                        this.mainsplitview.currentPage = this.mainsplitview.currentPage + 1;
+                    } else {
+                        this.mainsplitview.currentPage = 0;
+                    }
+                });
+                setTimeout(() => {
+                    this.flipMovies();
+                }, 7000);
             }
-            var movies = {};
-            data.recentMovies.movies.forEach((e) => {
-                if (!e.lastplayed) {
-                    movies[e.movieid] = true;
-                }
-            });
+        }
 
-            var movieslist = data.movies.movies.sort(this.getSortFunction(movies, "movieid"));    
-            
-            this.mainsplitview.itemDataSource = new WinJS.Binding.List(movieslist).dataSource;
+        flipTvshows() {
+            if (this.allowAutoFlip) {
+                this.tvshowsflipview.itemDataSource.getCount().then((nbitems) => {
+                    if (this.tvshowsflipview.currentPage < nbitems-1) {
+                        this.tvshowsflipview.currentPage = this.tvshowsflipview.currentPage + 1;
+                    } else {
+                        this.tvshowsflipview.currentPage = 0;
+                    }
+                });
+                setTimeout(() => {
+                    this.flipTvshows();
+                }, 7000);
+            }
+        }
+
+        loadMovies(data: Kodi.Data.IMediaLibrary) {
+            if (data.movies && data.movies.movies) {
+                this.flipviewtemplate = new WinJS.Binding.Template(null, { href: '/templates/moviesplitview.html', extractChild: true });
+                this.mainsplitview.itemTemplate = (itemPromise) => {
+                    return itemPromise.then((item) => {
+                        return this.flipviewtemplate.render(item.data).then((rendered) => {
+                            WinJSContrib.UI.tap(rendered, (elt) => {
+                                if (!this.element.classList.contains("inactive")) {
+                                    WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true });
+                                }
+                            }, { disableAnimation: true })
+                            return rendered;
+                        });
+                    })
+                }
+                var movies = {};
+                if (data.recentMovies && data.recentMovies.movies) {
+                    data.recentMovies.movies.forEach((e) => {
+                        if (!e.lastplayed) {
+                            movies[e.movieid] = true;
+                        }
+                    });
+                }
+
+                var movieslist = data.movies.movies.sort(this.getSortFunction(movies, "movieid"));
+
+                this.mainsplitview.itemDataSource = new WinJS.Binding.List(movieslist).dataSource;
+
+                setTimeout(() => {
+                    this.flipMovies();
+                }, 5000);
+            } else {
+            }
         }
 
         loadTvshows(data: Kodi.Data.IMediaLibrary) {
-            this.tvshowsflipview.itemTemplate = (itemPromise) => {
-                return itemPromise.then((item) => {
-                    return this.flipviewtemplate.render(item.data).then((rendered) => {
-                        WinJSContrib.UI.tap(rendered, (elt) => {
-                            if (!this.element.classList.contains("inactive")) {
-                                WinJS.Navigation.navigate("/pages/tvshows/seriedetail/tvshowsseriedetail.html", { tvshow: item.data, navigateStacked: true });
-                            }
-                        }, { disableAnimation: true })
-                        return rendered;
-                    });
-                })
-            }
-
-            var tvshows = {};
-            data.tvshowRecentEpisodes.episodes.forEach((e) => {
-                if (!e.lastplayed && !tvshows[e.tvshowid]) {
-                    tvshows[e.tvshowid] = true;
+            if (data.tvshows && data.tvshows.tvshows) {
+                this.tvshowsflipview.itemTemplate = (itemPromise) => {
+                    return itemPromise.then((item) => {
+                        return this.flipviewtemplate.render(item.data).then((rendered) => {
+                            WinJSContrib.UI.tap(rendered, (elt) => {
+                                if (!this.element.classList.contains("inactive")) {
+                                    WinJS.Navigation.navigate("/pages/tvshows/seriedetail/tvshowsseriedetail.html", { tvshow: item.data, navigateStacked: true });
+                                }
+                            }, { disableAnimation: true })
+                            return rendered;
+                        });
+                    })
                 }
-            });
 
-            var tvshowslist = data.tvshows.tvshows.sort(this.getSortFunction(tvshows, "tvshowid"));            
+                var tvshows = {};
+                data.tvshowRecentEpisodes.episodes.forEach((e) => {
+                    if (!e.lastplayed && !tvshows[e.tvshowid]) {
+                        tvshows[e.tvshowid] = true;
+                    }
+                });
 
-            this.tvshowsflipview.itemDataSource = new WinJS.Binding.List(tvshowslist).dataSource;
+                var tvshowslist = data.tvshows.tvshows.sort(this.getSortFunction(tvshows, "tvshowid"));
+
+                this.tvshowsflipview.itemDataSource = new WinJS.Binding.List(tvshowslist).dataSource;
+                setTimeout(() => {
+                    this.flipTvshows();
+                }, 7000);
+            }
         }
 
         loadAlbums(data: Kodi.Data.IMediaLibrary) {
@@ -110,6 +160,10 @@
                     return 1;
                 }
             }
+        }
+
+        unload() {
+            this.allowAutoFlip = false;
         }
     }
 

@@ -81,6 +81,9 @@ module KodiPassion{
             } else {
                 console.error("fowrapper not present");
             }
+            if (this.pageNavDeactivate) {
+                this.pageNavDeactivate();
+            }
         },
 
         navactivate: function () {
@@ -90,6 +93,9 @@ module KodiPassion{
                 //return WinJS.Promise.timeout(3000);
             } else {
                 console.error("fowrapper not present");
+            }
+            if (this.pageNavActivate) {
+                this.pageNavActivate();
             }
         }
     });

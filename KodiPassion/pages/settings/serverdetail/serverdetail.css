@@ -10,3 +10,13 @@
   border: none;
   background-color: transparent;
 }
+@media screen and (max-width: 1024px) {
+  .page-serverdetail {
+    padding: 40px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .page-serverdetail {
+    padding: 20px;
+  }
+}

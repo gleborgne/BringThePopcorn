@@ -66,6 +66,9 @@ var KodiPassion;
             else {
                 console.error("fowrapper not present");
             }
+            if (this.pageNavDeactivate) {
+                this.pageNavDeactivate();
+            }
         },
         navactivate: function () {
             if (this.foWrapper) {
@@ -74,6 +77,9 @@ var KodiPassion;
             }
             else {
                 console.error("fowrapper not present");
+            }
+            if (this.pageNavActivate) {
+                this.pageNavActivate();
             }
         }
     });

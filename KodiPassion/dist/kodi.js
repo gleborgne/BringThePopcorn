@@ -797,8 +797,8 @@ var Kodi;
 (function (Kodi) {
     var WOL;
     (function (WOL) {
-        function wakeUp(host, macAddress) {
-            host = '255.255.255.255';
+        function wakeUp(macAddress) {
+            var host = '255.255.255.255';
             //host = '192.168.1.255';
             return WinJS.Promise.join([
                 doWakeUp(host, '7', macAddress),

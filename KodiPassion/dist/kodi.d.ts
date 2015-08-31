@@ -187,7 +187,7 @@ declare module Kodi.Utils {
 }
 
 declare module Kodi.WOL {
-    function wakeUp(host: any, macAddress: any): WinJS.IPromise<any>;
+    function wakeUp(macAddress: string[]): WinJS.IPromise<any>;
 }
 
 declare module Kodi.API.Input {

@@ -10,11 +10,12 @@
 .page-startup .content {
   -ms-grid-column-align: center;
   width: 600px;
-  max-width: 90%;
-  padding-bottom: 40px;
+  max-width: 100%;
+  padding: 40px;
+  box-sizing: border-box;
 }
 .page-startup .content .logo {
-  margin-top: 120px;
+  margin-top: 80px;
 }
 .page-startup .content .logo img {
   width: 100%;

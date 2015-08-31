@@ -39,5 +39,26 @@
                 -ms-grid-column: 2;
             }
         }
+
+        .field5{
+            display: -ms-grid;
+            -ms-grid-columns: 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr;
+            -ms-grid-rows: auto;
+            > input:nth-child(2) {
+                -ms-grid-column: 3;
+            }
+
+            > input:nth-child(3) {
+                -ms-grid-column: 5;
+            }
+
+            > input:nth-child(4) {
+                -ms-grid-column: 7;
+            }
+
+            > input:nth-child(5) {
+                -ms-grid-column: 9;
+            }
+        }
     }
 }

@@ -3,8 +3,13 @@
         public static url = "/pages/settings/settings.html";
 
         availablesettings: HTMLElement;
+        serversettings: KodiPassion.UI.SettingsListControl;
 
         processed(element, options) {
+        }
+
+        pageNavActivate() {
+            this.serversettings.renderSettings();
         }
     }
 

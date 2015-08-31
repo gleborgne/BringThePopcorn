@@ -6,6 +6,7 @@ var KodiPassion;
         (function (Pages) {
             var HomePage = (function () {
                 function HomePage() {
+                    this.allowAutoFlip = true;
                 }
                 HomePage.prototype.processed = function (element, options) {
                     var _this = this;
@@ -15,58 +16,108 @@ var KodiPassion;
                     //        console.log("kodi api details at " + file.path);
                     //        return Windows.Storage.FileIO.writeTextAsync(file, JSON.stringify(api));
                     //    });
-                    //});            
+                    //});        
+                    var registerpointerdown = page.eventTracker.addEvent(page.element, "pointerdown", function () {
+                        _this.allowAutoFlip = false;
+                        registerpointerdown();
+                    }, true);
                     Kodi.Data.loadRootData().then(function (data) {
                         _this.loadMovies(data);
                         _this.loadTvshows(data);
                     });
                 };
+                HomePage.prototype.flipMovies = function () {
+                    var _this = this;
+                    if (this.allowAutoFlip) {
+                        this.mainsplitview.itemDataSource.getCount().then(function (nbitems) {
+                            if (_this.mainsplitview.currentPage < nbitems - 1) {
+                                _this.mainsplitview.currentPage = _this.mainsplitview.currentPage + 1;
+                            }
+                            else {
+                                _this.mainsplitview.currentPage = 0;
+                            }
+                        });
+                        setTimeout(function () {
+                            _this.flipMovies();
+                        }, 7000);
+                    }
+                };
+                HomePage.prototype.flipTvshows = function () {
+                    var _this = this;
+                    if (this.allowAutoFlip) {
+                        this.tvshowsflipview.itemDataSource.getCount().then(function (nbitems) {
+                            if (_this.tvshowsflipview.currentPage < nbitems - 1) {
+                                _this.tvshowsflipview.currentPage = _this.tvshowsflipview.currentPage + 1;
+                            }
+                            else {
+                                _this.tvshowsflipview.currentPage = 0;
+                            }
+                        });
+                        setTimeout(function () {
+                            _this.flipTvshows();
+                        }, 7000);
+                    }
+                };
                 HomePage.prototype.loadMovies = function (data) {
                     var _this = this;
-                    this.flipviewtemplate = new WinJS.Binding.Template(null, { href: '/templates/moviesplitview.html', extractChild: true });
-                    this.mainsplitview.itemTemplate = function (itemPromise) {
-                        return itemPromise.then(function (item) {
-                            return _this.flipviewtemplate.render(item.data).then(function (rendered) {
-                                WinJSContrib.UI.tap(rendered, function (elt) {
-                                    if (!_this.element.classList.contains("inactive")) {
-                                        WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true });
-                                    }
-                                }, { disableAnimation: true });
-                                return rendered;
+                    if (data.movies && data.movies.movies) {
+                        this.flipviewtemplate = new WinJS.Binding.Template(null, { href: '/templates/moviesplitview.html', extractChild: true });
+                        this.mainsplitview.itemTemplate = function (itemPromise) {
+                            return itemPromise.then(function (item) {
+                                return _this.flipviewtemplate.render(item.data).then(function (rendered) {
+                                    WinJSContrib.UI.tap(rendered, function (elt) {
+                                        if (!_this.element.classList.contains("inactive")) {
+                                            WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true });
+                                        }
+                                    }, { disableAnimation: true });
+                                    return rendered;
+                                });
                             });
-                        });
-                    };
-                    var movies = {};
-                    data.recentMovies.movies.forEach(function (e) {
-                        if (!e.lastplayed) {
-                            movies[e.movieid] = true;
+                        };
+                        var movies = {};
+                        if (data.recentMovies && data.recentMovies.movies) {
+                            data.recentMovies.movies.forEach(function (e) {
+                                if (!e.lastplayed) {
+                                    movies[e.movieid] = true;
+                                }
+                            });
                         }
-                    });
-                    var movieslist = data.movies.movies.sort(this.getSortFunction(movies, "movieid"));
-                    this.mainsplitview.itemDataSource = new WinJS.Binding.List(movieslist).dataSource;
+                        var movieslist = data.movies.movies.sort(this.getSortFunction(movies, "movieid"));
+                        this.mainsplitview.itemDataSource = new WinJS.Binding.List(movieslist).dataSource;
+                        setTimeout(function () {
+                            _this.flipMovies();
+                        }, 5000);
+                    }
+                    else {
+                    }
                 };
                 HomePage.prototype.loadTvshows = function (data) {
                     var _this = this;
-                    this.tvshowsflipview.itemTemplate = function (itemPromise) {
-                        return itemPromise.then(function (item) {
-                            return _this.flipviewtemplate.render(item.data).then(function (rendered) {
-                                WinJSContrib.UI.tap(rendered, function (elt) {
-                                    if (!_this.element.classList.contains("inactive")) {
-                                        WinJS.Navigation.navigate("/pages/tvshows/seriedetail/tvshowsseriedetail.html", { tvshow: item.data, navigateStacked: true });
-                                    }
-                                }, { disableAnimation: true });
-                                return rendered;
+                    if (data.tvshows && data.tvshows.tvshows) {
+                        this.tvshowsflipview.itemTemplate = function (itemPromise) {
+                            return itemPromise.then(function (item) {
+                                return _this.flipviewtemplate.render(item.data).then(function (rendered) {
+                                    WinJSContrib.UI.tap(rendered, function (elt) {
+                                        if (!_this.element.classList.contains("inactive")) {
+                                            WinJS.Navigation.navigate("/pages/tvshows/seriedetail/tvshowsseriedetail.html", { tvshow: item.data, navigateStacked: true });
+                                        }
+                                    }, { disableAnimation: true });
+                                    return rendered;
+                                });
                             });
+                        };
+                        var tvshows = {};
+                        data.tvshowRecentEpisodes.episodes.forEach(function (e) {
+                            if (!e.lastplayed && !tvshows[e.tvshowid]) {
+                                tvshows[e.tvshowid] = true;
+                            }
                         });
-                    };
-                    var tvshows = {};
-                    data.tvshowRecentEpisodes.episodes.forEach(function (e) {
-                        if (!e.lastplayed && !tvshows[e.tvshowid]) {
-                            tvshows[e.tvshowid] = true;
-                        }
-                    });
-                    var tvshowslist = data.tvshows.tvshows.sort(this.getSortFunction(tvshows, "tvshowid"));
-                    this.tvshowsflipview.itemDataSource = new WinJS.Binding.List(tvshowslist).dataSource;
+                        var tvshowslist = data.tvshows.tvshows.sort(this.getSortFunction(tvshows, "tvshowid"));
+                        this.tvshowsflipview.itemDataSource = new WinJS.Binding.List(tvshowslist).dataSource;
+                        setTimeout(function () {
+                            _this.flipTvshows();
+                        }, 7000);
+                    }
                 };
                 HomePage.prototype.loadAlbums = function (data) {
                 };
@@ -99,6 +150,9 @@ var KodiPassion;
                             return 1;
                         }
                     };
+                };
+                HomePage.prototype.unload = function () {
+                    this.allowAutoFlip = false;
                 };
                 HomePage.url = "/pages/home/home.html";
                 return HomePage;

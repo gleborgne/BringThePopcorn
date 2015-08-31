@@ -8,6 +8,15 @@ var KodiPassion;
                 function StartUpPage() {
                 }
                 StartUpPage.prototype.processed = function (element, options) {
+                    var _this = this;
+                    this.eventTracker.addEvent(this.serversettings, "settingslistmessage", function (arg) {
+                        if (arg.detail.message) {
+                            _this.messages.innerHTML = arg.detail.message;
+                        }
+                    });
+                };
+                StartUpPage.prototype.pageNavActivate = function () {
+                    this.serversettings.renderSettings();
                 };
                 StartUpPage.url = "/pages/startup/startup.html";
                 return StartUpPage;

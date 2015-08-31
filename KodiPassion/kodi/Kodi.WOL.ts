@@ -1,6 +1,6 @@
 ﻿module Kodi.WOL {
-    export function wakeUp(host, macAddress) {
-        host = '255.255.255.255';
+    export function wakeUp(macAddress: string[]) {
+        var host = '255.255.255.255';
 
         //host = '192.168.1.255';
         return WinJS.Promise.join([
@@ -9,7 +9,7 @@
         ]);
     }
     
-    function doWakeUp(host, service, macAddress) {
+    function doWakeUp(host: string, service, macAddress: string[]) {
         return new WinJS.Promise(function (complete, error) {
             var hostName;
             try {

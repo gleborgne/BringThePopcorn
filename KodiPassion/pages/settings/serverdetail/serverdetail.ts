@@ -4,8 +4,14 @@
         public static url = "/pages/settings/serverdetail/serverdetail.html";
 
         setting: Kodi.Settings.KodiServerSetting;
+        
         settingName: string;
+        makedefault: HTMLInputElement;
         settingsForm: any;
+
+        get isDefault(): boolean {
+            return this.makedefault.checked;
+        }
 
         processed(element, options) {
             this.settingName = options.setting;
@@ -15,7 +21,7 @@
 
         saveSetting() {
             if (this.settingsForm.validate()) {
-                Kodi.Settings.save(this.settingName || this.settingsForm.setting.name, this.settingsForm.setting, false);
+                Kodi.Settings.save(this.settingName || this.settingsForm.setting.name, this.settingsForm.setting, this.isDefault);
                 WinJS.Navigation.back();
             }
         }
