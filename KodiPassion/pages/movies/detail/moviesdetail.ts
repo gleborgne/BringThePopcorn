@@ -42,7 +42,7 @@
                 var e = err;
             });
 
-            this.renderCast();
+            
             var p = [];
             var bindables = this.element.querySelectorAll(".moviebinding");
             for (var i = 0, l = bindables.length; i < l; i++) {
@@ -51,18 +51,28 @@
             return WinJS.Promise.join(p);
         }
 
+        ready(element, options) {
+            setTimeout(() => {
+                this.renderCast();
+            }, 400);
+        }
+
         renderCast() {
             var template = new WinJS.Binding.Template(null, { href: '/templates/actor.html', extractChild: true });
             var container = document.createDocumentFragment();
             var p = [];
+            var items = [];
             this.movie.cast.forEach((c) => {
                 p.push(template.render(c).then((rendered) => {
+                    rendered.style.opacity = '0';
+                    items.push(rendered);
                     container.appendChild(rendered);
                 }));
             });
 
             WinJS.Promise.join(p).then(() => {
                 this.castItems.appendChild(container);
+                WinJS.UI.Animation.enterPage(items);
             });
         }
 

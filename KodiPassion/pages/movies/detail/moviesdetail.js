@@ -30,7 +30,6 @@ var KodiPassion;
                     }, function (err) {
                         var e = err;
                     });
-                    this.renderCast();
                     var p = [];
                     var bindables = this.element.querySelectorAll(".moviebinding");
                     for (var i = 0, l = bindables.length; i < l; i++) {
@@ -38,18 +37,28 @@ var KodiPassion;
                     }
                     return WinJS.Promise.join(p);
                 };
+                MovieDetailPage.prototype.ready = function (element, options) {
+                    var _this = this;
+                    setTimeout(function () {
+                        _this.renderCast();
+                    }, 400);
+                };
                 MovieDetailPage.prototype.renderCast = function () {
                     var _this = this;
                     var template = new WinJS.Binding.Template(null, { href: '/templates/actor.html', extractChild: true });
                     var container = document.createDocumentFragment();
                     var p = [];
+                    var items = [];
                     this.movie.cast.forEach(function (c) {
                         p.push(template.render(c).then(function (rendered) {
+                            rendered.style.opacity = '0';
+                            items.push(rendered);
                             container.appendChild(rendered);
                         }));
                     });
                     WinJS.Promise.join(p).then(function () {
                         _this.castItems.appendChild(container);
+                        WinJS.UI.Animation.enterPage(items);
                     });
                 };
                 MovieDetailPage.prototype.checkScroll = function () {

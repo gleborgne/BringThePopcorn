@@ -9,6 +9,7 @@
   -ms-grid-column-span: 2;
   height: 360px;
   position: relative;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .tvshowsseriedetail header.fanart .fanart-bg {
   width: 100%;

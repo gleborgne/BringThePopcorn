@@ -86,7 +86,7 @@ var KodiPassion;
                         this.mainsplitview.itemDataSource = new WinJS.Binding.List(movieslist).dataSource;
                         setTimeout(function () {
                             _this.flipMovies();
-                        }, 5000);
+                        }, 4000);
                     }
                     else {
                     }
@@ -116,7 +116,7 @@ var KodiPassion;
                         this.tvshowsflipview.itemDataSource = new WinJS.Binding.List(tvshowslist).dataSource;
                         setTimeout(function () {
                             _this.flipTvshows();
-                        }, 7000);
+                        }, 5000);
                     }
                 };
                 HomePage.prototype.loadAlbums = function (data) {

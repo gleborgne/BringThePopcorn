@@ -88,7 +88,7 @@
 
                 setTimeout(() => {
                     this.flipMovies();
-                }, 5000);
+                }, 4000);
             } else {
             }
         }
@@ -120,7 +120,7 @@
                 this.tvshowsflipview.itemDataSource = new WinJS.Binding.List(tvshowslist).dataSource;
                 setTimeout(() => {
                     this.flipTvshows();
-                }, 7000);
+                }, 5000);
             }
         }
 

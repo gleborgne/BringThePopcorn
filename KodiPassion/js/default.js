@@ -60,7 +60,7 @@ var KodiPassion;
         navdeactivate: function () {
             if (this.foWrapper) {
                 this.foWrapper.element.style.opacity = '0.2';
-                this.foWrapper.blurTo(20, 200);
+                this.foWrapper.blurTo(20, 160);
                 return WinJS.Promise.timeout(50);
             }
             else {

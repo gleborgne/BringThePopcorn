@@ -36,6 +36,7 @@
   -ms-grid-column-span: 2;
   height: 360px;
   position: relative;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .page-moviesdetail header.fanart .fanart-bg {
   width: 100%;
@@ -228,6 +229,11 @@
   top: 0;
   bottom: 0;
   background-size: cover;
+  opacity: 0;
+  transition: opacity 200ms ease-in;
+}
+.page-moviesdetail .actor .thumbnail.imageLoaded {
+  opacity: 1;
 }
 .page-moviesdetail .actor .desc {
   position: absolute;
