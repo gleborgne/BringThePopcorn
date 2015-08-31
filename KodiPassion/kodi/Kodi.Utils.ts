@@ -106,10 +106,31 @@
         var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
         if (!data)
             return;
-        var totalseconds = parseInt(data);
+        var totalseconds = parseInt(data); 
+        var hours = 0;
         var minutes = ((totalseconds / 60) >> 0);
+        if (minutes > 60) {
+            var hours = (minutes / 60) >> 0;
+            minutes = minutes - (60 * hours);
+        }
         var seconds = totalseconds - (minutes * 60);
-        WinJS.Binding.oneTime({ duration: minutes + 'min' + WinJSContrib.Utils.pad2(seconds) }, ['duration'], dest, [destProperty]);
+        var d = (hours ? hours+"h" : "") + WinJSContrib.Utils.pad2(minutes) + 'min' + (!hours && seconds ? WinJSContrib.Utils.pad2(seconds) : "");
+        WinJS.Binding.oneTime({ duration: d }, ['duration'], dest, [destProperty]);
+    });
+
+    export var rating = WinJS.Binding.initializer(function ratingBinding(source, sourceProperty, dest, destProperty) {
+        var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
+        if (!data)
+            return;
+        dest.innerHTML = data.toFixed(1);
+    });
+
+    export var stringlist = WinJS.Binding.initializer(function stringlistBinding(source, sourceProperty, dest, destProperty) {
+        var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
+        if (!data && !data.length)
+            return;
+
+        dest.innerText = data.join(', ');
     });
     
     export var showIfNetworkPath = WinJS.Binding.initializer(function(source, sourceProperty, dest, destProperty) {

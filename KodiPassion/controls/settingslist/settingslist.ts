@@ -41,6 +41,7 @@
                             return KodiPassion.UI.DataLoader.showLoader(true);
                         }, function (err) {
                             console.error(err);
+                            return WinJS.Promise.wrapError(err);
                         });
                     });
 

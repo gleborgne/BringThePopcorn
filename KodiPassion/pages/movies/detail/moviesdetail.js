@@ -30,7 +30,27 @@ var KodiPassion;
                     }, function (err) {
                         var e = err;
                     });
-                    return WinJS.Binding.processAll(element, options.movie);
+                    this.renderCast();
+                    var p = [];
+                    var bindables = this.element.querySelectorAll(".moviebinding");
+                    for (var i = 0, l = bindables.length; i < l; i++) {
+                        p.push(WinJS.Binding.processAll(bindables[i], options.movie));
+                    }
+                    return WinJS.Promise.join(p);
+                };
+                MovieDetailPage.prototype.renderCast = function () {
+                    var _this = this;
+                    var template = new WinJS.Binding.Template(null, { href: '/templates/actor.html', extractChild: true });
+                    var container = document.createDocumentFragment();
+                    var p = [];
+                    this.movie.cast.forEach(function (c) {
+                        p.push(template.render(c).then(function (rendered) {
+                            container.appendChild(rendered);
+                        }));
+                    });
+                    WinJS.Promise.join(p).then(function () {
+                        _this.castItems.appendChild(container);
+                    });
                 };
                 MovieDetailPage.prototype.checkScroll = function () {
                     var h = this.headerbanner.clientHeight;
@@ -56,18 +76,10 @@ var KodiPassion;
                     }
                 };
                 MovieDetailPage.prototype.resumeMovie = function () {
-                    return Kodi.API.Videos.Movies.playMovie(this.movie.movieid, true).then(function (res) {
-                        console.log(res);
-                    }, function (err) {
-                        console.error(err);
-                    });
+                    return Kodi.API.Videos.Movies.playMovie(this.movie.movieid, true);
                 };
                 MovieDetailPage.prototype.playMovie = function () {
-                    return Kodi.API.Videos.Movies.playMovie(this.movie.movieid).then(function (res) {
-                        console.log(res);
-                    }, function (err) {
-                        console.error(err);
-                    });
+                    return Kodi.API.Videos.Movies.playMovie(this.movie.movieid);
                 };
                 MovieDetailPage.prototype.playMovieLocal = function () {
                     return Kodi.App.playLocalMedia(this.movie.file);

@@ -86,14 +86,40 @@
   font-size: 1.8rem;
   font-weight: 600;
 }
-.page-moviesdetail section[role=main] .description .movie-tagline {
+.page-moviesdetail section[role=main] .description .movie-tagline,
+.page-moviesdetail section[role=main] .description .movie-genres {
   font-size: 1.1rem;
   font-weight: 500;
-  color: #BBB;
+  color: #AAA;
 }
 .page-moviesdetail section[role=main] .description .movie-plot {
   font-size: 1.3rem;
   margin-top: 1em;
+}
+.page-moviesdetail section[role=main] .description .movie-details {
+  margin-top: 1em;
+  color: #AAA;
+  font-size: 0.9rem;
+  font-style: italic;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.page-moviesdetail section[role=main] .description .movie-details .left {
+  flex: 1;
+  margin-right: 10px;
+}
+.page-moviesdetail section[role=main] .description .movie-details .rating {
+  color: white;
+  font-size: 1.5em;
+}
+.page-moviesdetail section[role=main] .casting > h3 {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.page-moviesdetail section[role=main] .casting .casting-items {
+  display: flex;
+  flex-flow: row wrap;
 }
 .page-moviesdetail section[role=main] .seasons {
   margin-top: 1em;
@@ -188,6 +214,33 @@
   color: #12b2e7;
   background-color: transparent;
   font-size: 18pt;
+}
+.page-moviesdetail .actor {
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.page-moviesdetail .actor .thumbnail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-size: cover;
+}
+.page-moviesdetail .actor .desc {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 4px;
+  box-sizing: border-box;
+}
+.page-moviesdetail .actor .desc .name {
+  font-weight: 500;
 }
 .page-moviesdetail.state-medium header.fanart {
   -ms-grid-column: 2;

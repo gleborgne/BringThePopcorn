@@ -73,9 +73,10 @@ gulp.task('compilekodi', function () {
 });
 
 gulp.task('compilewinjscontrib', function () {
+    
     return merge([
         gulp.src([
-		    'scripts/winjscontrib/js/winjscontrib.core.js',
+		    //'scripts/winjscontrib/js/winjscontrib.core.js',
             'scripts/winjscontrib/js/winjscontrib.ui.webcomponents.js',
             'scripts/winjscontrib/js/winjscontrib.winrt.core.js',
 		    'scripts/winjscontrib/js/winjscontrib.winrt.upnp.js',

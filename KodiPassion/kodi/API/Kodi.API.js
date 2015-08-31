@@ -88,9 +88,7 @@ var Kodi;
                         completed = true;
                         completeCallback(data.result);
                         if (forceCheck) {
-                            setTimeout(function () {
-                                WinJS.Application.queueEvent({ type: 'xbmcplayercheck' });
-                            }, 150);
+                            WinJS.Application.queueEvent({ type: 'xbmcplayercheck' });
                         }
                     }
                 },

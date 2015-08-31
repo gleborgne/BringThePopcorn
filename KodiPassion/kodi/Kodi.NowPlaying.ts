@@ -46,14 +46,26 @@
     export var current: Playing = new ObservablePlaying();
     export var intervaldelay = 10000;
 
-    function forceCheck() {
+    function forceCheck() {        
         check(true);
     }
 
     WinJS.Application.addEventListener('Player.OnPlay', forceCheck);
     WinJS.Application.addEventListener('Player.OnSeek', forceCheck);
     WinJS.Application.addEventListener('Player.OnStop', forceCheck);
-    WinJS.Application.addEventListener('xbmcplayercheck', forceCheck);
+    var xbmcplayercheck;
+    WinJS.Application.addEventListener('xbmcplayercheck', function () {
+        clearTimeout(xbmcplayercheck);
+
+        if (nowPlayingInterval)
+            clearInterval(nowPlayingInterval);
+
+        xbmcplayercheck = setTimeout(function () {
+            clearInterval(nowPlayingInterval);
+            nowPlayingInterval = setInterval(check, intervaldelay);
+            check(true);
+        }, 500);        
+    });
 
     export function checkError(err) {
         current.id = undefined;

@@ -15,7 +15,8 @@ var Kodi;
             fanart: 1.7778,
             movieposter: 0.6667,
             tvshowepisode: 1.7778,
-            album: 1.1
+            album: 1.1,
+            actor: 0.6667,
         };
         function playLocalMedia(kodipath) {
             return new WinJS.Promise(function (complete, error) {
@@ -28,7 +29,7 @@ var Kodi;
                         complete();
                     }
                     else {
-                        complete();
+                        error();
                         WinJSContrib.Alerts.message('unable to play media', 'cannot play this media. Check the network path you set in your Kodi/XBMC (due to Windows constraints, path with server IP will not work, use server name instead within your media server)');
                     }
                 }, error);
@@ -400,7 +401,17 @@ var Kodi;
         WinJS.Application.addEventListener('Player.OnPlay', forceCheck);
         WinJS.Application.addEventListener('Player.OnSeek', forceCheck);
         WinJS.Application.addEventListener('Player.OnStop', forceCheck);
-        WinJS.Application.addEventListener('xbmcplayercheck', forceCheck);
+        var xbmcplayercheck;
+        WinJS.Application.addEventListener('xbmcplayercheck', function () {
+            clearTimeout(xbmcplayercheck);
+            if (nowPlayingInterval)
+                clearInterval(nowPlayingInterval);
+            xbmcplayercheck = setTimeout(function () {
+                clearInterval(nowPlayingInterval);
+                nowPlayingInterval = setInterval(check, NowPlaying.intervaldelay);
+                check(true);
+            }, 500);
+        });
         function checkError(err) {
             NowPlaying.current.id = undefined;
             NowPlaying.current.position = undefined;
@@ -719,9 +730,27 @@ var Kodi;
             if (!data)
                 return;
             var totalseconds = parseInt(data);
+            var hours = 0;
             var minutes = ((totalseconds / 60) >> 0);
+            if (minutes > 60) {
+                var hours = (minutes / 60) >> 0;
+                minutes = minutes - (60 * hours);
+            }
             var seconds = totalseconds - (minutes * 60);
-            WinJS.Binding.oneTime({ duration: minutes + 'min' + WinJSContrib.Utils.pad2(seconds) }, ['duration'], dest, [destProperty]);
+            var d = (hours ? hours + "h" : "") + WinJSContrib.Utils.pad2(minutes) + 'min' + (!hours && seconds ? WinJSContrib.Utils.pad2(seconds) : "");
+            WinJS.Binding.oneTime({ duration: d }, ['duration'], dest, [destProperty]);
+        });
+        Utils.rating = WinJS.Binding.initializer(function ratingBinding(source, sourceProperty, dest, destProperty) {
+            var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
+            if (!data)
+                return;
+            dest.innerHTML = data.toFixed(1);
+        });
+        Utils.stringlist = WinJS.Binding.initializer(function stringlistBinding(source, sourceProperty, dest, destProperty) {
+            var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
+            if (!data && !data.length)
+                return;
+            dest.innerText = data.join(', ');
         });
         Utils.showIfNetworkPath = WinJS.Binding.initializer(function (source, sourceProperty, dest, destProperty) {
             var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
@@ -828,10 +857,9 @@ var Kodi;
     (function (API) {
         var Input;
         (function (Input) {
-            function properties() {
-                return API.kodiRequest('Application.GetProperties', { properties: ["muted", "volume", "version"] });
-            }
-            Input.properties = properties;
+            //export function properties() {
+            //    return API.kodiRequest<any>('Application.GetProperties', { properties: ["muted", "volume", "version"] });
+            //}
             function mute(mute) {
                 Kodi.NowPlaying.current.muted = mute;
                 return API.kodiRequest('Application.SetMute', { mute: mute });
@@ -1065,7 +1093,7 @@ var Kodi;
                     //if (!playerToUse && player.currentPlayer) {
                     //    playerToUse = player.currentPlayer.playerid;
                     //}
-                    if (playerToUse === undefined) {
+                    if (playerToUse === undefined && !Kodi.NowPlaying.current.playerid) {
                         getActivePlayer().done(function (activeplayers) {
                             if (activeplayers && activeplayers.length) {
                                 Player.currentPlayer = activeplayers[0];
@@ -1079,6 +1107,9 @@ var Kodi;
                         }, error);
                     }
                     else {
+                        if (!playerToUse) {
+                            playerToUse = Kodi.NowPlaying.current.playerid;
+                        }
                         datacall.playerid = playerToUse;
                         API.kodiRequest(methodname, datacall, forceCheck, true).done(function (result) {
                             complete(result);
@@ -1304,9 +1335,7 @@ var Kodi;
                         completed = true;
                         completeCallback(data.result);
                         if (forceCheck) {
-                            setTimeout(function () {
-                                WinJS.Application.queueEvent({ type: 'xbmcplayercheck' });
-                            }, 150);
+                            WinJS.Application.queueEvent({ type: 'xbmcplayercheck' });
                         }
                     }
                 },
@@ -1648,7 +1677,7 @@ var Kodi;
                             "properties": [
                                 "title", "genre", "year", "rating", "director", "trailer", "tagline", "plot", "plotoutline",
                                 "originaltitle", "lastplayed", "playcount", "writer", "studio", "mpaa", "cast", "country",
-                                "set", "showlink", "streamdetails",
+                                "set", "showlink", "streamdetails", "dateadded", "runtime",
                                 "votes", "fanart", "thumbnail", "file", "sorttitle", "resume", "setid"
                             ],
                             "sort": { "method": "label", "order": "ascending" }

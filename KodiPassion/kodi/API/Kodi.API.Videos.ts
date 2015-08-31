@@ -94,7 +94,7 @@
                 "properties": [
                     "title", "genre", "year", "rating", "director", "trailer", "tagline", "plot", "plotoutline",
                     "originaltitle", "lastplayed", "playcount", "writer", "studio", "mpaa", "cast", "country",
-                    "set", "showlink", "streamdetails",
+                    "set", "showlink", "streamdetails", "dateadded", "runtime",
                     "votes", "fanart", "thumbnail", "file", "sorttitle", "resume", "setid"
                 ],
                 "sort": { "method": "label", "order": "ascending" }

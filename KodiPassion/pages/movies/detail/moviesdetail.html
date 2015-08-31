@@ -14,36 +14,63 @@
                 small : { wLt: 800 },
                 xsmall : { wLt: 700 },
              }}"></div>
-        <header role="banner" member="headerbanner" class="fanart">
+        <header role="banner" member="headerbanner" class="moviebinding fanart">
             <div class="fanart-bg" data-win-bind="display: fanart Kodi.Utils.toThumbnailBg"></div>
             
         </header>
-        <header role="banner" member="headerposter" class="poster">
+        <header role="banner" member="headerposter" class="moviebinding poster">
             <div class="poster" data-win-bind="display: art.poster Kodi.Utils.toThumbnailBg"></div>
         </header>
 
         <section class="page-section" member="scrollContainer" aria-label="Main content" role="main">
-
-            <div class="description">
+            
+            <div class="description moviebinding">
                 <div class="moviedetails">
-                    <div class="movie-title" data-win-bind="innerHTML: title"></div>
-                    <div class="movie-tagline" data-win-bind="innerHTML: tagline; innerHTML: tagline WinJSContrib.Bindings.showIf"></div>
+                    <div class="movie-title" data-win-bind="innerHTML: title"></div>                    
+                    <div class="movie-tagline" data-win-bind="innerHTML: tagline; display: tagline WinJSContrib.Bindings.showIf"></div>
+                    <div class="movie-genres" data-win-bind="innerHTML: allgenres Kodi.Utils.stringlist"></div>
+
+                    <div class="movie-details">
+                        <div class="left">
+                            <div>
+                                <span data-win-bind="innerHTML: runtime Kodi.Utils.toDuration"></span>
+                                <span>directed by <span data-win-bind="innerHTML: director Kodi.Utils.stringlist"></span></span>
+                            </div>
+                            
+                            <div>
+                                <span data-win-bind="display: lastplayed WinJSContrib.Bindings.showIf">last played <span data-win-bind="innerHTML: lastplayed WinJSContrib.Bindings.formatDate"></span>,</span>
+                                <span>added <span data-win-bind="innerHTML: dateadded WinJSContrib.Bindings.formatDate"></span></span>                                
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="rating"><i class="kdp-favourites"></i><span data-win-bind="innerHTML: rating Kodi.Utils.rating"></span></div>     
+                            <div class="votes"><span data-win-bind="innerHTML: votes"></span> votes</div>     
+                        </div>
+                    </div>
+                    
                     <div class="movie-plot" data-win-bind="innerHTML: plot; innerHTML: plot WinJSContrib.Bindings.showIf"></div>
                 </div>
             </div>
+            <div class="casting">
+                <h3>casting</h3>
+                <div data-win-control="WinJSContrib.UI.AspectRatio" data-win-options="{ ratio: Kodi.App.PictureRatios.actor, baseWidth: 200, baseWidthMargin: 10, prefix: '.page-moviesdetail', target: '.actor'}"></div>
 
+                <div class="casting-items" member="castItems">
+
+                </div>
+            </div>
         </section>
         <div class="actions">
-            <button member="btnDownloadMovie" tap="downloadMovie" style="display: none" title="download movie">
+            <button member="btnDownloadMovie" class="blink" tap="downloadMovie" style="display: none" title="download movie">
                 <i class="kdp-download"></i>
             </button>
-            <button member="btnPlayMovieLocal" tap="playMovieLocal" style="display: none" title="play movie on this device">
+            <button member="btnPlayMovieLocal" class="blink" tap="playMovieLocal" style="display: none" title="play movie on this device">
                 <i class="kdp-playlocal"></i>
             </button>
-            <button member="btnResumeMovie" tap="resumeMovie" style="display: none" title="resume movie">
+            <button member="btnResumeMovie" class="blink" tap="resumeMovie" style="display: none" title="resume movie">
                 <i class="kdp-refresh"></i>
             </button>
-            <button member="btnPlayMovie" tap="playMovie" title="play movie">
+            <button member="btnPlayMovie" class="blink" tap="playMovie" title="play movie">
                 <i class="kdp-play"></i>
             </button>
         </div>

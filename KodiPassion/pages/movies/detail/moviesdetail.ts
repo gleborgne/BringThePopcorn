@@ -1,5 +1,5 @@
 ﻿module KodiPassion.UI.Pages {
-    
+
     export class MovieDetailPage {
         public static url = "/pages/movies/detail/moviesdetail.html";
 
@@ -11,6 +11,7 @@
         btnResumeMovie: HTMLElement;
         headerbanner: HTMLElement;
         headerposter: HTMLElement;
+        castItems: HTMLElement;
         visualstate: any;
         scrollContainer: HTMLElement;
         scrollDelay: number;
@@ -41,7 +42,28 @@
                 var e = err;
             });
 
-            return WinJS.Binding.processAll(element, options.movie);
+            this.renderCast();
+            var p = [];
+            var bindables = this.element.querySelectorAll(".moviebinding");
+            for (var i = 0, l = bindables.length; i < l; i++) {
+                p.push(WinJS.Binding.processAll(<Element>bindables[i], options.movie));
+            }
+            return WinJS.Promise.join(p);
+        }
+
+        renderCast() {
+            var template = new WinJS.Binding.Template(null, { href: '/templates/actor.html', extractChild: true });
+            var container = document.createDocumentFragment();
+            var p = [];
+            this.movie.cast.forEach((c) => {
+                p.push(template.render(c).then((rendered) => {
+                    container.appendChild(rendered);
+                }));
+            });
+
+            WinJS.Promise.join(p).then(() => {
+                this.castItems.appendChild(container);
+            });
         }
 
         checkScroll() {
@@ -70,19 +92,11 @@
 
 
         resumeMovie() {
-            return Kodi.API.Videos.Movies.playMovie(this.movie.movieid, true).then((res) => {
-                console.log(res);
-            }, (err) => {
-                console.error(err);
-            });
+            return Kodi.API.Videos.Movies.playMovie(this.movie.movieid, true);
         }
 
         playMovie() {
-            return Kodi.API.Videos.Movies.playMovie(this.movie.movieid).then((res) => {
-                console.log(res);
-            }, (err) => {
-                console.error(err);
-            });
+            return Kodi.API.Videos.Movies.playMovie(this.movie.movieid);
         }
 
         playMovieLocal() {

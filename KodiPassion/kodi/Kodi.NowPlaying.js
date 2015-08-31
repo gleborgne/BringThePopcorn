@@ -17,7 +17,17 @@ var Kodi;
         WinJS.Application.addEventListener('Player.OnPlay', forceCheck);
         WinJS.Application.addEventListener('Player.OnSeek', forceCheck);
         WinJS.Application.addEventListener('Player.OnStop', forceCheck);
-        WinJS.Application.addEventListener('xbmcplayercheck', forceCheck);
+        var xbmcplayercheck;
+        WinJS.Application.addEventListener('xbmcplayercheck', function () {
+            clearTimeout(xbmcplayercheck);
+            if (nowPlayingInterval)
+                clearInterval(nowPlayingInterval);
+            xbmcplayercheck = setTimeout(function () {
+                clearInterval(nowPlayingInterval);
+                nowPlayingInterval = setInterval(check, NowPlaying.intervaldelay);
+                check(true);
+            }, 500);
+        });
         function checkError(err) {
             NowPlaying.current.id = undefined;
             NowPlaying.current.position = undefined;

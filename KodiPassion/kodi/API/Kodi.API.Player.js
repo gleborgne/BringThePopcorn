@@ -23,7 +23,7 @@ var Kodi;
                     //if (!playerToUse && player.currentPlayer) {
                     //    playerToUse = player.currentPlayer.playerid;
                     //}
-                    if (playerToUse === undefined) {
+                    if (playerToUse === undefined && !Kodi.NowPlaying.current.playerid) {
                         getActivePlayer().done(function (activeplayers) {
                             if (activeplayers && activeplayers.length) {
                                 Player.currentPlayer = activeplayers[0];
@@ -37,6 +37,9 @@ var Kodi;
                         }, error);
                     }
                     else {
+                        if (!playerToUse) {
+                            playerToUse = Kodi.NowPlaying.current.playerid;
+                        }
                         datacall.playerid = playerToUse;
                         API.kodiRequest(methodname, datacall, forceCheck, true).done(function (result) {
                             complete(result);

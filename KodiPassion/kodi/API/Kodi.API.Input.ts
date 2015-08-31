@@ -1,7 +1,7 @@
 ﻿module Kodi.API.Input {
-    export function properties() {
-        return API.kodiRequest<any>('Application.GetProperties', { properties: ["muted", "volume", "version"] });
-    }
+    //export function properties() {
+    //    return API.kodiRequest<any>('Application.GetProperties', { properties: ["muted", "volume", "version"] });
+    //}
     
     export function mute(mute:boolean) {
         Kodi.NowPlaying.current.muted = mute;

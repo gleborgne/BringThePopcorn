@@ -36,6 +36,7 @@ declare module Kodi.App {
         movieposter: number;
         tvshowepisode: number;
         album: number;
+        actor: number;
     };
     function playLocalMedia(kodipath: any): WinJS.Promise<{}>;
 }
@@ -178,6 +179,8 @@ declare module Kodi.Utils {
     var toThumbnailActorImg: Function;
     var toFormatedPlayerTime: Function;
     var toDuration: Function;
+    var rating: Function;
+    var stringlist: Function;
     var showIfNetworkPath: Function;
     var isCurrent: Function;
     function getNetworkPath(mediapath: any): any;
@@ -188,7 +191,6 @@ declare module Kodi.WOL {
 }
 
 declare module Kodi.API.Input {
-    function properties(): WinJS.Promise<any>;
     function mute(mute: boolean): WinJS.Promise<any>;
     function volumeMute(): WinJS.Promise<any>;
     function volumeUnmute(): WinJS.Promise<any>;

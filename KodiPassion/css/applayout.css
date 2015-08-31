@@ -170,3 +170,24 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
     font-size: 10pt;
   }
 }
+.blink.tap {
+  transition: background-color 300ms ease;
+}
+.blink.tap.tap-working {
+  animation: workingblink;
+  animation-delay: 150ms;
+  animation-duration: 1500ms;
+  animation-iteration-count: infinite;
+}
+.blink.tap.tap-error {
+  background-color: indianred;
+  border-color: indianred;
+  color: white;
+}
+@keyframes workingblink {
+  50% {
+    background-color: gold;
+    border-color: gold;
+    color: white;
+  }
+}

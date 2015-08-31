@@ -113,7 +113,10 @@
                 if (!ctrl.parentpage)
                     ctrl.parentpage = WinJSContrib.Utils.getScopeControl(ctrl.element);
 
-                if (ctrl.parentpage && ctrl.target && ctrl.ratio) {
+                if (!ctrl.container)
+                    ctrl.container = ctrl.element.parentElement;
+
+                if (ctrl.container && ctrl.target && ctrl.ratio) {
                     if (ctrl.basedOn == "height") {
                         ctrl.updateLayoutBasedOnHeight();
                     } else {
@@ -130,20 +133,21 @@
                     classname = ctrl.prefix + ' ' + classname;
                 }
 
+                var container = ctrl.parentpage.element;
                 if (ctrl.baseWidth) {
-                    var nbitems = ((ctrl.parentpage.element.clientWidth / ctrl.baseWidth) << 0) + 1;
-                    var itemW = ((ctrl.parentpage.element.clientWidth / nbitems) << 0) - ctrl.baseWidthMargin;
+                    var nbitems = ((ctrl.container.clientWidth / ctrl.baseWidth) << 0) + 1;
+                    var itemW = ((ctrl.container.clientWidth / nbitems) << 0) - ctrl.baseWidthMargin;
                     var targetH = (itemW / ctrl.ratio) << 0;
                     ctrl.styleElt.innerHTML = classname + "{ width: " + itemW + "px; height:" + targetH + "px}";
                 } else {
-                    var elements = ctrl.parentpage.element.querySelectorAll(ctrl.target);
+                    var elements = ctrl.container.querySelectorAll(ctrl.target);
                     var eltW = elements[0].clientWidth;
                     var eltH = elements[0].clientHeight;
 
                     if (eltW > 0) {
                         var targetH = (eltW / ctrl.ratio) << 0;
                         if (ctrl.max) {
-                            var maxH = (ctrl.parentpage.element.clientHeight * ctrl.max / 100) << 0;
+                            var maxH = (container.clientHeight * ctrl.max / 100) << 0;
                             if (targetH > maxH) {
                                 targetH = maxH;
                             }
@@ -162,19 +166,19 @@
                 }
 
                 if (ctrl.baseHeight) {
-                    var nbitems = ((ctrl.parentpage.element.clientHeight / ctrl.baseHeight) << 0) + 1;
-                    var itemH = ((ctrl.parentpage.element.clientHeight / nbitems) << 0) - ctrl.baseHeightMargin;
+                    var nbitems = ((ctrl.container.clientHeight / ctrl.baseHeight) << 0) + 1;
+                    var itemH = ((ctrl.container.clientHeight / nbitems) << 0) - ctrl.baseHeightMargin;
                     var targetW = (itemH / ctrl.ratio) << 0;
                     ctrl.styleElt.innerHTML = classname + "{ width: " + targetW + "px; height:" + itemH + "px}";
                 } else {
-                    var elements = ctrl.parentpage.element.querySelectorAll(ctrl.target);
+                    var elements = ctrl.container.querySelectorAll(ctrl.target);
                     var eltW = elements[0].clientWidth;
                     var eltH = elements[0].clientHeight;
 
                     if (eltH > 0) {
                         var targetW = (eltH * ctrl.ratio) << 0;
                         if (ctrl.max) {
-                            var maxW = (ctrl.parentpage.element.clientWidth * ctrl.max / 100) << 0;
+                            var maxW = (ctrl.container.clientWidth * ctrl.max / 100) << 0;
                             if (targetW > maxW) {
                                 targetW = maxW;
                             }
@@ -187,6 +191,7 @@
             dispose: function () {
                 var ctrl = this;
                 ctrl.parentpage = null;
+                ctrl.container = null;
                 ctrl.styleElt.parentElement.removeChild(ctrl.styleElt);
                 WinJS.Utilities.disposeSubTree(this.element);
                 this.element = null;

@@ -7,11 +7,11 @@
 <body>
     <div class="remote-controller">
         <div class="main-menus">
-            <button class="kdp-home" kodiapi="Kodi.API.Input.home"></button>
-            <button class="kdp-movie" kodiapi="Kodi.API.Input.openMovies"></button>
-            <button class="kdp-television" kodiapi="Kodi.API.Input.openTvShows"></button>
-            <button class="kdp-music" kodiapi="Kodi.API.Input.openMusic"></button>
-            <button class="kdp-photo" kodiapi="Kodi.API.Input.openPictures"></button>
+            <button class="kdp-home blink" kodiapi="Kodi.API.Input.home"></button>
+            <button class="kdp-movie blink" kodiapi="Kodi.API.Input.openMovies"></button>
+            <button class="kdp-television blink" kodiapi="Kodi.API.Input.openTvShows"></button>
+            <button class="kdp-music blink" kodiapi="Kodi.API.Input.openMusic"></button>
+            <button class="kdp-photo blink" kodiapi="Kodi.API.Input.openPictures"></button>
         </div>
         <div class="navigation">
             <div class="wheel">                
@@ -23,14 +23,14 @@
                 <button class="wheelbtn kdp-chevron-down" kodiapi="Kodi.API.Input.down"></button>
                 <button class="wheelbtn kdp-chevron-left" kodiapi="Kodi.API.Input.left"></button>
                 <button class="wheelbtn kdp-chevron-right" kodiapi="Kodi.API.Input.right"></button>
-                <button class="wheelbtn kdp-check" kodiapi="Kodi.API.Input.select"></button>
+                <button class="wheelbtn kdp-check blink" kodiapi="Kodi.API.Input.select"></button>
             </div>
         </div>
         
         <div class="volume">
             <div class="icon">
-                <button class="kdp-speaker-on" data-win-bind="display: muted WinJSContrib.Bindings.hideIf" kodiapi="Kodi.API.Input.volumeMute"></button>
-                <button class="kdp-speaker-mute" data-win-bind="display: muted WinJSContrib.Bindings.showIf" kodiapi="Kodi.API.Input.volumeUnmute"></button>
+                <button class="kdp-speaker-on blink" data-win-bind="display: muted WinJSContrib.Bindings.hideIf" kodiapi="Kodi.API.Input.volumeMute"></button>
+                <button class="kdp-speaker-mute blink" data-win-bind="display: muted WinJSContrib.Bindings.showIf" kodiapi="Kodi.API.Input.volumeUnmute"></button>
             </div>
             <input type="range" max="100" id="rangeVolume" member data-win-bind="value: volume" />
         </div>
@@ -38,11 +38,11 @@
         <div class="playercommands" data-win-bind="display : enabled WinJSContrib.Bindings.showIf">
             <div class="itemlabel" data-win-bind="innerText : label"></div>
             <div class="playercommands-items">
-                <button class="cmd kdp-rewind" kodiapi="Kodi.API.Player.previous"></button>
-                <button class="cmd kdp-play" kodiapi="Kodi.API.Player.play" data-win-bind="display: speed WinJSContrib.Bindings.hideIf"></button>
-                <button class="cmd kdp-pause" kodiapi="Kodi.API.Player.pause" data-win-bind="display: speed WinJSContrib.Bindings.showIf"></button>
-                <button class="cmd kdp-stop" kodiapi="Kodi.API.Player.stop"></button>
-                <button class="cmd kdp-forward" kodiapi="Kodi.API.Player.next"></button>
+                <button class="cmd kdp-rewind blink" kodiapi="Kodi.API.Player.previous"></button>
+                <button class="cmd kdp-play blink" kodiapi="Kodi.API.Player.play" data-win-bind="display: speed WinJSContrib.Bindings.hideIf"></button>
+                <button class="cmd kdp-pause blink" kodiapi="Kodi.API.Player.pause" data-win-bind="display: speed WinJSContrib.Bindings.showIf"></button>
+                <button class="cmd kdp-stop blink" kodiapi="Kodi.API.Player.stop"></button>
+                <button class="cmd kdp-forward blink" kodiapi="Kodi.API.Player.next"></button>
             </div>
         </div>
         <div class="seekprogress" data-win-bind="display: enabled WinJSContrib.Bindings.showIf">

@@ -15,7 +15,8 @@ module Kodi.App {
         fanart: 1.7778,
         movieposter: 0.6667,
         tvshowepisode: 1.7778,
-        album : 1.1
+        album: 1.1,
+        actor: 0.6667,
     }; 
 
     export function playLocalMedia(kodipath){
@@ -29,7 +30,7 @@ module Kodi.App {
                     complete();
                 }
                 else {
-                    complete();
+                    error();
                     WinJSContrib.Alerts.message('unable to play media', 'cannot play this media. Check the network path you set in your Kodi/XBMC (due to Windows constraints, path with server IP will not work, use server name instead within your media server)');
                 }
             }, error);

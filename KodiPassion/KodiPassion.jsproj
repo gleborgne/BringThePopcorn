@@ -412,6 +412,7 @@
     <Content Include="scripts\WinJS\js\base.js" />
     <Content Include="scripts\WinJS\js\en-US\ui.strings.js" />
     <Content Include="scripts\WinJS\js\ui.js" />
+    <Content Include="templates\actor.html" />
     <Content Include="templates\tvshowposter.html" />
     <Content Include="templates\moviesplitview.html" />
     <Content Include="templates\movieposter.html" />

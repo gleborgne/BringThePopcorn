@@ -4,10 +4,9 @@ var Kodi;
     (function (API) {
         var Input;
         (function (Input) {
-            function properties() {
-                return API.kodiRequest('Application.GetProperties', { properties: ["muted", "volume", "version"] });
-            }
-            Input.properties = properties;
+            //export function properties() {
+            //    return API.kodiRequest<any>('Application.GetProperties', { properties: ["muted", "volume", "version"] });
+            //}
             function mute(mute) {
                 Kodi.NowPlaying.current.muted = mute;
                 return API.kodiRequest('Application.SetMute', { mute: mute });

@@ -122,7 +122,7 @@ body {
     body.unconnected {
         #menu {
             display: none;
-            }
+        }
 
         #appcontent {
             left: 0;
@@ -154,9 +154,9 @@ body {
             -ms-grid-rows: 1fr;
             -ms-grid-columns: 1fr auto;
 
-            .remote{
+            .remote {
                 -ms-grid-column: 2;
-                width : 350px;
+                width: 350px;
                 background-color: rgba(20,20,20,0.5);
             }
         }
@@ -172,14 +172,14 @@ body {
             background-color: @kodiBlue;
             color: white;
             height: @menusize;
-            padding : 0 1rem;
+            padding: 0 1rem;
 
             .titlearea {
                 flex: 1;
                 font-size: 1.5rem;
             }
 
-            h2{
+            h2 {
                 font-size: 1.1rem;
             }
         }
@@ -197,14 +197,45 @@ body {
     top: 0;
 }
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1024px) {
     html, body {
-        font-size : 11pt;
+        font-size: 11pt;
     }
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 800px) {
     html, body {
-        font-size : 10pt;
+        font-size: 10pt;
+    }
+}
+
+.blink.tap {
+    transition: background-color 300ms ease;
+
+    &.tap-working {
+        animation: workingblink;
+        animation-delay: 150ms;
+        animation-duration: 1500ms;
+        animation-iteration-count: infinite;
+    }
+
+    &.tap-error{
+        background-color: indianred;
+        border-color: indianred;
+        color: white;
+    }
+}
+
+@keyframes workingblink {
+    0% {
+    }
+
+    50% {
+        background-color: gold;
+        border-color: gold;
+        color: white;
+    }
+
+    100% {
     }
 }

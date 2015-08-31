@@ -62,9 +62,6 @@
         if (params)
             reqdata.params = params;
 
-        
-
-
         var url = setting.host + '/jsonrpc';
         if (setting.port !== 80) {
             url = setting.host + ':' + setting.port + '/jsonrpc';
@@ -111,9 +108,7 @@
                     completed = true;
                     completeCallback(data.result);
                     if (forceCheck) {
-                        setTimeout(function () {
-                            WinJS.Application.queueEvent({ type: 'xbmcplayercheck' });
-                        }, 150);
+                        WinJS.Application.queueEvent({ type: 'xbmcplayercheck' });
                     }
                 }
             },
