@@ -38,12 +38,16 @@
     <script src="/controls/loader/loader.js"></script>
     <script src="/controls/genrespicker/genrepicker.js"></script>
     <script src="/controls/remote/remote.js"></script>
+    <script src="/controls/playingcontent/playingcontent.js"></script>
+    <script src="controls/playlist/playlist.js"></script>
+    <script src="pages/tvshows/seriedetail/tvshowsseriedetail.js"></script>
+    <script src="pages/movies/detail/moviesdetail.js"></script>
 
     <link href="/css/default.css" rel="stylesheet" />
     <script src="/js/default.js"></script>
 </head>
 <body class="win-type-body unconnected">
-    <div id="menu" data-win-control="KodiPassion.UI.MainMenu"></div>
+    
     <div id="appcontent">
         <div id="contentwrapper">
             <div id="pageshostwrapper">
@@ -52,11 +56,16 @@
             <div id="nowplaying">
                 <div id="nowplayingbar" data-win-control="KodiPassion.UI.NowPlayingSummary"></div>
                 <div id="nowplayingcontent">
-                    <div class="playlist"></div>
-                    <div class="remote" data-win-control="KodiPassion.UI.RemoteController"></div>
+                    <div class="menubar">
+                        <div class="menu selected" target="nowplaying-remote">remote</div>
+                        <div class="menu" target="nowplaying-playlist">playing</div>
+                    </div>
+                    <div id="nowplaying-playlist" class="panel playlist" data-win-control="KodiPassion.UI.PlayingContent"></div>
+                    <div id="nowplaying-remote" class="panel remote selected" data-win-control="KodiPassion.UI.RemoteController"></div>
                 </div>
             </div>
         </div>
     </div>
+    <div id="menu" data-win-control="KodiPassion.UI.MainMenu"></div>
 </body>
 </html>

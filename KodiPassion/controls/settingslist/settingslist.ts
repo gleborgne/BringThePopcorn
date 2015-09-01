@@ -44,7 +44,7 @@
                             }, function (err) {
                                 console.error(err);
                             });
-                        }, 2000));
+                        }, 4000));
                     }
                 }             
 
@@ -109,7 +109,7 @@
         isValidMacAddress(setting: Kodi.Settings.KodiServerSetting) {
             if (setting.macAddress && setting.macAddress.length) {
                 var res = true;
-                setting.macAddress.forEach(function (s) {
+                setting.macAddress.forEach((s) => {
                     res = res && <any>s;
                 });
                 return res;

@@ -39,7 +39,7 @@ var KodiPassion;
                                 }, function (err) {
                                     console.error(err);
                                 });
-                            }, 2000));
+                            }, 4000));
                         }
                     };
                     p.push(servertemplate.render(setting).then(function (rendered) {

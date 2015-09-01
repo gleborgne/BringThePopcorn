@@ -10,6 +10,8 @@ var KodiPassion;
                 MovieDetailPage.prototype.processed = function (element, options) {
                     var _this = this;
                     this.movie = options.movie;
+                    this.element.id = "page-" + WinJSContrib.Utils.guid();
+                    this.actorsAspectRatio.prefix = "#" + this.element.id + " .page-moviesdetail";
                     this.eventTracker.addEvent(this.scrollContainer, "scroll", function () {
                         cancelAnimationFrame(_this.scrollDelay);
                         _this.scrollDelay = requestAnimationFrame(function () {
@@ -102,7 +104,7 @@ var KodiPassion;
                 return MovieDetailPage;
             })();
             Pages.MovieDetailPage = MovieDetailPage;
-            WinJS.UI.Pages.define(MovieDetailPage.url, MovieDetailPage);
+            Pages.MovieDetail = WinJS.UI.Pages.define(MovieDetailPage.url, MovieDetailPage);
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));

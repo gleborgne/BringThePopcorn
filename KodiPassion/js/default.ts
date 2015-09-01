@@ -30,8 +30,8 @@ module KodiPassion{
                 duration: 160,
                 frequency: 1,
                 friction: 166,
-                complete : complete
-            })
+                complete: complete
+            });
         });
 
         //return WinJS.UI.executeTransition(elt, {

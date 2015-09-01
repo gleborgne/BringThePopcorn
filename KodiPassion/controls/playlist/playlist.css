@@ -1,0 +1,47 @@
+.playlistcontrol {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.playlistcontrol .playlist-item {
+  padding: 8px 16px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.playlistcontrol .playlist-item.current {
+  background-color: rgba(90, 90, 90, 0.4);
+}
+.playlistcontrol .playlist-item .thumbnail {
+  height: 40px;
+  margin-right: 10px;
+}
+.playlistcontrol .playlist-item .desc {
+  flex: 1;
+  margin-right: 10px;
+}
+.playlistcontrol .playlist-item .desc .title {
+  font-weight: 500;
+  line-height: 1.2em;
+}
+.playlistcontrol .playlist-item .desc .album {
+  color: #777;
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.2em;
+}
+.playlistcontrol .playlist-item .actions button {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 42px;
+  border: 1px solid #12b2e7;
+  background-color: transparent;
+  color: #12b2e7;
+  margin-right: 10px;
+  font-size: 16pt;
+}

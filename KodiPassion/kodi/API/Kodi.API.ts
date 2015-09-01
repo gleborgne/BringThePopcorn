@@ -237,7 +237,7 @@ module Kodi.API.PlayList {
     }
 
     export function getItems(playlistid) {
-        return kodiRequest('Playlist.GetItems', { playlistid: playlistid, properties: ["set", "setid", "albumid", "album", "duration", "artist", "albumartist", "thumbnail", "tvshowid", "season", "episode"] });
+        return kodiRequest<any>('Playlist.GetItems', { playlistid: playlistid, properties: ["set", "setid", "albumid", "album", "duration", "artist", "albumartist", "thumbnail", "tvshowid", "season", "episode"] });
     }
 
     export function removeAt(playlistid, position) {

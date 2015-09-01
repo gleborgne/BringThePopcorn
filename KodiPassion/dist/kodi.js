@@ -387,8 +387,8 @@ var Kodi;
     var NowPlaying;
     (function (NowPlaying) {
         var ObservablePlaying = WinJS.Binding.define({
-            id: 0, position: 0, progress: 0, enabled: 0, speed: 0, label: '', time: '', totaltime: '', type: null,
-            thumbnail: undefined, playerid: 0, playlistid: 0, volume: 0, muted: false, reachable: 0,
+            id: null, position: 0, progress: 0, enabled: 0, speed: 0, label: '', time: '', totaltime: '', type: null,
+            thumbnail: undefined, playerid: null, playlistid: null, volume: 0, muted: false, reachable: 0,
             subtitleenabled: false, currentsubtitle: null, currentaudiostream: null,
             checking: false, hasLanguages: false, hasSubtitles: false, hasLanguagesOrSubtitles: false,
             isPlaying: false, isPlayingMusic: false, isPlayingVideo: false, isPlayingTvShow: false, isPlayingMovie: false
@@ -446,19 +446,25 @@ var Kodi;
                 }, function () {
                 });
                 Kodi.API.Player.currentItem(undefined).done(function (currentItem) {
-                    var id = Kodi.API.Player.currentPlayer.playerid;
-                    Kodi.API.Player.properties(id).done(function (props) {
-                        if (props && currentItem) {
-                            nowPlaying(props, currentItem.item);
-                        }
-                        if (NowPlaying.current.checking) {
-                            NowPlaying.current.checking = false;
-                        }
+                    if (Kodi.API.Player.currentPlayer) {
+                        var id = Kodi.API.Player.currentPlayer.playerid;
+                        Kodi.API.Player.properties(id).done(function (props) {
+                            if (props && currentItem) {
+                                nowPlaying(props, currentItem.item);
+                            }
+                            if (NowPlaying.current.checking) {
+                                NowPlaying.current.checking = false;
+                            }
+                            complete(NowPlaying.current);
+                        }, function (err) {
+                            checkError(err);
+                            complete(NowPlaying.current);
+                        });
+                    }
+                    else {
+                        NowPlaying.current.playerid = null;
                         complete(NowPlaying.current);
-                    }, function (err) {
-                        checkError(err);
-                        complete(NowPlaying.current);
-                    });
+                    }
                 }, function (err) {
                     checkError(err);
                     complete(NowPlaying.current);
@@ -1093,7 +1099,7 @@ var Kodi;
                     //if (!playerToUse && player.currentPlayer) {
                     //    playerToUse = player.currentPlayer.playerid;
                     //}
-                    if (playerToUse === undefined && !Kodi.NowPlaying.current.playerid) {
+                    if (playerToUse === undefined && (Kodi.NowPlaying.current.playerid == null || Kodi.NowPlaying.current.playerid == undefined)) {
                         getActivePlayer().done(function (activeplayers) {
                             if (activeplayers && activeplayers.length) {
                                 Player.currentPlayer = activeplayers[0];
@@ -1107,7 +1113,7 @@ var Kodi;
                         }, error);
                     }
                     else {
-                        if (!playerToUse) {
+                        if (playerToUse == null || playerToUse == undefined) {
                             playerToUse = Kodi.NowPlaying.current.playerid;
                         }
                         datacall.playerid = playerToUse;
@@ -1316,7 +1322,7 @@ var Kodi;
                 data: callData,
                 success: function (data) {
                     Kodi.NowPlaying.current.reachable = true;
-                    console.log('API call success for ' + url + ' ' + callData);
+                    console.log('API call success for ' + url + ' ' + callData, data);
                     if (p._state && p._state.name && p._state.name == 'error') {
                         if (completed)
                             return;

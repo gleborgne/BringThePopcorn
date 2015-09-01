@@ -18,10 +18,10 @@ body {
         left: 0;
         top: 0;
         bottom: 0;
-        width: 400px;
+        width: @menusize;
 
         .main-menu {
-            width: 100%;
+            width: @menusize;
             height: 100%;
             .hflex(auto);
 
@@ -153,6 +153,11 @@ body {
             display: -ms-grid;
             -ms-grid-rows: 1fr;
             -ms-grid-columns: 1fr auto;
+            border-top: 1px solid #666;
+
+            .menubar {
+                display: none;
+            }
 
             .remote {
                 -ms-grid-column: 2;
@@ -195,6 +200,9 @@ body {
 .nowplaying-expanded #appcontent #contentwrapper #nowplaying {
     height: auto;
     top: 0;
+    /*.nowplayingbar{
+        background-color: @kodiBlue;
+    }*/
 }
 
 @media screen and (max-width: 1024px) {
@@ -206,6 +214,60 @@ body {
 @media screen and (max-width: 800px) {
     html, body {
         font-size: 10pt;
+    }
+
+    #nowplaying {
+        #nowplayingcontent {
+            -ms-grid-row: 2;
+            display: -ms-grid;
+            -ms-grid-rows: auto 1fr;
+            -ms-grid-columns: 1fr;
+
+            .menubar {
+                display: -ms-grid;
+                -ms-grid-rows: auto;
+                -ms-grid-columns: 1fr 1fr;
+                border-bottom: 1px solid #444;
+
+                .menu {
+                    color: #777;
+                    padding: 8px;
+                    text-align: center;
+                    text-transform: uppercase;
+
+                    &:nth-child(2) {
+                        -ms-grid-column: 2;
+                    }
+
+                    &.selected {
+                        background-color: rgba(90,90,90,0.5);
+                        color: white;
+                    }
+                }
+            }
+
+            > .panel {
+                position: relative;
+                -ms-grid-row: 2;
+                -ms-grid-column: 1;
+                width: 100%;
+                height: 100%;
+                transform: translate(100%, 0);
+                /*transition: transform 350ms @easeOutBack;*/
+
+                &#nowplaying-remote {
+                    transform: translate(-100%, 0);
+
+                    &.selected {
+                        transform: translate(0, 0);
+                    }
+                }
+
+                &.selected {
+                    transform: translate(0, 0);
+                }
+            }
+        }
     }
 }
 
@@ -219,7 +281,7 @@ body {
         animation-iteration-count: infinite;
     }
 
-    &.tap-error{
+    &.tap-error {
         background-color: indianred;
         border-color: indianred;
         color: white;

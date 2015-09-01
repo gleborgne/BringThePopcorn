@@ -23,7 +23,7 @@ var Kodi;
                     //if (!playerToUse && player.currentPlayer) {
                     //    playerToUse = player.currentPlayer.playerid;
                     //}
-                    if (playerToUse === undefined && !Kodi.NowPlaying.current.playerid) {
+                    if (playerToUse === undefined && (Kodi.NowPlaying.current.playerid == null || Kodi.NowPlaying.current.playerid == undefined)) {
                         getActivePlayer().done(function (activeplayers) {
                             if (activeplayers && activeplayers.length) {
                                 Player.currentPlayer = activeplayers[0];
@@ -37,7 +37,7 @@ var Kodi;
                         }, error);
                     }
                     else {
-                        if (!playerToUse) {
+                        if (playerToUse == null || playerToUse == undefined) {
                             playerToUse = Kodi.NowPlaying.current.playerid;
                         }
                         datacall.playerid = playerToUse;

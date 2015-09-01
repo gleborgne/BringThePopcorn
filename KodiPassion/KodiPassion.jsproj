@@ -84,6 +84,15 @@
     <Content Include="controls\nowplayingbar\nowplayingbar.less" />
     <Content Include="controls\nowplayingbar\nowplayingbar.html" />
     <TypeScriptCompile Include="controls\nowplayingbar\nowplayingbar.ts" />
+    <TypeScriptCompile Include="controls\playingcontent\playingcontent.ts" />
+    <Content Include="controls\playingcontent\playingcontent.css" />
+    <Content Include="controls\playingcontent\playingcontent.js" />
+    <Content Include="controls\playingcontent\playingcontent.js.map" />
+    <Content Include="controls\playingcontent\playingcontent.less" />
+    <Content Include="controls\playlist\playlist.css" />
+    <Content Include="controls\playlist\playlist.js" />
+    <Content Include="controls\playlist\playlist.js.map" />
+    <Content Include="controls\playlist\playlist.less" />
     <Content Include="controls\remote\remote.css" />
     <Content Include="controls\remote\remote.html" />
     <Content Include="controls\remote\remote.js" />
@@ -94,6 +103,7 @@
     <Content Include="controls\settingsform\settingsform.js.map" />
     <Content Include="controls\settingsform\settingsform.less" />
     <Content Include="controls\settingsform\settingsform.html" />
+    <TypeScriptCompile Include="controls\playlist\playlist.ts" />
     <TypeScriptCompile Include="controls\remote\remote.ts" />
     <TypeScriptCompile Include="controls\settingsform\settingsform.ts" />
     <Content Include="controls\settingslist\settingslist.css" />
@@ -413,6 +423,7 @@
     <Content Include="scripts\WinJS\js\en-US\ui.strings.js" />
     <Content Include="scripts\WinJS\js\ui.js" />
     <Content Include="templates\actor.html" />
+    <Content Include="templates\playlistitem.html" />
     <Content Include="templates\tvshowposter.html" />
     <Content Include="templates\moviesplitview.html" />
     <Content Include="templates\movieposter.html" />

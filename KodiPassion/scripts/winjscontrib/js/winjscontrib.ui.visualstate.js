@@ -40,6 +40,9 @@
 
             checkState: function (name, state) {
                 var ctrl = this;
+                if (!ctrl.element)
+                    return;
+
                 var target = ctrl.target || ctrl.element.parentElement;
                 var targetW = target.clientWidth;
                 var targetH = target.clientHeight;

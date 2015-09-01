@@ -121,7 +121,7 @@ declare module Kodi.NowPlaying {
         time: string;
         totaltime: string;
         thumbnail: string;
-        playerid: number;
+        playerid?: number;
         playlistid: number;
         volume: number;
         muted: boolean;
@@ -342,7 +342,7 @@ declare module Kodi.API.Profiles {
 }
 declare module Kodi.API.PlayList {
     function getProperties(playlistid: any): WinJS.Promise<{}>;
-    function getItems(playlistid: any): WinJS.Promise<{}>;
+    function getItems(playlistid: any): WinJS.Promise<any>;
     function removeAt(playlistid: any, position: any): WinJS.Promise<{}>;
     function swap(playlistid: any, position: any, position2: any): WinJS.Promise<{}>;
     function insertSong(playlistid: any, position: any, songId: any): WinJS.Promise<{}>;

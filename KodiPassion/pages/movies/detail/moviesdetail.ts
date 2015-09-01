@@ -15,10 +15,12 @@
         visualstate: any;
         scrollContainer: HTMLElement;
         scrollDelay: number;
+        actorsAspectRatio: any;
 
         processed(element, options) {
             this.movie = options.movie;
-
+            this.element.id = "page-" + WinJSContrib.Utils.guid();
+            this.actorsAspectRatio.prefix = "#" + this.element.id + " .page-moviesdetail";
             this.eventTracker.addEvent(this.scrollContainer, "scroll", () => {
                 cancelAnimationFrame(this.scrollDelay);
                 this.scrollDelay = requestAnimationFrame(() => {
@@ -121,6 +123,6 @@
         }
     }
 
-    WinJS.UI.Pages.define(MovieDetailPage.url, MovieDetailPage);
+    export var MovieDetail = WinJS.UI.Pages.define(MovieDetailPage.url, MovieDetailPage);
 
 }

@@ -10,7 +10,7 @@
         time: string;
         totaltime: string;
         thumbnail: string;
-        playerid: number;
+        playerid?: number;
         playlistid: number;
         volume: number;
         muted: boolean;
@@ -36,8 +36,8 @@
     }
 
     var ObservablePlaying = <any>WinJS.Binding.define({
-        id: 0, position: 0, progress: 0, enabled: 0, speed: 0, label: '', time: '', totaltime: '', type: null,
-        thumbnail: undefined, playerid: 0, playlistid: 0, volume: 0, muted: false, reachable: 0,
+        id: null, position: 0, progress: 0, enabled: 0, speed: 0, label: '', time: '', totaltime: '', type: null,
+        thumbnail: undefined, playerid: null, playlistid: null, volume: 0, muted: false, reachable: 0,
         subtitleenabled: false, currentsubtitle: null, currentaudiostream: null,
         checking: false, hasLanguages: false, hasSubtitles: false, hasLanguagesOrSubtitles: false,
         isPlaying: false, isPlayingMusic: false, isPlayingVideo: false, isPlayingTvShow: false, isPlayingMovie: false
@@ -105,20 +105,27 @@
             });
 
             Kodi.API.Player.currentItem(undefined).done(function (currentItem) {
-                var id = Kodi.API.Player.currentPlayer.playerid;
-                Kodi.API.Player.properties(id).done(function (props) {
-                    if (props && currentItem) {
-                        nowPlaying(props, currentItem.item);
-                    }
-                    if (current.checking) {
-                        current.checking = false;
-                    }
+                if (Kodi.API.Player.currentPlayer) {
+                    var id = Kodi.API.Player.currentPlayer.playerid;
+                    Kodi.API.Player.properties(id).done(function (props) {
+                        if (props && currentItem) {
+                            nowPlaying(props, currentItem.item);
+                        }
+                        if (current.checking) {
+                            current.checking = false;
+                        }
+                        complete(current);
+                    }, function (err) {
+                        checkError(err);
+                        complete(current);
+                    });
+                } else {
+                    current.playerid = null;
                     complete(current);
-                }, function (err) {
-                    checkError(err);
-                    complete(current);
-                });
+                }
             }, function (err) {
+                
+
                 checkError(err);
                 complete(current);
             });

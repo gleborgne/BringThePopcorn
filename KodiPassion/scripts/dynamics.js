@@ -238,7 +238,7 @@
     return "" + v + (unitForProperty(key, v));
   };
 
-  getCurrentProperties = function(el, keys) {
+  getCurrentProperties = function (el, keys) {      
     var isSVG, key, matrix, properties, style, v, _i, _j, _len, _len1, _ref;
     properties = {};
     isSVG = isSVGElement(el);

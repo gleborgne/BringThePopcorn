@@ -1,0 +1,14 @@
+﻿<div class="playlist-item">
+    <img class="thumbnail" data-win-bind="src : thumbnail Kodi.Utils.toThumbnailBg" />
+    <div class="desc">
+        <div class="title" data-win-bind="innerHTML: label"></div>
+        <div class="album">
+            <div data-win-bind="innerHTML: artist Kodi.Utils.stringlist; display: artist WinJSContrib.Bindings.showIf"></div>
+            <div data-win-bind="innerHTML: album; display: album WinJSContrib.Bindings.showIf"></div>
+        </div>
+    </div>
+    <div class="actions">
+        <button class="blink btnplay kdp-play"></button>
+        <button class="blink btnremove kdp-close"></button>
+    </div>
+</div>

@@ -3,8 +3,8 @@ var Kodi;
     var NowPlaying;
     (function (NowPlaying) {
         var ObservablePlaying = WinJS.Binding.define({
-            id: 0, position: 0, progress: 0, enabled: 0, speed: 0, label: '', time: '', totaltime: '', type: null,
-            thumbnail: undefined, playerid: 0, playlistid: 0, volume: 0, muted: false, reachable: 0,
+            id: null, position: 0, progress: 0, enabled: 0, speed: 0, label: '', time: '', totaltime: '', type: null,
+            thumbnail: undefined, playerid: null, playlistid: null, volume: 0, muted: false, reachable: 0,
             subtitleenabled: false, currentsubtitle: null, currentaudiostream: null,
             checking: false, hasLanguages: false, hasSubtitles: false, hasLanguagesOrSubtitles: false,
             isPlaying: false, isPlayingMusic: false, isPlayingVideo: false, isPlayingTvShow: false, isPlayingMovie: false
@@ -62,19 +62,25 @@ var Kodi;
                 }, function () {
                 });
                 Kodi.API.Player.currentItem(undefined).done(function (currentItem) {
-                    var id = Kodi.API.Player.currentPlayer.playerid;
-                    Kodi.API.Player.properties(id).done(function (props) {
-                        if (props && currentItem) {
-                            nowPlaying(props, currentItem.item);
-                        }
-                        if (NowPlaying.current.checking) {
-                            NowPlaying.current.checking = false;
-                        }
+                    if (Kodi.API.Player.currentPlayer) {
+                        var id = Kodi.API.Player.currentPlayer.playerid;
+                        Kodi.API.Player.properties(id).done(function (props) {
+                            if (props && currentItem) {
+                                nowPlaying(props, currentItem.item);
+                            }
+                            if (NowPlaying.current.checking) {
+                                NowPlaying.current.checking = false;
+                            }
+                            complete(NowPlaying.current);
+                        }, function (err) {
+                            checkError(err);
+                            complete(NowPlaying.current);
+                        });
+                    }
+                    else {
+                        NowPlaying.current.playerid = null;
                         complete(NowPlaying.current);
-                    }, function (err) {
-                        checkError(err);
-                        complete(NowPlaying.current);
-                    });
+                    }
                 }, function (err) {
                     checkError(err);
                     complete(NowPlaying.current);

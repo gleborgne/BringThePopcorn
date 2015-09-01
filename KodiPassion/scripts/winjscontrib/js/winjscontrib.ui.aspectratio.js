@@ -98,7 +98,7 @@
                 var ctrl = this;
                 if (!ctrl.styleElt) {
                     ctrl.styleElt = document.createElement('STYLE');
-                    ctrl.element.parentElement.appendChild(ctrl.styleElt);
+                    ctrl.element.appendChild(ctrl.styleElt);
                 }
                 ctrl.updateLayout();
             },

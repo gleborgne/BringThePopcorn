@@ -1,0 +1,53 @@
+﻿@import "../../css/apptheme.less";
+
+.playlistcontrol {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .playlist-item{
+        padding : 8px 16px;
+        border-bottom: 1px solid #333;
+
+        &.current{
+            background-color: rgba(90,90,90,0.4);
+        }
+
+        .hflex();
+
+
+        .thumbnail{
+            height: 40px;
+            margin-right : 10px;
+        }
+
+        .desc{
+            flex: 1;
+            margin-right : 10px;
+
+            .title{
+                font-weight: 500;
+                line-height: 1.2em;
+            }
+            .album{
+                color: #777;
+                font-style: italic;
+                font-size: 0.9rem;
+                line-height: 1.2em;
+            }
+        }
+
+        .actions{
+            button{
+                .roundButton(40px);
+                line-height: 42px;
+                border : 1px solid @kodiBlue;
+                background-color: transparent;
+                color: @kodiBlue;
+                margin-right : 10px;
+                font-size: 16pt;
+            }
+        }
+    }
+}
