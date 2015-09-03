@@ -1,4 +1,4 @@
-var KodiPassion;
+﻿var KodiPassion;
 (function (KodiPassion) {
     var Templates;
     (function (Templates) {
@@ -169,4 +169,5 @@ var KodiPassion;
     }
     KodiPassion.mapKodiApi = mapKodiApi;
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=default.js.map
+
+//# sourceMappingURL=../../KodiPassion/js/default.js.map

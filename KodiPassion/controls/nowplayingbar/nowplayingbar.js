@@ -1,4 +1,4 @@
-var KodiPassion;
+﻿var KodiPassion;
 (function (KodiPassion) {
     var UI;
     (function (UI) {
@@ -74,4 +74,5 @@ var KodiPassion;
         UI.NowPlayingSummary = WinJS.UI.Pages.define(NowPlayingBarControl.url, NowPlayingBarControl);
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=nowplayingbar.js.map
+
+//# sourceMappingURL=../../../KodiPassion/controls/nowplayingbar/nowplayingbar.js.map

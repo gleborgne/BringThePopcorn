@@ -1,4 +1,4 @@
-var KodiPassion;
+﻿var KodiPassion;
 (function (KodiPassion) {
     var UI;
     (function (UI) {
@@ -92,6 +92,7 @@ var KodiPassion;
                         }, 4000);
                     }
                     else {
+                        this.moviesbloc.style.display = "none";
                     }
                 };
                 HomePage.prototype.loadTvshows = function (data) {
@@ -122,6 +123,9 @@ var KodiPassion;
                             _this.flipTvshows();
                         }, 5000);
                     }
+                    else {
+                        this.tvshowsbloc.style.display = "none";
+                    }
                 };
                 HomePage.prototype.loadAlbums = function (data) {
                     var _this = this;
@@ -139,6 +143,9 @@ var KodiPassion;
                         WinJS.Promise.join(p).then(function () {
                             _this.albumscontainer.appendChild(container);
                         });
+                    }
+                    else {
+                        this.musicbloc.style.display = "none";
                     }
                 };
                 HomePage.prototype.getSortFunction = function (catalog, fieldname) {
@@ -205,6 +212,20 @@ var KodiPassion;
                         });
                     }
                 };
+                HomePage.prototype.albumsGenres = function () {
+                    if (this.data && this.data.tvshowGenres && this.data.tvshowGenres.genres) {
+                        KodiPassion.UI.GenrePicker.pick(this.data.musicGenres.genres).then(function (genre) {
+                            if (genre) {
+                                if (genre === "all") {
+                                    WinJS.Navigation.navigate("/pages/albums/list/albumslist.html");
+                                }
+                                else {
+                                    WinJS.Navigation.navigate("/pages/albums/list/albumslist.html", { genre: genre.label });
+                                }
+                            }
+                        });
+                    }
+                };
                 HomePage.prototype.unload = function () {
                     this.allowAutoFlip = false;
                 };
@@ -216,4 +237,5 @@ var KodiPassion;
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=home.js.map
+
+//# sourceMappingURL=../../../KodiPassion/pages/home/home.js.map

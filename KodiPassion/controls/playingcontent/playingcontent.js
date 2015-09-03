@@ -1,4 +1,4 @@
-var KodiPassion;
+﻿var KodiPassion;
 (function (KodiPassion) {
     var UI;
     (function (UI) {
@@ -110,7 +110,7 @@ var KodiPassion;
                     if (!_this.currentContent || !_this.currentContent.classList.contains("emptyplaying")) {
                         _this.currentContent = document.createElement("DIV");
                         _this.currentContent.classList.add("emptyplaying");
-                        _this.currentContent.innerHTML = '<div class="content"><img src="/images/logos/KodiPassion-notitle-white.svg"/><div class="message">nothing is currently playing</div></div>';
+                        _this.currentContent.innerHTML = '<div class="content"><img src="/images/logos/KodiPassion-notitle-white.svg"  draggable="false"/><div class="message">nothing is currently playing</div></div>';
                         _this.element.appendChild(_this.currentContent);
                     }
                 });
@@ -174,4 +174,5 @@ var KodiPassion;
         UI.PlayingContent = WinJS.Class.mix(WinJS.Utilities.markSupportedForProcessing(PlayingContentControl), WinJS.Utilities.eventMixin, WinJS.Utilities.createEventProperties("myevent"));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=playingcontent.js.map
+
+//# sourceMappingURL=../../../KodiPassion/controls/playingcontent/playingcontent.js.map

@@ -1,4 +1,4 @@
-var KodiPassion;
+﻿var KodiPassion;
 (function (KodiPassion) {
     var UI;
     (function (UI) {
@@ -104,4 +104,5 @@ var KodiPassion;
         UI.PlayList = WinJS.Class.mix(WinJS.Utilities.markSupportedForProcessing(PlayListControl), WinJS.Utilities.eventMixin, WinJS.Utilities.createEventProperties("myevent"));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=playlist.js.map
+
+//# sourceMappingURL=../../../KodiPassion/controls/playlist/playlist.js.map

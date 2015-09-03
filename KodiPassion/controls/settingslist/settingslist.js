@@ -1,4 +1,4 @@
-var KodiPassion;
+﻿var KodiPassion;
 (function (KodiPassion) {
     var UI;
     (function (UI) {
@@ -116,4 +116,5 @@ var KodiPassion;
         UI.SettingsList = WinJS.UI.Pages.define(SettingsListControl.url, SettingsListControl);
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=settingslist.js.map
+
+//# sourceMappingURL=../../../KodiPassion/controls/settingslist/settingslist.js.map

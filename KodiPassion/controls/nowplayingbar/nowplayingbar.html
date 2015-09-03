@@ -10,7 +10,7 @@
 <body>
     <div class="nowplayingbar">
         <div class="desc" data-win-bind="display : enabled WinJSContrib.Bindings.showIf">
-            <img class="thumb" data-win-bind="src : thumbnail Kodi.Utils.toThumbnailBg" tap="toggleView" />
+            <img class="thumb" data-win-bind="src : thumbnail Kodi.Utils.toThumbnailBg" tap="toggleView"  draggable="false" />
             <div class="desc-progress">
                 <div class="label win-type-ellipsis" data-win-bind="innerText : label"></div>
                 <input type="range" max="100" id="rangeSeek" member data-win-bind="value : progress" />

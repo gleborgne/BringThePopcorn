@@ -98,6 +98,7 @@
                     this.flipMovies();
                 }, 4000);
             } else {
+                this.moviesbloc.style.display = "none";
             }
         }
 
@@ -130,12 +131,14 @@
                 setTimeout(() => {
                     this.flipTvshows();
                 }, 5000);
+            } else {
+                this.tvshowsbloc.style.display = "none";
             }
         }
 
         loadAlbums(data: Kodi.Data.IMediaLibrary) {
             if (data.music && data.music.albums) {
-                
+
                 var container = document.createDocumentFragment();
                 var p = [];
                 data.recentMusic.albums.slice(0, 12).forEach((a) => {
@@ -150,6 +153,8 @@
                 WinJS.Promise.join(p).then(() => {
                     this.albumscontainer.appendChild(container);
                 });
+            } else {
+                this.musicbloc.style.display = "none";
             }
         }
 
@@ -218,6 +223,20 @@
                             WinJS.Navigation.navigate("/pages/tvshows/list/tvshowslist.html");
                         } else {
                             WinJS.Navigation.navigate("/pages/tvshows/list/tvshowslist.html", { genre: genre.label });
+                        }
+                    }
+                });
+            }
+        }
+
+        albumsGenres() {
+            if (this.data && this.data.tvshowGenres && this.data.tvshowGenres.genres) {
+                KodiPassion.UI.GenrePicker.pick(this.data.musicGenres.genres).then(function (genre) {
+                    if (genre) {
+                        if (genre === "all") {
+                            WinJS.Navigation.navigate("/pages/albums/list/albumslist.html");
+                        } else {
+                            WinJS.Navigation.navigate("/pages/albums/list/albumslist.html", { genre: genre.label });
                         }
                     }
                 });

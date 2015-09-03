@@ -1,4 +1,4 @@
-var KodiPassion;
+﻿var KodiPassion;
 (function (KodiPassion) {
     var UI;
     (function (UI) {
@@ -54,4 +54,5 @@ var KodiPassion;
         };
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=loader.js.map
+
+//# sourceMappingURL=../../../KodiPassion/controls/loader/loader.js.map

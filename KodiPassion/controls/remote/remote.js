@@ -1,4 +1,4 @@
-var KodiPassion;
+﻿var KodiPassion;
 (function (KodiPassion) {
     var UI;
     (function (UI) {
@@ -147,4 +147,5 @@ var KodiPassion;
         UI.RemoteController = WinJS.UI.Pages.define(RemoteControllerControl.url, RemoteControllerControl);
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=remote.js.map
+
+//# sourceMappingURL=../../../KodiPassion/controls/remote/remote.js.map
