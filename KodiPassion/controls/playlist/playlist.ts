@@ -4,7 +4,10 @@
         eventTracker: WinJSContrib.UI.EventTracker;
         itemTemplate: WinJS.Binding.Template;
         currentId: number;
+        throttle: number;
         _items: any[];
+        lastrefresh: Date;
+
 
         constructor(element?, options?) {
             this.element = element || document.createElement('DIV');
@@ -20,6 +23,26 @@
             this.eventTracker.addBinding(Kodi.NowPlaying.current, "id", () => {
                 this.refresh();
             });
+
+            this.eventTracker.addBinding(Kodi.NowPlaying.current, "expanded", () => {
+                this.refresh(true);
+                if (!Kodi.NowPlaying.current.expanded) {
+                    this.element.innerHTML = "";
+                }
+            });
+
+            this.eventTracker.addEvent(WinJS.Application, "Playlist.OnAdd", () => {
+                clearTimeout(this.throttle);
+                this.throttle = setTimeout(() => {
+                    var delta = (<any>new Date()) - <any>this.lastrefresh;
+                    if (delta > 1000) {
+                        this.refresh();
+                    }
+                }, 700);
+                
+            });
+
+            
         }
 
         get items() {
@@ -28,50 +51,65 @@
 
         set items(val) {
             this._items = val;
-            this.renderItems();
+            
         }
 
-        refresh() {
-            Kodi.API.PlayList.getItems(Kodi.NowPlaying.current.playlistid).then((playlist) =>{
-                this.items = playlist.items;
-            });
+        refresh(animate? : boolean) {
+            if (Kodi.NowPlaying.current.expanded) {
+                Kodi.API.PlayList.getItems(Kodi.NowPlaying.current.playlistid).then((playlist) => {
+                    this.items = playlist.items;
+                    this.renderItems(animate);
+                    this.lastrefresh = new Date();
+                });
+            }
         }
 
-        renderItems() {
-            var container = document.createDocumentFragment();
+        renderItems(animate: boolean) {
+            //var container = document.createDocumentFragment();
             var p = [];
-            this.items.forEach((i, index) => {
-                p.push(this.itemTemplate.render(i).then((rendered) => {
-                    container.appendChild(rendered);
-                    if (i.id == Kodi.NowPlaying.current.id) {
-                        rendered.classList.add("current");
-                    }
+            var elts = [];
 
-                    var btnplay = rendered.querySelector(".btnplay");
-                    var btnremove = rendered.querySelector(".btnremove");
+            this.element.innerHTML = "";
 
-                    WinJSContrib.UI.tap(btnplay, () => {
-                        return Kodi.API.Player.moveTo(Kodi.NowPlaying.current.playerid, index).then(() => {
-                            this.refresh();
-                        });
-                    });
+            if (this.items) {
+                this.items.forEach((i, index) => {
+                    p.push(this.itemTemplate.render(i).then((rendered) => {
+                        elts.push(rendered);
+                        if (animate) {
+                            rendered.style.opacity = "0";
+                        }
+                        this.element.appendChild(rendered);
+                        if (i.id == Kodi.NowPlaying.current.id) {
+                            rendered.classList.add("current");
+                        }
 
-                    WinJSContrib.UI.tap(btnremove, () => {
-                        return Kodi.API.PlayList.removeAt(Kodi.NowPlaying.current.playlistid, index).then(() => {
-                            return WinJSContrib.UI.removeElementAnimation(rendered).then(() => {
-                                //this.refresh();
+                        var btnplay = rendered.querySelector(".btnplay");
+                        var btnremove = rendered.querySelector(".btnremove");
+
+                        WinJSContrib.UI.tap(btnplay, () => {
+                            return Kodi.API.Player.moveTo(Kodi.NowPlaying.current.playerid, index).then(() => {
+                                this.refresh();
                             });
                         });
-                    });
-                }));
-            });
 
-            WinJS.Promise.join(p).then(() => {
-                this.element.style.opacity = "0";
-                this.element.innerHTML = "";
-                this.element.appendChild(container);
-                this.element.style.opacity = "1";
-            });
+                        WinJSContrib.UI.tap(btnremove, () => {
+                            return Kodi.API.PlayList.removeAt(Kodi.NowPlaying.current.playlistid, index).then(() => {
+                                return WinJSContrib.UI.removeElementAnimation(rendered).then(() => {
+                                    //this.refresh();
+                                });
+                            });
+                        });
+                    }));
+                });
+
+                WinJS.Promise.join(p).then(() => {
+                    if (animate) {
+                        WinJS.UI.Animation.enterPage(elts);
+                    }
+                    //    this.element.innerHTML = "";
+                    //    this.element.appendChild(container);
+                });
+            }
         }
 
         dispose() {

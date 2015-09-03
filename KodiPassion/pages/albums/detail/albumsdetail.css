@@ -1,0 +1,76 @@
+﻿.page-albumsdetail {
+  width: 100%;
+  height: 100%;
+  display: -ms-grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: 400px 1fr;
+}
+.page-albumsdetail .cmd {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #12b2e7;
+  background-color: #12b2e7;
+  color: white;
+}
+.page-albumsdetail .song {
+  margin-bottom: 10px;
+}
+.page-albumsdetail .song .cmd {
+  background-color: transparent;
+  color: #12b2e7;
+}
+.page-albumsdetail .cover {
+  padding: 40px;
+}
+.page-albumsdetail .cover .album-desc {
+  color: #777;
+  font-size: 1rem;
+}
+.page-albumsdetail .cover .album-desc .title {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: white;
+}
+.page-albumsdetail .cover .album-desc .artists {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+.page-albumsdetail .cover .coverpic {
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  margin-bottom: 10px;
+}
+.page-albumsdetail .cover .album-actions {
+  text-align: right;
+  margin-bottom: 10px;
+}
+.page-albumsdetail .album-details {
+  -ms-grid-column: 2;
+  padding: 40px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.page-albumsdetail .album-details .album-songs {
+  flex: 1;
+}
+@media screen and (max-width: 800px) {
+  .page-albumsdetail {
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .page-albumsdetail .cover {
+    padding: 20px;
+  }
+  .page-albumsdetail .cover .coverpic {
+    max-width: 400px;
+  }
+  .page-albumsdetail .album-details {
+    padding: 20px;
+    overflow: hidden;
+  }
+}

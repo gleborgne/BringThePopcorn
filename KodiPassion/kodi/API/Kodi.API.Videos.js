@@ -108,6 +108,10 @@ var Kodi;
                     return API.kodiRequest('VideoLibrary.Scan', {});
                 }
                 Movies.scan = scan;
+                function clean() {
+                    return API.kodiRequest('VideoLibrary.Clean', {});
+                }
+                Movies.clean = clean;
             })(Movies = Videos.Movies || (Videos.Movies = {}));
         })(Videos = API.Videos || (API.Videos = {}));
     })(API = Kodi.API || (Kodi.API = {}));

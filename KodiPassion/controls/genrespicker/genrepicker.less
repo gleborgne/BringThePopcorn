@@ -32,12 +32,24 @@
             margin-bottom: 10px;
             font-size: 1.3rem;
             padding: 0.5em 1em;
-            background-color : rgba(60,60,60,0.3);
+            background-color: rgba(60,60,60,0.3);
 
             &.genre-all {
                 width: 100%;
                 text-align: center;
                 text-transform: uppercase;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .genrepickerctrl {
+        .genre-items {
+            padding: 60px 20px 20px 20px;
+
+            .genre {
+                width: 100%;
             }
         }
     }

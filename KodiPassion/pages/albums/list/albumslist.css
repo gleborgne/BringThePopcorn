@@ -1,0 +1,9 @@
+﻿.page-albumslist .albumslist .album-item {
+  margin: 0;
+}
+.page-albumslist.view-wall .win-listview .win-gridlayout .win-container {
+  margin: 0 1px 1px 0;
+}
+.page-albumslist.view-wall .win-listview .win-vertical .win-gridlayout.win-surface {
+  margin: 0;
+}

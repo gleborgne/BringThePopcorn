@@ -17,6 +17,21 @@ var KodiPassion;
                 this.eventTracker.addBinding(Kodi.NowPlaying.current, "id", function () {
                     _this.refresh();
                 });
+                this.eventTracker.addBinding(Kodi.NowPlaying.current, "expanded", function () {
+                    _this.refresh(true);
+                    if (!Kodi.NowPlaying.current.expanded) {
+                        _this.element.innerHTML = "";
+                    }
+                });
+                this.eventTracker.addEvent(WinJS.Application, "Playlist.OnAdd", function () {
+                    clearTimeout(_this.throttle);
+                    _this.throttle = setTimeout(function () {
+                        var delta = (new Date()) - _this.lastrefresh;
+                        if (delta > 1000) {
+                            _this.refresh();
+                        }
+                    }, 700);
+                });
             }
             Object.defineProperty(PlayListControl.prototype, "items", {
                 get: function () {
@@ -24,49 +39,61 @@ var KodiPassion;
                 },
                 set: function (val) {
                     this._items = val;
-                    this.renderItems();
                 },
                 enumerable: true,
                 configurable: true
             });
-            PlayListControl.prototype.refresh = function () {
+            PlayListControl.prototype.refresh = function (animate) {
                 var _this = this;
-                Kodi.API.PlayList.getItems(Kodi.NowPlaying.current.playlistid).then(function (playlist) {
-                    _this.items = playlist.items;
-                });
+                if (Kodi.NowPlaying.current.expanded) {
+                    Kodi.API.PlayList.getItems(Kodi.NowPlaying.current.playlistid).then(function (playlist) {
+                        _this.items = playlist.items;
+                        _this.renderItems(animate);
+                        _this.lastrefresh = new Date();
+                    });
+                }
             };
-            PlayListControl.prototype.renderItems = function () {
+            PlayListControl.prototype.renderItems = function (animate) {
                 var _this = this;
-                var container = document.createDocumentFragment();
+                //var container = document.createDocumentFragment();
                 var p = [];
-                this.items.forEach(function (i, index) {
-                    p.push(_this.itemTemplate.render(i).then(function (rendered) {
-                        container.appendChild(rendered);
-                        if (i.id == Kodi.NowPlaying.current.id) {
-                            rendered.classList.add("current");
-                        }
-                        var btnplay = rendered.querySelector(".btnplay");
-                        var btnremove = rendered.querySelector(".btnremove");
-                        WinJSContrib.UI.tap(btnplay, function () {
-                            return Kodi.API.Player.moveTo(Kodi.NowPlaying.current.playerid, index).then(function () {
-                                _this.refresh();
-                            });
-                        });
-                        WinJSContrib.UI.tap(btnremove, function () {
-                            return Kodi.API.PlayList.removeAt(Kodi.NowPlaying.current.playlistid, index).then(function () {
-                                return WinJSContrib.UI.removeElementAnimation(rendered).then(function () {
-                                    //this.refresh();
+                var elts = [];
+                this.element.innerHTML = "";
+                if (this.items) {
+                    this.items.forEach(function (i, index) {
+                        p.push(_this.itemTemplate.render(i).then(function (rendered) {
+                            elts.push(rendered);
+                            if (animate) {
+                                rendered.style.opacity = "0";
+                            }
+                            _this.element.appendChild(rendered);
+                            if (i.id == Kodi.NowPlaying.current.id) {
+                                rendered.classList.add("current");
+                            }
+                            var btnplay = rendered.querySelector(".btnplay");
+                            var btnremove = rendered.querySelector(".btnremove");
+                            WinJSContrib.UI.tap(btnplay, function () {
+                                return Kodi.API.Player.moveTo(Kodi.NowPlaying.current.playerid, index).then(function () {
+                                    _this.refresh();
                                 });
                             });
-                        });
-                    }));
-                });
-                WinJS.Promise.join(p).then(function () {
-                    _this.element.style.opacity = "0";
-                    _this.element.innerHTML = "";
-                    _this.element.appendChild(container);
-                    _this.element.style.opacity = "1";
-                });
+                            WinJSContrib.UI.tap(btnremove, function () {
+                                return Kodi.API.PlayList.removeAt(Kodi.NowPlaying.current.playlistid, index).then(function () {
+                                    return WinJSContrib.UI.removeElementAnimation(rendered).then(function () {
+                                        //this.refresh();
+                                    });
+                                });
+                            });
+                        }));
+                    });
+                    WinJS.Promise.join(p).then(function () {
+                        if (animate) {
+                            WinJS.UI.Animation.enterPage(elts);
+                        }
+                        //    this.element.innerHTML = "";
+                        //    this.element.appendChild(container);
+                    });
+                }
             };
             PlayListControl.prototype.dispose = function () {
                 this.eventTracker.dispose();

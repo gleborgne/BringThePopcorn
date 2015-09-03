@@ -1,2 +1,88 @@
-﻿.albumsdetail {
+﻿@import "../../../css/apptheme.less";
+
+.page-albumsdetail {
+    width: 100%;
+    height: 100%;
+    display: -ms-grid;
+    -ms-grid-rows: 1fr;
+    -ms-grid-columns: 400px 1fr;
+
+    .cmd {
+        .roundButton(40px);
+        border: 1px solid @kodiBlue;
+        background-color: @kodiBlue;
+        color: white;
+    }
+
+    .song {
+        margin-bottom: 10px;
+        .cmd{
+            background-color: transparent;
+            color: @kodiBlue;
+        }
+    }
+
+    .cover {
+        padding: 40px;
+
+        .album-desc {
+            color: #777;
+            font-size: 1rem;
+
+            .title {
+                font-size: 1.6rem;
+                font-weight: 500;
+                color: white;
+            }
+
+            .artists{
+                font-size: 1.6rem;
+                font-weight: 500;
+            }
+        }
+
+        .coverpic {
+            background-size: cover;
+            background-position: center;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+
+        .album-actions {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+    }
+
+    .album-details {
+        -ms-grid-column: 2;
+        padding: 40px;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .album-songs {
+            flex: 1;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .page-albumsdetail {
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .cover {
+            padding: 20px;
+
+            .coverpic {
+                max-width: 400px;
+            }
+        }
+
+        .album-details {
+            padding: 20px;
+            overflow: hidden;
+        }
+    }
 }

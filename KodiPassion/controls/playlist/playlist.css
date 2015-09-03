@@ -1,11 +1,11 @@
-.playlistcontrol {
+﻿.playlistcontrol {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 }
 .playlistcontrol .playlist-item {
-  padding: 8px 16px;
+  padding: 4px 16px;
   border-bottom: 1px solid #333;
   display: flex;
   flex-flow: row nowrap;
@@ -14,9 +14,16 @@
 .playlistcontrol .playlist-item.current {
   background-color: rgba(90, 90, 90, 0.4);
 }
+.playlistcontrol .playlist-item.current:hover {
+  background-color: rgba(90, 90, 90, 0.6);
+}
+.playlistcontrol .playlist-item:hover {
+  background-color: rgba(90, 90, 90, 0.6);
+}
 .playlistcontrol .playlist-item .thumbnail {
   height: 40px;
   margin-right: 10px;
+  flex-shrink: 0;
 }
 .playlistcontrol .playlist-item .desc {
   flex: 1;
@@ -25,12 +32,16 @@
 .playlistcontrol .playlist-item .desc .title {
   font-weight: 500;
   line-height: 1.2em;
+  font-size: 1rem;
 }
 .playlistcontrol .playlist-item .desc .album {
   color: #777;
   font-style: italic;
   font-size: 0.9rem;
   line-height: 1.2em;
+}
+.playlistcontrol .playlist-item .actions {
+  flex-shrink: 0;
 }
 .playlistcontrol .playlist-item .actions button {
   width: 40px;
@@ -44,4 +55,7 @@
   color: #12b2e7;
   margin-right: 10px;
   font-size: 16pt;
+}
+.playlistcontrol .playlist-item .actions button:last-child {
+  margin-right: 0;
 }

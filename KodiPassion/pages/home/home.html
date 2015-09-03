@@ -11,38 +11,60 @@
     <div class="page-home" >
         <div data-win-control="WinJSContrib.UI.AspectRatio" data-win-options="{ ratio: Kodi.App.PictureRatios.fanart, max: 90, prefix: '.page-home', target: '.mainsplitview'}"></div>
         <div data-win-control="WinJSContrib.UI.AspectRatio" data-win-options="{ ratio: Kodi.App.PictureRatios.tvshowepisode, baseWidth: 500, prefix: '.page-home', target: '.tvshow-episode'}"></div>
-        <div class="mainbloc">            
+        <div data-win-control="WinJSContrib.UI.AspectRatio" data-win-options="{ baseWidth: 500, baseWidthMargin: 1, prefix: '.page-home', target: '.album-item'}"></div>
+        <div class="mainbloc" member="moviesbloc">            
             <div class="mainsplitview" member="mainsplitview" data-win-control="WinJS.UI.FlipView"></div>
             <div class="sectiontitle">
                 <div class="sectiontitle-item stretch" linkto="/pages/movies/list/movieslist.html">
                     <i class="kdp-movie"></i>
                     all movies
                 </div>
-                <div class="sectiontitle-item">
-                    by source
-                </div>
-                <div class="sectiontitle-item">
+                <div class="sectiontitle-item" tap="moviesGenres">
                     by genre
                 </div>
+                <div class="sectiontitle-item" tap="scanVideos">
+                    scan
+                </div>
+                <div class="sectiontitle-item" tap="cleanVideos">
+                    clean
+                </div>                
             </div>
         </div>
-        <div class="secondbloc">
+        <div class="secondbloc" member="tvshowsbloc">
             <div class="mainsplitview" member="tvshowsflipview" data-win-control="WinJS.UI.FlipView"></div>
             <div class="sectiontitle">
                 <div class="sectiontitle-item stretch" linkto="/pages/tvshows/list/tvshowslist.html">
                     <i class="kdp-movie"></i>
                     all tv shows
                 </div>
-                <div class="sectiontitle-item">
-                    by source
-                </div>
-                <div class="sectiontitle-item">
+                <div class="sectiontitle-item" tap="tvshowsGenres">
                     by genre
                 </div>
+                <div class="sectiontitle-item" tap="scanVideos">
+                    scan
+                </div>
+                <div class="sectiontitle-item" tap="cleanVideos">
+                    clean
+                </div>                
             </div>
         </div>
-        <div class="thirdbloc">
-
+        <div class="thirdbloc" member="musicbloc">
+            <div class="album-items" member="albumscontainer"></div>
+            <div class="sectiontitle">
+                <div class="sectiontitle-item stretch" linkto="/pages/albums/list/albumslist.html">
+                    <i class="kdp-music"></i>
+                    all albums
+                </div>
+                <div class="sectiontitle-item" tap="tvshowsGenres">
+                    by genre
+                </div>
+                <div class="sectiontitle-item" tap="scanVideos">
+                    scan
+                </div>
+                <div class="sectiontitle-item" tap="cleanVideos">
+                    clean
+                </div>
+            </div>
         </div>
     </div>
 </body>

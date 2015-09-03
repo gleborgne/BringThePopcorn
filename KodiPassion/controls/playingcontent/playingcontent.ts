@@ -4,6 +4,7 @@
         currentContent: HTMLElement;
         eventTracker: WinJSContrib.UI.EventTracker;
         currentPlayerId: number;
+        currentPlaylistId: number;
         currentType: string;
 
         constructor(element, options) {
@@ -24,6 +25,7 @@
                 this.updateLayout();
             });
             this.manageSmallScreen();
+            this.showEmpty();
         }
 
         manageSmallScreen() {
@@ -41,7 +43,7 @@
                     var currentSelection = $("#nowplayingcontent .panel.selected");
                     if (!target.classList.contains("selected") || currentSelection.length > 1) {
                         $("#nowplayingcontent .menubar .menu.selected").removeClass("selected");
-                        
+
                         menu.classList.add("selected");
 
                         if (currentSelection.length) {
@@ -57,7 +59,7 @@
                             });
                         }
 
-                        dynamics.animate(target, { translateX : 0 }, {
+                        dynamics.animate(target, { translateX: 0 }, {
                             type: dynamics.spring,
                             duration: 500,
                             frequency: 100,
@@ -74,30 +76,60 @@
 
         setCurrentItem() {
             var id = Kodi.NowPlaying.current.id;
-            if (Kodi.NowPlaying.current.playerid != this.currentPlayerId || Kodi.NowPlaying.current.type != this.currentType) {
+            if (Kodi.NowPlaying.current.playlistid == null || Kodi.NowPlaying.current.playlistid == undefined) {
+                return this.showEmpty();                
+            }
+
+            if (Kodi.NowPlaying.current.playerid != this.currentPlayerId || Kodi.NowPlaying.current.playlistid != this.currentPlaylistId || Kodi.NowPlaying.current.type != this.currentType) {
+                this.currentPlaylistId = Kodi.NowPlaying.current.playlistid;
                 this.currentPlayerId = Kodi.NowPlaying.current.playerid;
                 this.currentType = Kodi.NowPlaying.current.type;
                 this.closeCurrent().then(() => {
                     if (Kodi.NowPlaying.current.id != null && Kodi.NowPlaying.current.id != undefined) {
                         if (Kodi.NowPlaying.current.playlistid != null && Kodi.NowPlaying.current.playlistid != undefined) {
-                            Kodi.API.PlayList.getItems(Kodi.NowPlaying.current.playlistid).then((playlist) => {
-                                if (playlist.items && playlist.items.length > 1) {
-                                    this.showPlayList(playlist.items);
-                                } else {
-                                    if (Kodi.NowPlaying.current.type === "movie") {
-                                        this.showMovie();
-                                    } else if (Kodi.NowPlaying.current.type === "episode") {
-                                        this.showEpisode();
-                                    } else if (Kodi.NowPlaying.current.type === "song") {
-                                    }
+                            return Kodi.API.PlayList.getItems(Kodi.NowPlaying.current.playlistid).then((playlist) => {
+                                if (Kodi.NowPlaying.current.type === "song") {
+                                    return this.showPlayList(playlist.items);
                                 }
-                            });
-                        } else {
+                                else if (playlist.items && playlist.items.length > 1) {
+                                    return this.showPlayList(playlist.items);
+                                } else if (Kodi.NowPlaying.current.type === "movie") {
+                                    return this.showMovie();
+                                } else if (Kodi.NowPlaying.current.type === "episode") {
+                                    return this.showEpisode();
+                                }
+                                return this.showEmpty();
 
+                            });
                         }
                     }
+                    this.showEmpty();
+
                 });
             }
+        }
+
+        showEmpty() {
+            var p = WinJS.Promise.wrap();
+            this.currentPlaylistId = null;
+            this.currentPlayerId = null;
+            this.currentType = null;
+
+            if (this.currentContent && !this.currentContent.classList.contains("emptyplaying")) {
+                p = this.closeCurrent();
+            }
+
+            p.then(() => {
+                if (!this.currentContent || !this.currentContent.classList.contains("emptyplaying")) {
+                    
+
+                    this.currentContent = document.createElement("DIV");
+
+                    this.currentContent.classList.add("emptyplaying");
+                    this.currentContent.innerHTML = '<div class="content"><img src="/images/logos/KodiPassion-notitle-white.svg"/><div class="message">nothing is currently playing</div></div>';
+                    this.element.appendChild(this.currentContent);
+                }
+            });
         }
 
         showMovie() {
@@ -163,5 +195,5 @@
     }
 
     export var PlayingContent = WinJS.Class.mix(WinJS.Utilities.markSupportedForProcessing(PlayingContentControl), WinJS.Utilities.eventMixin,
-        WinJS.Utilities.createEventProperties("myevent"));    
+        WinJS.Utilities.createEventProperties("myevent"));
 }

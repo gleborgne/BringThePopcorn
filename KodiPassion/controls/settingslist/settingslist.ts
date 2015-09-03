@@ -107,7 +107,7 @@
         }
 
         isValidMacAddress(setting: Kodi.Settings.KodiServerSetting) {
-            if (setting.macAddress && setting.macAddress.length) {
+            if (setting.macAddress && setting.macAddress.length == 6) {
                 var res = true;
                 setting.macAddress.forEach((s) => {
                     res = res && <any>s;

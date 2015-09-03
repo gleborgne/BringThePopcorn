@@ -241,6 +241,9 @@
     <Content Include="pages\movies\list\movieslist.less" />
     <Content Include="pages\movies\list\movieslist.html" />
     <TypeScriptCompile Include="pages\movies\list\movieslist.ts" />
+    <Content Include="pages\search\search.less" />
+    <Content Include="pages\search\search.html" />
+    <TypeScriptCompile Include="pages\search\search.ts" />
     <Content Include="pages\settings\serverdetail\serverdetail.css" />
     <Content Include="pages\settings\serverdetail\serverdetail.js" />
     <Content Include="pages\settings\serverdetail\serverdetail.js.map" />
@@ -423,7 +426,9 @@
     <Content Include="scripts\WinJS\js\en-US\ui.strings.js" />
     <Content Include="scripts\WinJS\js\ui.js" />
     <Content Include="templates\actor.html" />
+    <Content Include="templates\album.html" />
     <Content Include="templates\playlistitem.html" />
+    <Content Include="templates\song.html" />
     <Content Include="templates\tvshowposter.html" />
     <Content Include="templates\moviesplitview.html" />
     <Content Include="templates\movieposter.html" />

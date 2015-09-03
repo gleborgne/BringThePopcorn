@@ -1,4 +1,4 @@
-.nowplayingbar {
+﻿.nowplayingbar {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -98,6 +98,15 @@
   font-size: 30pt;
   margin: 0;
   background-color: black;
+}
+.nowplayingbar .actions .btntoggle .kdp-chevron-down {
+  display: none;
+}
+.nowplaying-expanded .nowplayingbar .actions .btntoggle .kdp-chevron-down {
+  display: inline;
+}
+.nowplaying-expanded .nowplayingbar .actions .btntoggle .kdp-chevron-up {
+  display: none;
 }
 @media screen and (max-width: 800px) {
   .nowplayingbar .playercommands {

@@ -1,4 +1,4 @@
-declare module Kodi.App {
+﻿declare module Kodi.App {
     var DefaultGridLayout: {
         horizontal: {
             query: string;
@@ -115,6 +115,7 @@ declare module Kodi.NowPlaying {
         type: string;
         position: number;
         progress: number;
+        expanded: boolean;
         active: boolean;
         enabled: boolean;
         label: string;
@@ -551,6 +552,7 @@ declare module Kodi.API.Videos.Movies {
     function getRecentMovies(): WinJS.Promise<MoviesResultSet>;
     function playMovie(movieid: any, resume?: boolean): WinJS.Promise<any>;
     function scan(): WinJS.Promise<any>;
+    function clean(): WinJS.Promise<any>;
 }
 
 declare module Kodi.API.Websocket {

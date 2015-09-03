@@ -1,4 +1,4 @@
-// Snap.svg 0.3.0
+﻿// Snap.svg 0.3.0
 // 
 // Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
 // 

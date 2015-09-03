@@ -7,7 +7,6 @@ declare module KodiPassion.UI {
 }
 
 module KodiPassion.UI.Pages {
-
     export class MoviesListPage {
         public static url = "/pages/movies/list/movieslist.html";
 
@@ -16,27 +15,25 @@ module KodiPassion.UI.Pages {
         semanticzoom: any;
         element: HTMLElement;
         genretitle: HTMLElement;
-        listitemtemplate: WinJS.Binding.Template;
         itemsStyle: HTMLStyleElement;
         movies: Kodi.API.Videos.Movies.Movie[];
         genres: Kodi.API.Genre[];
         
-
         static moviesViews = {
             "wall": {
                 groupKind: null,
                 groupField: null,
-                template: '/templates/movieposter.html'
+                template: KodiPassion.Templates.movieposter
             },
             "alphabetic": {
                 groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                 groupField: 'title',
-                template: '/templates/movieposter.html'
+                template: KodiPassion.Templates.movieposter
             },
             "year": {
                 groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                 groupField: 'year',
-                template: '/templates/movieposter.html'
+                template: KodiPassion.Templates.movieposter
             }
         }
 
@@ -45,9 +42,7 @@ module KodiPassion.UI.Pages {
             element.classList.add("page-movieslist");
             var view = MoviesListPage.moviesViews["wall"];
             page.itemsPromise = Kodi.Data.loadRootData();
-            if (options && options.genre) {
-                page.selectedGenre = options.genre;
-            }
+            
         }
 
         setView(viewname) {
@@ -59,8 +54,7 @@ module KodiPassion.UI.Pages {
                 page.semanticzoom.dataManager.field = view.groupField;
             }
             page.element.classList.add("view-" + viewname);
-            page.listitemtemplate = new WinJS.Binding.Template(null, { href: view.template });
-            page.semanticzoom.listview.itemTemplate = page.listitemtemplate.element;
+            page.semanticzoom.listview.itemTemplate = view.template.element;
         }
 
         cleanViewClasses() {
@@ -72,6 +66,11 @@ module KodiPassion.UI.Pages {
 
         processed(element, options) {
             var page = this;
+            if (options && options.genre) {
+                page.selectedGenre = options.genre;
+                page.genretitle.innerText = page.selectedGenre;
+            }
+
             page.itemsStyle = <HTMLStyleElement>document.createElement("STYLE");
             page.element.appendChild(page.itemsStyle);
             page.itemsPromise = page.itemsPromise.then(function (data: Kodi.Data.IMediaLibrary) {

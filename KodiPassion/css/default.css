@@ -1,4 +1,4 @@
-h1,
+﻿h1,
 h2,
 h3 {
   font-weight: 300;
@@ -268,6 +268,80 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
     color: white;
   }
 }
+.album-item {
+  height: 80px;
+  width: 500px;
+  background-color: #333;
+  margin-right: 1px;
+  margin-bottom: 1px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.album-item .cover {
+  height: 80px;
+  width: 90px;
+  background-color: #444;
+  position: relative;
+  flex-shrink: 0;
+}
+.album-item .cover .kdp-music {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  text-align: center;
+  line-height: 100px;
+  font-size: 30pt;
+  color: #555;
+}
+.album-item .cover .pic {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+.album-item .cover .pic.imageLoaded {
+  opacity: 1;
+}
+.album-item .desc {
+  padding: 10px;
+}
+.album-item .desc .title {
+  font-weight: 500;
+  font-size: 1rem;
+}
+.album-item .desc .artist {
+  color: #777;
+}
+.song {
+  padding: 4px 8px;
+  border-bottom: 1px solid #555;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+}
+.song .desc {
+  color: #777;
+  flex: 1;
+}
+.song .desc .title {
+  font-size: 1.0rem;
+  font-weight: 500;
+  color: white;
+}
+.song .desc .duration {
+  font-size: 0.8rem;
+}
+.song .song-actions {
+  flex-shrink: 0;
+}
 .tvshow-episode {
   width: 25%;
   position: relative;
@@ -376,6 +450,14 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
   width: 100%;
   text-align: center;
   text-transform: uppercase;
+}
+@media screen and (max-width: 800px) {
+  .genrepickerctrl .genre-items {
+    padding: 60px 20px 20px 20px;
+  }
+  .genrepickerctrl .genre-items .genre {
+    width: 100%;
+  }
 }
 .remote-controller {
   padding: 20px 40px;
@@ -551,12 +633,32 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
   -ms-grid-row-align: center;
   width: 100%;
 }
+.playingcontent {
+  overflow: hidden;
+}
 .playingcontent > .pagecontrol {
   width: 100%;
   height: 100%;
 }
 .playingcontent .page-moviesdetail .actions {
   display: none;
+}
+.playingcontent .emptyplaying {
+  width: 100%;
+  height: 100%;
+  display: -ms-grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: 1fr;
+}
+.playingcontent .emptyplaying .content {
+  opacity: 0.15;
+  max-width: 400px;
+  -ms-grid-row-align: center;
+  -ms-grid-column-align: center;
+  text-align: center;
+}
+.playingcontent .emptyplaying .content img {
+  width: 100%;
 }
 .playlistcontrol {
   width: 100%;
@@ -565,7 +667,7 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
   overflow-y: auto;
 }
 .playlistcontrol .playlist-item {
-  padding: 8px 16px;
+  padding: 4px 16px;
   border-bottom: 1px solid #333;
   display: flex;
   flex-flow: row nowrap;
@@ -574,9 +676,16 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
 .playlistcontrol .playlist-item.current {
   background-color: rgba(90, 90, 90, 0.4);
 }
+.playlistcontrol .playlist-item.current:hover {
+  background-color: rgba(90, 90, 90, 0.6);
+}
+.playlistcontrol .playlist-item:hover {
+  background-color: rgba(90, 90, 90, 0.6);
+}
 .playlistcontrol .playlist-item .thumbnail {
   height: 40px;
   margin-right: 10px;
+  flex-shrink: 0;
 }
 .playlistcontrol .playlist-item .desc {
   flex: 1;
@@ -585,12 +694,16 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
 .playlistcontrol .playlist-item .desc .title {
   font-weight: 500;
   line-height: 1.2em;
+  font-size: 1rem;
 }
 .playlistcontrol .playlist-item .desc .album {
   color: #777;
   font-style: italic;
   font-size: 0.9rem;
   line-height: 1.2em;
+}
+.playlistcontrol .playlist-item .actions {
+  flex-shrink: 0;
 }
 .playlistcontrol .playlist-item .actions button {
   width: 40px;
@@ -604,4 +717,7 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
   color: #12b2e7;
   margin-right: 10px;
   font-size: 16pt;
+}
+.playlistcontrol .playlist-item .actions button:last-child {
+  margin-right: 0;
 }

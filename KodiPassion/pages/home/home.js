@@ -22,8 +22,10 @@ var KodiPassion;
                         registerpointerdown();
                     }, true);
                     Kodi.Data.loadRootData().then(function (data) {
+                        page.data = data;
                         _this.loadMovies(data);
                         _this.loadTvshows(data);
+                        _this.loadAlbums(data);
                     });
                 };
                 HomePage.prototype.flipMovies = function () {
@@ -82,7 +84,8 @@ var KodiPassion;
                                 }
                             });
                         }
-                        var movieslist = data.movies.movies.sort(this.getSortFunction(movies, "movieid"));
+                        var movieslist = data.movies.movies.slice(0, data.movies.movies.length);
+                        movieslist = movieslist.sort(this.getSortFunction(movies, "movieid"));
                         this.mainsplitview.itemDataSource = new WinJS.Binding.List(movieslist).dataSource;
                         setTimeout(function () {
                             _this.flipMovies();
@@ -112,7 +115,8 @@ var KodiPassion;
                                 tvshows[e.tvshowid] = true;
                             }
                         });
-                        var tvshowslist = data.tvshows.tvshows.sort(this.getSortFunction(tvshows, "tvshowid"));
+                        var tvshowslist = data.tvshows.tvshows.slice(0, data.tvshows.tvshows.length);
+                        tvshowslist = tvshowslist.sort(this.getSortFunction(tvshows, "tvshowid"));
                         this.tvshowsflipview.itemDataSource = new WinJS.Binding.List(tvshowslist).dataSource;
                         setTimeout(function () {
                             _this.flipTvshows();
@@ -120,6 +124,22 @@ var KodiPassion;
                     }
                 };
                 HomePage.prototype.loadAlbums = function (data) {
+                    var _this = this;
+                    if (data.music && data.music.albums) {
+                        var container = document.createDocumentFragment();
+                        var p = [];
+                        data.recentMusic.albums.slice(0, 12).forEach(function (a) {
+                            p.push(KodiPassion.Templates.album.render(a).then(function (rendered) {
+                                container.appendChild(rendered);
+                                WinJSContrib.UI.tap(rendered, function () {
+                                    WinJS.Navigation.navigate("/pages/albums/detail/albumsdetail.html", { album: a, navigateStacked: true });
+                                });
+                            }));
+                        });
+                        WinJS.Promise.join(p).then(function () {
+                            _this.albumscontainer.appendChild(container);
+                        });
+                    }
                 };
                 HomePage.prototype.getSortFunction = function (catalog, fieldname) {
                     var calcpoints = function (item) {
@@ -150,6 +170,40 @@ var KodiPassion;
                             return 1;
                         }
                     };
+                };
+                HomePage.prototype.scanVideos = function () {
+                    Kodi.API.Videos.Movies.scan();
+                };
+                HomePage.prototype.cleanVideos = function () {
+                    Kodi.API.Videos.Movies.clean();
+                };
+                HomePage.prototype.moviesGenres = function () {
+                    if (this.data && this.data.movieGenres && this.data.movieGenres.genres) {
+                        KodiPassion.UI.GenrePicker.pick(this.data.movieGenres.genres).then(function (genre) {
+                            if (genre) {
+                                if (genre === "all") {
+                                    WinJS.Navigation.navigate("/pages/movies/list/movieslist.html");
+                                }
+                                else {
+                                    WinJS.Navigation.navigate("/pages/movies/list/movieslist.html", { genre: genre.label });
+                                }
+                            }
+                        });
+                    }
+                };
+                HomePage.prototype.tvshowsGenres = function () {
+                    if (this.data && this.data.tvshowGenres && this.data.tvshowGenres.genres) {
+                        KodiPassion.UI.GenrePicker.pick(this.data.tvshowGenres.genres).then(function (genre) {
+                            if (genre) {
+                                if (genre === "all") {
+                                    WinJS.Navigation.navigate("/pages/tvshows/list/tvshowslist.html");
+                                }
+                                else {
+                                    WinJS.Navigation.navigate("/pages/tvshows/list/tvshowslist.html", { genre: genre.label });
+                                }
+                            }
+                        });
+                    }
                 };
                 HomePage.prototype.unload = function () {
                     this.allowAutoFlip = false;

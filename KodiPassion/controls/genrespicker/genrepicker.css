@@ -1,4 +1,4 @@
-.genrepickerctrl {
+﻿.genrepickerctrl {
   position: absolute;
   left: 0;
   right: 0;
@@ -37,4 +37,12 @@
   width: 100%;
   text-align: center;
   text-transform: uppercase;
+}
+@media screen and (max-width: 800px) {
+  .genrepickerctrl .genre-items {
+    padding: 60px 20px 20px 20px;
+  }
+  .genrepickerctrl .genre-items .genre {
+    width: 100%;
+  }
 }

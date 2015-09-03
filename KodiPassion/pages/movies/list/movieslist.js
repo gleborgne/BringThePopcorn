@@ -12,9 +12,6 @@ var KodiPassion;
                     element.classList.add("page-movieslist");
                     var view = MoviesListPage.moviesViews["wall"];
                     page.itemsPromise = Kodi.Data.loadRootData();
-                    if (options && options.genre) {
-                        page.selectedGenre = options.genre;
-                    }
                 };
                 MoviesListPage.prototype.setView = function (viewname) {
                     var page = this;
@@ -25,8 +22,7 @@ var KodiPassion;
                         page.semanticzoom.dataManager.field = view.groupField;
                     }
                     page.element.classList.add("view-" + viewname);
-                    page.listitemtemplate = new WinJS.Binding.Template(null, { href: view.template });
-                    page.semanticzoom.listview.itemTemplate = page.listitemtemplate.element;
+                    page.semanticzoom.listview.itemTemplate = view.template.element;
                 };
                 MoviesListPage.prototype.cleanViewClasses = function () {
                     var page = this;
@@ -36,6 +32,10 @@ var KodiPassion;
                 };
                 MoviesListPage.prototype.processed = function (element, options) {
                     var page = this;
+                    if (options && options.genre) {
+                        page.selectedGenre = options.genre;
+                        page.genretitle.innerText = page.selectedGenre;
+                    }
                     page.itemsStyle = document.createElement("STYLE");
                     page.element.appendChild(page.itemsStyle);
                     page.itemsPromise = page.itemsPromise.then(function (data) {
@@ -100,17 +100,17 @@ var KodiPassion;
                     "wall": {
                         groupKind: null,
                         groupField: null,
-                        template: '/templates/movieposter.html'
+                        template: KodiPassion.Templates.movieposter
                     },
                     "alphabetic": {
                         groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                         groupField: 'title',
-                        template: '/templates/movieposter.html'
+                        template: KodiPassion.Templates.movieposter
                     },
                     "year": {
                         groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                         groupField: 'year',
-                        template: '/templates/movieposter.html'
+                        template: KodiPassion.Templates.movieposter
                     }
                 };
                 return MoviesListPage;

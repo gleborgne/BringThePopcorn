@@ -3,6 +3,22 @@ var Kodi;
     var Data;
     (function (Data) {
         var pictureslimit = 15;
+        var invalidatedcache = false;
+        var _invalidateAndRefresh = function () {
+            invalidatedcache = true;
+            loadRootData(true);
+        };
+        var _invalidate = function () {
+            invalidatedcache = true;
+        };
+        WinJS.Application.addEventListener("VideoLibrary.OnScanFinished", _invalidateAndRefresh);
+        WinJS.Application.addEventListener("VideoLibrary.OnCleanFinished", _invalidateAndRefresh);
+        WinJS.Application.addEventListener("MusicLibrary.OnScanFinished", _invalidateAndRefresh);
+        WinJS.Application.addEventListener("MusicLibrary.OnCleanFinished", _invalidateAndRefresh);
+        WinJS.Application.addEventListener("VideoLibrary.OnUpdate", _invalidate);
+        WinJS.Application.addEventListener("VideoLibrary.OnRemove", _invalidate);
+        WinJS.Application.addEventListener("MusicLibrary.OnUpdate", _invalidate);
+        WinJS.Application.addEventListener("MusicLibrary.OnRemove", _invalidate);
         Data.SearchDefinitions = {
             movies: { fields: { "label": 10, "genre": 1 } },
             music: { fields: { "label": 10, "artist": 2, "genre": 1 } },
@@ -226,10 +242,11 @@ var Kodi;
                 Kodi.API.currentSettings = Kodi.Settings.load();
                 Kodi.API.Websocket.close();
             }
-            if (!forceLoad && library) {
+            if (!invalidatedcache && !forceLoad && library) {
                 var cachedprom = WinJS.Promise.wrap(library);
                 return cachedprom;
             }
+            invalidatedcache = false;
             var prom = new WinJS.Promise(function (complete, error) {
                 Kodi.API.properties().done(function (sysprops) {
                     if (sysprops) {

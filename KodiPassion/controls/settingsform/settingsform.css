@@ -1,4 +1,4 @@
-.settingsform .formfield {
+﻿.settingsform .formfield {
   margin-bottom: 0.4rem;
 }
 .settingsform .formfield label {
@@ -38,20 +38,23 @@
   margin-left: 10px;
   -ms-grid-column: 2;
 }
-.settingsform .formfield .field5 {
+.settingsform .formfield .field6 {
   display: -ms-grid;
-  -ms-grid-columns: 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr;
+  -ms-grid-columns: 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr;
   -ms-grid-rows: auto;
 }
-.settingsform .formfield .field5 > input:nth-child(2) {
+.settingsform .formfield .field6 > input:nth-child(2) {
   -ms-grid-column: 3;
 }
-.settingsform .formfield .field5 > input:nth-child(3) {
+.settingsform .formfield .field6 > input:nth-child(3) {
   -ms-grid-column: 5;
 }
-.settingsform .formfield .field5 > input:nth-child(4) {
+.settingsform .formfield .field6 > input:nth-child(4) {
   -ms-grid-column: 7;
 }
-.settingsform .formfield .field5 > input:nth-child(5) {
+.settingsform .formfield .field6 > input:nth-child(5) {
   -ms-grid-column: 9;
+}
+.settingsform .formfield .field6 > input:nth-child(6) {
+  -ms-grid-column: 11;
 }

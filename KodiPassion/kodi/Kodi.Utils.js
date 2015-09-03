@@ -4,6 +4,7 @@ var Kodi;
     (function (Utils) {
         function bgImage(source, sourceProperty, dest, destProperty, defaultImage) {
             function setImage(url, img) {
+                dest.style.visibility = '';
                 WinJS.Utilities.addClass(dest, 'imageLoaded');
                 if (dest.nodeName === "IMG") {
                     dest.src = url;
@@ -19,6 +20,7 @@ var Kodi;
                 }
             }
             function setBg() {
+                dest.style.visibility = 'hidden';
                 var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
                 WinJS.Utilities.removeClass(dest, 'imageLoaded');
                 if (!data || !data.length) {
@@ -29,7 +31,7 @@ var Kodi;
                     return;
                 }
                 if (data === 'DefaultAlbumCover.png') {
-                    setImage("/images/cd.png");
+                    //setImage("/images/cd.png");
                     return;
                 }
                 var imgUrl = Kodi.API.kodiThumbnail(data);
@@ -41,7 +43,7 @@ var Kodi;
                             setImage(defaultImage);
                         }
                     });
-                }, 150);
+                }, 250);
             }
             var bindingDesc = {};
             bindingDesc[sourceProperty] = setBg;

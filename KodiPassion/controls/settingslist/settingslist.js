@@ -92,7 +92,7 @@ var KodiPassion;
                 });
             };
             SettingsListControl.prototype.isValidMacAddress = function (setting) {
-                if (setting.macAddress && setting.macAddress.length) {
+                if (setting.macAddress && setting.macAddress.length == 6) {
                     var res = true;
                     setting.macAddress.forEach(function (s) {
                         res = res && s;

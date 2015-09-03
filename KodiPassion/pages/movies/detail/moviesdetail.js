@@ -4,6 +4,7 @@ var KodiPassion;
     (function (UI) {
         var Pages;
         (function (Pages) {
+            var actortemplate = new WinJS.Binding.Template(null, { href: '/templates/actor.html', extractChild: true });
             var MovieDetailPage = (function () {
                 function MovieDetailPage() {
                 }
@@ -47,12 +48,11 @@ var KodiPassion;
                 };
                 MovieDetailPage.prototype.renderCast = function () {
                     var _this = this;
-                    var template = new WinJS.Binding.Template(null, { href: '/templates/actor.html', extractChild: true });
                     var container = document.createDocumentFragment();
                     var p = [];
                     var items = [];
-                    this.movie.cast.forEach(function (c) {
-                        p.push(template.render(c).then(function (rendered) {
+                    this.movie.cast.slice(0, 20).forEach(function (c) {
+                        p.push(actortemplate.render(c).then(function (rendered) {
                             rendered.style.opacity = '0';
                             items.push(rendered);
                             container.appendChild(rendered);

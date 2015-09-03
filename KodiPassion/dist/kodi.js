@@ -1,4 +1,4 @@
-var Kodi;
+﻿var Kodi;
 (function (Kodi) {
     var App;
     (function (App) {
@@ -44,6 +44,22 @@ var Kodi;
     var Data;
     (function (Data) {
         var pictureslimit = 15;
+        var invalidatedcache = false;
+        var _invalidateAndRefresh = function () {
+            invalidatedcache = true;
+            loadRootData(true);
+        };
+        var _invalidate = function () {
+            invalidatedcache = true;
+        };
+        WinJS.Application.addEventListener("VideoLibrary.OnScanFinished", _invalidateAndRefresh);
+        WinJS.Application.addEventListener("VideoLibrary.OnCleanFinished", _invalidateAndRefresh);
+        WinJS.Application.addEventListener("MusicLibrary.OnScanFinished", _invalidateAndRefresh);
+        WinJS.Application.addEventListener("MusicLibrary.OnCleanFinished", _invalidateAndRefresh);
+        WinJS.Application.addEventListener("VideoLibrary.OnUpdate", _invalidate);
+        WinJS.Application.addEventListener("VideoLibrary.OnRemove", _invalidate);
+        WinJS.Application.addEventListener("MusicLibrary.OnUpdate", _invalidate);
+        WinJS.Application.addEventListener("MusicLibrary.OnRemove", _invalidate);
         Data.SearchDefinitions = {
             movies: { fields: { "label": 10, "genre": 1 } },
             music: { fields: { "label": 10, "artist": 2, "genre": 1 } },
@@ -267,10 +283,11 @@ var Kodi;
                 Kodi.API.currentSettings = Kodi.Settings.load();
                 Kodi.API.Websocket.close();
             }
-            if (!forceLoad && library) {
+            if (!invalidatedcache && !forceLoad && library) {
                 var cachedprom = WinJS.Promise.wrap(library);
                 return cachedprom;
             }
+            invalidatedcache = false;
             var prom = new WinJS.Promise(function (complete, error) {
                 Kodi.API.properties().done(function (sysprops) {
                     if (sysprops) {
@@ -389,7 +406,7 @@ var Kodi;
         var ObservablePlaying = WinJS.Binding.define({
             id: null, position: 0, progress: 0, enabled: 0, speed: 0, label: '', time: '', totaltime: '', type: null,
             thumbnail: undefined, playerid: null, playlistid: null, volume: 0, muted: false, reachable: 0,
-            subtitleenabled: false, currentsubtitle: null, currentaudiostream: null,
+            subtitleenabled: false, currentsubtitle: null, currentaudiostream: null, expanded: false,
             checking: false, hasLanguages: false, hasSubtitles: false, hasLanguagesOrSubtitles: false,
             isPlaying: false, isPlayingMusic: false, isPlayingVideo: false, isPlayingTvShow: false, isPlayingMovie: false
         });
@@ -643,6 +660,7 @@ var Kodi;
     (function (Utils) {
         function bgImage(source, sourceProperty, dest, destProperty, defaultImage) {
             function setImage(url, img) {
+                dest.style.visibility = '';
                 WinJS.Utilities.addClass(dest, 'imageLoaded');
                 if (dest.nodeName === "IMG") {
                     dest.src = url;
@@ -658,6 +676,7 @@ var Kodi;
                 }
             }
             function setBg() {
+                dest.style.visibility = 'hidden';
                 var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
                 WinJS.Utilities.removeClass(dest, 'imageLoaded');
                 if (!data || !data.length) {
@@ -668,7 +687,7 @@ var Kodi;
                     return;
                 }
                 if (data === 'DefaultAlbumCover.png') {
-                    setImage("/images/cd.png");
+                    //setImage("/images/cd.png");
                     return;
                 }
                 var imgUrl = Kodi.API.kodiThumbnail(data);
@@ -680,7 +699,7 @@ var Kodi;
                             setImage(defaultImage);
                         }
                     });
-                }, 150);
+                }, 250);
             }
             var bindingDesc = {};
             bindingDesc[sourceProperty] = setBg;
@@ -1322,7 +1341,7 @@ var Kodi;
                 data: callData,
                 success: function (data) {
                     Kodi.NowPlaying.current.reachable = true;
-                    console.log('API call success for ' + url + ' ' + callData, data);
+                    console.log('API call success for ' + url + ' ' + callData);
                     if (p._state && p._state.name && p._state.name == 'error') {
                         if (completed)
                             return;
@@ -1775,6 +1794,10 @@ var Kodi;
                     return API.kodiRequest('VideoLibrary.Scan', {});
                 }
                 Movies.scan = scan;
+                function clean() {
+                    return API.kodiRequest('VideoLibrary.Clean', {});
+                }
+                Movies.clean = clean;
             })(Movies = Videos.Movies || (Videos.Movies = {}));
         })(Videos = API.Videos || (API.Videos = {}));
     })(API = Kodi.API || (Kodi.API = {}));
@@ -1796,7 +1819,7 @@ var Kodi;
             }
             function socketMessage(evt) {
                 var data = evt.data ? JSON.parse(evt.data) : undefined;
-                console.log(evt.data);
+                console.info(evt.data);
                 if (data.method) {
                     WinJS.Application.queueEvent({ type: data.method, data: data });
                 }

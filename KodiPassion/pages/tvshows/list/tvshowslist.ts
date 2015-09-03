@@ -37,9 +37,6 @@
             element.classList.add("page-tvshowslist");
             var view = TvShowsListPage.tvshowsViews["wall"];
             page.itemsPromise = Kodi.Data.loadRootData();
-            if (options && options.genre) {
-                page.selectedGenre = options.genre;
-            }
         }
 
         setView(viewname) {
@@ -64,6 +61,12 @@
 
         processed(element, options) {
             var page = this;
+
+            if (options && options.genre) {
+                page.selectedGenre = options.genre;
+                page.genretitle.innerText = page.selectedGenre;
+            }
+
             page.itemsStyle = <HTMLStyleElement>document.createElement("STYLE");
             page.element.appendChild(page.itemsStyle);
             page.itemsPromise = page.itemsPromise.then(function (data: Kodi.Data.IMediaLibrary) {

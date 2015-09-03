@@ -1,5 +1,5 @@
 ﻿module KodiPassion.UI.Pages {
-
+                
     export class HomePage {
         public static url = "/pages/home/home.html";
         element: HTMLElement;
@@ -8,6 +8,11 @@
         mainsplitview: WinJS.UI.FlipView<any>;
         tvshowsflipview: WinJS.UI.FlipView<any>;
         allowAutoFlip: boolean = true;
+        data: Kodi.Data.IMediaLibrary;
+        moviesbloc: HTMLElement;
+        tvshowsbloc: HTMLElement;
+        musicbloc: HTMLElement;
+        albumscontainer: HTMLElement;
         
         processed(element, options) {
             var page = this;
@@ -23,8 +28,10 @@
             }, true);
 
             Kodi.Data.loadRootData().then((data) => {
+                page.data = data;
                 this.loadMovies(data);
                 this.loadTvshows(data);
+                this.loadAlbums(data);
             });
         }
 
@@ -82,7 +89,8 @@
                     });
                 }
 
-                var movieslist = data.movies.movies.sort(this.getSortFunction(movies, "movieid"));
+                var movieslist = data.movies.movies.slice(0, data.movies.movies.length);
+                movieslist = movieslist.sort(this.getSortFunction(movies, "movieid"));
 
                 this.mainsplitview.itemDataSource = new WinJS.Binding.List(movieslist).dataSource;
 
@@ -114,8 +122,9 @@
                         tvshows[e.tvshowid] = true;
                     }
                 });
-
-                var tvshowslist = data.tvshows.tvshows.sort(this.getSortFunction(tvshows, "tvshowid"));
+                
+                var tvshowslist = data.tvshows.tvshows.slice(0, data.tvshows.tvshows.length);
+                tvshowslist = tvshowslist.sort(this.getSortFunction(tvshows, "tvshowid"));
 
                 this.tvshowsflipview.itemDataSource = new WinJS.Binding.List(tvshowslist).dataSource;
                 setTimeout(() => {
@@ -125,6 +134,23 @@
         }
 
         loadAlbums(data: Kodi.Data.IMediaLibrary) {
+            if (data.music && data.music.albums) {
+                
+                var container = document.createDocumentFragment();
+                var p = [];
+                data.recentMusic.albums.slice(0, 12).forEach((a) => {
+                    p.push(KodiPassion.Templates.album.render(a).then((rendered) => {
+                        container.appendChild(rendered);
+                        WinJSContrib.UI.tap(rendered, function () {
+                            WinJS.Navigation.navigate("/pages/albums/detail/albumsdetail.html", { album: a, navigateStacked: true });
+                        });
+                    }));
+                });
+
+                WinJS.Promise.join(p).then(() => {
+                    this.albumscontainer.appendChild(container);
+                });
+            }
         }
 
         getSortFunction(catalog, fieldname) {
@@ -159,6 +185,42 @@
                 } else if (a.playcount > b.playcount) {
                     return 1;
                 }
+            }
+        }
+
+        scanVideos() {
+            Kodi.API.Videos.Movies.scan();
+        }
+
+        cleanVideos() {
+            Kodi.API.Videos.Movies.clean();
+        }
+
+        moviesGenres() {
+            if (this.data && this.data.movieGenres && this.data.movieGenres.genres) {
+                KodiPassion.UI.GenrePicker.pick(this.data.movieGenres.genres).then(function (genre) {
+                    if (genre) {
+                        if (genre === "all") {
+                            WinJS.Navigation.navigate("/pages/movies/list/movieslist.html");
+                        } else {
+                            WinJS.Navigation.navigate("/pages/movies/list/movieslist.html", { genre: genre.label });
+                        }
+                    }
+                });
+            }
+        }
+
+        tvshowsGenres() {
+            if (this.data && this.data.tvshowGenres && this.data.tvshowGenres.genres) {
+                KodiPassion.UI.GenrePicker.pick(this.data.tvshowGenres.genres).then(function (genre) {
+                    if (genre) {
+                        if (genre === "all") {
+                            WinJS.Navigation.navigate("/pages/tvshows/list/tvshowslist.html");
+                        } else {
+                            WinJS.Navigation.navigate("/pages/tvshows/list/tvshowslist.html", { genre: genre.label });
+                        }
+                    }
+                });
             }
         }
 

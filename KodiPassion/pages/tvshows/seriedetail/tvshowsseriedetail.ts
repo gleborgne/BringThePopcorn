@@ -51,7 +51,7 @@
             }
                 
             var dif = (h - this.scrollContainer.scrollTop);
-            if (dif < 0) {
+            if (dif <= 0) {
                 if (this.headerbanner.style.opacity != '0') {
                     this.headerbanner.style.opacity = '0';                    
                 }
@@ -71,24 +71,34 @@
             this.seasonsPromise.then((seasons) => {
                 if (seasons) {
                     var container = document.createDocumentFragment();
+                    var p = [];
                     if (seasons.seasons.length == 1) {
-                        this.renderEpisodes(<HTMLElement>container, (<any>seasons.seasons[0]).episodes.episodes);
+                        p.push(WinJS.Promise.timeout(200).then(() => {
+                            this.renderEpisodes(<HTMLElement>container, (<any>seasons.seasons[0]).episodes.episodes);
+                        }));
                     } else {
                         seasons.seasons.forEach((s) => {
-                            this.renderSeason(container, s);
+                            p.push(this.renderSeason(container, s));
                         });
                         setImmediate(() => {
-                            WinJS.UI.Animation.enterPage(this.seasonsItems.querySelectorAll(".season"));
+                            
                         });
                     }
-                    this.seasonsItems.appendChild(container);
+
+                    WinJS.Promise.join(p).then(() => {
+                        this.seasonsItems.appendChild(container);
+                        var seasons = this.seasonsItems.querySelectorAll(".season");
+                        if (seasons.length) {
+                            WinJS.UI.Animation.enterPage(seasons);
+                        }
+                    });
                 }
             });
         }
 
         renderSeason(container: DocumentFragment, season: Kodi.API.Videos.TVShows.Season) {
             var tmpseason = <any>season;
-            this.seasonTemplate.render(season).then((rendered) => {
+            return this.seasonTemplate.render(season).then((rendered) => {
                 rendered.style.opacity = '0';
                 container.appendChild(rendered);
 
@@ -132,6 +142,7 @@
 
         prepareEpisode(episode: Kodi.API.Videos.TVShows.Episode, element: HTMLElement) {
             var btnplay = element.querySelector(".btnplay");
+            var btnadd = element.querySelector(".btnadd");
             var btnplaylocal = <HTMLElement>element.querySelector(".btnplaylocal");
             var btndownload = <HTMLElement>element.querySelector(".btndownload");
 
@@ -144,6 +155,12 @@
             WinJSContrib.UI.tap(btnplay, () => {
                 return Kodi.API.Videos.TVShows.playEpisode(episode.episodeid);
             });
+
+            if (btnadd) {
+                WinJSContrib.UI.tap(btnadd, () => {
+                    return Kodi.API.Videos.TVShows.queueEpisode(episode.episodeid);
+                });
+            }
 
             WinJSContrib.UI.tap(btnplaylocal, () => {
                 return Kodi.App.playLocalMedia(episode.file);

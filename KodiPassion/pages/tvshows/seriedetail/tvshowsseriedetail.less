@@ -7,6 +7,8 @@
     width: 100%;
     height: 100%;
 
+    
+
     header.fanart {
         -ms-grid-column-span: 2;
         height: 360px;
@@ -19,39 +21,10 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 200ms ease-in;
+            transition: opacity 400ms ease-in;
 
             &.imageLoaded {
                 opacity: 1;
-            }
-        }
-
-        .actions {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 8px;
-            .hflex();
-            justify-content: flex-end;
-
-            button, .mcn-elasticbutton {
-                @size: 48px;
-                width: @size;
-                height: @size;
-                line-height: @size;
-                text-align: center;
-                margin-right: 8px;
-                border-radius: 50%;
-
-                i {
-                    font-size: 18pt;
-                    color: @kodiBlue;
-                }
-            }
-
-            button {
-                background-color: rgba(40,40,40,0.7);
-                border: 2px solid @kodiBlue;
             }
         }
     }
@@ -72,7 +45,7 @@
             background-size: contain;
             background-repeat: no-repeat;
             opacity: 0;
-            transition: opacity 200ms ease-in;
+            transition: opacity 400ms ease-in;
 
             &.imageLoaded {
                 opacity: 1;
@@ -91,7 +64,7 @@
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-        position:relative;
+        position: relative;
 
         .description {
             .movie-title {
@@ -228,8 +201,8 @@
         -ms-grid-column: 1;
         -ms-grid-row-span: 1;
 
-        .poster{
-            background-size:cover;
+        .poster {
+            background-size: cover;
         }
     }
 
@@ -238,7 +211,7 @@
         -ms-grid-row-span: 2;
         -ms-grid-column: 1;
         -ms-grid-column-span: 2;
-        padding-top : 320px;
+        padding-top: 320px;
     }
 }
 
@@ -251,7 +224,7 @@
         width: 106px;
         height: 160px;
     }
-    
+
     section[role=main] {
         padding: 20px;
         padding-top: 180px;

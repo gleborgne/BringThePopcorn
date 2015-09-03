@@ -1,4 +1,4 @@
-.tvshowsseriedetail {
+﻿.tvshowsseriedetail {
   display: -ms-grid;
   -ms-grid-rows: auto 1fr;
   -ms-grid-columns: auto 1fr;
@@ -17,38 +17,10 @@
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity 200ms ease-in;
+  transition: opacity 400ms ease-in;
 }
 .tvshowsseriedetail header.fanart .fanart-bg.imageLoaded {
   opacity: 1;
-}
-.tvshowsseriedetail header.fanart .actions {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 8px;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-end;
-}
-.tvshowsseriedetail header.fanart .actions button,
-.tvshowsseriedetail header.fanart .actions .mcn-elasticbutton {
-  width: 48px;
-  height: 48px;
-  line-height: 48px;
-  text-align: center;
-  margin-right: 8px;
-  border-radius: 50%;
-}
-.tvshowsseriedetail header.fanart .actions button i,
-.tvshowsseriedetail header.fanart .actions .mcn-elasticbutton i {
-  font-size: 18pt;
-  color: #12b2e7;
-}
-.tvshowsseriedetail header.fanart .actions button {
-  background-color: rgba(40, 40, 40, 0.7);
-  border: 2px solid #12b2e7;
 }
 .tvshowsseriedetail header.poster {
   position: relative;
@@ -66,7 +38,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0;
-  transition: opacity 200ms ease-in;
+  transition: opacity 400ms ease-in;
 }
 .tvshowsseriedetail header.poster .poster.imageLoaded {
   opacity: 1;

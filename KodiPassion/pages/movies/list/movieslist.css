@@ -1,4 +1,4 @@
-.page-movieslist .movieslist .movie {
+﻿.page-movieslist .movieslist .movie {
   width: 280px;
   height: 400px;
   position: relative;
@@ -19,6 +19,13 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+.page-movieslist .movieslist .movie .bg.pic {
+  transition: opacity 160ms ease-in;
+  opacity: 0;
+}
+.page-movieslist .movieslist .movie .bg.pic.imageLoaded {
+  opacity: 1;
 }
 .page-movieslist.view-wall .win-listview .win-gridlayout .win-container {
   margin: 0 1px 1px 0;

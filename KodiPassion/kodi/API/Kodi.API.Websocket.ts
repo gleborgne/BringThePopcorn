@@ -13,7 +13,7 @@
 
     function socketMessage(evt) {
         var data = evt.data ? JSON.parse(evt.data) : undefined;
-        console.log(evt.data);
+        console.info(evt.data);
 
         if (data.method) {
             WinJS.Application.queueEvent({ type: data.method, data: data });

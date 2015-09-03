@@ -10,13 +10,34 @@
 <body>
     <div class="albumslist fragment">
         <header class="page-header" aria-label="Header content" role="banner">
-            <button class="back-button" data-win-control="WinJS.UI.BackButton"></button>
             <h1 class="titlearea win-type-ellipsis">
-                <span class="pagetitle">Welcome to albumslist</span>
+                <span class="pagetitle">albums</span>
             </h1>
+            <h2 class="genre" member="genretitle" tap="pickGenre">
+                All
+            </h2>
+            <div class="stretch"></div>
+            <div class="actions">
+
+            </div>
         </header>
         <section class="page-section" aria-label="Main content" role="main">
-            <p>Content goes here.</p>
+            <win-template id="groupItemTemplate" extractchild="true">
+                <div class="group-item">
+                    <div data-win-bind="innerText: title" onclick="$('#semanticzoom')[0].winControl._semanticZoom.zoomedOut = true"></div>
+                </div>
+            </win-template>
+            <win-template id="semanticItemTemplate" extractchild="true">
+                <div class="semantic-item">
+                    <h2 data-win-bind="innerText: title"></h2>
+                </div>
+            </win-template>
+
+            <mcn-semanticlistviews id="semanticzoom" member class="mcn-fullsize"
+                                   listview.groupHeaderTemplate="select:#groupItemTemplate"
+                                   zoomedoutlistview.itemTemplate="select:#semanticItemTemplate"
+                                   defaultGroupLimit="12">
+            </mcn-semanticlistviews>
         </section>
     </div>
 </body>

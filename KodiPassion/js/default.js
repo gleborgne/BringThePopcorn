@@ -1,5 +1,14 @@
 var KodiPassion;
 (function (KodiPassion) {
+    var Templates;
+    (function (Templates) {
+        Templates.album = new WinJS.Binding.Template(null, { href: "/templates/album.html", extractChild: true });
+        Templates.song = new WinJS.Binding.Template(null, { href: "/templates/song.html", extractChild: true });
+        Templates.movieposter = new WinJS.Binding.Template(null, { href: "/templates/movieposter.html", extractChild: true });
+    })(Templates = KodiPassion.Templates || (KodiPassion.Templates = {}));
+})(KodiPassion || (KodiPassion = {}));
+var KodiPassion;
+(function (KodiPassion) {
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
     WinJSContrib.UI.enableSystemBackButton = true;
@@ -150,7 +159,7 @@ var KodiPassion;
                 if (fn && typeof fn === "function") {
                     WinJSContrib.UI.tap(item, function (arg) {
                         return fn();
-                    }, { tapOnDown: true });
+                    }, {});
                 }
             }
         };

@@ -51,8 +51,10 @@ module KodiPassion.UI{
                 ctrl.playingElt.style.height = 'auto';
                 $.Velocity.hook(ctrl.playingElt, "top", target + "px");
                 WinJSContrib.UI.Application.navigator.pageControl.foWrapper.blurTo(20, 120);
+                
                 $.Velocity(ctrl.playingElt, { top: '0px' }, { duration: 200, easing: 'easeOutQuart' }).then(function () {
                     document.body.classList.add("nowplaying-expanded");
+                    Kodi.NowPlaying.current.expanded = true;
                 });
             }
         }
@@ -73,6 +75,7 @@ module KodiPassion.UI{
                     ctrl.playingElt.style.height = '';
                     ctrl.playingElt.style.top = '';
                     document.body.classList.remove("nowplaying-expanded");
+                    Kodi.NowPlaying.current.expanded = false;
                 });
             }
         }

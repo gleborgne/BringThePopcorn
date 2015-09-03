@@ -185,4 +185,8 @@
     export function scan() {
         return API.kodiRequest<any>('VideoLibrary.Scan', {});
     }
+
+    export function clean() {
+        return API.kodiRequest<any>('VideoLibrary.Clean', {});
+    }
 }

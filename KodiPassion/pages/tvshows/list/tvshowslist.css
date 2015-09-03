@@ -1,4 +1,4 @@
-.page-tvshowslist .tvshowslist .tvshow {
+﻿.page-tvshowslist .tvshowslist .tvshow {
   width: 280px;
   height: 400px;
   position: relative;
@@ -19,6 +19,13 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+.page-tvshowslist .tvshowslist .tvshow .bg.pic {
+  transition: opacity 160ms ease-in;
+  opacity: 0;
+}
+.page-tvshowslist .tvshowslist .tvshow .bg.pic.imageLoaded {
+  opacity: 1;
 }
 .page-tvshowslist.view-wall .win-listview .win-gridlayout .win-container {
   margin: 0 1px 1px 0;

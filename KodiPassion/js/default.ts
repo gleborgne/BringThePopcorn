@@ -4,8 +4,13 @@
 }
 declare var dynamics: any;
 
-module KodiPassion{
+module KodiPassion.Templates {
+    export var album = new WinJS.Binding.Template(null, { href: "/templates/album.html", extractChild: true });
+    export var song = new WinJS.Binding.Template(null, { href: "/templates/song.html", extractChild: true });
+    export var movieposter = new WinJS.Binding.Template(null, { href: "/templates/movieposter.html", extractChild: true });
+}
 
+module KodiPassion {
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
 
@@ -176,7 +181,7 @@ module KodiPassion{
                 if (fn && typeof fn === "function") {
                     WinJSContrib.UI.tap(item, function (arg) {
                         return fn();
-                    }, { tapOnDown : true });
+                    }, { /*tapOnDown : true*/ });
                 }
             }
         }

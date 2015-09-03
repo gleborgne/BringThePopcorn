@@ -8,16 +8,27 @@
     <script src="albumsdetail.js"></script>
 </head>
 <body>
-    <div class="albumsdetail fragment">
-        <header class="page-header" aria-label="Header content" role="banner">
-            <button class="back-button" data-win-control="WinJS.UI.BackButton"></button>
-            <h1 class="titlearea win-type-ellipsis">
-                <span class="pagetitle">Welcome to albumsdetail</span>
-            </h1>
-        </header>
-        <section class="page-section" aria-label="Main content" role="main">
-            <p>Content goes here.</p>
-        </section>
+    <div class="page-albumsdetail">
+        <div class="cover">
+            <div data-win-control="WinJSContrib.UI.AspectRatio" data-win-options="{ ratio: Kodi.App.PictureRatios.album, prefix: '.page-albumsdetail .cover', target: '.coverpic'}"></div>
+            <div class="album-desc">
+                <div class="title" data-win-bind="innerHTML: label"></div>
+                <div class="artists" data-win-bind="innerHTML: allartists Kodi.Utils.stringlist"></div>
+                <div class="genres" data-win-bind="innerHTML: allgenres Kodi.Utils.stringlist"></div>
+            </div>
+            <div class="album-actions">
+                <button class="cmd blink kdp-add" tap="addAlbum"></button>
+                <button class="cmd blink kdp-play" tap="playAlbum"></button>
+            </div>
+            <div class="coverpic" data-win-bind="display: thumbnail Kodi.Utils.toThumbnailBg">
+
+            </div>            
+        </div>
+        <div class="album-details">            
+            <div class="album-songs" member="albumSongs">
+
+            </div>
+        </div>
     </div>
 </body>
 </html>

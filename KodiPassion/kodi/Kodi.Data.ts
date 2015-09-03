@@ -1,5 +1,26 @@
 ﻿module Kodi.Data {
     var pictureslimit = 15;
+    var invalidatedcache = false;
+
+    var _invalidateAndRefresh = function () {
+        invalidatedcache = true;
+        loadRootData(true);
+    }
+    var _invalidate = function () {
+        invalidatedcache = true;
+    }
+
+
+    WinJS.Application.addEventListener("VideoLibrary.OnScanFinished", _invalidateAndRefresh);
+    WinJS.Application.addEventListener("VideoLibrary.OnCleanFinished", _invalidateAndRefresh);
+    WinJS.Application.addEventListener("MusicLibrary.OnScanFinished", _invalidateAndRefresh);
+    WinJS.Application.addEventListener("MusicLibrary.OnCleanFinished", _invalidateAndRefresh);
+
+    WinJS.Application.addEventListener("VideoLibrary.OnUpdate", _invalidate);
+    WinJS.Application.addEventListener("VideoLibrary.OnRemove", _invalidate);
+    WinJS.Application.addEventListener("MusicLibrary.OnUpdate", _invalidate);
+    WinJS.Application.addEventListener("MusicLibrary.OnRemove", _invalidate);
+
     export interface IMediaLibrary {
         artists: API.Music.Artist[];
         musicPictures: any[];
@@ -278,11 +299,12 @@
             Kodi.API.Websocket.close();
         }
 
-        if (!forceLoad && library) {
+        if (!invalidatedcache && !forceLoad && library) {
             var cachedprom = WinJS.Promise.wrap(library);
             return cachedprom;
         }
 
+        invalidatedcache = false;
         var prom = new WinJS.Promise<IMediaLibrary>(function (complete, error) {
             Kodi.API.properties().done(function (sysprops) {
                 if (sysprops) {

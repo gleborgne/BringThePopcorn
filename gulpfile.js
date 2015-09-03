@@ -12,6 +12,7 @@ var ts = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
 var flatten = require('gulp-flatten');
 var merge = require('merge-stream');
+var bom = require('gulp-bom');
 
 var onError = function(err) {
 	notify.onError({
@@ -33,6 +34,7 @@ gulp.task('styles', function() {
 	return gulp.src(['**/*.less', '!bin/**/*.less', '!/bld/**/*.less'], { cwd: 'KodiPassion',  base : '.' })
 	.pipe(plumber({errorHandler: onError}))
 	.pipe(less())
+	.pipe(bom())
 	.pipe(gulp.dest(''));	
 });
 
@@ -53,7 +55,7 @@ gulp.task('compilekodi', function () {
 	.pipe(ts(tsKodiProject));
 
     return merge([
-        tsResult.dts.pipe(flatten()).pipe(concat('kodi.d.ts')).pipe(gulp.dest('KodiPassion/dist')),
+        tsResult.dts.pipe(flatten()).pipe(concat('kodi.d.ts')).pipe(bom()).pipe(gulp.dest('KodiPassion/dist')),
         tsResult.js
             .pipe(concat('kodi.js'))
         	.pipe(sourcemaps.write(".",{
@@ -68,6 +70,7 @@ gulp.task('compilekodi', function () {
                     return ' ';
                 }
             }))
+            .pipe(bom())
         	.pipe(gulp.dest('KodiPassion/dist'))
     ]);
 });
@@ -110,6 +113,7 @@ gulp.task('compilewinjscontrib', function () {
                 return ' ';
             }
         }))
+        .pipe(bom())
         .pipe(gulp.dest('KodiPassion/dist')),
 
         gulp.src([
@@ -136,6 +140,7 @@ gulp.task('compilewinjscontrib', function () {
                 return ' ';
             }
         }))
+        .pipe(bom())
         .pipe(gulp.dest('KodiPassion/dist'))
     ]);
 });
@@ -174,6 +179,7 @@ gulp.task('compilepages', function () {
         	        return ' ';
         	    }
         	}))
+        	.pipe(bom())
         	.pipe(gulp.dest(''))
     ]);
 });

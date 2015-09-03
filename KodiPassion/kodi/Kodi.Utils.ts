@@ -1,6 +1,7 @@
 ﻿module Kodi.Utils {
     function bgImage(source, sourceProperty, dest, destProperty, defaultImage) {
         function setImage(url, img?) {
+            dest.style.visibility = '';
             WinJS.Utilities.addClass(dest, 'imageLoaded');
             if (dest.nodeName === "IMG") {
                 dest.src = url;
@@ -15,6 +16,7 @@
             }
         }
         function setBg() {
+            dest.style.visibility = 'hidden';
             var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
             WinJS.Utilities.removeClass(dest, 'imageLoaded');
             if (!data || !data.length) {  
@@ -26,7 +28,7 @@
             }
 
             if (data === 'DefaultAlbumCover.png') {                
-                setImage("/images/cd.png");
+                //setImage("/images/cd.png");
                 return;
             }
 
@@ -39,7 +41,7 @@
                         setImage(defaultImage);
                     }
                 });
-            }, 150);
+            }, 250);
         }
 
         var bindingDesc = {};

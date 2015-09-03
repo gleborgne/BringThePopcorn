@@ -1,7 +1,27 @@
+﻿.playingcontent {
+  overflow: hidden;
+}
 .playingcontent > .pagecontrol {
   width: 100%;
   height: 100%;
 }
 .playingcontent .page-moviesdetail .actions {
   display: none;
+}
+.playingcontent .emptyplaying {
+  width: 100%;
+  height: 100%;
+  display: -ms-grid;
+  -ms-grid-rows: 1fr;
+  -ms-grid-columns: 1fr;
+}
+.playingcontent .emptyplaying .content {
+  opacity: 0.15;
+  max-width: 400px;
+  -ms-grid-row-align: center;
+  -ms-grid-column-align: center;
+  text-align: center;
+}
+.playingcontent .emptyplaying .content img {
+  width: 100%;
 }

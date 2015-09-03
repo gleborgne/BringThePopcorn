@@ -12,9 +12,6 @@ var KodiPassion;
                     element.classList.add("page-tvshowslist");
                     var view = TvShowsListPage.tvshowsViews["wall"];
                     page.itemsPromise = Kodi.Data.loadRootData();
-                    if (options && options.genre) {
-                        page.selectedGenre = options.genre;
-                    }
                 };
                 TvShowsListPage.prototype.setView = function (viewname) {
                     var page = this;
@@ -36,6 +33,10 @@ var KodiPassion;
                 };
                 TvShowsListPage.prototype.processed = function (element, options) {
                     var page = this;
+                    if (options && options.genre) {
+                        page.selectedGenre = options.genre;
+                        page.genretitle.innerText = page.selectedGenre;
+                    }
                     page.itemsStyle = document.createElement("STYLE");
                     page.element.appendChild(page.itemsStyle);
                     page.itemsPromise = page.itemsPromise.then(function (data) {

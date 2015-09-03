@@ -1,5 +1,6 @@
 ﻿module KodiPassion.UI.Pages {
-
+    var actortemplate = new WinJS.Binding.Template(null, { href: '/templates/actor.html', extractChild: true });
+            
     export class MovieDetailPage {
         public static url = "/pages/movies/detail/moviesdetail.html";
 
@@ -60,12 +61,11 @@
         }
 
         renderCast() {
-            var template = new WinJS.Binding.Template(null, { href: '/templates/actor.html', extractChild: true });
             var container = document.createDocumentFragment();
             var p = [];
             var items = [];
-            this.movie.cast.forEach((c) => {
-                p.push(template.render(c).then((rendered) => {
+            this.movie.cast.slice(0,20).forEach((c) => {
+                p.push(actortemplate.render(c).then((rendered) => {
                     rendered.style.opacity = '0';
                     items.push(rendered);
                     container.appendChild(rendered);

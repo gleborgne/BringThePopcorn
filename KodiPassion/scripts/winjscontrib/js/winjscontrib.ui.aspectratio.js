@@ -116,7 +116,7 @@
                 if (!ctrl.container)
                     ctrl.container = ctrl.element.parentElement;
 
-                if (ctrl.container && ctrl.target && ctrl.ratio) {
+                if (ctrl.container && ctrl.target) {
                     if (ctrl.basedOn == "height") {
                         ctrl.updateLayoutBasedOnHeight();
                     } else {
@@ -136,10 +136,14 @@
                 var container = ctrl.parentpage.element;
                 if (ctrl.baseWidth) {
                     var nbitems = ((ctrl.container.clientWidth / ctrl.baseWidth) << 0) + 1;
-                    var itemW = ((ctrl.container.clientWidth / nbitems) << 0) - ctrl.baseWidthMargin;
-                    var targetH = (itemW / ctrl.ratio) << 0;
-                    ctrl.styleElt.innerHTML = classname + "{ width: " + itemW + "px; height:" + targetH + "px}";
-                } else {
+                    var itemW = ((ctrl.container.clientWidth / nbitems) << 0) - ctrl.baseWidthMargin - 0.25;
+                    if (ctrl.ratio) {
+                        var targetH = (itemW / ctrl.ratio) << 0;
+                        ctrl.styleElt.innerHTML = classname + "{ width: " + itemW + "px; height:" + targetH + "px}";
+                    } else {
+                        ctrl.styleElt.innerHTML = classname + "{ width: " + itemW + "px; }";
+                    }
+                } else if (ctrl.ratio) {
                     var elements = ctrl.container.querySelectorAll(ctrl.target);
                     var eltW = elements[0].clientWidth;
                     var eltH = elements[0].clientHeight;
@@ -154,6 +158,8 @@
                         }
                         ctrl.styleElt.innerHTML = classname + "{ height:" + targetH + "px}";
                     }
+                } else {
+                    console.warn("aspect ratio control must have baseWidth and/or ratio")
                 }
             },
 

@@ -37,7 +37,7 @@ var KodiPassion;
                         this.headerposter.style.opacity = '';
                     }
                     var dif = (h - this.scrollContainer.scrollTop);
-                    if (dif < 0) {
+                    if (dif <= 0) {
                         if (this.headerbanner.style.opacity != '0') {
                             this.headerbanner.style.opacity = '0';
                         }
@@ -58,25 +58,33 @@ var KodiPassion;
                     this.seasonsPromise.then(function (seasons) {
                         if (seasons) {
                             var container = document.createDocumentFragment();
+                            var p = [];
                             if (seasons.seasons.length == 1) {
-                                _this.renderEpisodes(container, seasons.seasons[0].episodes.episodes);
+                                p.push(WinJS.Promise.timeout(200).then(function () {
+                                    _this.renderEpisodes(container, seasons.seasons[0].episodes.episodes);
+                                }));
                             }
                             else {
                                 seasons.seasons.forEach(function (s) {
-                                    _this.renderSeason(container, s);
+                                    p.push(_this.renderSeason(container, s));
                                 });
                                 setImmediate(function () {
-                                    WinJS.UI.Animation.enterPage(_this.seasonsItems.querySelectorAll(".season"));
                                 });
                             }
-                            _this.seasonsItems.appendChild(container);
+                            WinJS.Promise.join(p).then(function () {
+                                _this.seasonsItems.appendChild(container);
+                                var seasons = _this.seasonsItems.querySelectorAll(".season");
+                                if (seasons.length) {
+                                    WinJS.UI.Animation.enterPage(seasons);
+                                }
+                            });
                         }
                     });
                 };
                 TvShowsDetailPage.prototype.renderSeason = function (container, season) {
                     var _this = this;
                     var tmpseason = season;
-                    this.seasonTemplate.render(season).then(function (rendered) {
+                    return this.seasonTemplate.render(season).then(function (rendered) {
                         rendered.style.opacity = '0';
                         container.appendChild(rendered);
                         var episodesContainer = rendered.querySelector(".season-episodes");
@@ -117,6 +125,7 @@ var KodiPassion;
                 };
                 TvShowsDetailPage.prototype.prepareEpisode = function (episode, element) {
                     var btnplay = element.querySelector(".btnplay");
+                    var btnadd = element.querySelector(".btnadd");
                     var btnplaylocal = element.querySelector(".btnplaylocal");
                     var btndownload = element.querySelector(".btndownload");
                     var path = Kodi.Utils.getNetworkPath(episode.file);
@@ -126,6 +135,11 @@ var KodiPassion;
                     WinJSContrib.UI.tap(btnplay, function () {
                         return Kodi.API.Videos.TVShows.playEpisode(episode.episodeid);
                     });
+                    if (btnadd) {
+                        WinJSContrib.UI.tap(btnadd, function () {
+                            return Kodi.API.Videos.TVShows.queueEpisode(episode.episodeid);
+                        });
+                    }
                     WinJSContrib.UI.tap(btnplaylocal, function () {
                         return Kodi.App.playLocalMedia(episode.file);
                     });
