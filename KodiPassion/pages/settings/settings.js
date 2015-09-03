@@ -1,4 +1,4 @@
-var KodiPassion;
+﻿var KodiPassion;
 (function (KodiPassion) {
     var UI;
     (function (UI) {
@@ -20,4 +20,5 @@ var KodiPassion;
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=settings.js.map
+
+//# sourceMappingURL=../../../KodiPassion/pages/settings/settings.js.map

@@ -38,4 +38,3 @@ var Kodi;
         App.playLocalMedia = playLocalMedia;
     })(App = Kodi.App || (Kodi.App = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.App.js.map

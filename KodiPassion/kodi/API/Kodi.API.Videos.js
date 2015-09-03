@@ -116,4 +116,3 @@ var Kodi;
         })(Videos = API.Videos || (API.Videos = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.API.Videos.js.map

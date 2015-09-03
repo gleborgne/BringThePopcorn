@@ -127,4 +127,3 @@ var Kodi;
         })(Music = API.Music || (API.Music = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.API.Music.js.map
