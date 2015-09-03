@@ -1,4 +1,4 @@
-var Kodi;
+﻿var Kodi;
 (function (Kodi) {
     var WOL;
     (function (WOL) {
@@ -55,3 +55,4 @@ var Kodi;
         }
     })(WOL = Kodi.WOL || (Kodi.WOL = {}));
 })(Kodi || (Kodi = {}));
+//# sourceMappingURL=Kodi.WOL.js.map

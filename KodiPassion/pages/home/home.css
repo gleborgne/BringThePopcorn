@@ -32,6 +32,40 @@
 .page-home .sectiontitle .stretch {
   flex: 1;
 }
+.page-home .searchbloc {
+  height: 60px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.page-home .searchbloc input {
+  flex: 1;
+  margin: 0;
+  display: block;
+  background-color: transparent;
+  height: 40px;
+  box-sizing: border-box;
+  line-height: 60px;
+  color: white;
+  margin-left: 10px;
+  border: 1px solid transparent;
+  font-size: 1.2rem;
+}
+.page-home .searchbloc input::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+.page-home .searchbloc input:focus {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.page-home .searchbloc button {
+  background-color: transparent;
+  border: none;
+  height: 60px;
+  line-height: 60px;
+  width: 60px;
+  color: white;
+  font-size: 20pt;
+}
 .page-home .thirdbloc .album-items {
   display: flex;
   flex-flow: row wrap;

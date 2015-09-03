@@ -1,0 +1,2 @@
+MainPackage=C:\projects\github\KodiPassion\KodiPassion\bin\Release\KodiPassion_1.1.0.0_AnyCPU.appx
+ResourcePack=C:\projects\github\KodiPassion\KodiPassion\bin\Release\KodiPassion_1.1.0.0_scale-100.appx

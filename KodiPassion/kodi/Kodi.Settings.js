@@ -1,4 +1,4 @@
-var Kodi;
+﻿var Kodi;
 (function (Kodi) {
     var Settings;
     (function (Settings) {
@@ -84,3 +84,4 @@ var Kodi;
         Settings.list = list;
     })(Settings = Kodi.Settings || (Kodi.Settings = {}));
 })(Kodi || (Kodi = {}));
+//# sourceMappingURL=Kodi.Settings.js.map

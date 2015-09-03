@@ -41,6 +41,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>14538270-1c70-4b16-af89-b8cb2ebeae3b</ProjectGuid>
     <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
+    <TypeScriptEmitBOM>true</TypeScriptEmitBOM>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -244,6 +245,14 @@
     <Content Include="pages\search\search.less" />
     <Content Include="pages\search\search.html" />
     <TypeScriptCompile Include="pages\search\search.ts" />
+    <Content Include="pages\settings\about\about.css" />
+    <Content Include="pages\settings\about\about.less" />
+    <Content Include="pages\settings\about\about.html" />
+    <Content Include="pages\settings\about\about.js" />
+    <Content Include="pages\settings\privacy\privacy.css" />
+    <Content Include="pages\settings\privacy\privacy.less" />
+    <Content Include="pages\settings\privacy\privacy.html" />
+    <Content Include="pages\settings\privacy\privacy.js" />
     <Content Include="pages\settings\serverdetail\serverdetail.css" />
     <Content Include="pages\settings\serverdetail\serverdetail.js" />
     <Content Include="pages\settings\serverdetail\serverdetail.js.map" />

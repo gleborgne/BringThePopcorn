@@ -34,6 +34,43 @@
         }
     }
 
+    .searchbloc{
+        height : 60px;
+        .hflex();
+
+        input{
+            flex: 1;
+            margin: 0;
+            display: block;
+            background-color: transparent;
+            height: 40px;
+            box-sizing: border-box;
+            line-height: 60px;
+            color : white;
+            margin-left : 10px;
+            border : 1px solid transparent;
+            font-size: 1.2rem;
+
+            &::-ms-input-placeholder{
+                color: rgba(255,255,255,0.2);
+            }
+
+            &:focus{
+                border-color: rgba(255,255,255,0.2);
+            }
+        }
+
+        button{
+            background-color: transparent;
+            border: none;
+            height: 60px;
+            line-height: 60px;
+            width: 60px;
+            color : white;
+            font-size: 20pt;
+        }
+    }
+
     .mainbloc {
     }
 

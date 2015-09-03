@@ -1,4 +1,4 @@
-var Kodi;
+﻿var Kodi;
 (function (Kodi) {
     var Data;
     (function (Data) {
@@ -357,3 +357,4 @@ var Kodi;
         });
     })(Data = Kodi.Data || (Kodi.Data = {}));
 })(Kodi || (Kodi = {}));
+//# sourceMappingURL=Kodi.Data.js.map

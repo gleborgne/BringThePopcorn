@@ -169,5 +169,4 @@ var KodiPassion;
     }
     KodiPassion.mapKodiApi = mapKodiApi;
 })(KodiPassion || (KodiPassion = {}));
-
-//# sourceMappingURL=../../KodiPassion/js/default.js.map
+//# sourceMappingURL=default.js.map

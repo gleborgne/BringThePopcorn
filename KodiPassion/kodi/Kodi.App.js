@@ -1,4 +1,4 @@
-var Kodi;
+﻿var Kodi;
 (function (Kodi) {
     var App;
     (function (App) {
@@ -38,3 +38,4 @@ var Kodi;
         App.playLocalMedia = playLocalMedia;
     })(App = Kodi.App || (Kodi.App = {}));
 })(Kodi || (Kodi = {}));
+//# sourceMappingURL=Kodi.App.js.map

@@ -1,9 +1,27 @@
-﻿.page-settings {
+﻿@import "../../css/apptheme.less";
+.page-settings {
     section[role=main] {
         padding: 40px;
         box-sizing: border-box;
         overflow-x: hidden;
         overflow-y: auto;
+
+        .settingdetail{
+            margin-top: 2rem;
+            border-top : 3px solid #444;
+            border-bottom : 3px solid #444;
+
+            .item{
+                padding : 8px 16px;
+                border-bottom : 1px solid #444;
+                text-transform: uppercase;
+                font-size : 1.2rem;
+
+                &:last-child{
+                    border : none;
+                }
+            }
+        }
     }
 }
 

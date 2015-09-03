@@ -1,4 +1,4 @@
-var Kodi;
+﻿var Kodi;
 (function (Kodi) {
     var NowPlaying;
     (function (NowPlaying) {
@@ -165,3 +165,4 @@ var Kodi;
         NowPlaying.init = init;
     })(NowPlaying = Kodi.NowPlaying || (Kodi.NowPlaying = {}));
 })(Kodi || (Kodi = {}));
+//# sourceMappingURL=Kodi.NowPlaying.js.map

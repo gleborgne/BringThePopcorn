@@ -7,8 +7,7 @@
         throttle: number;
         _items: any[];
         lastrefresh: Date;
-
-
+        
         constructor(element?, options?) {
             this.element = element || document.createElement('DIV');
             this.eventTracker = new WinJSContrib.UI.EventTracker();
