@@ -1,4 +1,4 @@
-﻿/*
+/*
 this is a template for icon fonts
  */
 
@@ -14,6 +14,7 @@ this is a template for icon fonts
 }
 
 .kdp-add:before,
+.kdp-artist:before,
 .kdp-check:before,
 .kdp-chevron-down:before,
 .kdp-chevron-left:before,
@@ -66,43 +67,44 @@ this is a template for icon fonts
 }
 
 .kdp-add:before { content: "\E001" }
-.kdp-check:before { content: "\E002" }
-.kdp-chevron-down:before { content: "\E003" }
-.kdp-chevron-left:before { content: "\E004" }
-.kdp-chevron-right:before { content: "\E005" }
-.kdp-chevron-up:before { content: "\E006" }
-.kdp-close:before { content: "\E007" }
-.kdp-connect:before { content: "\E008" }
-.kdp-download:before { content: "\E009" }
-.kdp-edit:before { content: "\E00A" }
-.kdp-eject:before { content: "\E00B" }
-.kdp-favourites:before { content: "\E00C" }
-.kdp-file:before { content: "\E00D" }
-.kdp-forward:before { content: "\E00E" }
-.kdp-home:before { content: "\E00F" }
-.kdp-info:before { content: "\E010" }
-.kdp-language:before { content: "\E011" }
-.kdp-menu:before { content: "\E012" }
-.kdp-movie:before { content: "\E013" }
-.kdp-music:before { content: "\E014" }
-.kdp-pause:before { content: "\E015" }
-.kdp-photo:before { content: "\E016" }
-.kdp-play:before { content: "\E017" }
-.kdp-playlocal:before { content: "\E018" }
-.kdp-power:before { content: "\E019" }
-.kdp-refresh:before { content: "\E01A" }
-.kdp-remotecontrol:before { content: "\E01B" }
-.kdp-rewind:before { content: "\E01C" }
-.kdp-save:before { content: "\E01D" }
-.kdp-search:before { content: "\E01E" }
-.kdp-settings:before { content: "\E01F" }
-.kdp-share:before { content: "\E020" }
-.kdp-speaker-mute:before { content: "\E021" }
-.kdp-speaker-off:before { content: "\E022" }
-.kdp-speaker-on:before { content: "\E023" }
-.kdp-stop:before { content: "\E024" }
-.kdp-subtitle:before { content: "\E025" }
-.kdp-television:before { content: "\E026" }
-.kdp-wakeup:before { content: "\E027" }
-.kdp-zoom-minus:before { content: "\E028" }
-.kdp-zoom-plus:before { content: "\E029" }
+.kdp-artist:before { content: "\E002" }
+.kdp-check:before { content: "\E003" }
+.kdp-chevron-down:before { content: "\E004" }
+.kdp-chevron-left:before { content: "\E005" }
+.kdp-chevron-right:before { content: "\E006" }
+.kdp-chevron-up:before { content: "\E007" }
+.kdp-close:before { content: "\E008" }
+.kdp-connect:before { content: "\E009" }
+.kdp-download:before { content: "\E00A" }
+.kdp-edit:before { content: "\E00B" }
+.kdp-eject:before { content: "\E00C" }
+.kdp-favourites:before { content: "\E00D" }
+.kdp-file:before { content: "\E00E" }
+.kdp-forward:before { content: "\E00F" }
+.kdp-home:before { content: "\E010" }
+.kdp-info:before { content: "\E011" }
+.kdp-language:before { content: "\E012" }
+.kdp-menu:before { content: "\E013" }
+.kdp-movie:before { content: "\E014" }
+.kdp-music:before { content: "\E015" }
+.kdp-pause:before { content: "\E016" }
+.kdp-photo:before { content: "\E017" }
+.kdp-play:before { content: "\E018" }
+.kdp-playlocal:before { content: "\E019" }
+.kdp-power:before { content: "\E01A" }
+.kdp-refresh:before { content: "\E01B" }
+.kdp-remotecontrol:before { content: "\E01C" }
+.kdp-rewind:before { content: "\E01D" }
+.kdp-save:before { content: "\E01E" }
+.kdp-search:before { content: "\E01F" }
+.kdp-settings:before { content: "\E020" }
+.kdp-share:before { content: "\E021" }
+.kdp-speaker-mute:before { content: "\E022" }
+.kdp-speaker-off:before { content: "\E023" }
+.kdp-speaker-on:before { content: "\E024" }
+.kdp-stop:before { content: "\E025" }
+.kdp-subtitle:before { content: "\E026" }
+.kdp-television:before { content: "\E027" }
+.kdp-wakeup:before { content: "\E028" }
+.kdp-zoom-minus:before { content: "\E029" }
+.kdp-zoom-plus:before { content: "\E02A" }

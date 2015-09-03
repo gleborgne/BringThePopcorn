@@ -77,26 +77,35 @@ declare module Kodi.Data {
     }
     var SearchDefinitions: {
         movies: {
-            fields: {
-                "label": number;
-                "genre": number;
+            definition: {
+                fields: {
+                    "label": number;
+                    "genre": number;
+                };
             };
         };
         music: {
-            fields: {
-                "label": number;
-                "artist": number;
-                "genre": number;
+            definition: {
+                fields: {
+                    "label": number;
+                    "artist": number;
+                    "genre": number;
+                };
             };
         };
         artists: {
-            fields: {
-                "label": number;
+            definition: {
+                fields: {
+                    "label": number;
+                };
             };
         };
         tvshows: {
-            fields: {
-                "label": number;
+            definition: {
+                fields: {
+                    "label": number;
+                    "genre": number;
+                };
             };
         };
     };
@@ -183,6 +192,7 @@ declare module Kodi.Utils {
     var rating: Function;
     var stringlist: Function;
     var showIfNetworkPath: Function;
+    var searchItemKind: Function;
     var isCurrent: Function;
     function getNetworkPath(mediapath: any): any;
 }

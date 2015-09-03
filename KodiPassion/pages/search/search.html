@@ -8,15 +8,13 @@
     <script src="search.js"></script>
 </head>
 <body>
-    <div class="search fragment">
+    <div class="page-search fragment">
         <header class="page-header" aria-label="Header content" role="banner">
-            <button class="back-button" data-win-control="WinJS.UI.BackButton"></button>
-            <h1 class="titlearea win-type-ellipsis">
-                <span class="pagetitle">Welcome to search</span>
-            </h1>
+            <input type="search" id="txtsearch" member />
+            <button class="kdp-search" id="btnSearch" tap="search"></button>
         </header>
         <section class="page-section" aria-label="Main content" role="main">
-            <p>Content goes here.</p>
+            <div id="result-items" member="resultItems"></div>
         </section>
     </div>
 </body>

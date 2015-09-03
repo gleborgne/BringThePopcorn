@@ -242,6 +242,9 @@
     <Content Include="pages\movies\list\movieslist.less" />
     <Content Include="pages\movies\list\movieslist.html" />
     <TypeScriptCompile Include="pages\movies\list\movieslist.ts" />
+    <Content Include="pages\search\search.css" />
+    <Content Include="pages\search\search.js" />
+    <Content Include="pages\search\search.js.map" />
     <Content Include="pages\search\search.less" />
     <Content Include="pages\search\search.html" />
     <TypeScriptCompile Include="pages\search\search.ts" />
@@ -437,6 +440,7 @@
     <Content Include="templates\actor.html" />
     <Content Include="templates\album.html" />
     <Content Include="templates\playlistitem.html" />
+    <Content Include="templates\searchitem.html" />
     <Content Include="templates\song.html" />
     <Content Include="templates\tvshowposter.html" />
     <Content Include="templates\moviesplitview.html" />

@@ -144,6 +144,24 @@
         }
     });
 
+    export var searchItemKind = WinJS.Binding.initializer(function (source, sourceProperty, dest, destProperty) {
+        var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
+        if (data) {
+            var classname = null;
+            if (data == "music")
+                classname = "kdp-music";
+            if (data == "artists")
+                classname = "kdp-artist";
+            if (data == "tvshows")
+                classname = "kdp-television";
+            if (data == "movies")
+                classname = "kdp-movie";
+
+            if (classname)
+                dest.classList.add(classname);
+        } 
+    });
+
     export var isCurrent = WinJS.Binding.initializer(function(source, sourceProperty, dest, destProperty) {
         function setClass() {
             var data = WinJSContrib.Utils.readProperty(source, sourceProperty);

@@ -55,4 +55,3 @@
         }
     })(WOL = Kodi.WOL || (Kodi.WOL = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.WOL.js.map

@@ -61,10 +61,10 @@ var Kodi;
         WinJS.Application.addEventListener("MusicLibrary.OnUpdate", _invalidate);
         WinJS.Application.addEventListener("MusicLibrary.OnRemove", _invalidate);
         Data.SearchDefinitions = {
-            movies: { fields: { "label": 10, "genre": 1 } },
-            music: { fields: { "label": 10, "artist": 2, "genre": 1 } },
-            artists: { fields: { "label": 10 } },
-            tvshows: { fields: { "label": 10 } }
+            movies: { definition: { fields: { "label": 10, "genre": 1 } } },
+            music: { definition: { fields: { "label": 10, "artist": 2, "genre": 1 } } },
+            artists: { definition: { fields: { "label": 10 } } },
+            tvshows: { definition: { fields: { "label": 10, "genre": 1 } } }
         };
         var searchIndex = null;
         var library;
@@ -784,6 +784,22 @@ var Kodi;
             }
             else {
                 dest.style.display = '';
+            }
+        });
+        Utils.searchItemKind = WinJS.Binding.initializer(function (source, sourceProperty, dest, destProperty) {
+            var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
+            if (data) {
+                var classname = null;
+                if (data == "music")
+                    classname = "kdp-music";
+                if (data == "artists")
+                    classname = "kdp-artist";
+                if (data == "tvshows")
+                    classname = "kdp-television";
+                if (data == "movies")
+                    classname = "kdp-movie";
+                if (classname)
+                    dest.classList.add(classname);
             }
         });
         Utils.isCurrent = WinJS.Binding.initializer(function (source, sourceProperty, dest, destProperty) {

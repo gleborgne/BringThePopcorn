@@ -79,22 +79,24 @@ gulp.task('compilewinjscontrib', function () {
     
     return merge([
         gulp.src([
-		    //'scripts/winjscontrib/js/winjscontrib.core.js',
+		    'scripts/winjscontrib/js/winjscontrib.core.js',
             'scripts/winjscontrib/js/winjscontrib.ui.webcomponents.js',
             'scripts/winjscontrib/js/winjscontrib.winrt.core.js',
 		    'scripts/winjscontrib/js/winjscontrib.winrt.upnp.js',
             'scripts/winjscontrib/js/winjscontrib.bindings.js',
             'scripts/winjscontrib/js/winjscontrib.date.utils.js',
-            'scripts/winjscontrib/js/winjscontrib.search.js',
-            //'scripts/winjscontrib/js/winjscontrib.ui.navigator.js',
+            'scripts/winjscontrib/js/winjscontrib.messenger.js',
+            //'scripts/winjscontrib/js/winjscontrib.search.js',
+            'scripts/winjscontrib/js/winjscontrib.ui.jquery.js',
+            'scripts/winjscontrib/js/winjscontrib.ui.navigator.js',
             'scripts/winjscontrib/js/winjscontrib.ui.animation.js',
             'scripts/winjscontrib/js/winjscontrib.ui.elasticbutton.js',
             'scripts/winjscontrib/js/winjscontrib.ui.fowrapper.js',
             'scripts/winjscontrib/js/winjscontrib.ui.multipass-renderer.js',
             'scripts/winjscontrib/js/winjscontrib.ui.grid.js',
             'scripts/winjscontrib/js/winjscontrib.ui.datasourcemanager.js',
-            //'scripts/winjscontrib/js/winjscontrib.ui.aspectratio.js',
-            //'scripts/winjscontrib/js/winjscontrib.ui.visualstate.js',
+            'scripts/winjscontrib/js/winjscontrib.ui.aspectratio.js',
+            'scripts/winjscontrib/js/winjscontrib.ui.visualstate.js',
             
         ], { base: '.', cwd: 'KodiPassion' })
 	    .pipe(plumber({ errorHandler: onError }))

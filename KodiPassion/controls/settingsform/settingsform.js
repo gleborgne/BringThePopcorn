@@ -27,4 +27,5 @@
         UI.SettingsForm = WinJS.UI.Pages.define(SettingsFormControl.url, SettingsFormControl);
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=settingsform.js.map
+
+//# sourceMappingURL=../../../KodiPassion/controls/settingsform/settingsform.js.map

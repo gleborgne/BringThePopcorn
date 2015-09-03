@@ -2,6 +2,7 @@
 (function (KodiPassion) {
     var Templates;
     (function (Templates) {
+        Templates.search = new WinJS.Binding.Template(null, { href: "/templates/searchitem.html", extractChild: true });
         Templates.album = new WinJS.Binding.Template(null, { href: "/templates/album.html", extractChild: true });
         Templates.song = new WinJS.Binding.Template(null, { href: "/templates/song.html", extractChild: true });
         Templates.movieposter = new WinJS.Binding.Template(null, { href: "/templates/movieposter.html", extractChild: true });
@@ -169,4 +170,5 @@ var KodiPassion;
     }
     KodiPassion.mapKodiApi = mapKodiApi;
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=default.js.map
+
+//# sourceMappingURL=../../KodiPassion/js/default.js.map

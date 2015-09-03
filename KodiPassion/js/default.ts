@@ -2,9 +2,14 @@
     var FOWrapper: any;
     var enableSystemBackButton: boolean;
 }
+
+interface JQuery {
+    pressEnterDefaultTo: any;
+}
 declare var dynamics: any;
 
 module KodiPassion.Templates {
+    export var search = new WinJS.Binding.Template(null, { href: "/templates/searchitem.html", extractChild: true });
     export var album = new WinJS.Binding.Template(null, { href: "/templates/album.html", extractChild: true });
     export var song = new WinJS.Binding.Template(null, { href: "/templates/song.html", extractChild: true });
     export var movieposter = new WinJS.Binding.Template(null, { href: "/templates/movieposter.html", extractChild: true });

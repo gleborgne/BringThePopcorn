@@ -130,6 +130,22 @@
                 dest.style.display = '';
             }
         });
+        Utils.searchItemKind = WinJS.Binding.initializer(function (source, sourceProperty, dest, destProperty) {
+            var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
+            if (data) {
+                var classname = null;
+                if (data == "music")
+                    classname = "kdp-music";
+                if (data == "artists")
+                    classname = "kdp-artist";
+                if (data == "tvshows")
+                    classname = "kdp-television";
+                if (data == "movies")
+                    classname = "kdp-movie";
+                if (classname)
+                    dest.classList.add(classname);
+            }
+        });
         Utils.isCurrent = WinJS.Binding.initializer(function (source, sourceProperty, dest, destProperty) {
             function setClass() {
                 var data = WinJSContrib.Utils.readProperty(source, sourceProperty);
@@ -161,4 +177,3 @@
         Utils.getNetworkPath = getNetworkPath;
     })(Utils = Kodi.Utils || (Kodi.Utils = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.Utils.js.map
