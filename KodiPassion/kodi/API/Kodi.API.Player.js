@@ -174,3 +174,4 @@
         })(Player = API.Player || (API.Player = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
+//# sourceMappingURL=Kodi.API.Player.js.map

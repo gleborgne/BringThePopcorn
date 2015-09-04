@@ -155,5 +155,4 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-
-//# sourceMappingURL=../../../../KodiPassion/pages/tvshows/seriedetail/tvshowsseriedetail.js.map
+//# sourceMappingURL=tvshowsseriedetail.js.map

@@ -116,5 +116,4 @@
         UI.SettingsList = WinJS.UI.Pages.define(SettingsListControl.url, SettingsListControl);
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-
-//# sourceMappingURL=../../../KodiPassion/controls/settingslist/settingslist.js.map
+//# sourceMappingURL=settingslist.js.map

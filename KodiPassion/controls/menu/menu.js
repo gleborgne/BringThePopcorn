@@ -14,5 +14,4 @@
         UI.MainMenu = WinJS.UI.Pages.define(MainMenuControl.url, MainMenuControl);
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-
-//# sourceMappingURL=../../../KodiPassion/controls/menu/menu.js.map
+//# sourceMappingURL=menu.js.map
