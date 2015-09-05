@@ -7,6 +7,9 @@
             var StartUpPage = (function () {
                 function StartUpPage() {
                 }
+                StartUpPage.prototype.init = function (element, options) {
+                    document.body.classList.add("unconnected");
+                };
                 StartUpPage.prototype.processed = function (element, options) {
                     var _this = this;
                     this.eventTracker.addEvent(this.serversettings, "settingslistmessage", function (arg) {
@@ -26,4 +29,3 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=startup.js.map

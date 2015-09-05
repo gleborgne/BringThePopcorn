@@ -7,6 +7,10 @@
         eventTracker: WinJSContrib.UI.EventTracker;
         messages: HTMLElement;
 
+        init(element, options) {
+            document.body.classList.add("unconnected");
+        }
+
         processed(element, options) {
             this.eventTracker.addEvent(this.serversettings, "settingslistmessage", (arg) => {
                 if (arg.detail.message) {

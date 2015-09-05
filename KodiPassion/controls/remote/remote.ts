@@ -3,11 +3,15 @@
     export class RemoteControllerControl {
         public static url = "/controls/remote/remote.html";
 
+        btnProfiles: HTMLElement;
+        profilesItems: HTMLElement;
         language: HTMLSelectElement;
         subtitle: HTMLSelectElement;
         rangeVolume: HTMLInputElement;
         rangeSeek: HTMLInputElement;
         eventTracker: WinJSContrib.UI.EventTracker;
+        shutdownFlyout: WinJS.UI.Flyout;
+        profilesFlyout: WinJS.UI.Flyout;
 
         processed(element, options) {
             KodiPassion.mapKodiApi(element);
@@ -17,6 +21,12 @@
                 var volumeval = parseInt(this.rangeVolume.value);
                 Kodi.API.Input.volume(volumeval);
             }
+
+            this.eventTracker.addBinding(Kodi.NowPlaying.current, "expanded", () => {
+                if (Kodi.NowPlaying.current.expanded) {
+                    this.loadProfiles();
+                }
+            });
 
             this.rangeSeek.onchange = () => {
                 var progressval = parseInt(this.rangeSeek.value);
@@ -29,6 +39,69 @@
             }
 
             return WinJS.Binding.processAll(element, Kodi.NowPlaying.current);
+        }
+
+        loadProfiles() {
+            WinJS.Promise.join({
+                current: Kodi.API.Profiles.getCurrentProfile(),
+                list: Kodi.API.Profiles.getProfiles()
+            }).then((profiles) => {
+                this.profilesItems.innerHTML = "";
+                if (profiles && profiles.list) {
+                    if (profiles.list.profiles.length == 1) {
+                        this.btnProfiles.style.display = "none";
+                        return;
+                    } else {
+                        this.btnProfiles.style.display = "";
+                        profiles.list.profiles.forEach((p) => {
+                            var b = document.createElement("BUTTON");
+                            b.innerText = p.label;
+                            if (profiles.current && p.label == profiles.current.label) {
+                                b.classList.add("selected");
+                            }
+
+                            this.profilesItems.appendChild(b);
+                            WinJSContrib.UI.tap(b, () => {
+                                this.profilesFlyout.hide();
+                                return Kodi.API.Profiles.loadProfile(p.label).then(() => {
+                                    $('.selected', this.profilesItems).removeClass("selected");
+                                    b.classList.add("selected");
+                                });
+                            });
+                        });
+                    }
+                }
+                }, (err) => {
+                    this.btnProfiles.style.display = "none";
+            });
+        }
+
+        showProfiles(arg) {
+            this.profilesFlyout.show(<HTMLElement>arg.elt, "bottom", "right");
+        }
+
+        showPowerOptions(arg) {
+            this.shutdownFlyout.show(<HTMLElement>arg.elt, "bottom", "right");
+        }
+
+        shutdown() {
+            this.shutdownFlyout.hide();
+            WinJSContrib.Alerts.messageBox({ content: "This will turn off your media server. After a few seconds, Kodi Passion will not be able to reach your media server any more. \r\n\r\nDo you want to proceed ?", title: 'Shutdown media server ?', commands: [{ label: 'Yes' }, { label: 'No', isDefault: true }] }).done(function (c) {
+                if (c.label == 'Yes')
+                    Kodi.API.System.shutdown().done(function () {
+                        WinJS.Navigation.navigate("/pages/startup/startup.html");
+                    });
+            });
+        }
+
+        restart() {
+            this.shutdownFlyout.hide();
+            WinJSContrib.Alerts.messageBox({ content: "This will restart your media server.\r\n\r\nDo you want to proceed ?", title: 'Shutdown media server ?', commands: [{ label: 'Yes' }, { label: 'No', isDefault: true }] }).done(function (c) {
+                if (c.label == 'Yes')
+                    Kodi.API.System.reboot().done(function () {
+                        WinJS.Navigation.navigate("/pages/startup/startup.html");
+                    });
+            });
         }
 
         loadLanguages() {
@@ -62,7 +135,7 @@
             }
         }
 
-        loadSubtitles(){
+        loadSubtitles() {
             this.eventTracker.addBinding(Kodi.NowPlaying.current, "id", () => {
                 this.subtitle.innerHTML = "";
                 if (Kodi.NowPlaying.current.subtitles) {
@@ -86,31 +159,31 @@
 
             this.subtitle.onchange = () => {
                 var subtitle = <any>this.subtitle.value;
-                    if (subtitle) {
-                        if (subtitle != 'off')
-                            subtitle = parseInt(subtitle);
+                if (subtitle) {
+                    if (subtitle != 'off')
+                        subtitle = parseInt(subtitle);
 
-                        Kodi.API.Player.setSubtitle(Kodi.NowPlaying.current.playerid, subtitle).done(() => {
-                            if (subtitle != 'off' && !Kodi.NowPlaying.current.subtitleenabled) {
-                                Kodi.API.Player.setSubtitle(Kodi.NowPlaying.current.playerid, 'on').done(() => {
-                                    Kodi.NowPlaying.check().done((props:any) => {
-                                        console.log('subtitles changed to ' + props.currentsubtitle.name);
-                                        this.subtitle.value = Kodi.NowPlaying.current.currentsubtitle.index;
-                                    });
+                    Kodi.API.Player.setSubtitle(Kodi.NowPlaying.current.playerid, subtitle).done(() => {
+                        if (subtitle != 'off' && !Kodi.NowPlaying.current.subtitleenabled) {
+                            Kodi.API.Player.setSubtitle(Kodi.NowPlaying.current.playerid, 'on').done(() => {
+                                Kodi.NowPlaying.check().done((props: any) => {
+                                    console.log('subtitles changed to ' + props.currentsubtitle.name);
+                                    this.subtitle.value = Kodi.NowPlaying.current.currentsubtitle.index;
                                 });
-                            } else {
-                                Kodi.NowPlaying.check().done((props:any) => {
-                                    if (!props.subtitleenabled) {
-                                        console.log('subtitles changed to off');
-                                        this.subtitle.value = 'off';
-                                    } else {
-                                        console.log('subtitles changed to ' + props.currentsubtitle.name);
-                                        this.subtitle.value = Kodi.NowPlaying.current.currentsubtitle.index;
-                                    }
-                                });
-                            }
-                        });
-                    }
+                            });
+                        } else {
+                            Kodi.NowPlaying.check().done((props: any) => {
+                                if (!props.subtitleenabled) {
+                                    console.log('subtitles changed to off');
+                                    this.subtitle.value = 'off';
+                                } else {
+                                    console.log('subtitles changed to ' + props.currentsubtitle.name);
+                                    this.subtitle.value = Kodi.NowPlaying.current.currentsubtitle.index;
+                                }
+                            });
+                        }
+                    });
+                }
             }
 
             //var subtitles = $('#subtitle', element);

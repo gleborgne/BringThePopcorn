@@ -6,6 +6,17 @@
 </head>
 <body>
     <div class="remote-controller">
+        <div id="profilesFlyout" member class="menu-flyout" data-win-control="WinJS.UI.Flyout">
+            <div member="profilesItems"></div>
+        </div>
+        <div id="shutdownFlyout" member class="menu-flyout" data-win-control="WinJS.UI.Flyout">
+            <button tap="shutdown">Shutdown</button>
+            <button tap="restart">Restart</button>
+        </div>
+        <div class="system-menus">
+            <button class="kdp-artist" member="btnProfiles" tap="showProfiles" style="display:none"></button>
+            <button class="kdp-power" tap="showPowerOptions"></button>
+        </div>
         <div class="main-menus">
             <button class="kdp-home blink" kodiapi="Kodi.API.Input.home"></button>
             <button class="kdp-movie blink" kodiapi="Kodi.API.Input.openMovies"></button>

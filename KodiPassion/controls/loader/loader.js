@@ -9,12 +9,15 @@
             };
             DataLoaderControl.prototype.ready = function (element, options) {
                 var page = this;
-                WinJSContrib.UI.Application.navigator.closeAllPages();
-                Kodi.API.Websocket.init(Kodi.API.currentSettings);
-                WinJS.Navigation.history.backstack = [];
-                var p = WinJS.Promise.wrap();
+                var p = WinJS.Promise.wrap().then(function () {
+                    WinJSContrib.UI.Application.navigator.closeAllPages();
+                    Kodi.API.Websocket.init(Kodi.API.currentSettings);
+                    WinJS.Navigation.history.backstack = [];
+                });
                 if (options && options.transitionIn) {
-                    p = WinJSContrib.UI.Animation.fadeIn(element);
+                    p = p.then(function () {
+                        return WinJSContrib.UI.Animation.fadeIn(element);
+                    });
                 }
                 p.then(function () {
                     return WinJSContrib.UI.Animation.enterGrow(page.content, { easing: WinJSContrib.UI.Animation.Easings.easeOutBack }).then(function () {
@@ -31,12 +34,14 @@
                     document.body.classList.add("unconnected");
                     return WinJS.Navigation.navigate("/pages/startup/startup.html");
                 }).then(function () {
+                    WinJS.Application.queueEvent({ type: "ServerChanged" });
                     page.container.classList.add('exit');
                     //return WinJSContrib.UI.afterTransition(page.container);
                     return WinJS.Promise.timeout(700);
                 }).then(function () {
                     $(page.element).remove();
                     page.dispose();
+                    currentLoader = null;
                 });
             };
             DataLoaderControl.url = "/controls/loader/loader.html";
@@ -44,14 +49,17 @@
         })();
         UI.DataLoaderControl = DataLoaderControl;
         UI.DataLoader = WinJS.UI.Pages.define(DataLoaderControl.url, DataLoaderControl);
+        var currentLoader = null;
         UI.DataLoader.showLoader = function (transitionIn, startupArgs) {
+            if (currentLoader)
+                return;
             var e = document.createElement("DIV");
             e.className = "page-loader-wrapper";
             if (transitionIn)
                 e.style.opacity = '0';
             document.body.appendChild(e);
             var loader = new KodiPassion.UI.DataLoader(e, { transitionIn: transitionIn, startupArgs: startupArgs });
+            currentLoader = loader;
         };
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=loader.js.map

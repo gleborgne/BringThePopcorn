@@ -26,7 +26,7 @@
         //ws.onerror = function (evt) {
         //    console.log(evt.data)
         //};
-        function kodiServerRequest(setting, methodname, params, forceCheck, ignoreXBMCErrors, retries) {
+        function kodiServerRequest(setting, methodname, params, forceCheck, ignoreXBMCErrors, retries, timeout) {
             var p, completed = false, completeCallback, errorCallback = null;
             p = new WinJS.Promise(function (complete, error) {
                 completeCallback = complete;
@@ -117,15 +117,18 @@
                 }
             });
             //});
-            return WinJS.Promise.timeout(API.defaultCallTimeout * 1000, p);
+            if (timeout)
+                return WinJS.Promise.timeout(timeout * 1000, p);
+            else
+                return p;
         }
         API.kodiServerRequest = kodiServerRequest;
         function testServerSetting(setting) {
-            return kodiServerRequest(setting, 'Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, false, 2);
+            return kodiServerRequest(setting, 'Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, false, 2, 10);
         }
         API.testServerSetting = testServerSetting;
-        function kodiRequest(methodname, params, forceCheck, ignoreXBMCErrors, retries) {
-            return kodiServerRequest(API.currentSettings, methodname, params, forceCheck, ignoreXBMCErrors, retries).then(function (data) {
+        function kodiRequest(methodname, params, forceCheck, ignoreXBMCErrors, retries, timeout) {
+            return kodiServerRequest(API.currentSettings, methodname, params, forceCheck, ignoreXBMCErrors, retries, timeout).then(function (data) {
                 if (API.version && API.version.major >= 12 && !Kodi.API.Websocket.current) {
                     Kodi.API.Websocket.init(API.currentSettings);
                 }
@@ -279,4 +282,3 @@ var Kodi;
         })(System = API.System || (API.System = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.API.js.map

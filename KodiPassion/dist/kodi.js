@@ -684,9 +684,13 @@ var Kodi;
                         setImage(defaultImage);
                         dest.style.backgroundSize = 'contain';
                     }
+                    else {
+                        WinJS.Utilities.addClass(dest, 'imageNotLoaded');
+                    }
                     return;
                 }
                 if (data === 'DefaultAlbumCover.png') {
+                    WinJS.Utilities.addClass(dest, 'imageNotLoaded');
                     //setImage("/images/cd.png");
                     return;
                 }
@@ -697,6 +701,9 @@ var Kodi;
                     }, function () {
                         if (defaultImage) {
                             setImage(defaultImage);
+                        }
+                        else {
+                            WinJS.Utilities.addClass(dest, 'imageNotLoaded');
                         }
                     });
                 }, 250);
@@ -842,7 +849,14 @@ var Kodi;
             var host = '255.255.255.255';
             //host = '192.168.1.255';
             return WinJS.Promise.join([
+                doWakeUp(host, '1', macAddress),
+                doWakeUp(host, '2', macAddress),
+                doWakeUp(host, '3', macAddress),
+                doWakeUp(host, '4', macAddress),
+                doWakeUp(host, '5', macAddress),
+                doWakeUp(host, '6', macAddress),
                 doWakeUp(host, '7', macAddress),
+                doWakeUp(host, '8', macAddress),
                 doWakeUp(host, '9', macAddress)
             ]);
         }
@@ -874,7 +888,7 @@ var Kodi;
                     bytes = [255, 255, 255, 255, 255, 255];
                     for (var i = 0; i < 16; i++) {
                         for (var m = 0; m < macAddress.length; m++) {
-                            bytes.push(macAddress[m]);
+                            bytes.push(parseInt(macAddress[m], 16));
                         }
                     }
                     //clientSocket.connectAsync(hostName, service).done(function () {
@@ -1314,7 +1328,7 @@ var Kodi;
         //ws.onerror = function (evt) {
         //    console.log(evt.data)
         //};
-        function kodiServerRequest(setting, methodname, params, forceCheck, ignoreXBMCErrors, retries) {
+        function kodiServerRequest(setting, methodname, params, forceCheck, ignoreXBMCErrors, retries, timeout) {
             var p, completed = false, completeCallback, errorCallback = null;
             p = new WinJS.Promise(function (complete, error) {
                 completeCallback = complete;
@@ -1405,15 +1419,18 @@ var Kodi;
                 }
             });
             //});
-            return WinJS.Promise.timeout(API.defaultCallTimeout * 1000, p);
+            if (timeout)
+                return WinJS.Promise.timeout(timeout * 1000, p);
+            else
+                return p;
         }
         API.kodiServerRequest = kodiServerRequest;
         function testServerSetting(setting) {
-            return kodiServerRequest(setting, 'Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, false, 2);
+            return kodiServerRequest(setting, 'Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, false, 2, 10);
         }
         API.testServerSetting = testServerSetting;
-        function kodiRequest(methodname, params, forceCheck, ignoreXBMCErrors, retries) {
-            return kodiServerRequest(API.currentSettings, methodname, params, forceCheck, ignoreXBMCErrors, retries).then(function (data) {
+        function kodiRequest(methodname, params, forceCheck, ignoreXBMCErrors, retries, timeout) {
+            return kodiServerRequest(API.currentSettings, methodname, params, forceCheck, ignoreXBMCErrors, retries, timeout).then(function (data) {
                 if (API.version && API.version.major >= 12 && !Kodi.API.Websocket.current) {
                     Kodi.API.Websocket.init(API.currentSettings);
                 }

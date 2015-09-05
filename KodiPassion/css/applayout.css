@@ -214,10 +214,10 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
     transform: translate(-100%, 0);
   }
   #nowplaying #nowplayingcontent > .panel#nowplaying-remote.selected {
-    transform: translate(0, 0);
+    transform: none;
   }
   #nowplaying #nowplayingcontent > .panel.selected {
-    transform: translate(0, 0);
+    transform: none;
   }
 }
 .blink.tap {

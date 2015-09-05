@@ -4,7 +4,14 @@
 
         //host = '192.168.1.255';
         return WinJS.Promise.join([
+            doWakeUp(host, '1', macAddress),
+            doWakeUp(host, '2', macAddress),
+            doWakeUp(host, '3', macAddress),
+            doWakeUp(host, '4', macAddress),
+            doWakeUp(host, '5', macAddress),
+            doWakeUp(host, '6', macAddress),
             doWakeUp(host, '7', macAddress),
+            doWakeUp(host, '8', macAddress),
             doWakeUp(host, '9', macAddress)
         ]);
     }
@@ -36,7 +43,7 @@
                 bytes = [255, 255, 255, 255, 255, 255];
                 for (var i = 0; i < 16; i++) {
                     for (var m = 0; m < macAddress.length; m++) {
-                        bytes.push(macAddress[m]);
+                        bytes.push(parseInt(macAddress[m],16));
                     }
                 }
 

@@ -87,6 +87,8 @@
                                     addInterval();
                                 }
                                 //WinJSContrib.Alerts.toast("Wake on lan sended to " + setting.name);
+                            }, (err) => {
+                                console.error(err);
                             });
                         });
                     } else {

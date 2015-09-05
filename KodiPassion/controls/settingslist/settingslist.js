@@ -75,6 +75,8 @@
                                         addInterval();
                                     }
                                     //WinJSContrib.Alerts.toast("Wake on lan sended to " + setting.name);
+                                }, function (err) {
+                                    console.error(err);
                                 });
                             });
                         }
@@ -116,4 +118,3 @@
         UI.SettingsList = WinJS.UI.Pages.define(SettingsListControl.url, SettingsListControl);
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=settingslist.js.map

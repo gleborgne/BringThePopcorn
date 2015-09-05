@@ -28,9 +28,13 @@
                         setImage(defaultImage);
                         dest.style.backgroundSize = 'contain';
                     }
+                    else {
+                        WinJS.Utilities.addClass(dest, 'imageNotLoaded');
+                    }
                     return;
                 }
                 if (data === 'DefaultAlbumCover.png') {
+                    WinJS.Utilities.addClass(dest, 'imageNotLoaded');
                     //setImage("/images/cd.png");
                     return;
                 }
@@ -41,6 +45,9 @@
                     }, function () {
                         if (defaultImage) {
                             setImage(defaultImage);
+                        }
+                        else {
+                            WinJS.Utilities.addClass(dest, 'imageNotLoaded');
                         }
                     });
                 }, 250);
@@ -177,4 +184,3 @@
         Utils.getNetworkPath = getNetworkPath;
     })(Utils = Kodi.Utils || (Kodi.Utils = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.Utils.js.map

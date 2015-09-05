@@ -43,6 +43,14 @@
   background-position: center;
   height: 200px;
   margin-bottom: 10px;
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+.page-albumsdetail .cover .coverpic.imageLoaded {
+  opacity: 1;
+}
+.page-albumsdetail .cover .coverpic.imageNotLoaded {
+  display: none;
 }
 .page-albumsdetail .cover .album-actions {
   text-align: right;

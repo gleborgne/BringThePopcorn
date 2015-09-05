@@ -23,11 +23,14 @@
                 if (defaultImage) {
                     setImage(defaultImage);
                     dest.style.backgroundSize = 'contain';
+                } else {
+                    WinJS.Utilities.addClass(dest, 'imageNotLoaded');
                 }
                 return;
             }
 
-            if (data === 'DefaultAlbumCover.png') {                
+            if (data === 'DefaultAlbumCover.png') {    
+                WinJS.Utilities.addClass(dest, 'imageNotLoaded');            
                 //setImage("/images/cd.png");
                 return;
             }
@@ -39,6 +42,8 @@
                 }, function () {
                     if (defaultImage) {
                         setImage(defaultImage);
+                    } else {
+                        WinJS.Utilities.addClass(dest, 'imageNotLoaded');
                     }
                 });
             }, 250);

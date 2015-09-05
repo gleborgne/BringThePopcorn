@@ -25,6 +25,7 @@
   <Capabilities>
     <Capability Name="internetClient" />
     <Capability Name="privateNetworkClientServer" />
+    <Capability Name="internetClientServer" />
     <uap:Capability Name="videosLibrary" />
     <uap:Capability Name="picturesLibrary" />
     <uap:Capability Name="musicLibrary" />

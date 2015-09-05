@@ -41,7 +41,7 @@
     //    console.log(evt.data)
     //};
 
-    export function kodiServerRequest<T>(setting: Kodi.Settings.KodiServerSetting, methodname, params?, forceCheck?, ignoreXBMCErrors?, retries?): WinJS.Promise<T> {
+    export function kodiServerRequest<T>(setting: Kodi.Settings.KodiServerSetting, methodname, params?, forceCheck?, ignoreXBMCErrors?, retries?, timeout? : number): WinJS.Promise<T> {
         var p, completed = false, completeCallback, errorCallback = null;
         p = new WinJS.Promise<T>(function (complete, error) {
             completeCallback = complete;
@@ -138,15 +138,18 @@
         });
         //});
 
-        return WinJS.Promise.timeout(API.defaultCallTimeout * 1000, p);
+        if (timeout)
+            return WinJS.Promise.timeout(timeout * 1000, p);
+        else
+            return p;
     }
 
     export function testServerSetting(setting: Kodi.Settings.KodiServerSetting): WinJS.Promise<any> {
-        return kodiServerRequest(setting, 'Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, false, 2);
+        return kodiServerRequest(setting, 'Application.GetProperties', { properties: ["volume", "muted", "version", "name"] }, false, false, 2, 10);
     }
 
-    export function kodiRequest<T>(methodname, params?, forceCheck?, ignoreXBMCErrors?, retries?): WinJS.Promise<T> {
-        return kodiServerRequest(API.currentSettings, methodname, params, forceCheck, ignoreXBMCErrors, retries).then(function (data) {
+    export function kodiRequest<T>(methodname, params?, forceCheck?, ignoreXBMCErrors?, retries?, timeout?: number): WinJS.Promise<T> {
+        return kodiServerRequest(API.currentSettings, methodname, params, forceCheck, ignoreXBMCErrors, retries, timeout).then(function (data) {
             if (API.version && API.version.major >= 12 && !Kodi.API.Websocket.current) {
                 Kodi.API.Websocket.init(API.currentSettings);
             }
@@ -219,7 +222,7 @@ module Kodi.API.Profiles {
 
     }
     
-    export function loadProfile(name, prompt, password) {
+    export function loadProfile(name, prompt?, password?) {
         var arg = <any>{ profile: name };
         if (prompt !== undefined)
             arg.prompt = prompt;

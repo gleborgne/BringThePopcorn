@@ -46,6 +46,15 @@
             background-position: center;
             height: 200px;
             margin-bottom: 10px;
+           
+            opacity : 0;
+            transition : opacity 200ms ease-out;
+            &.imageLoaded{                
+                opacity : 1;
+            }
+            &.imageNotLoaded{                
+                display: none;
+            }
         }
 
         .album-actions {

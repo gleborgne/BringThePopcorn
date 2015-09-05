@@ -326,9 +326,9 @@ declare module Kodi.API {
         };
     }
     function redirectToSettings(error: any): WinJS.IPromise<{}>;
-    function kodiServerRequest<T>(setting: Kodi.Settings.KodiServerSetting, methodname: any, params?: any, forceCheck?: any, ignoreXBMCErrors?: any, retries?: any): WinJS.Promise<T>;
+    function kodiServerRequest<T>(setting: Kodi.Settings.KodiServerSetting, methodname: any, params?: any, forceCheck?: any, ignoreXBMCErrors?: any, retries?: any, timeout?: number): WinJS.Promise<T>;
     function testServerSetting(setting: Kodi.Settings.KodiServerSetting): WinJS.Promise<any>;
-    function kodiRequest<T>(methodname: any, params?: any, forceCheck?: any, ignoreXBMCErrors?: any, retries?: any): WinJS.Promise<T>;
+    function kodiRequest<T>(methodname: any, params?: any, forceCheck?: any, ignoreXBMCErrors?: any, retries?: any, timeout?: number): WinJS.Promise<T>;
     function kodiThumbnail(thumburl: any): string;
     function getFilePath(path: any): string;
     function introspect(): WinJS.Promise<{}>;
@@ -349,7 +349,7 @@ declare module Kodi.API {
 declare module Kodi.API.Profiles {
     function getCurrentProfile(): WinJS.Promise<any>;
     function getProfiles(): WinJS.Promise<any>;
-    function loadProfile(name: any, prompt: any, password: any): WinJS.Promise<{}>;
+    function loadProfile(name: any, prompt?: any, password?: any): WinJS.Promise<{}>;
 }
 declare module Kodi.API.PlayList {
     function getProperties(playlistid: any): WinJS.Promise<{}>;

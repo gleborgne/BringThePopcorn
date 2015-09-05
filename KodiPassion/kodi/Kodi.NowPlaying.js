@@ -165,4 +165,3 @@
         NowPlaying.init = init;
     })(NowPlaying = Kodi.NowPlaying || (Kodi.NowPlaying = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.NowPlaying.js.map

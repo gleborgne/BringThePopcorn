@@ -19,12 +19,8 @@
         padding: 0;
         box-sizing: border-box;
     }
-
-    .main-menus {
-        margin-top: 10px;
-        .hflex(center);
-        justify-content: center;
-
+    
+    .system-menu, .main-menus{
         button {
             margin: 0 10px;
 
@@ -36,6 +32,16 @@
                 margin-right: 0;
             }
         }
+    }
+
+    .system-menus{
+        text-align: right;
+    }
+
+    .main-menus {
+        margin-top: 10px;
+        .hflex(center);
+        justify-content: center;
     }
 
     .navigation {
@@ -205,3 +211,23 @@
     }
 }
 
+.menu-flyout{
+    border: 1px solid @kodiBlue;
+
+    button{
+        display: block;
+        width: 250px;
+        margin-bottom : 10px;
+        color: @kodiBlue;
+        outline: none;
+
+        &:hover{
+            background-color: rgba(20,20,20,0.5);
+        }
+
+        &.selected{
+            background-color: @kodiBlue;
+            color: white;
+        }
+    }
+}

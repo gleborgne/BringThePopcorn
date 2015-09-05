@@ -10,13 +10,17 @@
 
         ready(element, options) {
             var page = this;
-            WinJSContrib.UI.Application.navigator.closeAllPages();
-            Kodi.API.Websocket.init(Kodi.API.currentSettings);
-            WinJS.Navigation.history.backstack = [];
-            var p = WinJS.Promise.wrap();
+           
+            var p = WinJS.Promise.wrap().then(() => {
+                WinJSContrib.UI.Application.navigator.closeAllPages();
+                Kodi.API.Websocket.init(Kodi.API.currentSettings);
+                WinJS.Navigation.history.backstack = [];
+            });
 
             if (options && options.transitionIn) {
-                p = WinJSContrib.UI.Animation.fadeIn(element);
+                p = p.then(() => {
+                    return WinJSContrib.UI.Animation.fadeIn(element);
+                });
             }
 
             p.then(function () {
@@ -29,25 +33,30 @@
             }).then(function (data) {
                 document.body.classList.remove("unconnected");
                 Kodi.NowPlaying.init();
-
+                
                 return WinJS.Navigation.navigate("/pages/home/home.html")
             }, function (err) {
                 document.body.classList.add("unconnected");
                 return WinJS.Navigation.navigate("/pages/startup/startup.html");
             }).then(function () {
+                WinJS.Application.queueEvent({ type: "ServerChanged" });
                 page.container.classList.add('exit');
                 //return WinJSContrib.UI.afterTransition(page.container);
                 return WinJS.Promise.timeout(700);
             }).then(function () {
                 $(page.element).remove();
                 (<any>page).dispose();
+                currentLoader = null;
             });
         }
     }
 
     export var DataLoader = <any>WinJS.UI.Pages.define(DataLoaderControl.url, DataLoaderControl);
-
+    var currentLoader = null;
     DataLoader.showLoader = function (transitionIn, startupArgs) {
+        if (currentLoader)
+            return;
+
         var e = <HTMLElement>document.createElement("DIV");
         e.className = "page-loader-wrapper";
         if (transitionIn)
@@ -55,5 +64,6 @@
 
         document.body.appendChild(e);
         var loader = new KodiPassion.UI.DataLoader(e, { transitionIn: transitionIn, startupArgs: startupArgs });
+        currentLoader = loader;
     }
 }
