@@ -74,3 +74,4 @@
         UI.NowPlayingSummary = WinJS.UI.Pages.define(NowPlayingBarControl.url, NowPlayingBarControl);
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
+//# sourceMappingURL=nowplayingbar.js.map

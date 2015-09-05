@@ -56,7 +56,10 @@
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <PackageCertificateKeyFile>KodiPassion_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>KodiPassion_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>971FCFD46593E555EF59CC1E381E71E61AA59CFA</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -174,6 +177,7 @@
     <Content Include="css\default.less" />
     <Content Include="js\default.js" />
     <Content Include="js\default.js.map" />
+    <None Include="KodiPassion_StoreKey.pfx" />
     <Content Include="kodi\API\Kodi.API.Input.js" />
     <Content Include="kodi\API\Kodi.API.Input.js.map" />
     <Content Include="kodi\API\Kodi.API.js" />
@@ -200,6 +204,7 @@
     <Content Include="kodi\Kodi.Utils.js.map" />
     <Content Include="kodi\Kodi.WOL.js" />
     <Content Include="kodi\Kodi.WOL.js.map" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="pages\albums\artists\artists.css" />
     <Content Include="pages\albums\artists\artists.js" />
     <Content Include="pages\albums\artists\artists.js.map" />
