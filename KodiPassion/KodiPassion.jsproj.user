@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ReferenceCachePath>C:\Users\gleborgne\AppData\Local\Temp\KodiPassion_refcache</ReferenceCachePath>
     <ShowAllFiles>true</ShowAllFiles>
-    <AppxPackageIsForStore>True</AppxPackageIsForStore>
+    <AppxPackageIsForStore>False</AppxPackageIsForStore>
     <AppxShowAllApps>False</AppxShowAllApps>
     <AppxBuildConfigurationSelection>neutral</AppxBuildConfigurationSelection>
   </PropertyGroup>

@@ -1,3 +1,6 @@
 .vs/
+vsdist/
 bin/
 bld/
+apppackages/
+bundleartifacts/

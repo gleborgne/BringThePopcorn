@@ -11,6 +11,7 @@ var rename = require('gulp-rename');
 var iconfont = require('gulp-iconfont');
 var iconfontCss = require('gulp-iconfont-css');
 var consolidate = require('gulp-consolidate');
+var bom = require('gulp-bom');
 
 var onError = function(err) {
 	notify.onError({
@@ -45,6 +46,7 @@ gulp.task('Iconfont', function(){
           fontPath: '',
           className: 'kdp'
         }))
+        .pipe(bom())
         .pipe(rename('kodipassion.css'))
         .pipe(gulp.dest('../KodiPassion/dist/fonts/'));
     })

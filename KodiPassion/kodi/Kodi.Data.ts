@@ -250,8 +250,9 @@
 
     function buildLibrary(data) {
         var tmplibrary = <IMediaLibrary>{};
-        if (searchIndex)
+        if (searchIndex) {
             searchIndex.dispose();
+        }
 
         searchIndex = new WinJSContrib.Search.IndexGroup(SearchDefinitions);
         buildMusicLibrary(tmplibrary, data[0], searchIndex);
@@ -267,6 +268,10 @@
         }
         library = tmplibrary;
         searchIndex.save();
+        if (searchIndex) {
+            searchIndex.dispose();
+            searchIndex = null;
+        }
     }
 
     function showHideMenus() {

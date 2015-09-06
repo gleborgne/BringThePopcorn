@@ -198,8 +198,9 @@
         }
         function buildLibrary(data) {
             var tmplibrary = {};
-            if (searchIndex)
+            if (searchIndex) {
                 searchIndex.dispose();
+            }
             searchIndex = new WinJSContrib.Search.IndexGroup(Data.SearchDefinitions);
             buildMusicLibrary(tmplibrary, data[0], searchIndex);
             buildVideoLibrary(tmplibrary, data[1], searchIndex);
@@ -214,6 +215,10 @@
             }
             library = tmplibrary;
             searchIndex.save();
+            if (searchIndex) {
+                searchIndex.dispose();
+                searchIndex = null;
+            }
         }
         function showHideMenus() {
             if (!library.movies || !library.movies.movies || !library.movies.movies.length) {
