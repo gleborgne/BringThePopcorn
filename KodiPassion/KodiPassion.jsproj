@@ -66,6 +66,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="controls\genrespicker\genrepicker.css" />
+    <Content Include="images\Square44x44Logo.targetsize-256_altform-unplated.png" />
     <Content Include="todo.txt" />
     <TypeScriptCompile Include="controls\genrespicker\genrepicker.ts" />
     <Content Include="controls\genrespicker\genrepicker.js" />
