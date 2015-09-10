@@ -15,6 +15,9 @@
                 enumerable: true,
                 configurable: true
             });
+            SettingsFormControl.prototype.init = function (element, options) {
+                element.classList.add("settingsformcontrol");
+            };
             SettingsFormControl.prototype.ready = function (element, options) {
             };
             SettingsFormControl.prototype.validate = function () {

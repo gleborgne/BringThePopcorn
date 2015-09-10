@@ -1,7 +1,8 @@
 ﻿.page-serverdetail {
-    padding: 60px;
-
     .actions {
+        position: absolute;
+        top : 20px;
+        right : 20px;
         text-align: right;
 
         button {
@@ -11,16 +12,31 @@
             background-color: transparent;
         }
     }
+
+    .settings-panel {
+        box-sizing: border-box;
+        max-width: 600px;
+        margin: auto;
+        padding: 60px;
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
 }
 
 @media screen and (max-width: 1024px) {
     .page-serverdetail {
-        padding: 40px;
+        .settings-panel {
+            padding: 40px;
+        }
     }
 }
 
 @media screen and (max-width: 800px) {
     .page-serverdetail {
-        padding: 20px;
+        .settings-panel {
+            padding: 20px;
+        }
     }
 }

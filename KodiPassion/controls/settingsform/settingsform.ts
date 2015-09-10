@@ -11,6 +11,10 @@
             this.dataForm.item = val;
         }
 
+        init(element, options) {
+            element.classList.add("settingsformcontrol");
+        }
+
         ready(element, options) {
         }
 

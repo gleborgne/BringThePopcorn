@@ -1,16 +1,16 @@
-﻿.settingsform .formfield {
+﻿.settingsformcontrol .formfield {
   margin-bottom: 0.4rem;
 }
-.settingsform .formfield label {
+.settingsformcontrol .formfield label {
   display: block;
   font-size: 0.6rem;
   text-transform: uppercase;
   margin-top: 2px;
   color: #666666;
 }
-.settingsform .formfield input[type=text],
-.settingsform .formfield input[type=number],
-.settingsform .formfield input[type=password] {
+.settingsformcontrol .formfield input[type=text],
+.settingsformcontrol .formfield input[type=number],
+.settingsformcontrol .formfield input[type=password] {
   border: none;
   border-bottom: 1px solid #666;
   width: 100%;
@@ -18,43 +18,43 @@
   color: inherit;
   font-size: inherit;
 }
-.settingsform .formfield input[type=text].error,
-.settingsform .formfield input[type=number].error,
-.settingsform .formfield input[type=password].error {
+.settingsformcontrol .formfield input[type=text].error,
+.settingsformcontrol .formfield input[type=number].error,
+.settingsformcontrol .formfield input[type=password].error {
   border-bottom-color: red;
 }
-.settingsform .formfield input[type=text]::-ms-input-placeholder,
-.settingsform .formfield input[type=number]::-ms-input-placeholder,
-.settingsform .formfield input[type=password]::-ms-input-placeholder {
+.settingsformcontrol .formfield input[type=text]::-ms-input-placeholder,
+.settingsformcontrol .formfield input[type=number]::-ms-input-placeholder,
+.settingsformcontrol .formfield input[type=password]::-ms-input-placeholder {
   color: #999;
   font-weight: 300;
 }
-.settingsform .formfield.field2 {
+.settingsformcontrol .formfield.field2 {
   display: -ms-grid;
   -ms-grid-columns: 3fr 1fr;
   -ms-grid-rows: auto;
 }
-.settingsform .formfield.field2 > .formfield:nth-child(2) {
+.settingsformcontrol .formfield.field2 > .formfield:nth-child(2) {
   margin-left: 10px;
   -ms-grid-column: 2;
 }
-.settingsform .formfield .field6 {
+.settingsformcontrol .formfield .field6 {
   display: -ms-grid;
   -ms-grid-columns: 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr 10px 1fr;
   -ms-grid-rows: auto;
 }
-.settingsform .formfield .field6 > input:nth-child(2) {
+.settingsformcontrol .formfield .field6 > input:nth-child(2) {
   -ms-grid-column: 3;
 }
-.settingsform .formfield .field6 > input:nth-child(3) {
+.settingsformcontrol .formfield .field6 > input:nth-child(3) {
   -ms-grid-column: 5;
 }
-.settingsform .formfield .field6 > input:nth-child(4) {
+.settingsformcontrol .formfield .field6 > input:nth-child(4) {
   -ms-grid-column: 7;
 }
-.settingsform .formfield .field6 > input:nth-child(5) {
+.settingsformcontrol .formfield .field6 > input:nth-child(5) {
   -ms-grid-column: 9;
 }
-.settingsform .formfield .field6 > input:nth-child(6) {
+.settingsformcontrol .formfield .field6 > input:nth-child(6) {
   -ms-grid-column: 11;
 }

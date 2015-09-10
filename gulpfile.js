@@ -31,7 +31,7 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('styles', function() {
-	return gulp.src(['**/*.less', '!bin/**/*.less', '!/bld/**/*.less'], { cwd: 'KodiPassion',  base : '.' })
+	return gulp.src(['**/*.less', '!**/bin/**/*.less', '!**/bld/**/*.less'], { cwd: 'KodiPassion',  base : '.' })
 	.pipe(plumber({errorHandler: onError}))
 	.pipe(less())
 	.pipe(bom())

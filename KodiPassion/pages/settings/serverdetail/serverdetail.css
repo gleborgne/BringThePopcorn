@@ -1,7 +1,7 @@
-﻿.page-serverdetail {
-  padding: 60px;
-}
-.page-serverdetail .actions {
+﻿.page-serverdetail .actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
   text-align: right;
 }
 .page-serverdetail .actions button {
@@ -10,13 +10,23 @@
   border: none;
   background-color: transparent;
 }
+.page-serverdetail .settings-panel {
+  box-sizing: border-box;
+  max-width: 600px;
+  margin: auto;
+  padding: 60px;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 @media screen and (max-width: 1024px) {
-  .page-serverdetail {
+  .page-serverdetail .settings-panel {
     padding: 40px;
   }
 }
 @media screen and (max-width: 800px) {
-  .page-serverdetail {
+  .page-serverdetail .settings-panel {
     padding: 20px;
   }
 }
