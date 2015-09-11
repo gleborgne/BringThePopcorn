@@ -1,5 +1,13 @@
-﻿WinJSContrib.DataContainer.WinRTFilesContainer.makeCurrent();
-WinJSContrib.Logs.configure("WinJSContrib.UI.Pages", { level: WinJSContrib.Logs.Levels.debug, appenders: ["Console"] });
+﻿var KodiPassion;
+(function (KodiPassion) {
+    KodiPassion.debug = true;
+})(KodiPassion || (KodiPassion = {}));
+WinJSContrib.DataContainer.WinRTFilesContainer.makeCurrent();
+if (KodiPassion.debug) {
+    WinJSContrib.UI.Pages.verboseTraces = true;
+    WinJSContrib.Logs.configure("WinJSContrib.UI.Pages", { level: WinJSContrib.Logs.Levels.debug, appenders: ["DefaultConsole"] });
+    WinJSContrib.Logs.configure("KDP.API", { level: WinJSContrib.Logs.Levels.info, appenders: ["DefaultConsole"] });
+}
 var KodiPassion;
 (function (KodiPassion) {
     var Templates;

@@ -1,5 +1,5 @@
 ﻿module Kodi.API {
-
+    var logger = WinJSContrib.Logs.getLogger("KDP.API");
     var apiUrl = 'http://192.168.1.67:80';
     var apiId = 0;
     var apiVersion = '2.0';
@@ -72,7 +72,7 @@
         }
 
         var callData = JSON.stringify(reqdata);
-        console.log('API call for ' + url + ' ' + callData);
+        logger.verbose('API call for ' + url + ' ' + callData);
         $.ajax({
             url: url,
             type: 'POST',
@@ -89,7 +89,7 @@
             data: callData,
             success: function (data) {
                 Kodi.NowPlaying.current.reachable = true;
-                console.log('API call success for ' + url + ' ' + callData);
+                logger.debug('API call success for ' + url + ' ' + callData);
                 if (p._state && p._state.name && p._state.name == 'error') {
                     if (completed)
                         return;
@@ -113,7 +113,7 @@
                 }
             },
             error: function (data) {
-                console.log('API call error for ' + url + ' ' + callData);
+                logger.warn('API call error for ' + url + ' ' + callData);
                 if (p._state && p._state.name && p._state.name == 'error') {
                     if (completed)
                         return;
@@ -122,7 +122,7 @@
                 }
 
                 if (data.status === 0 && !retries) {
-                    console.log('API call retry ' + url + ' ' + callData);
+                    logger.info('API call retry ' + url + ' ' + callData);
                     kodiServerRequest(setting, methodname, params, forceCheck, ignoreXBMCErrors, (retries || 0) + 1).done(function (data) {
                         completed = true;
                         completeCallback(data);

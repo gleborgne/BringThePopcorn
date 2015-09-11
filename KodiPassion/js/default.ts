@@ -8,9 +8,17 @@ interface JQuery {
 }
 
 declare var dynamics: any;
+module KodiPassion {
+    export var debug = true;
+}
 
 WinJSContrib.DataContainer.WinRTFilesContainer.makeCurrent();
-WinJSContrib.Logs.configure("WinJSContrib.UI.Pages", { level: WinJSContrib.Logs.Levels.debug, appenders: ["Console"] });
+
+if (KodiPassion.debug) {
+    WinJSContrib.UI.Pages.verboseTraces = true;
+    WinJSContrib.Logs.configure("WinJSContrib.UI.Pages", { level: WinJSContrib.Logs.Levels.debug, appenders: ["DefaultConsole"] });
+    WinJSContrib.Logs.configure("KDP.API", { level: WinJSContrib.Logs.Levels.info, appenders: ["DefaultConsole"] });
+}
 
 module KodiPassion.Templates {
     export var search = new WinJS.Binding.Template(null, { href: "/templates/searchitem.html", extractChild: true });
