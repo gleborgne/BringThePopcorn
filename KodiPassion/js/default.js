@@ -1,4 +1,6 @@
-﻿var KodiPassion;
+﻿WinJSContrib.DataContainer.WinRTFilesContainer.makeCurrent();
+WinJSContrib.Logs.configure("WinJSContrib.UI.Pages", { level: WinJSContrib.Logs.Levels.debug, appenders: ["Console"] });
+var KodiPassion;
 (function (KodiPassion) {
     var Templates;
     (function (Templates) {

@@ -79,14 +79,15 @@ gulp.task('compilewinjscontrib', function () {
     
     return merge([
         gulp.src([
-		    'scripts/winjscontrib/js/winjscontrib.core.js',
+		    //'scripts/winjscontrib/js/winjscontrib.core.js',
             'scripts/winjscontrib/js/winjscontrib.ui.webcomponents.js',
             'scripts/winjscontrib/js/winjscontrib.winrt.core.js',
 		    'scripts/winjscontrib/js/winjscontrib.winrt.upnp.js',
             'scripts/winjscontrib/js/winjscontrib.bindings.js',
             'scripts/winjscontrib/js/winjscontrib.date.utils.js',
             'scripts/winjscontrib/js/winjscontrib.messenger.js',
-            'scripts/winjscontrib/js/winjscontrib.search.js',
+            'scripts/winjscontrib/js/winjscontrib.datacontainer.winrt.file.js',
+            //'scripts/winjscontrib/js/winjscontrib.search.js',
             'scripts/winjscontrib/js/winjscontrib.ui.jquery.js',
             'scripts/winjscontrib/js/winjscontrib.ui.dataform.js',
             'scripts/winjscontrib/js/winjscontrib.ui.navigator.js',

@@ -1,4 +1,10 @@
-﻿/// <reference path="winjscontrib.core.js" />
+﻿/* 
+ * WinJS Contrib v2.1.0.4
+ * licensed under MIT license (see http://opensource.org/licenses/MIT)
+ * sources available at https://github.com/gleborgne/winjscontrib
+ */
+
+/// <reference path="winjscontrib.core.js" />
 (function () {
     'use strict';
     WinJS.Namespace.define("WinJSContrib.UI", {

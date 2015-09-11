@@ -67,6 +67,12 @@
     </AppxManifest>
     <Content Include="controls\genrespicker\genrepicker.css" />
     <Content Include="images\Square44x44Logo.targetsize-256_altform-unplated.png" />
+    <Content Include="js\searchworker.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.core.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.datacontainer.winrt.file.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.messenger.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.search.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.search.worker.js" />
     <Content Include="todo.txt" />
     <TypeScriptCompile Include="controls\genrespicker\genrepicker.ts" />
     <Content Include="controls\genrespicker\genrepicker.js" />
@@ -352,7 +358,8 @@
     <TypeScriptCompile Include="typings\typings\winjs\winjs.d.ts" />
     <TypeScriptCompile Include="typings\typings\winrt\winrt.d.ts" />
     <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.core.d.ts" />
-    <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.logger.d.ts" />
+    <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.datacontainer.d.ts" />
+    <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.datacontainer.winrt.file.d.ts" />
     <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.search.d.ts" />
     <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.ui.animation.d.ts" />
     <TypeScriptCompile Include="typings\winjscontrib\winjscontrib.ui.pages.d.ts" />

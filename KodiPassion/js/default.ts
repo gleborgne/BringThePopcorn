@@ -6,7 +6,11 @@
 interface JQuery {
     pressEnterDefaultTo: any;
 }
+
 declare var dynamics: any;
+
+WinJSContrib.DataContainer.WinRTFilesContainer.makeCurrent();
+WinJSContrib.Logs.configure("WinJSContrib.UI.Pages", { level: WinJSContrib.Logs.Levels.debug, appenders: ["Console"] });
 
 module KodiPassion.Templates {
     export var search = new WinJS.Binding.Template(null, { href: "/templates/searchitem.html", extractChild: true });
@@ -19,6 +23,7 @@ module KodiPassion {
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
 
+    
     WinJSContrib.UI.enableSystemBackButton = true;
     WinJSContrib.UI.defaultTapBehavior.awaitAnim = true;
     WinJSContrib.UI.defaultTapBehavior.animDown = function (elt) {

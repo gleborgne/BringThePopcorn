@@ -1,3 +1,187 @@
+﻿declare module WinJSContrib.Logs {
+    /**
+    * enumeration for log levels
+    * @enum {number} Levels
+    * @memberof WinJSContrib.Logs
+    */
+    enum Levels {
+        /**
+         * disabled
+         */
+        off = 256,
+        /**
+         * log error
+         */
+        error = 16,
+        /**
+         * log warn and error
+         */
+        warn = 8,
+        /**
+         * log info, warn, error
+         */
+        info = 4,
+        /**
+         * log debug, info, warn, error
+         */
+        debug = 2,
+    }
+    interface ILoggerConfig {
+        level: Logs.Levels;
+        hideLevelInMessage?: boolean;
+        hideGroupInMessage?: boolean;
+        appenders?: any[];
+    }
+    var defaultConfig: ILoggerConfig;
+    var RuntimeAppenders: {
+        "Console": Appenders.ConsoleAppender;
+    };
+    /**
+     * get a logger, logger is created if it does not exists
+     * @function WinJSContrib.Logs.getLogger
+     * @param {string} name name for the logger
+     * @param {Object} config logger configuration
+     * @param {...Object} appenders appenders to add to the logger
+     * @returns {WinJSContrib.Logs.Logger}
+     */
+    function getLogger(name: string, config?: ILoggerConfig): Logger;
+    function configure(name: string, config: ILoggerConfig): void;
+    function loggingLevelStringToEnum(level: any): Levels;
+    function logginLevelToString(level: any): string;
+    class Logger {
+        appenders: Array<WinJSContrib.Logs.Appenders.ILogAppender>;
+        config: any;
+        name: string;
+        /**
+         * @class WinJSContrib.Logs.Logger
+         * @param {Object} config logger configuration
+         */
+        constructor(config: any);
+        Config: ILoggerConfig;
+        /**
+         * add appender to logger
+         * @function WinJSContrib.Logs.Logger.prototype.addAppender
+         * @param {Object} appender
+         */
+        addAppender(appender: string | WinJSContrib.Logs.Appenders.ILogAppender): void;
+        /**
+         * Add log entry
+         * @function WinJSContrib.Logs.Logger.prototype.log
+         * @param {string} message log message
+         * @param {string} group group/category for the entry
+         * @param {WinJSContrib.Logs.Levels} log level
+         */
+        log(message: string, group: string, level: Logs.Levels): void;
+        /**
+         * format log entry
+         * @function WinJSContrib.Logs.Logger.prototype.format
+         * @param {string} message log message
+         * @param {string} group group/category for the entry
+         * @param {WinJSContrib.Logs.Levels} log level
+         */
+        format(message: string, group: string, level: Logs.Levels): string;
+        /**
+         * add debug log entry
+         * @function WinJSContrib.Logs.Logger.prototype.debug
+         * @param {string} message log message
+         * @param {string} [group] log group name
+         */
+        debug(message: string, group?: string): void;
+        /**
+         * add info log entry
+         * @function WinJSContrib.Logs.Logger.prototype.info
+         * @param {string} message log message
+         * @param {string} [group] log group name
+         */
+        info(message: string, group?: string): void;
+        /**
+         * add warn log entry
+         * @function WinJSContrib.Logs.Logger.prototype.warn
+         * @param {string} message log message
+         * @param {string} [group] log group name
+         */
+        warn(message: string, group?: string): void;
+        /**
+         * add error log entry
+         * @function WinJSContrib.Logs.Logger.prototype.error
+         * @param {string} message log message
+         * @param {string} [group] log group name
+         */
+        error(message: string, group?: string): void;
+        /**
+         * create a log group
+         * @function WinJSContrib.Logs.Logger.prototype.group
+         * @param {string} title group title
+         */
+        group(title: string): void;
+        /**
+         * create a collapsed log group
+         * @function WinJSContrib.Logs.Logger.prototype.groupCollapsed
+         * @param {string} title group title
+         */
+        groupCollapsed(title: string): void;
+        /**
+         * end current group
+         * @function WinJSContrib.Logs.Logger.prototype.groupEnd
+         */
+        groupEnd(): void;
+        /**
+         * Get a child logger
+         * @function WinJSContrib.Logs.Logger.prototype.getChildLogger
+         * @param {string} name child logger name
+         * @param {WinJSContrib.Logs.Levels} level
+         */
+        getChildLogger(name: string, level: Logs.Levels): Logger;
+    }
+}
+declare module WinJSContrib.Logs.Appenders {
+    interface ILogAppender {
+        clone(): any;
+        format(message: string, group: string, level: Logs.Levels): any;
+        log(logger: Logs.Logger, message: string, group: string, level: Logs.Levels): any;
+        group(title: string): any;
+        groupCollapsed(title: string): any;
+        groupEnd(): any;
+    }
+    class ConsoleAppender implements ILogAppender {
+        config: Logs.ILoggerConfig;
+        /**
+         * Appender writing to console
+         * @class WinJSContrib.Logs.Appenders.ConsoleAppender
+         */
+        constructor(config?: Logs.ILoggerConfig);
+        /**
+         * clone appender
+         * @function WinJSContrib.Logs.Appenders.ConsoleAppender.prototype.clone
+         */
+        clone(): ConsoleAppender;
+        /**
+         * log item
+         * @function WinJSContrib.Logs.Appenders.ConsoleAppender.prototype.log
+         * @param {string} message log message
+         * @param {string} group group/category for the entry
+         * @param {WinJSContrib.Logs.Levels} log level
+         */
+        log(logger: Logs.Logger, message: string, group: string, level: Logs.Levels): void;
+        /**
+         * create log group
+         * @function WinJSContrib.Logs.Appenders.ConsoleAppender.prototype.group
+         */
+        group(title: string): void;
+        /**
+         * create collapsed log group
+         * @function WinJSContrib.Logs.Appenders.ConsoleAppender.prototype.groupCollapsed
+         */
+        groupCollapsed(title: string): void;
+        /**
+         * close log group
+         * @function WinJSContrib.Logs.Appenders.ConsoleAppender.prototype.groupEnd
+         */
+        groupEnd(): void;
+        format(message: string, group: string, level: Logs.Levels): string;
+    }
+}
+
 interface Object {
     map(obj: any, mapping: any): any;
 }
@@ -540,8 +724,8 @@ declare module WinJSContrib.UI {
      */
     function untapAll(element: any): void;
     var defaultTapBehavior: {
-        animDown: (element: any) => WinJS.Promise<any>;
-        animUp: (element: any) => WinJS.Promise<any>;
+        animDown: any;
+        animUp: any;
         disableAnimation: boolean;
         awaitAnim: boolean;
         errorDelay: number;

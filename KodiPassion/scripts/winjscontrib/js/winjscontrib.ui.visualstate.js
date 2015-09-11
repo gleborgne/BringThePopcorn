@@ -1,4 +1,10 @@
-﻿(function () {
+﻿/* 
+ * WinJS Contrib v2.1.0.4
+ * licensed under MIT license (see http://opensource.org/licenses/MIT)
+ * sources available at https://github.com/gleborgne/winjscontrib
+ */
+
+(function () {
     'use strict';
     WinJS.Namespace.define("WinJSContrib.UI", {
         VisualState: WinJS.Class.mix(WinJS.Class.define(function ctor(element, options) {

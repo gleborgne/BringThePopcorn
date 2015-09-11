@@ -12,6 +12,7 @@
         data: WinJS.Promise<Kodi.Data.IMediaLibrary>;
 
         init(element, options) {
+            WinJSContrib.Search.workerPath = "/js/searchworker.js";
             this.index = new WinJSContrib.Search.IndexGroup({
                 movies: { useworker: true },
                 tvshows: { useworker: true },
