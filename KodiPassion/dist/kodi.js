@@ -1377,7 +1377,7 @@ var Kodi;
                 data: callData,
                 success: function (data) {
                     Kodi.NowPlaying.current.reachable = true;
-                    logger.debug('API call success for ' + url + ' ' + callData);
+                    logger.debug('API call success for ' + url, callData);
                     if (p._state && p._state.name && p._state.name == 'error') {
                         if (completed)
                             return;
@@ -1401,7 +1401,7 @@ var Kodi;
                     }
                 },
                 error: function (data) {
-                    logger.warn('API call error for ' + url + ' ' + callData);
+                    logger.warn('API call error for ' + url, callData);
                     if (p._state && p._state.name && p._state.name == 'error') {
                         if (completed)
                             return;
@@ -1409,7 +1409,7 @@ var Kodi;
                             errorCallback();
                     }
                     if (data.status === 0 && !retries) {
-                        logger.info('API call retry ' + url + ' ' + callData);
+                        logger.info('API call retry ' + url, callData);
                         kodiServerRequest(setting, methodname, params, forceCheck, ignoreXBMCErrors, (retries || 0) + 1).done(function (data) {
                             completed = true;
                             completeCallback(data);

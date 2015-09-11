@@ -63,4 +63,5 @@
         };
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=loader.js.map
+
+//# sourceMappingURL=../../../KodiPassion/controls/loader/loader.js.map
