@@ -39,8 +39,9 @@ KodiPassion.UI = KodiPassion.UI || {};
 
         componentWillUpdate(nextProps, nextState) {
             var node = React.findDOMNode(this);
+            var targeturl = Kodi.API.kodiThumbnail(nextProps.data.thumbnail);
             var thumbnail = node.querySelector(".thumbnail");
-            if (thumbnail && thumbnail.src) {
+            if (thumbnail && thumbnail.src == targeturl) {
                 nextProps.picture = thumbnail.src;
             }
         }
