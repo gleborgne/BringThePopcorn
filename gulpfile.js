@@ -13,6 +13,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var flatten = require('gulp-flatten');
 var merge = require('merge-stream');
 var bom = require('gulp-bom');
+var babel = require('gulp-babel');
 
 var onError = function(err) {
 	notify.onError({
@@ -188,10 +189,32 @@ gulp.task('compilepages', function () {
     ]);
 });
 
+gulp.task('compilejsx', function () {
+    gulp.src('**/*.jsx')
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(sourcemaps.init())
+        .pipe(babel())
+        .pipe(sourcemaps.write(".", {
+                sourceRoot: function (file) {
+                    var sources = [];
+                    file.sourceMap.sources.forEach(function (s) {
+                        var filename = s.substr(s.lastIndexOf('/') + 1);
+                        console.log(filename)
+                        sources.push(filename);
+                    });
+                    file.sourceMap.sources = sources;
+                    return ' ';
+                }
+            }))
+        .pipe(bom())
+        .pipe(gulp.dest(''))
+});
+
 gulp.task('watch', function() {
     gulp.watch(['KodiPassion/**/*.less', '!KodiPassion/**/bin/**/*.less', '!KodiPassion/**/bld/**/*.less'], ['styles']);
     gulp.watch(['KodiPassion/kodi/**/*.ts'], ['compilekodi']);
     gulp.watch(['KodiPassion/pages/**/*.ts', 'KodiPassion/controls/**/*.ts', 'KodiPassion/js/**/*.ts'], ['compilepages']);
+    gulp.watch(['KodiPassion/pages/**/*.jsx', 'KodiPassion/controls/**/*.jsx', 'KodiPassion/js/**/*.jsx'], ['compilejsx']);
 });
 
 gulp.task('default', ['clean', 'styles'], function() {

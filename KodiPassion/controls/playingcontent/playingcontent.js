@@ -66,6 +66,10 @@
             PlayingContentControl.prototype.setCurrentItem = function () {
                 var _this = this;
                 var id = Kodi.NowPlaying.current.id;
+                //this.closeCurrent().then(() => {
+                //    this.showReactPlayList([{ id: "1", label: "item1" }, { id: "2", label: "item2" }, { id: "3", label: "item3" }, { id: "4", label: "item4" }]);
+                //});
+                //return;
                 if (Kodi.NowPlaying.current.playlistid == null || Kodi.NowPlaying.current.playlistid == undefined) {
                     return this.showEmpty();
                 }
@@ -78,7 +82,7 @@
                             if (Kodi.NowPlaying.current.playlistid != null && Kodi.NowPlaying.current.playlistid != undefined) {
                                 return Kodi.API.PlayList.getItems(Kodi.NowPlaying.current.playlistid).then(function (playlist) {
                                     if (Kodi.NowPlaying.current.type === "song") {
-                                        return _this.showPlayList(playlist.items);
+                                        return _this.showReactPlayList(playlist.items);
                                     }
                                     else if (playlist.items && playlist.items.length > 1) {
                                         return _this.showPlayList(playlist.items);
@@ -129,6 +133,13 @@
                 });
             };
             PlayingContentControl.prototype.showEpisode = function () {
+            };
+            PlayingContentControl.prototype.showReactPlayList = function (items) {
+                var elt = document.createElement("DIV");
+                this.element.appendChild(elt);
+                var playlistctrl = new KodiPassion.UI.ReactPlayListControl(elt);
+                this.currentContent = playlistctrl.element;
+                playlistctrl.items = items;
             };
             PlayingContentControl.prototype.showPlayList = function (items) {
                 var playlistctrl = new KodiPassion.UI.PlayListControl();

@@ -4,23 +4,24 @@
     (function (API) {
         var Websocket;
         (function (Websocket) {
+            var logger = WinJSContrib.Logs.getLogger("KDP.API");
             Websocket.current;
             function socketOpen(evt) {
-                console.log('socket opened');
+                logger.verbose('websocket opened');
             }
             function socketClosed(evt) {
                 Websocket.current = undefined;
-                console.log('socket closed');
+                logger.verbose('websocket closed');
             }
             function socketMessage(evt) {
                 var data = evt.data ? JSON.parse(evt.data) : undefined;
-                console.info(evt.data);
+                logger.debug(evt.data);
                 if (data.method) {
                     WinJS.Application.queueEvent({ type: data.method, data: data });
                 }
             }
             function socketError(evt) {
-                console.log(evt.type);
+                logger.warn(evt.type);
             }
             function register() {
                 Websocket.current.onopen = socketOpen;

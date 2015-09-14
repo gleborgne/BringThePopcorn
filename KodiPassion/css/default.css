@@ -744,3 +744,68 @@ body.unconnected #appcontent #contentwrapper #nowplaying {
 .playlistcontrol .playlist-item .actions button:last-child {
   margin-right: 0;
 }
+.reactplaylistcontrol {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.reactplaylistcontrol .playlist-item {
+  padding: 4px 16px;
+  border-bottom: 1px solid #333;
+  transition: background-color 200ms ease-out;
+  opacity: 1;
+  transform: none;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.reactplaylistcontrol .playlist-item.current {
+  background-color: rgba(90, 90, 90, 0.4);
+}
+.reactplaylistcontrol .playlist-item.current:hover {
+  background-color: rgba(90, 90, 90, 0.6);
+}
+.reactplaylistcontrol .playlist-item:hover {
+  background-color: rgba(90, 90, 90, 0.6);
+}
+.reactplaylistcontrol .playlist-item .thumbnail {
+  height: 40px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+.reactplaylistcontrol .playlist-item .desc {
+  flex: 1;
+  margin-right: 10px;
+}
+.reactplaylistcontrol .playlist-item .desc .title {
+  font-weight: 500;
+  line-height: 1.2em;
+  font-size: 1rem;
+}
+.reactplaylistcontrol .playlist-item .desc .album {
+  color: #777;
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.2em;
+}
+.reactplaylistcontrol .playlist-item .actions {
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+.reactplaylistcontrol .playlist-item .actions button {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 42px;
+  border: 1px solid #12b2e7;
+  background-color: transparent;
+  color: #12b2e7;
+  margin-right: 10px;
+  font-size: 16pt;
+}
+.reactplaylistcontrol .playlist-item .actions button:last-child {
+  margin-right: 0;
+}

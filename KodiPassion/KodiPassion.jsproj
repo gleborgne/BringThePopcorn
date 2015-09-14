@@ -66,8 +66,14 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="controls\genrespicker\genrepicker.css" />
+    <Content Include="controls\reactplaylist\reactplaylist.js" />
+    <Content Include="controls\reactplaylist\reactplaylist.js.map" />
+    <Content Include="controls\reactplaylist\reactplaylist.jsx" />
+    <Content Include="controls\reactplaylist\reactplaylist.less" />
     <Content Include="images\Square44x44Logo.targetsize-256_altform-unplated.png" />
     <Content Include="js\searchworker.js" />
+    <Content Include="scripts\react\react-with-addons.js" />
+    <Content Include="scripts\react\react.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.core.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.datacontainer.winrt.file.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.messenger.js" />
