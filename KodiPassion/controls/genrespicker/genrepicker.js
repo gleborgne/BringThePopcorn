@@ -102,4 +102,5 @@
         };
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=genrepicker.js.map
+
+//# sourceMappingURL=../../../KodiPassion/controls/genrespicker/genrepicker.js.map

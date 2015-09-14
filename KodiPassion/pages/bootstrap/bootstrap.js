@@ -37,4 +37,5 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=bootstrap.js.map
+
+//# sourceMappingURL=../../../KodiPassion/pages/bootstrap/bootstrap.js.map

@@ -48,6 +48,13 @@
                             var hasgenre = movie.allgenres.indexOf(page.selectedGenre) >= 0;
                             return hasgenre;
                         };
+                        if (options.artist) {
+                            page.pagetitle.innerText = options.artist;
+                            page.genretitle.style.display = "none";
+                            page.semanticzoom.dataManager.filters.push(function (a) {
+                                return a.allartists.indexOf(options.artist) >= 0;
+                            });
+                        }
                         page.semanticzoom.listview.layout = new WinJS.UI.GridLayout();
                         page.semanticzoom.listview.layout.orientation = "vertical";
                         page.semanticzoom.listview.oniteminvoked = function (arg) {
@@ -119,4 +126,5 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=albumslist.js.map
+
+//# sourceMappingURL=../../../../KodiPassion/pages/albums/list/albumslist.js.map

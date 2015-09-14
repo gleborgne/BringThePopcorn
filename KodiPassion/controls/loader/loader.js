@@ -29,10 +29,10 @@
                 }).then(function (data) {
                     document.body.classList.remove("unconnected");
                     Kodi.NowPlaying.init();
-                    return WinJS.Navigation.navigate("/pages/home/home.html");
+                    return WinJS.Navigation.navigate("/pages/home/home.html", { clearNavigationHistory: true });
                 }, function (err) {
                     document.body.classList.add("unconnected");
-                    return WinJS.Navigation.navigate("/pages/startup/startup.html");
+                    return WinJS.Navigation.navigate("/pages/startup/startup.html", { clearNavigationHistory: true });
                 }).then(function () {
                     WinJS.Application.queueEvent({ type: "ServerChanged" });
                     page.container.classList.add('exit');
@@ -63,4 +63,5 @@
         };
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-//# sourceMappingURL=loader.js.map
+
+//# sourceMappingURL=../../../KodiPassion/controls/loader/loader.js.map

@@ -8,6 +8,7 @@
         semanticzoom: any;
         element: HTMLElement;
         genretitle: HTMLElement;
+        pagetitle: HTMLElement;
         itemsStyle: HTMLStyleElement;
         albums: Kodi.API.Music.Album[];
         genres: Kodi.API.Genre[];
@@ -66,6 +67,7 @@
 
             page.itemsStyle = <HTMLStyleElement>document.createElement("STYLE");
             page.element.appendChild(page.itemsStyle);
+
             page.itemsPromise = page.itemsPromise.then(function (data: Kodi.Data.IMediaLibrary) {
                 page.albums = data.music.albums;
                 page.genres = data.musicGenres.genres;
@@ -76,6 +78,13 @@
 
                     var hasgenre = movie.allgenres.indexOf(page.selectedGenre) >= 0;
                     return hasgenre;
+                }
+                if (options.artist) {
+                    page.pagetitle.innerText = options.artist;
+                    page.genretitle.style.display = "none";
+                    page.semanticzoom.dataManager.filters.push((a) => {
+                        return a.allartists.indexOf(options.artist) >= 0;
+                    });
                 }
                 page.semanticzoom.listview.layout = new WinJS.UI.GridLayout();
                 page.semanticzoom.listview.layout.orientation = "vertical";
