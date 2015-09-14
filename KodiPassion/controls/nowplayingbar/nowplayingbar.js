@@ -37,34 +37,27 @@
             NowPlayingBarControl.prototype.maximize = function () {
                 var ctrl = this;
                 if (!document.body.classList.contains("nowplaying-expanded")) {
-                    var target = ctrl.container.clientHeight - ctrl.element.clientHeight;
-                    ctrl.playingElt.style.height = 'auto';
-                    $.Velocity.hook(ctrl.playingElt, "top", target + "px");
+                    //var target = ctrl.container.clientHeight - ctrl.element.clientHeight;
+                    //ctrl.playingElt.style.height = 'auto';
+                    //$.Velocity.hook(ctrl.playingElt, "top", target + "px");
                     WinJSContrib.UI.Application.navigator.pageControl.foWrapper.blurTo(20, 120);
-                    $.Velocity(ctrl.playingElt, { top: '0px' }, { duration: 200, easing: 'easeOutQuart' }).then(function () {
-                        document.body.classList.add("nowplaying-expanded");
-                        Kodi.NowPlaying.current.expanded = true;
-                    });
+                    document.body.classList.add("nowplaying-expanded");
+                    Kodi.NowPlaying.current.expanded = true;
                 }
             };
             NowPlayingBarControl.prototype.minimize = function (instantly) {
                 var ctrl = this;
                 if (document.body.classList.contains("nowplaying-expanded")) {
-                    if (instantly) {
-                        ctrl.playingElt.style.top = '';
-                        ctrl.playingElt.style.height = '';
-                        document.body.classList.remove("nowplaying-expanded");
-                        return;
-                    }
-                    var target = ctrl.container.clientHeight - ctrl.element.clientHeight;
-                    $.Velocity.hook(ctrl.playingElt, "top", "0");
+                    //if (instantly) {
+                    //    ctrl.playingElt.style.transform = '';
+                    //    document.body.classList.remove("nowplaying-expanded");
+                    //    return;
+                    //}
+                    // var target = ctrl.container.clientHeight - ctrl.element.clientHeight;
+                    //$.Velocity.hook(ctrl.playingElt, "top", "0");
                     WinJSContrib.UI.Application.navigator.pageControl.foWrapper.blurTo(0, 90);
-                    $.Velocity(ctrl.playingElt, { top: target + 'px' }, { duration: 90, easing: 'easeOutQuart' }).then(function () {
-                        ctrl.playingElt.style.height = '';
-                        ctrl.playingElt.style.top = '';
-                        document.body.classList.remove("nowplaying-expanded");
-                        Kodi.NowPlaying.current.expanded = false;
-                    });
+                    document.body.classList.remove("nowplaying-expanded");
+                    Kodi.NowPlaying.current.expanded = false;
                 }
             };
             NowPlayingBarControl.url = "/controls/nowplayingbar/nowplayingbar.html";
@@ -74,5 +67,4 @@
         UI.NowPlayingSummary = WinJS.UI.Pages.define(NowPlayingBarControl.url, NowPlayingBarControl);
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-
-//# sourceMappingURL=../../../KodiPassion/controls/nowplayingbar/nowplayingbar.js.map
+//# sourceMappingURL=nowplayingbar.js.map

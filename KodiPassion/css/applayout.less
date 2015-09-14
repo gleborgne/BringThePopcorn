@@ -109,11 +109,13 @@ body {
                 bottom: 0;
                 left: 0;
                 right: 0;
-                height: @nowplayingsize;
+                top : 0;
+                transform: ~"translate(0, calc(100% - 48px))";
+                transition: transform 160ms @easeOutQuart;
 
                 #nowplayingbar {
                     width: 100%;
-                    height: @nowplayingsize;
+                    height: 48px;
                 }
             }
         }
@@ -133,7 +135,7 @@ body {
                 }
 
                 #nowplaying {
-                    bottom: -@nowplayingsize;
+                    transform: translate(0, 100%);
                 }
             }
         }
@@ -198,8 +200,7 @@ body {
 .applayout(48px, 48px);
 
 .nowplaying-expanded #appcontent #contentwrapper #nowplaying {
-    height: auto;
-    top: 0;
+    transform: none;
     /*.nowplayingbar{
         background-color: @kodiBlue;
     }*/

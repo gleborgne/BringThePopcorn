@@ -120,5 +120,4 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-
-//# sourceMappingURL=../../../../KodiPassion/pages/movies/list/movieslist.js.map
+//# sourceMappingURL=movieslist.js.map

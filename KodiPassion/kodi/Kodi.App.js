@@ -22,9 +22,9 @@
             return new WinJS.Promise(function (complete, error) {
                 var path = Kodi.Utils.getNetworkPath(kodipath);
                 var uri = new Windows.Foundation.Uri(path);
-                var opt = new Windows.System.LauncherOptions();
-                opt.desiredRemainingView = (Windows.UI.ViewManagement).ViewSizePreference.useNone;
-                Windows.System.Launcher.launchUriAsync(uri, opt).done(function (a) {
+                //var opt = <any>new Windows.System.LauncherOptions();
+                //opt.desiredRemainingView = (<any>(Windows.UI.ViewManagement)).ViewSizePreference.useNone;
+                Windows.System.Launcher.launchUriAsync(uri).done(function (a) {
                     if (a == true) {
                         complete();
                     }

@@ -58,5 +58,4 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
 })(KodiPassion || (KodiPassion = {}));
-
-//# sourceMappingURL=../../../../KodiPassion/pages/albums/detail/albumsdetail.js.map
+//# sourceMappingURL=albumsdetail.js.map

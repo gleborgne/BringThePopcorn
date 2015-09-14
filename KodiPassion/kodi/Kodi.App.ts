@@ -23,9 +23,9 @@ module Kodi.App {
         return new WinJS.Promise((complete, error) => {
             var path = Kodi.Utils.getNetworkPath(kodipath);
             var uri = new Windows.Foundation.Uri(path);
-            var opt = <any>new Windows.System.LauncherOptions();
-            opt.desiredRemainingView = (<any>(Windows.UI.ViewManagement)).ViewSizePreference.useNone;
-            Windows.System.Launcher.launchUriAsync(uri, opt).done((a) => {
+            //var opt = <any>new Windows.System.LauncherOptions();
+            //opt.desiredRemainingView = (<any>(Windows.UI.ViewManagement)).ViewSizePreference.useNone;
+            Windows.System.Launcher.launchUriAsync(uri).done((a) => {
                 if (a == true) {
                     complete();
                 }

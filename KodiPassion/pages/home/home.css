@@ -126,6 +126,9 @@ html.win-hoverable .page-home .win-flipview .win-navbutton:hover {
   }
 }
 @media screen and (max-width: 800px) {
+  .page-home .sectiontitle .sectiontitle-item {
+    padding: 10px;
+  }
   .page-home .movie-splitview .content h3 {
     font-size: 1.9rem;
   }
