@@ -43,11 +43,10 @@
     }
 
     export var SearchDefinitions = {
-        movies: { definition: { fields: { "label": 10, "genre": 1 } } },
-        music: { definition: { fields: { "label": 10, "artist": 2, "genre": 1 } } },
+        movies: { definition: { fields: { "label": 10, "allgenres": 1 } } },
+        music: { definition: { fields: { "label": 10, "allartists": 2, "allgenres": 1 } } },
         artists: { definition: { fields: { "label": 10 } } },
-        tvshows: { definition: { fields: { "label": 10, "genre": 1 } } }
-
+        tvshows: { definition: { fields: { "label": 10, "allgenres": 1 } } }
     };
     var searchIndex = null;
     var library: IMediaLibrary;

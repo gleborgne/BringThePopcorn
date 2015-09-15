@@ -80,7 +80,7 @@ declare module Kodi.Data {
             definition: {
                 fields: {
                     "label": number;
-                    "genre": number;
+                    "allgenres": number;
                 };
             };
         };
@@ -88,8 +88,8 @@ declare module Kodi.Data {
             definition: {
                 fields: {
                     "label": number;
-                    "artist": number;
-                    "genre": number;
+                    "allartists": number;
+                    "allgenres": number;
                 };
             };
         };
@@ -104,7 +104,7 @@ declare module Kodi.Data {
             definition: {
                 fields: {
                     "label": number;
-                    "genre": number;
+                    "allgenres": number;
                 };
             };
         };

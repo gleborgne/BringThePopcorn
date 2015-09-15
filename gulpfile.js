@@ -88,7 +88,7 @@ gulp.task('compilewinjscontrib', function () {
             'scripts/winjscontrib/js/winjscontrib.date.utils.js',
             'scripts/winjscontrib/js/winjscontrib.messenger.js',
             'scripts/winjscontrib/js/winjscontrib.datacontainer.winrt.file.js',
-            'scripts/winjscontrib/js/winjscontrib.search.js',
+            //'scripts/winjscontrib/js/winjscontrib.search.js',
             'scripts/winjscontrib/js/winjscontrib.ui.jquery.js',
             'scripts/winjscontrib/js/winjscontrib.ui.dataform.js',
             'scripts/winjscontrib/js/winjscontrib.ui.navigator.js',
