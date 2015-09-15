@@ -1,5 +1,19 @@
-﻿.page-movieslist {
+﻿@import "../../../css/apptheme.less";
+.page-movieslist {
     .movieslist {
+        .zoomedinlist.win-listview.win-groups .win-vertical .win-listlayout .win-groupleader, .zoomedinlist.win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader{
+            margin : 0;
+            background-color: #2F2F2F;
+        }
+
+        .zoomedinlist.win-listview.win-groups{
+            .win-groupheader{
+                font-weight: 300;                
+                padding : 8px 16px;
+                font-size: 1.6rem;
+            }
+        }
+
         .movie {
             width: 280px;
             height: 400px;
@@ -36,14 +50,16 @@
                 }
             }
         }
+
+        
     }
 
-    &.view-wall {
-        .win-listview .win-gridlayout .win-container {
+    &.view-wall, &.view-alphabetic, &.view-year {
+        .zoomedinlist.win-listview .win-gridlayout .win-container {
             margin: 0 1px 1px 0;
         }
 
-        .win-listview .win-vertical .win-gridlayout.win-surface {
+        .zoomedinlist.win-listview .win-vertical .win-gridlayout.win-surface {
             margin: 0;
         }
     }

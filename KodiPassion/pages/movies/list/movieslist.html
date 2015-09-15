@@ -17,7 +17,7 @@
             </h2>
             <div class="stretch"></div>
             <div class="actions">
-
+                <button class="sgicon-more" tap="showMenu"></button>
             </div>
         </header>
         <section class="page-section" aria-label="Main content" role="main">
@@ -38,6 +38,18 @@
                                    defaultGroupLimit="12">
             </mcn-semanticlistviews>
         </section>
+        <div class="screenmenu" member="menu">
+            <div class="menuoverlay" tap="hideMenu" tap-options="{ disableAnimation : true }"></div>
+            <div class="menu">
+                <div class="menu-group">
+                    <h3>View</h3>
+                    <div class="item" view="wall" tap="setViewMenu">wall</div>
+                    <div class="item" view="alphabetic" tap="setViewMenu">alphabetic</div>
+                    <div class="item" view="year" tap="setViewMenu">year</div>
+                    <div class="item">large</div>
+                </div> 
+            </div>
+        </div>
     </div>
 </body>
 </html>

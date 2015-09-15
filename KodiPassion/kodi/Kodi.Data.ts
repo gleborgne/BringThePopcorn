@@ -45,7 +45,7 @@
     export var SearchDefinitions = {
         movies: { definition: { fields: { "label": 10, "allgenres": 1 } } },
         music: { definition: { fields: { "label": 10, "allartists": 2, "allgenres": 1 } } },
-        artists: { definition: { fields: { "label": 10 } } },
+        artists: { definition: { fields: { "label": 20 } } },
         tvshows: { definition: { fields: { "label": 10, "allgenres": 1 } } }
     };
     var searchIndex = null;

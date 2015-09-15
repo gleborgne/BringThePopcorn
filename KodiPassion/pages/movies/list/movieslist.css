@@ -1,4 +1,14 @@
-﻿.page-movieslist .movieslist .movie {
+﻿.page-movieslist .movieslist .zoomedinlist.win-listview.win-groups .win-vertical .win-listlayout .win-groupleader,
+.page-movieslist .movieslist .zoomedinlist.win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
+  margin: 0;
+  background-color: #2F2F2F;
+}
+.page-movieslist .movieslist .zoomedinlist.win-listview.win-groups .win-groupheader {
+  font-weight: 300;
+  padding: 8px 16px;
+  font-size: 1.6rem;
+}
+.page-movieslist .movieslist .movie {
   width: 280px;
   height: 400px;
   position: relative;
@@ -27,9 +37,13 @@
 .page-movieslist .movieslist .movie .bg.pic.imageLoaded {
   opacity: 1;
 }
-.page-movieslist.view-wall .win-listview .win-gridlayout .win-container {
+.page-movieslist.view-wall .zoomedinlist.win-listview .win-gridlayout .win-container,
+.page-movieslist.view-alphabetic .zoomedinlist.win-listview .win-gridlayout .win-container,
+.page-movieslist.view-year .zoomedinlist.win-listview .win-gridlayout .win-container {
   margin: 0 1px 1px 0;
 }
-.page-movieslist.view-wall .win-listview .win-vertical .win-gridlayout.win-surface {
+.page-movieslist.view-wall .zoomedinlist.win-listview .win-vertical .win-gridlayout.win-surface,
+.page-movieslist.view-alphabetic .zoomedinlist.win-listview .win-vertical .win-gridlayout.win-surface,
+.page-movieslist.view-year .zoomedinlist.win-listview .win-vertical .win-gridlayout.win-surface {
   margin: 0;
 }

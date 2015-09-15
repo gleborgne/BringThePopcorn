@@ -518,7 +518,7 @@ WinJSContrib.UI.DataSources.Grouping = WinJSContrib.UI.DataSources.Grouping || {
                 return this.defaultGroupName;
 
             var val = WinJSContrib.Utils.readProperty(dataItem, this.field);
-            if (!val)
+            if (!val || !val[0])
                 return this.defaultGroupName;
 
             var key = val[0].toUpperCase();
@@ -529,7 +529,7 @@ WinJSContrib.UI.DataSources.Grouping = WinJSContrib.UI.DataSources.Grouping || {
             var val = '#';
             if (dataItem)
                 val = WinJSContrib.Utils.readProperty(dataItem, this.field);
-            if (!val)
+            if (!val || !val[0])
                 val = this.defaultGroupName;
 
             var key = val[0].toUpperCase();

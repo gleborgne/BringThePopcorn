@@ -13,13 +13,25 @@
                     var view = MoviesListPage.moviesViews["wall"];
                     page.itemsPromise = Kodi.Data.loadRootData();
                 };
+                MoviesListPage.prototype.setViewMenu = function (arg) {
+                    var name = arg.elt.getAttribute("view");
+                    if (name) {
+                        this.setView(name);
+                        this.semanticzoom.dataManager.refresh();
+                    }
+                    this.hideMenu();
+                };
                 MoviesListPage.prototype.setView = function (viewname) {
                     var page = this;
                     page.cleanViewClasses();
                     var view = MoviesListPage.moviesViews[viewname] || MoviesListPage.moviesViews["wall"];
                     if (view.groupKind) {
-                        page.semanticzoom.dataManager.groupKind = view.groupKind;
                         page.semanticzoom.dataManager.field = view.groupField;
+                        page.semanticzoom.dataManager.groupKind = view.groupKind;
+                    }
+                    else {
+                        page.semanticzoom.dataManager.groupKind = null;
+                        page.semanticzoom.dataManager.field = null;
                     }
                     page.element.classList.add("view-" + viewname);
                     page.semanticzoom.listview.itemTemplate = view.template.element;
@@ -50,11 +62,16 @@
                         };
                         page.semanticzoom.listview.layout = new WinJS.UI.GridLayout();
                         page.semanticzoom.listview.layout.orientation = "vertical";
+                        page.semanticzoom.zoomedOutListview.layout = new WinJS.UI.GridLayout();
+                        page.semanticzoom.zoomedOutListview.layout.orientation = "vertical";
                         page.semanticzoom.listview.oniteminvoked = function (arg) {
                             arg.detail.itemPromise.then(function (item) {
                                 WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true });
                             });
                         };
+                    });
+                    $(element).on("click", ".win-groupheadercontainer", function () {
+                        page.semanticzoom.semanticZoom.zoomedOut = true;
                     });
                 };
                 MoviesListPage.prototype.ready = function () {
@@ -92,8 +109,14 @@
                         var nbitems = ((w / 260) << 0) + 1;
                         var posterW = ((w / nbitems) << 0) - 1;
                         var posterH = (posterW / Kodi.App.PictureRatios.movieposter) << 0;
-                        page.itemsStyle.innerHTML = ".page-movieslist.view-wall .movie { width:" + posterW + "px; height:" + posterH + "px}";
+                        page.itemsStyle.innerHTML = ".page-movieslist.view-wall .movie, .page-movieslist.view-alphabetic .movie, .page-movieslist.view-year .movie { width:" + posterW + "px; height:" + posterH + "px}";
                     }
+                };
+                MoviesListPage.prototype.showMenu = function () {
+                    this.menu.classList.add("visible");
+                };
+                MoviesListPage.prototype.hideMenu = function () {
+                    this.menu.classList.remove("visible");
                 };
                 MoviesListPage.url = "/pages/movies/list/movieslist.html";
                 MoviesListPage.moviesViews = {
@@ -108,7 +131,7 @@
                         template: KodiPassion.Templates.movieposter
                     },
                     "year": {
-                        groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
+                        groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
                         groupField: 'year',
                         template: KodiPassion.Templates.movieposter
                     }

@@ -109,7 +109,7 @@ body {
                 bottom: 0;
                 left: 0;
                 right: 0;
-                top : 0;
+                top: 0;
                 transform: ~"translate(0, calc(100% - 48px))";
                 transition: transform 160ms @easeOutQuart;
 
@@ -189,6 +189,19 @@ body {
             h2 {
                 font-size: 1.1rem;
             }
+
+            .actions {
+                button {
+                    margin-left: 10px;
+                    width: 40px;
+                    height: 40px;
+                    display: inline-block;
+                    border: none;
+                    background-color: transparent;
+                    color: inherit;
+                    font-size: 14pt;
+                }
+            }
         }
 
         > section[role=main] {
@@ -204,6 +217,70 @@ body {
     /*.nowplayingbar{
         background-color: @kodiBlue;
     }*/
+}
+
+.screenmenu {
+    position: absolute;
+    .fit-container();
+    left: 0;
+    top: 0;
+    visibility: hidden;
+
+    .menuoverlay {
+        background-color: rgba(255,255,255,0.2);
+        position: absolute;
+        .fit-container();
+        left: 0;
+        top: 0;
+        opacity: 0;
+        transition: opacity 200ms ease-out;
+    }
+
+    &.visible {
+        visibility: visible;
+
+        .menuoverlay {
+            opacity: 1;
+        }
+
+        .menu {
+            transform: scale(1,1);
+            opacity: 1;
+        }
+    }
+
+    .menu {
+        width: 260px;
+        background-color : rgba(0,0,0, 0.9);
+        padding : 20px;
+        position: absolute;
+        right: 10px;
+        top: 56px;
+        opacity: 0;
+        transform: scale(0.9, 0.8);
+        transition: all 300ms @easeOutBack;
+    }
+}
+
+.zoomedoutlist.win-listview {
+    .win-surface{
+        margin : 60px;
+    }
+
+    .semantic-item.win-item {
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        background-color : @kodiBlue;
+        color: white;
+
+        h2{
+            margin: 0;
+            padding: 0;
+            line-height: 60px;
+            text-align: center;
+        }
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -255,7 +332,6 @@ body {
                 height: 100%;
                 transform: translate(100%, 0);
                 /*transition: transform 350ms @easeOutBack;*/
-
                 &#nowplaying-remote {
                     transform: translate(-100%, 0);
 
