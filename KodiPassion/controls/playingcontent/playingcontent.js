@@ -114,7 +114,7 @@
                     if (!_this.currentContent || !_this.currentContent.classList.contains("emptyplaying")) {
                         _this.currentContent = document.createElement("DIV");
                         _this.currentContent.classList.add("emptyplaying");
-                        _this.currentContent.innerHTML = '<div class="content"><img src="/images/logos/KodiPassion-notitle-white.svg"  draggable="false"/><div class="message">nothing is currently playing</div></div>';
+                        _this.currentContent.innerHTML = '<div class="content"><img src="/images/logos/PopcornRounded.svg"  draggable="false"/><div class="message">nothing is currently playing</div></div>';
                         _this.element.appendChild(_this.currentContent);
                     }
                 });

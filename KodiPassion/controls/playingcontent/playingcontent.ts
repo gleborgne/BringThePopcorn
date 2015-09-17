@@ -134,7 +134,7 @@
                     this.currentContent = document.createElement("DIV");
 
                     this.currentContent.classList.add("emptyplaying");
-                    this.currentContent.innerHTML = '<div class="content"><img src="/images/logos/KodiPassion-notitle-white.svg"  draggable="false"/><div class="message">nothing is currently playing</div></div>';
+                    this.currentContent.innerHTML = '<div class="content"><img src="/images/logos/PopcornRounded.svg"  draggable="false"/><div class="message">nothing is currently playing</div></div>';
                     this.element.appendChild(this.currentContent);
                 }
             });

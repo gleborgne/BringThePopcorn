@@ -32,13 +32,73 @@
         .content {
             -ms-grid-row-align: center;
             -ms-grid-column-align: center;
-            font-size: 1.5rem;
-            text-align: center;
+            
+            position: relative;
 
             .logo {
                 display: block;
                 width: 300px;
             }
         }
+
+        .message{
+            position : absolute;
+            bottom : 40px;
+            left: 10px;
+            right : 10px;
+            font-size: 1.5rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .circle1 {
+            width: 320px;
+            height: 320px;
+            background-color: darken(@kodiBlue, 8%);
+            border-radius: 50%;
+            -ms-grid-row-align: center;
+            -ms-grid-column-align: center;
+            transform : scale(0.97,1);
+            animation: loaderrotate1 7s infinite;
+        }
+
+        .circle2{
+            width: 340px;
+            height: 340px;
+            background-color: darken(@kodiBlue, 12%);
+            border-radius: 50%;
+            -ms-grid-row-align: center;
+            -ms-grid-column-align: center;
+            transform : scale(1,0.97);
+            animation: loaderrotate2 15s infinite;
+        }
+    }   
+}
+
+@keyframes loaderrotate1{
+    0% {
+        transform : rotate(0deg) scale(1, 0.97);
+    }
+
+    50% {
+        transform : rotate(180deg) scale(1.03, 1);
+    }
+
+    0% {
+        transform : rotate(360deg) scale(1, 0.97);
+    }
+}
+
+@keyframes loaderrotate2{
+    0% {
+        transform : rotate(0deg) scale(1, 0.97);
+    }
+
+    50% {
+        transform : rotate(-180deg) scale(1.03, 1);
+    }
+
+    0% {
+        transform : rotate(360deg) scale(1, 0.97);
     }
 }

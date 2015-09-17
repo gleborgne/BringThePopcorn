@@ -6,7 +6,7 @@
 .page-movieslist .movieslist .zoomedinlist.win-listview.win-groups .win-groupheader {
   font-weight: 300;
   padding: 8px 16px;
-  font-size: 1.6rem;
+  font-size: 1.6em;
 }
 .page-movieslist .movieslist .movie {
   width: 280px;
