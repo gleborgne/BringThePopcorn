@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="51042GEHEL.KodiPassion" Version="1.1.5.0" Publisher="CN=BDE44643-A93D-4AB1-B189-F9DBD2EC3DEE" />
+  <Identity Name="51042GEHEL.KodiPassion" Version="1.1.6.0" Publisher="CN=BDE44643-A93D-4AB1-B189-F9DBD2EC3DEE" />
   <mp:PhoneIdentity PhoneProductId="14538270-1c70-4b16-af89-b8cb2ebeae3b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Bring the popcorn</DisplayName>
