@@ -9,16 +9,21 @@
                 }
                 TvShowsDetailPage.prototype.init = function (element, options) {
                     this.tvshow = options.tvshow;
-                    this.seasonsPromise = Kodi.API.Videos.TVShows.getTVShowSeasons(this.tvshow.tvshowid).then(function (seasons) {
-                        if (seasons.seasons.length == 1) {
-                            var season = seasons.seasons[0];
-                            return Kodi.API.Videos.TVShows.getTVShowEpisodes(season.tvshowid, season.season).then(function (episodes) {
-                                season.episodes = episodes;
-                                return seasons;
-                            });
-                        }
-                        return seasons;
-                    });
+                    if (this.tvshow.seasons && this.tvshow.seasons.length) {
+                        this.seasonsPromise = WinJS.Promise.wrap(this.tvshow.seasons);
+                    }
+                    else {
+                        this.seasonsPromise = Kodi.API.Videos.TVShows.getTVShowSeasons(this.tvshow.tvshowid).then(function (seasons) {
+                            if (seasons.seasons.length == 1) {
+                                var season = seasons.seasons[0];
+                                return Kodi.API.Videos.TVShows.getTVShowEpisodes(season.tvshowid, season.season).then(function (episodes) {
+                                    season.episodes = episodes;
+                                    return seasons;
+                                });
+                            }
+                            return seasons.seasons;
+                        });
+                    }
                 };
                 TvShowsDetailPage.prototype.processed = function (element, options) {
                     var _this = this;
@@ -59,13 +64,13 @@
                         if (seasons) {
                             var container = document.createDocumentFragment();
                             var p = [];
-                            if (seasons.seasons.length == 1) {
+                            if (seasons.length == 1) {
                                 p.push(WinJS.Promise.timeout(200).then(function () {
-                                    _this.renderEpisodes(container, seasons.seasons[0].episodes.episodes);
+                                    _this.renderEpisodes(container, seasons[0].episodes);
                                 }));
                             }
                             else {
-                                seasons.seasons.forEach(function (s) {
+                                seasons.forEach(function (s) {
                                     p.push(_this.renderSeason(container, s));
                                 });
                                 setImmediate(function () {
@@ -89,6 +94,10 @@
                         container.appendChild(rendered);
                         var episodesContainer = rendered.querySelector(".season-episodes");
                         var episodesDesc = rendered.querySelector(".season-desc");
+                        if (season.episodes && season.episodes.length) {
+                            tmpseason.hasEpisodes = true;
+                            _this.renderEpisodes(episodesContainer, season.episodes, true);
+                        }
                         WinJSContrib.UI.tap(episodesDesc, function () {
                             rendered.classList.toggle("expanded");
                             if (!tmpseason.hasEpisodes) {
@@ -108,7 +117,7 @@
                         });
                     });
                 };
-                TvShowsDetailPage.prototype.renderEpisodes = function (container, episodes) {
+                TvShowsDetailPage.prototype.renderEpisodes = function (container, episodes, disableAnimation) {
                     var _this = this;
                     var items = [];
                     episodes.forEach(function (e) {
@@ -119,9 +128,11 @@
                             container.appendChild(rendered);
                         });
                     });
-                    setImmediate(function () {
-                        WinJS.UI.Animation.enterPage(items);
-                    });
+                    if (!disableAnimation) {
+                        setImmediate(function () {
+                            WinJS.UI.Animation.enterPage(items);
+                        });
+                    }
                 };
                 TvShowsDetailPage.prototype.prepareEpisode = function (episode, element) {
                     var btnplay = element.querySelector(".btnplay");

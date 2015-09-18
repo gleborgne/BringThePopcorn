@@ -189,7 +189,7 @@
   text-align: center;
   border-radius: 50%;
   line-height: 25px;
-  background-color: gold;
+  background-color: #ffd700;
   color: black;
 }
 .page-moviesdetail section[role=main] .episode .label {

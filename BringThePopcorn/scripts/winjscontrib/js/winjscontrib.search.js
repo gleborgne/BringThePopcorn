@@ -318,9 +318,7 @@ var WinJSContrib;
                                 res.items.push({ tokens: index.processText(value), weight: weight });
                             }
                             else {
-                                if (value != null && value != undefined) {
-                                    logger.warn(elt + " is of type " + valueType);
-                                }
+                                logger.warn(elt + " is of type " + valueType);
                             }
                         }
                     }

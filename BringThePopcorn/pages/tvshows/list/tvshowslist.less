@@ -1,11 +1,23 @@
-﻿.page-tvshowslist {
+﻿@import "../../../css/apptheme";
+
+.page-tvshowslist {
     .tvshowslist {
         .tvshow {
             width: 280px;
             height: 400px;
             position: relative;
             background-color: #111;
+            position: relative;
 
+            .played {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                .roundButton(20px);
+                line-height: 25px;
+                background-color: @accentColor;
+                color: black;
+            }
 
             .bg, .content {
                 position: absolute;
@@ -27,24 +39,14 @@
                 }
             }
 
-            .bg.pic{
-                transition : opacity 160ms ease-in;
-                opacity : 0;
+            .bg.pic {
+                transition: opacity 160ms ease-in;
+                opacity: 0;
 
-                &.imageLoaded{
-                    opacity : 1;
+                &.imageLoaded {
+                    opacity: 1;
                 }
             }
-        }
-    }
-
-    &.view-wall {
-        .win-listview .win-gridlayout .win-container {
-            margin: 0 1px 1px 0;
-        }
-
-        .win-listview .win-vertical .win-gridlayout.win-surface {
-            margin: 0;
         }
     }
 }

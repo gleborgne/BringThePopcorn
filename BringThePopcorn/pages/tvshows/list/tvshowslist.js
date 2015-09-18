@@ -8,30 +8,24 @@
                 function TvShowsListPage() {
                 }
                 TvShowsListPage.prototype.init = function (element, options) {
-                    var page = this;
+                    this.filterByPlayed = false;
+                    element.classList.add("listpage");
                     element.classList.add("page-tvshowslist");
-                    var view = TvShowsListPage.tvshowsViews["wall"];
-                    page.itemsPromise = Kodi.Data.loadRootData();
-                };
-                TvShowsListPage.prototype.setView = function (viewname) {
-                    var page = this;
-                    page.cleanViewClasses();
-                    var view = TvShowsListPage.tvshowsViews[viewname] || TvShowsListPage.tvshowsViews["wall"];
-                    if (view.groupKind) {
-                        page.semanticzoom.dataManager.groupKind = view.groupKind;
-                        page.semanticzoom.dataManager.field = view.groupField;
+                    this.itemsPromise = Kodi.Data.loadRootData();
+                    this.viewSetting = {
+                        group: "none",
+                        view: "poster"
+                    };
+                    var s = localStorage["tvshowsListView"];
+                    if (s) {
+                        this.viewSetting = JSON.parse(s);
                     }
-                    page.element.classList.add("view-" + viewname);
-                    page.listitemtemplate = new WinJS.Binding.Template(null, { href: view.template });
-                    page.semanticzoom.listview.itemTemplate = page.listitemtemplate.element;
                 };
-                TvShowsListPage.prototype.cleanViewClasses = function () {
-                    var page = this;
-                    for (var v in TvShowsListPage.tvshowsViews) {
-                        page.element.classList.remove("view-" + v);
-                    }
+                TvShowsListPage.prototype.saveViewSetting = function () {
+                    localStorage["tvshowsListView"] = JSON.stringify(this.viewSetting);
                 };
                 TvShowsListPage.prototype.processed = function (element, options) {
+                    var _this = this;
                     var page = this;
                     if (options && options.genre) {
                         page.selectedGenre = options.genre;
@@ -42,21 +36,42 @@
                     page.itemsPromise = page.itemsPromise.then(function (data) {
                         page.tvshows = data.tvshows.tvshows;
                         page.genres = data.tvshowGenres.genres;
-                        page.setView("wall");
-                        page.semanticzoom.dataManager.filter = function (movie) {
+                        BtPo.ListHelpers.renderMenu({
+                            views: TvShowsListPage.tvshowsViews,
+                            groups: TvShowsListPage.tvshowsGroups,
+                            root: page.element,
+                            viewsContainer: page.menuViews,
+                            groupsContainer: page.menuGroups,
+                            dsManager: page.semanticzoom,
+                            setting: page.viewSetting,
+                            defaultView: "poster",
+                            defaultGroup: "none",
+                            saveSetting: function () {
+                                _this.saveViewSetting();
+                            }
+                        });
+                        page.semanticzoom.dataManager.filter = function (tvshow) {
+                            if (page.filterByPlayed && tvshow.allplayed)
+                                return false;
                             if (!page.selectedGenre)
                                 return true;
-                            var hasgenre = movie.allgenres.indexOf(page.selectedGenre) >= 0;
+                            var hasgenre = tvshow.allgenres.indexOf(page.selectedGenre) >= 0;
                             return hasgenre;
                         };
                         page.semanticzoom.listview.layout = new WinJS.UI.GridLayout();
                         page.semanticzoom.listview.layout.orientation = "vertical";
+                        page.semanticzoom.zoomedOutListview.layout = new WinJS.UI.GridLayout();
+                        page.semanticzoom.zoomedOutListview.layout.orientation = "vertical";
                         page.semanticzoom.listview.oniteminvoked = function (arg) {
                             arg.detail.itemPromise.then(function (item) {
                                 WinJS.Navigation.navigate("/pages/tvshows/seriedetail/tvshowsseriedetail.html", { tvshow: item.data, navigateStacked: true });
                             });
                         };
                     });
+                    page.onlyUnplayed.onchange = function () {
+                        page.filterByPlayed = page.onlyUnplayed.checked;
+                        _this.semanticzoom.dataManager.refresh();
+                    };
                 };
                 TvShowsListPage.prototype.ready = function () {
                     var page = this;
@@ -90,29 +105,60 @@
                     var page = this;
                     var w = page.element.clientWidth;
                     if (w) {
+                        var content = [];
                         var nbitems = ((w / 260) << 0) + 1;
                         var posterW = ((w / nbitems) << 0) - 1;
                         var posterH = (posterW / Kodi.App.PictureRatios.movieposter) << 0;
-                        page.itemsStyle.innerHTML = ".page-tvshowslist.view-wall .tvshow { width:" + posterW + "px; height:" + posterH + "px}";
+                        content.push(".page-tvshowslist.view-poster .tvshow { width:" + posterW + "px; height:" + posterH + "px}");
+                        var nbitems = ((w / 400) << 0) + 1;
+                        var posterW = ((w / nbitems) << 0) - 1;
+                        var posterH = (posterW / Kodi.App.PictureRatios.movieposter) << 0;
+                        content.push(".page-tvshowslist.view-bigposter .tvshow { width:" + posterW + "px; height:" + posterH + "px}");
+                        var nbitems = ((w / 1024) << 0) + 1;
+                        var posterW = ((w / nbitems) << 0) - 1;
+                        var posterH = (posterW / Kodi.App.PictureRatios.fanart) << 0;
+                        content.push(".page-tvshowslist.view-detailed .tvshow { width:" + posterW + "px; height:" + posterH + "px}");
+                        page.itemsStyle.innerHTML = content.join("\r\n");
                     }
                 };
+                TvShowsListPage.prototype.showMenu = function () {
+                    this.menu.classList.add("visible");
+                };
+                TvShowsListPage.prototype.hideMenu = function () {
+                    this.menu.classList.remove("visible");
+                };
                 TvShowsListPage.url = "/pages/tvshows/list/tvshowslist.html";
-                TvShowsListPage.tvshowsViews = {
-                    "wall": {
+                TvShowsListPage.tvshowsGroups = {
+                    "none": {
+                        name: "no grouping",
                         groupKind: null,
-                        groupField: null,
-                        template: '/templates/tvshowposter.html'
+                        groupField: null
                     },
                     "alphabetic": {
+                        name: "alphabetic",
                         groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
-                        groupField: 'title',
-                        template: '/templates/tvshowposter.html'
+                        groupField: 'title'
                     },
                     "year": {
-                        groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
-                        groupField: 'year',
-                        template: '/templates/tvshowposter.html'
+                        name: "year",
+                        groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
+                        groupField: 'year'
+                    },
+                    "studio": {
+                        name: "studio",
+                        groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
+                        groupField: 'studio'
                     }
+                };
+                TvShowsListPage.tvshowsViews = {
+                    "poster": {
+                        name: "poster",
+                        template: BtPo.Templates.tvshowposter
+                    },
+                    "bigposter": {
+                        name: "big poster",
+                        template: BtPo.Templates.tvshowposter
+                    },
                 };
                 return TvShowsListPage;
             })();

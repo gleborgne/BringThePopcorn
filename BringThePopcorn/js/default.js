@@ -17,6 +17,7 @@ var BtPo;
         Templates.album = new WinJS.Binding.Template(null, { href: "/templates/album.html", extractChild: true });
         Templates.song = new WinJS.Binding.Template(null, { href: "/templates/song.html", extractChild: true });
         Templates.movieposter = new WinJS.Binding.Template(null, { href: "/templates/movieposter.html", extractChild: true });
+        Templates.tvshowposter = new WinJS.Binding.Template(null, { href: "/templates/tvshowposter.html", extractChild: true });
     })(Templates = BtPo.Templates || (BtPo.Templates = {}));
 })(BtPo || (BtPo = {}));
 var BtPo;
@@ -180,5 +181,95 @@ var BtPo;
         }
     }
     BtPo.mapKodiApi = mapKodiApi;
+})(BtPo || (BtPo = {}));
+var BtPo;
+(function (BtPo) {
+    var ListHelpers;
+    (function (ListHelpers) {
+        function renderMenu(args) {
+            var setView = function (viewname) {
+                viewname = viewname || args.defaultView;
+                for (var v in args.views) {
+                    args.root.classList.remove("view-" + v);
+                }
+                var view = args.views[viewname] || args.views[args.defaultView];
+                args.root.classList.add("view-" + viewname);
+                $('.item[view].selected', args.viewsContainer).removeClass("selected");
+                $('.item[view="' + viewname + '"]', args.viewsContainer).addClass("selected");
+                args.dsManager.listview.itemTemplate = view.template.element;
+                args.setting.view = viewname;
+                args.saveSetting();
+            };
+            var setGroup = function (groupname) {
+                groupname = groupname || args.defaultGroup;
+                for (var v in args.groups) {
+                    args.root.classList.remove("group-" + v);
+                }
+                var view = args.groups[groupname] || args.groups["none"];
+                if (view.groupKind) {
+                    args.dsManager.dataManager.field = view.groupField;
+                    args.dsManager.dataManager.groupKind = view.groupKind;
+                }
+                else {
+                    args.dsManager.dataManager.groupKind = null;
+                    args.dsManager.dataManager.field = null;
+                }
+                $('.item[grouping].selected', args.groupsContainer).removeClass("selected");
+                $('.item[grouping="' + groupname + '"]', args.groupsContainer).addClass("selected");
+                args.root.classList.add("group-" + groupname);
+                args.setting.group = groupname;
+                args.saveSetting();
+            };
+            var renderMenuGroupItem = function (name, group) {
+                var e = document.createElement("DIV");
+                e.className = "item group";
+                e.innerHTML = group.name;
+                e.setAttribute("grouping", name);
+                args.groupsContainer.appendChild(e);
+                WinJSContrib.UI.tap(e, function () {
+                    setGroup(name);
+                    args.dsManager.dataManager.refresh();
+                });
+            };
+            var renderMenuViewItem = function (name, group) {
+                var e = document.createElement("DIV");
+                e.className = "item view";
+                e.innerHTML = group.name;
+                e.setAttribute("view", name);
+                args.viewsContainer.appendChild(e);
+                WinJSContrib.UI.tap(e, function () {
+                    setView(name);
+                    args.dsManager.dataManager.refresh();
+                });
+            };
+            var renderMenu = function () {
+                var groups = 0;
+                for (var name in args.groups) {
+                    groups++;
+                    var g = args.groups[name];
+                    renderMenuGroupItem(name, g);
+                }
+                if (groups < 2) {
+                    args.groupsContainer.style.display = "none";
+                }
+                var views = 0;
+                for (var name in args.views) {
+                    views++;
+                    var g = args.views[name];
+                    renderMenuViewItem(name, g);
+                }
+                if (views < 2) {
+                    args.viewsContainer.style.display = "none";
+                }
+            };
+            renderMenu();
+            setView(args.setting.view);
+            setGroup(args.setting.group);
+            $(args.root).on("click", ".win-groupheadercontainer", function () {
+                args.dsManager.semanticZoom.zoomedOut = true;
+            });
+        }
+        ListHelpers.renderMenu = renderMenu;
+    })(ListHelpers = BtPo.ListHelpers || (BtPo.ListHelpers = {}));
 })(BtPo || (BtPo = {}));
 //# sourceMappingURL=default.js.map

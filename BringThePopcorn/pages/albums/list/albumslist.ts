@@ -1,4 +1,8 @@
 ﻿module BtPo.UI.Pages {
+    interface IAlbumViewSetting {
+        group: string;
+        view: string;
+    }
 
     export class AlbumsListPage {
         public static url = "/pages/albums/list/albumslist.html";
@@ -8,54 +12,62 @@
         semanticzoom: any;
         element: HTMLElement;
         genretitle: HTMLElement;
+        menu: HTMLElement;
+        menuGroups: HTMLElement;
+        menuViews: HTMLElement;
         pagetitle: HTMLElement;
         itemsStyle: HTMLStyleElement;
         albums: Kodi.API.Music.Album[];
         genres: Kodi.API.Genre[];
+        viewSetting: IAlbumViewSetting;        
 
-        static albumViews = {
-            "wall": {
+        static albumsGroups = {
+            "none": {
+                name: "no grouping",
                 groupKind: null,
-                groupField: null,
-                template: BtPo.Templates.album
+                groupField: null
             },
             "alphabetic": {
+                name: "alphabetic",
                 groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
-                groupField: 'title',
-                template: BtPo.Templates.album
+                groupField: 'label'
+            },
+            "artist": {
+                name: "artist",
+                groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
+                groupField: 'artist'
             },
             "year": {
-                groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
-                groupField: 'year',
+                name: "year",
+                groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
+                groupField: 'year'
+            }
+        }
+
+        static albumsViews = {
+            "list": {
+                name: "list",
                 template: BtPo.Templates.album
             }
         }
 
         init(element, options) {
             var page = this;
-            element.classList.add("page-albumslist");
-            var view = AlbumsListPage.albumViews["wall"];
+            element.classList.add("listpage");
+            element.classList.add("page-albumslist");            
             page.itemsPromise = Kodi.Data.loadRootData();
-
+            this.viewSetting = {
+                group: "none",
+                view: "list"
+            }
+            var s = localStorage["albumsListView"];
+            if (s) {
+                this.viewSetting = <IAlbumViewSetting>JSON.parse(s);
+            }
         }
 
-        setView(viewname) {
-            var page = this;
-            page.cleanViewClasses();
-            var view = AlbumsListPage.albumViews[viewname] || AlbumsListPage.albumViews["wall"];
-            if (view.groupKind) {
-                page.semanticzoom.dataManager.groupKind = view.groupKind;
-                page.semanticzoom.dataManager.field = view.groupField;
-            }
-            page.element.classList.add("view-" + viewname);
-            page.semanticzoom.listview.itemTemplate = view.template.element;
-        }
-
-        cleanViewClasses() {
-            var page = this;
-            for (var v in AlbumsListPage.albumViews) {
-                page.element.classList.remove("view-" + v);
-            }
+        saveViewSetting() {
+            localStorage["albumsListView"] = JSON.stringify(this.viewSetting);
         }
 
         processed(element, options) {
@@ -68,15 +80,30 @@
             page.itemsStyle = <HTMLStyleElement>document.createElement("STYLE");
             page.element.appendChild(page.itemsStyle);
 
-            page.itemsPromise = page.itemsPromise.then(function (data: Kodi.Data.IMediaLibrary) {
+            page.itemsPromise = page.itemsPromise.then((data: Kodi.Data.IMediaLibrary) => {
                 page.albums = data.music.albums;
                 page.genres = data.musicGenres.genres;
-                page.setView("wall");
-                page.semanticzoom.dataManager.filter = function (movie) {
+                
+                BtPo.ListHelpers.renderMenu({
+                    views: AlbumsListPage.albumsViews,
+                    groups: AlbumsListPage.albumsGroups,
+                    root: page.element,
+                    viewsContainer: page.menuViews,
+                    groupsContainer: page.menuGroups,
+                    dsManager: page.semanticzoom,
+                    setting: page.viewSetting,
+                    defaultView: "list",
+                    defaultGroup: "none",
+                    saveSetting: () => {
+                        this.saveViewSetting();
+                    }
+                });
+
+                page.semanticzoom.dataManager.filter = (album: Kodi.API.Music.Album) => {
                     if (!page.selectedGenre)
                         return true;
 
-                    var hasgenre = movie.allgenres.indexOf(page.selectedGenre) >= 0;
+                    var hasgenre = album.allgenres.indexOf(page.selectedGenre) >= 0;
                     return hasgenre;
                 }
                 if (options.artist) {
@@ -88,8 +115,8 @@
                 }
                 page.semanticzoom.listview.layout = new WinJS.UI.GridLayout();
                 page.semanticzoom.listview.layout.orientation = "vertical";
-                page.semanticzoom.listview.oniteminvoked = function (arg) {
-                    arg.detail.itemPromise.then(function (item) {
+                page.semanticzoom.listview.oniteminvoked = (arg) => {
+                    arg.detail.itemPromise.then((item) => {
                         WinJS.Navigation.navigate("/pages/albums/detail/albumsdetail.html", { album: item.data, navigateStacked: true });
                     });
                 }
@@ -132,8 +159,16 @@
             if (w) {
                 var nbitems = ((w / 500) << 0) + 1;
                 var posterW = ((w / nbitems) << 0) - 1 - 0.25;
-                page.itemsStyle.innerHTML = ".page-albumslist.view-wall .album-item { width:" + posterW + "px; }";
+                page.itemsStyle.innerHTML = ".page-albumslist.view-list .album-item { width:" + posterW + "px; }";
             }
+        }
+
+        showMenu() {
+            this.menu.classList.add("visible");
+        }
+
+        hideMenu() {
+            this.menu.classList.remove("visible");
         }
     }
 

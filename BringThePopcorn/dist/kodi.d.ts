@@ -400,6 +400,8 @@ declare module Kodi.API.Videos.TVShows {
         art?: any;
         reducedtitle: string;
         reducedgenre: string;
+        seasons?: Season[];
+        allplayed?: boolean;
     }
     interface TVShowsResultSet extends ApiResultSet {
         tvshows: TVShow[];
@@ -416,6 +418,8 @@ declare module Kodi.API.Videos.TVShows {
         fanart: string;
         thumbnail: string;
         tvshowid: number;
+        episodes: Episode[];
+        allplayed?: boolean;
     }
     interface SeasonsResultSet extends ApiResultSet {
         seasons: TVShows.Season[];
@@ -465,6 +469,7 @@ declare module Kodi.API.Videos.TVShows {
     function playEpisode(episodeid: any, resume?: boolean): WinJS.Promise<any>;
     function queueEpisode(episodeid: any): WinJS.Promise<any>;
     function scan(): WinJS.Promise<any>;
+    function loadTVShow(tvshow: TVShow): WinJS.IPromise<TVShow>;
 }
 
 declare module Kodi.API.Videos.Movies {

@@ -13,24 +13,27 @@
         btnPlayMovieLocal: HTMLElement;
         headerbanner: HTMLElement;
         headerposter: HTMLElement;
-        seasonsPromise: WinJS.Promise<Kodi.API.Videos.TVShows.SeasonsResultSet>;
+        seasonsPromise: WinJS.Promise<Kodi.API.Videos.TVShows.Season[]>;
         visualstate: any;
         scrollContainer: HTMLElement;
         scrollDelay: number;
 
         init(element, options) {
             this.tvshow = options.tvshow;
-
-            this.seasonsPromise = Kodi.API.Videos.TVShows.getTVShowSeasons(this.tvshow.tvshowid).then((seasons) => {
-                if (seasons.seasons.length == 1) {
-                    var season = seasons.seasons[0];
-                    return Kodi.API.Videos.TVShows.getTVShowEpisodes(season.tvshowid, season.season).then(function (episodes) {
-                        (<any>season).episodes = episodes;
-                        return seasons;
-                    });
-                }
-                return seasons;
-            });
+            if (this.tvshow.seasons && this.tvshow.seasons.length) {
+                this.seasonsPromise = WinJS.Promise.wrap(this.tvshow.seasons);
+            } else {
+                this.seasonsPromise = Kodi.API.Videos.TVShows.getTVShowSeasons(this.tvshow.tvshowid).then((seasons) => {
+                    if (seasons.seasons.length == 1) {
+                        var season = seasons.seasons[0];
+                        return Kodi.API.Videos.TVShows.getTVShowEpisodes(season.tvshowid, season.season).then(function (episodes) {
+                            (<any>season).episodes = episodes;
+                            return seasons;
+                        });
+                    }
+                    return seasons.seasons;
+                });
+            }
         }
 
         processed(element, options) {
@@ -72,12 +75,12 @@
                 if (seasons) {
                     var container = document.createDocumentFragment();
                     var p = [];
-                    if (seasons.seasons.length == 1) {
+                    if (seasons.length == 1) {
                         p.push(WinJS.Promise.timeout(200).then(() => {
-                            this.renderEpisodes(<HTMLElement>container, (<any>seasons.seasons[0]).episodes.episodes);
+                            this.renderEpisodes(<HTMLElement>container, seasons[0].episodes);
                         }));
                     } else {
-                        seasons.seasons.forEach((s) => {
+                        seasons.forEach((s) => {
                             p.push(this.renderSeason(container, s));
                         });
                         setImmediate(() => {
@@ -104,6 +107,12 @@
 
                 var episodesContainer = <HTMLElement>rendered.querySelector(".season-episodes");
                 var episodesDesc = <HTMLElement>rendered.querySelector(".season-desc");
+
+                if (season.episodes && season.episodes.length) {
+                    tmpseason.hasEpisodes = true;
+                    this.renderEpisodes(episodesContainer, season.episodes, true);
+                }
+
                 WinJSContrib.UI.tap(episodesDesc, () => {
                     rendered.classList.toggle("expanded");
                     if (!tmpseason.hasEpisodes) {
@@ -123,7 +132,7 @@
             
         }
 
-        renderEpisodes(container: HTMLElement, episodes: Kodi.API.Videos.TVShows.Episode[]) {
+        renderEpisodes(container: HTMLElement, episodes: Kodi.API.Videos.TVShows.Episode[], disableAnimation?: boolean) {
             var items = [];
 
             episodes.forEach((e) => {
@@ -135,9 +144,11 @@
                 });
             });
 
-            setImmediate(() => {
-                WinJS.UI.Animation.enterPage(items);
-            });
+            if (!disableAnimation) {
+                setImmediate(() => {
+                    WinJS.UI.Animation.enterPage(items);
+                });
+            }
         }
 
         prepareEpisode(episode: Kodi.API.Videos.TVShows.Episode, element: HTMLElement) {

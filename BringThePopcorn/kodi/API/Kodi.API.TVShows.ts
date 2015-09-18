@@ -26,6 +26,8 @@
         art?: any;
         reducedtitle: string;
         reducedgenre: string;
+        seasons?: Season[];
+        allplayed?: boolean;
     }
 
     export interface TVShowsResultSet extends ApiResultSet {
@@ -45,6 +47,8 @@
         fanart: string;
         thumbnail: string;
         tvshowid: number;
+        episodes: Episode[];
+        allplayed?: boolean;
     }
 
     export interface SeasonsResultSet extends ApiResultSet {
@@ -125,7 +129,7 @@
             return { "properties": ["thumbnail", "fanart", "tvshowid", "season", "title", "originaltitle", "showtitle", "episode", "plot"], "sort": { "method": "label", "order": "ascending" } };
         }
     }
-    
+
     export function processTVShows(tvshowset: TVShowsResultSet, tvshowitemcallback?: (TVShow) => any) {
         if (tvshowset && tvshowset.tvshows && tvshowset.tvshows.length) {
             tvshowset.tvshows.forEach(function (tvshow) {
@@ -142,7 +146,7 @@
             });
         }
     }
-    
+
     export function getAllTVShows() {
         var data = TVShowOptions(true);
         return API.kodiRequest<TVShowsResultSet>('VideoLibrary.GetTVShows', data, false, true).then(function (tvshows) {
@@ -197,5 +201,34 @@
 
     export function scan() {
         return API.kodiRequest<any>('VideoLibrary.Scan', {});
+    }
+
+    export function loadTVShow(tvshow: TVShow) {
+        return Kodi.API.Videos.TVShows.getTVShowSeasons(tvshow.tvshowid).then(function (seasons) {
+            if (seasons && seasons.seasons) {
+                tvshow.seasons = seasons.seasons;
+                return WinJSContrib.Promise.parallel(tvshow.seasons, function (season: Kodi.API.Videos.TVShows.Season) {
+                    return Kodi.API.Videos.TVShows.getTVShowEpisodes(season.tvshowid, season.season).then(function (episodes) {
+                        if (episodes && episodes.episodes) {
+                            season.episodes = episodes.episodes;
+                        }
+                    });
+                });
+            }
+        }).then(function () {
+            if (tvshow.seasons && tvshow.seasons.length) {
+                tvshow.seasons.forEach((s) => {
+                    if (s.episodes && s.episodes.length) {
+                        s.allplayed = s.episodes.filter((e) => {
+                            return e.lastplayed == null || e.lastplayed == undefined || e.lastplayed == '';
+                        }).length == 0;
+                    }
+                });
+                tvshow.allplayed = tvshow.seasons.filter((s) => {
+                    return !s.allplayed;
+                }).length == 0;
+            }
+            return tvshow;
+        });
     }
 }

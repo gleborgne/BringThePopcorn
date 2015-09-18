@@ -9,28 +9,23 @@
                 }
                 AlbumsListPage.prototype.init = function (element, options) {
                     var page = this;
+                    element.classList.add("listpage");
                     element.classList.add("page-albumslist");
-                    var view = AlbumsListPage.albumViews["wall"];
                     page.itemsPromise = Kodi.Data.loadRootData();
-                };
-                AlbumsListPage.prototype.setView = function (viewname) {
-                    var page = this;
-                    page.cleanViewClasses();
-                    var view = AlbumsListPage.albumViews[viewname] || AlbumsListPage.albumViews["wall"];
-                    if (view.groupKind) {
-                        page.semanticzoom.dataManager.groupKind = view.groupKind;
-                        page.semanticzoom.dataManager.field = view.groupField;
+                    this.viewSetting = {
+                        group: "none",
+                        view: "list"
+                    };
+                    var s = localStorage["albumsListView"];
+                    if (s) {
+                        this.viewSetting = JSON.parse(s);
                     }
-                    page.element.classList.add("view-" + viewname);
-                    page.semanticzoom.listview.itemTemplate = view.template.element;
                 };
-                AlbumsListPage.prototype.cleanViewClasses = function () {
-                    var page = this;
-                    for (var v in AlbumsListPage.albumViews) {
-                        page.element.classList.remove("view-" + v);
-                    }
+                AlbumsListPage.prototype.saveViewSetting = function () {
+                    localStorage["albumsListView"] = JSON.stringify(this.viewSetting);
                 };
                 AlbumsListPage.prototype.processed = function (element, options) {
+                    var _this = this;
                     var page = this;
                     if (options && options.genre) {
                         page.selectedGenre = options.genre;
@@ -41,11 +36,24 @@
                     page.itemsPromise = page.itemsPromise.then(function (data) {
                         page.albums = data.music.albums;
                         page.genres = data.musicGenres.genres;
-                        page.setView("wall");
-                        page.semanticzoom.dataManager.filter = function (movie) {
+                        BtPo.ListHelpers.renderMenu({
+                            views: AlbumsListPage.albumsViews,
+                            groups: AlbumsListPage.albumsGroups,
+                            root: page.element,
+                            viewsContainer: page.menuViews,
+                            groupsContainer: page.menuGroups,
+                            dsManager: page.semanticzoom,
+                            setting: page.viewSetting,
+                            defaultView: "list",
+                            defaultGroup: "none",
+                            saveSetting: function () {
+                                _this.saveViewSetting();
+                            }
+                        });
+                        page.semanticzoom.dataManager.filter = function (album) {
                             if (!page.selectedGenre)
                                 return true;
-                            var hasgenre = movie.allgenres.indexOf(page.selectedGenre) >= 0;
+                            var hasgenre = album.allgenres.indexOf(page.selectedGenre) >= 0;
                             return hasgenre;
                         };
                         if (options.artist) {
@@ -98,24 +106,41 @@
                     if (w) {
                         var nbitems = ((w / 500) << 0) + 1;
                         var posterW = ((w / nbitems) << 0) - 1 - 0.25;
-                        page.itemsStyle.innerHTML = ".page-albumslist.view-wall .album-item { width:" + posterW + "px; }";
+                        page.itemsStyle.innerHTML = ".page-albumslist.view-list .album-item { width:" + posterW + "px; }";
                     }
                 };
+                AlbumsListPage.prototype.showMenu = function () {
+                    this.menu.classList.add("visible");
+                };
+                AlbumsListPage.prototype.hideMenu = function () {
+                    this.menu.classList.remove("visible");
+                };
                 AlbumsListPage.url = "/pages/albums/list/albumslist.html";
-                AlbumsListPage.albumViews = {
-                    "wall": {
+                AlbumsListPage.albumsGroups = {
+                    "none": {
+                        name: "no grouping",
                         groupKind: null,
-                        groupField: null,
-                        template: BtPo.Templates.album
+                        groupField: null
                     },
                     "alphabetic": {
+                        name: "alphabetic",
                         groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
-                        groupField: 'title',
-                        template: BtPo.Templates.album
+                        groupField: 'label'
+                    },
+                    "artist": {
+                        name: "artist",
+                        groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
+                        groupField: 'artist'
                     },
                     "year": {
-                        groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
-                        groupField: 'year',
+                        name: "year",
+                        groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
+                        groupField: 'year'
+                    }
+                };
+                AlbumsListPage.albumsViews = {
+                    "list": {
+                        name: "list",
                         template: BtPo.Templates.album
                     }
                 };

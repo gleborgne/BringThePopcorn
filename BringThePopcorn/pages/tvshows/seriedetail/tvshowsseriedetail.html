@@ -11,7 +11,10 @@
     <div id="seasonTemplate" member data-win-control="WinJS.Binding.Template" data-win-options="{extractChild : true }">
         <div class="season">
             <div class="season-desc">
-                <div class="poster" data-win-bind="display: thumbnail Kodi.Utils.toThumbnailBg"></div>
+                <div class="poster">
+                    <div class="bg" data-win-bind="display: thumbnail Kodi.Utils.toThumbnailBg"></div>
+                    <div class="played btpo-check" data-win-bind="display: allplayed WinJSContrib.Bindings.showIf"></div>
+                </div>
                 <div class="label" data-win-bind="innerText: label"></div>
             </div>
             <div class="season-episodes">

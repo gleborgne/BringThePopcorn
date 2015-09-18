@@ -18,7 +18,7 @@
             </h2>
             <div class="stretch"></div>
             <div class="actions">
-
+                <button class="sgicon-more" tap="showMenu"></button>
             </div>
         </header>
         <section class="page-section" aria-label="Main content" role="main">
@@ -36,9 +36,26 @@
             <mcn-semanticlistviews id="semanticzoom" member class="mcn-fullsize"
                                    listview.groupHeaderTemplate="select:#groupItemTemplate"
                                    zoomedoutlistview.itemTemplate="select:#semanticItemTemplate"
-                                   defaultGroupLimit="12">
+                                   defaultGroupLimit="5">
             </mcn-semanticlistviews>
         </section>
+        <div class="screenmenu" member="menu">
+            <div class="menuoverlay" tap="hideMenu" tap-options="{ disableAnimation : true }"></div>
+            <div class="menu">
+                <div class="menu-group pseudo-radio" member="menuGroups">
+                    <h3>Group</h3>
+                </div>
+                <div class="menu-group pseudo-radio" member="menuViews">
+                    <h3>View</h3>
+                </div> 
+                <div class="menu-group">
+                    <h3>Filter</h3>
+                    <div class="item">
+                        <input type="checkbox" id="onlyUnplayed" name="onlyUnplayed" member /><label for="onlyUnplayed">show only unplayed items</label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -8,65 +8,21 @@
                 function MoviesListPage() {
                 }
                 MoviesListPage.prototype.init = function (element, options) {
-                    var page = this;
-                    page.filterByPlayed = false;
+                    this.filterByPlayed = false;
+                    element.classList.add("listpage");
                     element.classList.add("page-movieslist");
-                    page.itemsPromise = Kodi.Data.loadRootData();
-                };
-                MoviesListPage.prototype.setViewMenu = function (arg) {
-                    var name = arg.elt.getAttribute("view");
-                    if (name) {
-                        this.setView(name);
-                        this.semanticzoom.dataManager.refresh();
-                    }
-                    //this.hideMenu();
-                };
-                MoviesListPage.prototype.setGroupingMenu = function (arg) {
-                    var name = arg.elt.getAttribute("grouping");
-                    if (name) {
-                        this.setGroup(name);
-                        this.semanticzoom.dataManager.refresh();
-                    }
-                    //this.hideMenu();
-                };
-                MoviesListPage.prototype.setView = function (viewname) {
-                    var page = this;
-                    viewname = viewname || "poster";
-                    page.cleanViewClasses();
-                    var view = MoviesListPage.moviesViews[viewname] || MoviesListPage.moviesViews["poster"];
-                    page.element.classList.add("view-" + viewname);
-                    $('.item[view].selected', page.menu).removeClass("selected");
-                    $('.item[view="' + viewname + '"]', page.menu).addClass("selected");
-                    page.semanticzoom.listview.itemTemplate = view.template.element;
-                };
-                MoviesListPage.prototype.setGroup = function (groupname) {
-                    var page = this;
-                    groupname = groupname || "none";
-                    page.cleanGroupClasses();
-                    var view = MoviesListPage.moviesGroups[groupname] || MoviesListPage.moviesGroups["none"];
-                    if (view.groupKind) {
-                        page.semanticzoom.dataManager.field = view.groupField;
-                        page.semanticzoom.dataManager.groupKind = view.groupKind;
-                    }
-                    else {
-                        page.semanticzoom.dataManager.groupKind = null;
-                        page.semanticzoom.dataManager.field = null;
-                    }
-                    $('.item[grouping].selected', page.menu).removeClass("selected");
-                    $('.item[grouping="' + groupname + '"]', page.menu).addClass("selected");
-                    page.element.classList.add("group-" + groupname);
-                };
-                MoviesListPage.prototype.cleanViewClasses = function () {
-                    var page = this;
-                    for (var v in MoviesListPage.moviesViews) {
-                        page.element.classList.remove("view-" + v);
+                    this.itemsPromise = Kodi.Data.loadRootData();
+                    this.viewSetting = {
+                        group: "none",
+                        view: "poster"
+                    };
+                    var s = localStorage["moviesListView"];
+                    if (s) {
+                        this.viewSetting = JSON.parse(s);
                     }
                 };
-                MoviesListPage.prototype.cleanGroupClasses = function () {
-                    var page = this;
-                    for (var v in MoviesListPage.moviesGroups) {
-                        page.element.classList.remove("group-" + v);
-                    }
+                MoviesListPage.prototype.saveViewSetting = function () {
+                    localStorage["moviesListView"] = JSON.stringify(this.viewSetting);
                 };
                 MoviesListPage.prototype.processed = function (element, options) {
                     var _this = this;
@@ -80,8 +36,20 @@
                     page.itemsPromise = page.itemsPromise.then(function (data) {
                         page.movies = data.movies.movies;
                         page.genres = data.movieGenres.genres;
-                        page.setGroup();
-                        page.setView();
+                        BtPo.ListHelpers.renderMenu({
+                            views: MoviesListPage.moviesViews,
+                            groups: MoviesListPage.moviesGroups,
+                            root: page.element,
+                            viewsContainer: page.menuViews,
+                            groupsContainer: page.menuGroups,
+                            dsManager: page.semanticzoom,
+                            setting: page.viewSetting,
+                            defaultView: "poster",
+                            defaultGroup: "none",
+                            saveSetting: function () {
+                                _this.saveViewSetting();
+                            }
+                        });
                         page.semanticzoom.dataManager.filter = function (movie) {
                             if (page.filterByPlayed && movie.lastplayed)
                                 return false;
@@ -104,9 +72,6 @@
                         page.filterByPlayed = page.onlyUnplayed.checked;
                         _this.semanticzoom.dataManager.refresh();
                     };
-                    $(element).on("click", ".win-groupheadercontainer", function () {
-                        page.semanticzoom.semanticZoom.zoomedOut = true;
-                    });
                 };
                 MoviesListPage.prototype.ready = function () {
                     var page = this;
@@ -165,32 +130,35 @@
                 MoviesListPage.url = "/pages/movies/list/movieslist.html";
                 MoviesListPage.moviesGroups = {
                     "none": {
+                        name: "no grouping",
                         groupKind: null,
                         groupField: null
                     },
                     "alphabetic": {
+                        name: "alphabetic",
                         groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                         groupField: 'title'
                     },
                     "year": {
+                        name: "year",
                         groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
                         groupField: 'year'
                     },
                     "studio": {
+                        name: "studio",
                         groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
                         groupField: 'studio'
                     }
                 };
                 MoviesListPage.moviesViews = {
                     "poster": {
+                        name: "poster",
                         template: BtPo.Templates.movieposter
                     },
                     "bigposter": {
+                        name: "big poster",
                         template: BtPo.Templates.movieposter
                     },
-                    "detailed": {
-                        template: BtPo.Templates.movieposter
-                    }
                 };
                 return MoviesListPage;
             })();

@@ -53,24 +53,24 @@
   -ms-grid-row-align: center;
   -ms-grid-column-align: center;
   transform: scale(0.97, 1);
-  animation: loaderrotate1 7s infinite;
+  animation: loaderrotate1 3s infinite;
 }
 .page-loader-wrapper .page-loader .circle2 {
   width: 340px;
   height: 340px;
-  background-color: #0e86ae;
+  background-color: #0c789b;
   border-radius: 50%;
   -ms-grid-row-align: center;
   -ms-grid-column-align: center;
   transform: scale(1, 0.97);
-  animation: loaderrotate2 15s infinite;
+  animation: loaderrotate2 5s infinite;
 }
 @keyframes loaderrotate1 {
   0% {
     transform: rotate(0deg) scale(1, 0.97);
   }
   50% {
-    transform: rotate(180deg) scale(1.03, 1);
+    transform: rotate(180deg) scale(1, 1.04);
   }
   0% {
     transform: rotate(360deg) scale(1, 0.97);
@@ -81,7 +81,7 @@
     transform: rotate(0deg) scale(1, 0.97);
   }
   50% {
-    transform: rotate(-180deg) scale(1.03, 1);
+    transform: rotate(-180deg) scale(1, 1.04);
   }
   0% {
     transform: rotate(360deg) scale(1, 0.97);

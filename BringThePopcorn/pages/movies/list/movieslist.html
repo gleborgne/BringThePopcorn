@@ -37,24 +37,17 @@
             <mcn-semanticlistviews id="semanticzoom" member class="mcn-fullsize"
                                    listview.groupHeaderTemplate="select:#groupItemTemplate"
                                    zoomedoutlistview.itemTemplate="select:#semanticItemTemplate"
-                                   defaultGroupLimit="12">
+                                   defaultGroupLimit="5">
             </mcn-semanticlistviews>
         </section>
         <div class="screenmenu" member="menu">
             <div class="menuoverlay" tap="hideMenu" tap-options="{ disableAnimation : true }"></div>
             <div class="menu">
-                <div class="menu-group pseudo-radio">
+                <div class="menu-group pseudo-radio" member="menuGroups">
                     <h3>Group</h3>
-                    <div class="item" grouping="none" tap="setGroupingMenu">no grouping</div>
-                    <div class="item" grouping="alphabetic" tap="setGroupingMenu">alphabetic</div>
-                    <div class="item" grouping="year" tap="setGroupingMenu">year</div>
-                    <div class="item" grouping="studio" tap="setGroupingMenu">studio</div>
                 </div> 
-                <div class="menu-group pseudo-radio">
+                <div class="menu-group pseudo-radio" member="menuViews">
                     <h3>View</h3>
-                    <div class="item" view="poster" tap="setViewMenu">poster</div>
-                    <div class="item" view="bigposter" tap="setViewMenu">big poster</div>
-                    <!--<div class="item" view="detailed" tap="setViewMenu">detailed</div>-->
                 </div> 
                 <div class="menu-group">
                     <h3>Filter</h3>

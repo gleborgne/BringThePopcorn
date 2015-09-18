@@ -1,4 +1,8 @@
 ﻿module BtPo.UI.Pages {
+    interface ITvShowViewSetting {
+        group: string;
+        view: string;
+    }
 
     export class TvShowsListPage {
         public static url = "/pages/tvshows/list/tvshowslist.html";
@@ -6,62 +10,77 @@
         itemsPromise: WinJS.Promise<any>;
         selectedGenre: string;
         semanticzoom: any;
+        filterByPlayed: boolean;
         element: HTMLElement;
+        onlyUnplayed: HTMLInputElement;
         genretitle: HTMLElement;
-        listitemtemplate: WinJS.Binding.Template;
+        menu: HTMLElement;
+        menuGroups: HTMLElement;
+        menuViews: HTMLElement;
         itemsStyle: HTMLStyleElement;
         tvshows: Kodi.API.Videos.TVShows.TVShow[];
         genres: Kodi.API.Genre[];
+        viewSetting: ITvShowViewSetting;
 
-
-        static tvshowsViews = {
-            "wall": {
+        static tvshowsGroups = {
+            "none": {
+                name: "no grouping",
                 groupKind: null,
-                groupField: null,
-                template: '/templates/tvshowposter.html'
+                groupField: null
             },
             "alphabetic": {
+                name: "alphabetic",
                 groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
-                groupField: 'title',
-                template: '/templates/tvshowposter.html'
+                groupField: 'title'
             },
             "year": {
-                groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
-                groupField: 'year',
-                template: '/templates/tvshowposter.html'
+                name: "year",
+                groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
+                groupField: 'year'
+            },
+            "studio": {
+                name: "studio",
+                groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
+                groupField: 'studio'
             }
+        }
+
+        static tvshowsViews = {
+            "poster": {
+                name: "poster",
+                template: BtPo.Templates.tvshowposter
+            },
+            "bigposter": {
+                name: "big poster",
+                template: BtPo.Templates.tvshowposter
+            },
+            //"detailed": {
+            //    name: "detailed",
+            //    template: BtPo.Templates.tvshowposter
+            //}
         }
 
         init(element, options) {
-            var page = this;
+            this.filterByPlayed = false;
+            element.classList.add("listpage");
             element.classList.add("page-tvshowslist");
-            var view = TvShowsListPage.tvshowsViews["wall"];
-            page.itemsPromise = Kodi.Data.loadRootData();
+            this.itemsPromise = Kodi.Data.loadRootData();
+            this.viewSetting = {
+                group: "none",
+                view: "poster"
+            }
+            var s = localStorage["tvshowsListView"];
+            if (s) {
+                this.viewSetting = <ITvShowViewSetting>JSON.parse(s);
+            }
         }
 
-        setView(viewname) {
-            var page = this;
-            page.cleanViewClasses();
-            var view = TvShowsListPage.tvshowsViews[viewname] || TvShowsListPage.tvshowsViews["wall"];
-            if (view.groupKind) {
-                page.semanticzoom.dataManager.groupKind = view.groupKind;
-                page.semanticzoom.dataManager.field = view.groupField;
-            }
-            page.element.classList.add("view-" + viewname);
-            page.listitemtemplate = new WinJS.Binding.Template(null, { href: view.template });
-            page.semanticzoom.listview.itemTemplate = page.listitemtemplate.element;
-        }
-
-        cleanViewClasses() {
-            var page = this;
-            for (var v in TvShowsListPage.tvshowsViews) {
-                page.element.classList.remove("view-" + v);
-            }
+        saveViewSetting() {
+            localStorage["tvshowsListView"] = JSON.stringify(this.viewSetting);
         }
 
         processed(element, options) {
             var page = this;
-
             if (options && options.genre) {
                 page.selectedGenre = options.genre;
                 page.genretitle.innerText = page.selectedGenre;
@@ -69,25 +88,49 @@
 
             page.itemsStyle = <HTMLStyleElement>document.createElement("STYLE");
             page.element.appendChild(page.itemsStyle);
-            page.itemsPromise = page.itemsPromise.then(function (data: Kodi.Data.IMediaLibrary) {
+            page.itemsPromise = page.itemsPromise.then((data: Kodi.Data.IMediaLibrary) => {
                 page.tvshows = data.tvshows.tvshows;
                 page.genres = data.tvshowGenres.genres;
-                page.setView("wall");
-                page.semanticzoom.dataManager.filter = function (movie) {
+                
+                BtPo.ListHelpers.renderMenu({
+                    views: TvShowsListPage.tvshowsViews,
+                    groups: TvShowsListPage.tvshowsGroups,
+                    root: page.element,
+                    viewsContainer: page.menuViews,
+                    groupsContainer: page.menuGroups,
+                    dsManager: page.semanticzoom,
+                    setting: page.viewSetting,
+                    defaultView: "poster",
+                    defaultGroup: "none",
+                    saveSetting: () => {
+                        this.saveViewSetting();
+                    }
+                });
+
+                page.semanticzoom.dataManager.filter = (tvshow: Kodi.API.Videos.TVShows.TVShow) => {
+                    if (page.filterByPlayed && tvshow.allplayed)
+                        return false;
+
                     if (!page.selectedGenre)
                         return true;
 
-                    var hasgenre = movie.allgenres.indexOf(page.selectedGenre) >= 0;
+                    var hasgenre = tvshow.allgenres.indexOf(page.selectedGenre) >= 0;
                     return hasgenre;
                 }
                 page.semanticzoom.listview.layout = new WinJS.UI.GridLayout();
                 page.semanticzoom.listview.layout.orientation = "vertical";
-                page.semanticzoom.listview.oniteminvoked = function (arg) {
+                page.semanticzoom.zoomedOutListview.layout = new WinJS.UI.GridLayout();
+                page.semanticzoom.zoomedOutListview.layout.orientation = "vertical";
+                page.semanticzoom.listview.oniteminvoked = (arg) => {
                     arg.detail.itemPromise.then(function (item) {
                         WinJS.Navigation.navigate("/pages/tvshows/seriedetail/tvshowsseriedetail.html", { tvshow: item.data, navigateStacked: true });
                     });
                 }
             });
+            page.onlyUnplayed.onchange = () => {
+                page.filterByPlayed = page.onlyUnplayed.checked;
+                this.semanticzoom.dataManager.refresh();
+            }
         }
 
         ready() {
@@ -124,13 +167,34 @@
             var page = this;
             var w = page.element.clientWidth;
             if (w) {
+                var content = [];
+
                 var nbitems = ((w / 260) << 0) + 1;
                 var posterW = ((w / nbitems) << 0) - 1;
                 var posterH = (posterW / Kodi.App.PictureRatios.movieposter) << 0;
-                page.itemsStyle.innerHTML = ".page-tvshowslist.view-wall .tvshow { width:" + posterW + "px; height:" + posterH + "px}";
+                content.push(".page-tvshowslist.view-poster .tvshow { width:" + posterW + "px; height:" + posterH + "px}");
+
+                var nbitems = ((w / 400) << 0) + 1;
+                var posterW = ((w / nbitems) << 0) - 1;
+                var posterH = (posterW / Kodi.App.PictureRatios.movieposter) << 0;
+                content.push(".page-tvshowslist.view-bigposter .tvshow { width:" + posterW + "px; height:" + posterH + "px}");
+
+                var nbitems = ((w / 1024) << 0) + 1;
+                var posterW = ((w / nbitems) << 0) - 1;
+                var posterH = (posterW / Kodi.App.PictureRatios.fanart) << 0;
+                content.push(".page-tvshowslist.view-detailed .tvshow { width:" + posterW + "px; height:" + posterH + "px}");
+                page.itemsStyle.innerHTML = content.join("\r\n");
             }
         }
-    }
 
+        showMenu() {
+            this.menu.classList.add("visible");
+        }
+
+        hideMenu() {
+            this.menu.classList.remove("visible");
+        }
+    }
+    
     WinJS.UI.Pages.define(TvShowsListPage.url, TvShowsListPage);
 }

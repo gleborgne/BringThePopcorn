@@ -125,6 +125,35 @@
                     return API.kodiRequest('VideoLibrary.Scan', {});
                 }
                 TVShows.scan = scan;
+                function loadTVShow(tvshow) {
+                    return Kodi.API.Videos.TVShows.getTVShowSeasons(tvshow.tvshowid).then(function (seasons) {
+                        if (seasons && seasons.seasons) {
+                            tvshow.seasons = seasons.seasons;
+                            return WinJSContrib.Promise.parallel(tvshow.seasons, function (season) {
+                                return Kodi.API.Videos.TVShows.getTVShowEpisodes(season.tvshowid, season.season).then(function (episodes) {
+                                    if (episodes && episodes.episodes) {
+                                        season.episodes = episodes.episodes;
+                                    }
+                                });
+                            });
+                        }
+                    }).then(function () {
+                        if (tvshow.seasons && tvshow.seasons.length) {
+                            tvshow.seasons.forEach(function (s) {
+                                if (s.episodes && s.episodes.length) {
+                                    s.allplayed = s.episodes.filter(function (e) {
+                                        return e.lastplayed == null || e.lastplayed == undefined || e.lastplayed == '';
+                                    }).length == 0;
+                                }
+                            });
+                            tvshow.allplayed = tvshow.seasons.filter(function (s) {
+                                return !s.allplayed;
+                            }).length == 0;
+                        }
+                        return tvshow;
+                    });
+                }
+                TVShows.loadTVShow = loadTVShow;
             })(TVShows = Videos.TVShows || (Videos.TVShows = {}));
         })(Videos = API.Videos || (API.Videos = {}));
     })(API = Kodi.API || (Kodi.API = {}));

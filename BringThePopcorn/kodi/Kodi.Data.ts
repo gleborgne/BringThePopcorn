@@ -87,7 +87,16 @@
     function videoDataCalls() {
         return [
             Kodi.API.Videos.Movies.getAllMovies(),
-            Kodi.API.Videos.TVShows.getAllTVShows(),
+            Kodi.API.Videos.TVShows.getAllTVShows().then(function (tvshows) {
+                if (tvshows && tvshows.tvshows) {
+                    return WinJSContrib.Promise.parallel(tvshows.tvshows, function (tvshow: Kodi.API.Videos.TVShows.TVShow) {
+                        return Kodi.API.Videos.TVShows.loadTVShow(tvshow);
+                    }).then(function () {
+                        return tvshows;
+                    });
+                }
+                return tvshows;
+            }),
             Kodi.API.Videos.Movies.getMovieGenres(),
             Kodi.API.Videos.TVShows.getTVShowsGenres(),
             Kodi.API.Videos.Movies.getRecentMovies(),

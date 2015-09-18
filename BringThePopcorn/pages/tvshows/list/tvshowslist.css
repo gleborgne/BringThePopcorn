@@ -1,8 +1,21 @@
 ﻿.page-tvshowslist .tvshowslist .tvshow {
   width: 280px;
   height: 400px;
-  position: relative;
   background-color: #111;
+  position: relative;
+}
+.page-tvshowslist .tvshowslist .tvshow .played {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 25px;
+  background-color: #ffd700;
+  color: black;
 }
 .page-tvshowslist .tvshowslist .tvshow .bg,
 .page-tvshowslist .tvshowslist .tvshow .content {
@@ -26,10 +39,4 @@
 }
 .page-tvshowslist .tvshowslist .tvshow .bg.pic.imageLoaded {
   opacity: 1;
-}
-.page-tvshowslist.view-wall .win-listview .win-gridlayout .win-container {
-  margin: 0 1px 1px 0;
-}
-.page-tvshowslist.view-wall .win-listview .win-vertical .win-gridlayout.win-surface {
-  margin: 0;
 }

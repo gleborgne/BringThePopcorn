@@ -227,7 +227,7 @@ body {
     visibility: hidden;
 
     .menuoverlay {
-        background-color: rgba(255,255,255,0.2);
+        background-color: rgba(255,255,255,0.1);
         position: absolute;
         .fit-container();
         left: 0;
@@ -263,9 +263,9 @@ body {
         .menu-group {
             margin-bottom: 1em;
 
-            h3{
+            h3 {
                 margin: 0;
-                margin-bottom : 3px;
+                margin-bottom: 3px;
                 font-size: 0.8em;
                 text-transform: uppercase;
                 color: #AAA;
@@ -306,8 +306,8 @@ body {
             padding: 0 8px;
             line-height: 60px;
             text-align: center;
-            white-space:nowrap;
-            overflow:hidden;
+            white-space: nowrap;
+            overflow: hidden;
             text-overflow: ellipsis;
             font-size: 1.3rem;
         }
@@ -401,11 +401,34 @@ body {
     }
 
     50% {
-        background-color: gold;
-        border-color: gold;
+        background-color: @accentColor;
+        border-color: @accentColor;
         color: white;
     }
 
     100% {
+    }
+}
+
+.listpage {
+    .zoomedinlist.win-listview.win-groups {
+        .win-groupheader {
+            font-weight: 300;
+            padding: 8px 16px;
+            font-size: 1.6em;
+        }
+    }
+
+    .zoomedinlist.win-listview.win-groups .win-vertical .win-listlayout .win-groupleader, .zoomedinlist.win-listview.win-groups .win-vertical .win-gridlayout .win-groupleader {
+        margin: 0;
+        background-color: #2F2F2F;
+    }
+
+    .zoomedinlist.win-listview .win-gridlayout .win-container {
+        margin: 0 1px 1px 0;
+    }
+
+    .zoomedinlist.win-listview .win-vertical .win-gridlayout.win-surface {
+        margin: 0;
     }
 }
