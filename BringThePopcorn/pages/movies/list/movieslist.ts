@@ -13,37 +13,51 @@ module BtPo.UI.Pages {
         itemsPromise: WinJS.Promise<any>;
         selectedGenre: string;
         semanticzoom: any;
+        filterByPlayed: boolean;
         element: HTMLElement;
+        onlyUnplayed: HTMLInputElement;
         genretitle: HTMLElement;
         menu: HTMLElement; 
         itemsStyle: HTMLStyleElement;
         movies: Kodi.API.Videos.Movies.Movie[];
         genres: Kodi.API.Genre[];
         
-        static moviesViews = {
-            "wall": {
+        static moviesGroups = {
+            "none": {
                 groupKind: null,
-                groupField: null,
-                template: BtPo.Templates.movieposter
+                groupField: null
             },
             "alphabetic": {
                 groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
-                groupField: 'title',
-                template: BtPo.Templates.movieposter
+                groupField: 'title'
             },
             "year": {
                 groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
-                groupField: 'year',
+                groupField: 'year'
+            },
+            "studio": {
+                groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
+                groupField: 'studio'
+            }
+        }
+
+        static moviesViews = {
+            "poster": {
+                template: BtPo.Templates.movieposter
+            },
+            "bigposter": {
+                template: BtPo.Templates.movieposter
+            },
+            "detailed": {
                 template: BtPo.Templates.movieposter
             }
         }
 
         init(element, options) {
             var page = this;
+            page.filterByPlayed = false;
             element.classList.add("page-movieslist");
-            var view = MoviesListPage.moviesViews["wall"];
-            page.itemsPromise = Kodi.Data.loadRootData();
-            
+            page.itemsPromise = Kodi.Data.loadRootData();            
         }
 
         setViewMenu(arg: { elt: HTMLElement }) {
@@ -52,13 +66,34 @@ module BtPo.UI.Pages {
                 this.setView(name);
                 this.semanticzoom.dataManager.refresh();
             }
-            this.hideMenu();
+            //this.hideMenu();
         }
 
-        setView(viewname) {
+        setGroupingMenu(arg: { elt: HTMLElement }) {
+            var name = arg.elt.getAttribute("grouping");
+            if (name) {
+                this.setGroup(name);
+                this.semanticzoom.dataManager.refresh();
+            }
+            //this.hideMenu();
+        }
+
+        setView(viewname?: string) {
             var page = this;
+            viewname = viewname || "poster";
             page.cleanViewClasses();
-            var view = MoviesListPage.moviesViews[viewname] || MoviesListPage.moviesViews["wall"];
+            var view = MoviesListPage.moviesViews[viewname] || MoviesListPage.moviesViews["poster"];            
+            page.element.classList.add("view-" + viewname);
+            $('.item[view].selected', page.menu).removeClass("selected");
+            $('.item[view="' + viewname + '"]', page.menu).addClass("selected");
+            page.semanticzoom.listview.itemTemplate = view.template.element;
+        }
+
+        setGroup(groupname?:string) {
+            var page = this;
+            groupname = groupname || "none";
+            page.cleanGroupClasses();
+            var view = MoviesListPage.moviesGroups[groupname] || MoviesListPage.moviesGroups["none"];
             if (view.groupKind) {
                 page.semanticzoom.dataManager.field = view.groupField;
                 page.semanticzoom.dataManager.groupKind = view.groupKind;
@@ -66,14 +101,22 @@ module BtPo.UI.Pages {
                 page.semanticzoom.dataManager.groupKind = null;
                 page.semanticzoom.dataManager.field = null;
             }
-            page.element.classList.add("view-" + viewname);
-            page.semanticzoom.listview.itemTemplate = view.template.element;
+            $('.item[grouping].selected', page.menu).removeClass("selected");
+            $('.item[grouping="' + groupname + '"]', page.menu).addClass("selected");
+            page.element.classList.add("group-" + groupname);
         }
 
         cleanViewClasses() {
             var page = this;
             for (var v in MoviesListPage.moviesViews) {
                 page.element.classList.remove("view-" + v);
+            }
+        }
+
+        cleanGroupClasses() {
+            var page = this;
+            for (var v in MoviesListPage.moviesGroups) {
+                page.element.classList.remove("group-" + v);
             }
         }
 
@@ -86,11 +129,15 @@ module BtPo.UI.Pages {
 
             page.itemsStyle = <HTMLStyleElement>document.createElement("STYLE");
             page.element.appendChild(page.itemsStyle);
-            page.itemsPromise = page.itemsPromise.then(function (data: Kodi.Data.IMediaLibrary) {
+            page.itemsPromise = page.itemsPromise.then((data: Kodi.Data.IMediaLibrary) => {
                 page.movies = data.movies.movies;
                 page.genres = data.movieGenres.genres;
-                page.setView("wall");
-                page.semanticzoom.dataManager.filter = function (movie) {
+                page.setGroup();
+                page.setView();
+                page.semanticzoom.dataManager.filter = (movie: Kodi.API.Videos.Movies.Movie) => {
+                    if (page.filterByPlayed && movie.lastplayed)
+                        return false;
+
                     if (!page.selectedGenre)
                         return true;
 
@@ -101,15 +148,19 @@ module BtPo.UI.Pages {
                 page.semanticzoom.listview.layout.orientation = "vertical";
                 page.semanticzoom.zoomedOutListview.layout = new WinJS.UI.GridLayout();
                 page.semanticzoom.zoomedOutListview.layout.orientation = "vertical";
-                page.semanticzoom.listview.oniteminvoked = function (arg) {
-                    arg.detail.itemPromise.then(function (item) {
+                page.semanticzoom.listview.oniteminvoked = (arg) => {
+                    arg.detail.itemPromise.then((item) => {
                         WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true });
                     });
                 }
             });
+            page.onlyUnplayed.onchange = () => {
+                page.filterByPlayed = page.onlyUnplayed.checked;
+                this.semanticzoom.dataManager.refresh();
+            }
 
-            $(element).on("click", ".win-groupheadercontainer", function () {
-                page.semanticzoom.semanticZoom.zoomedOut = true;
+            $(element).on("click", ".win-groupheadercontainer", () => {
+                page.semanticzoom.semanticZoom.zoomedOut = true;                
             });
         }
 
@@ -147,10 +198,23 @@ module BtPo.UI.Pages {
             var page = this;
             var w = page.element.clientWidth;
             if (w) {
+                var content = [];
+
                 var nbitems = ((w / 260) << 0) + 1;
                 var posterW = ((w / nbitems) << 0) - 1;
                 var posterH = (posterW / Kodi.App.PictureRatios.movieposter) << 0;
-                page.itemsStyle.innerHTML = ".page-movieslist.view-wall .movie, .page-movieslist.view-alphabetic .movie, .page-movieslist.view-year .movie { width:" + posterW + "px; height:" + posterH + "px}";
+                content.push(".page-movieslist.view-poster .movie { width:" + posterW + "px; height:" + posterH + "px}");
+
+                var nbitems = ((w / 400) << 0) + 1;
+                var posterW = ((w / nbitems) << 0) - 1;
+                var posterH = (posterW / Kodi.App.PictureRatios.movieposter) << 0;
+                content.push(".page-movieslist.view-bigposter .movie { width:" + posterW + "px; height:" + posterH + "px}");
+
+                var nbitems = ((w / 1024) << 0) + 1;
+                var posterW = ((w / nbitems) << 0) - 1;
+                var posterH = (posterW / Kodi.App.PictureRatios.fanart) << 0;
+                content.push(".page-movieslist.view-detailed .movie { width:" + posterW + "px; height:" + posterH + "px}");
+                page.itemsStyle.innerHTML = content.join("\r\n");
             }
         }
 

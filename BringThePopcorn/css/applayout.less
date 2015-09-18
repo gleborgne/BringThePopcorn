@@ -250,35 +250,66 @@ body {
     }
 
     .menu {
-        width: 260px;
-        background-color : rgba(0,0,0, 0.9);
-        padding : 20px;
+        width: 220px;
+        background-color: rgba(20,20,20, 0.9);
+        padding: 20px;
         position: absolute;
         right: 10px;
         top: 56px;
         opacity: 0;
         transform: scale(0.9, 0.8);
         transition: all 300ms @easeOutBack;
+
+        .menu-group {
+            margin-bottom: 1em;
+
+            h3{
+                margin: 0;
+                margin-bottom : 3px;
+                font-size: 0.8em;
+                text-transform: uppercase;
+                color: #AAA;
+            }
+
+            &.pseudo-radio {
+                .item {
+                    padding: 8px;
+                    box-sizing: border-box;
+                    margin-bottom: 4px;
+                    text-align: center;
+                    width: 100%;
+                    background-color: #333;
+
+                    &.selected {
+                        background-color: @kodiBlue;
+                    }
+                }
+            }
+        }
     }
 }
 
 .zoomedoutlist.win-listview {
-    .win-surface{
-        margin : 60px;
+    .win-surface {
+        margin: 60px;
     }
 
     .semantic-item.win-item {
-        width: 60px;
+        width: 240px;
         height: 60px;
         text-align: center;
-        background-color : @kodiBlue;
+        background-color: @kodiBlue;
         color: white;
 
-        h2{
+        h2 {
             margin: 0;
-            padding: 0;
+            padding: 0 8px;
             line-height: 60px;
             text-align: center;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow: ellipsis;
+            font-size: 1.3rem;
         }
     }
 }

@@ -16,14 +16,16 @@
                 All
             </h2>
             <div class="stretch"></div>
-            <!--<div class="actions">
+            <div class="actions">
                 <button class="sgicon-more" tap="showMenu"></button>
-            </div>-->
+            </div>
         </header>
         <section class="page-section" aria-label="Main content" role="main">
             <win-template id="groupItemTemplate" extractchild="true">
                 <div class="group-item">
-                    <div data-win-bind="innerText: title" onclick="$('#semanticzoom')[0].winControl._semanticZoom.zoomedOut = true"></div>
+                    <div onclick="$('#semanticzoom')[0].winControl._semanticZoom.zoomedOut = true">
+                        <span data-win-bind="innerText: title" ></span>
+                    </div>
                 </div>
             </win-template>
             <win-template id="semanticItemTemplate" extractchild="true">
@@ -41,16 +43,18 @@
         <div class="screenmenu" member="menu">
             <div class="menuoverlay" tap="hideMenu" tap-options="{ disableAnimation : true }"></div>
             <div class="menu">
-                <div class="menu-group">
+                <div class="menu-group pseudo-radio">
                     <h3>Group</h3>
-                    <div class="item" grouping="" tap="setGroupingMenu">none</div>
+                    <div class="item" grouping="none" tap="setGroupingMenu">no grouping</div>
                     <div class="item" grouping="alphabetic" tap="setGroupingMenu">alphabetic</div>
                     <div class="item" grouping="year" tap="setGroupingMenu">year</div>
+                    <div class="item" grouping="studio" tap="setGroupingMenu">studio</div>
                 </div> 
-                <div class="menu-group">
+                <div class="menu-group pseudo-radio">
                     <h3>View</h3>
                     <div class="item" view="poster" tap="setViewMenu">poster</div>
-                    <div class="item" view="alphabetic" tap="setViewMenu">detailed</div>
+                    <div class="item" view="bigposter" tap="setViewMenu">big poster</div>
+                    <!--<div class="item" view="detailed" tap="setViewMenu">detailed</div>-->
                 </div> 
                 <div class="menu-group">
                     <h3>Filter</h3>

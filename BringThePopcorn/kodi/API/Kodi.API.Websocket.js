@@ -4,7 +4,7 @@
     (function (API) {
         var Websocket;
         (function (Websocket) {
-            var logger = WinJSContrib.Logs.getLogger("KDP.API");
+            var logger = WinJSContrib.Logs.getLogger("KDP.API.Websocket");
             Websocket.current;
             function socketOpen(evt) {
                 logger.verbose('websocket opened');

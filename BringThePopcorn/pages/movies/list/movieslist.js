@@ -9,8 +9,8 @@
                 }
                 MoviesListPage.prototype.init = function (element, options) {
                     var page = this;
+                    page.filterByPlayed = false;
                     element.classList.add("page-movieslist");
-                    var view = MoviesListPage.moviesViews["wall"];
                     page.itemsPromise = Kodi.Data.loadRootData();
                 };
                 MoviesListPage.prototype.setViewMenu = function (arg) {
@@ -19,12 +19,31 @@
                         this.setView(name);
                         this.semanticzoom.dataManager.refresh();
                     }
-                    this.hideMenu();
+                    //this.hideMenu();
+                };
+                MoviesListPage.prototype.setGroupingMenu = function (arg) {
+                    var name = arg.elt.getAttribute("grouping");
+                    if (name) {
+                        this.setGroup(name);
+                        this.semanticzoom.dataManager.refresh();
+                    }
+                    //this.hideMenu();
                 };
                 MoviesListPage.prototype.setView = function (viewname) {
                     var page = this;
+                    viewname = viewname || "poster";
                     page.cleanViewClasses();
-                    var view = MoviesListPage.moviesViews[viewname] || MoviesListPage.moviesViews["wall"];
+                    var view = MoviesListPage.moviesViews[viewname] || MoviesListPage.moviesViews["poster"];
+                    page.element.classList.add("view-" + viewname);
+                    $('.item[view].selected', page.menu).removeClass("selected");
+                    $('.item[view="' + viewname + '"]', page.menu).addClass("selected");
+                    page.semanticzoom.listview.itemTemplate = view.template.element;
+                };
+                MoviesListPage.prototype.setGroup = function (groupname) {
+                    var page = this;
+                    groupname = groupname || "none";
+                    page.cleanGroupClasses();
+                    var view = MoviesListPage.moviesGroups[groupname] || MoviesListPage.moviesGroups["none"];
                     if (view.groupKind) {
                         page.semanticzoom.dataManager.field = view.groupField;
                         page.semanticzoom.dataManager.groupKind = view.groupKind;
@@ -33,8 +52,9 @@
                         page.semanticzoom.dataManager.groupKind = null;
                         page.semanticzoom.dataManager.field = null;
                     }
-                    page.element.classList.add("view-" + viewname);
-                    page.semanticzoom.listview.itemTemplate = view.template.element;
+                    $('.item[grouping].selected', page.menu).removeClass("selected");
+                    $('.item[grouping="' + groupname + '"]', page.menu).addClass("selected");
+                    page.element.classList.add("group-" + groupname);
                 };
                 MoviesListPage.prototype.cleanViewClasses = function () {
                     var page = this;
@@ -42,7 +62,14 @@
                         page.element.classList.remove("view-" + v);
                     }
                 };
+                MoviesListPage.prototype.cleanGroupClasses = function () {
+                    var page = this;
+                    for (var v in MoviesListPage.moviesGroups) {
+                        page.element.classList.remove("group-" + v);
+                    }
+                };
                 MoviesListPage.prototype.processed = function (element, options) {
+                    var _this = this;
                     var page = this;
                     if (options && options.genre) {
                         page.selectedGenre = options.genre;
@@ -53,8 +80,11 @@
                     page.itemsPromise = page.itemsPromise.then(function (data) {
                         page.movies = data.movies.movies;
                         page.genres = data.movieGenres.genres;
-                        page.setView("wall");
+                        page.setGroup();
+                        page.setView();
                         page.semanticzoom.dataManager.filter = function (movie) {
+                            if (page.filterByPlayed && movie.lastplayed)
+                                return false;
                             if (!page.selectedGenre)
                                 return true;
                             var hasgenre = movie.allgenres.indexOf(page.selectedGenre) >= 0;
@@ -70,6 +100,10 @@
                             });
                         };
                     });
+                    page.onlyUnplayed.onchange = function () {
+                        page.filterByPlayed = page.onlyUnplayed.checked;
+                        _this.semanticzoom.dataManager.refresh();
+                    };
                     $(element).on("click", ".win-groupheadercontainer", function () {
                         page.semanticzoom.semanticZoom.zoomedOut = true;
                     });
@@ -106,10 +140,20 @@
                     var page = this;
                     var w = page.element.clientWidth;
                     if (w) {
+                        var content = [];
                         var nbitems = ((w / 260) << 0) + 1;
                         var posterW = ((w / nbitems) << 0) - 1;
                         var posterH = (posterW / Kodi.App.PictureRatios.movieposter) << 0;
-                        page.itemsStyle.innerHTML = ".page-movieslist.view-wall .movie, .page-movieslist.view-alphabetic .movie, .page-movieslist.view-year .movie { width:" + posterW + "px; height:" + posterH + "px}";
+                        content.push(".page-movieslist.view-poster .movie { width:" + posterW + "px; height:" + posterH + "px}");
+                        var nbitems = ((w / 400) << 0) + 1;
+                        var posterW = ((w / nbitems) << 0) - 1;
+                        var posterH = (posterW / Kodi.App.PictureRatios.movieposter) << 0;
+                        content.push(".page-movieslist.view-bigposter .movie { width:" + posterW + "px; height:" + posterH + "px}");
+                        var nbitems = ((w / 1024) << 0) + 1;
+                        var posterW = ((w / nbitems) << 0) - 1;
+                        var posterH = (posterW / Kodi.App.PictureRatios.fanart) << 0;
+                        content.push(".page-movieslist.view-detailed .movie { width:" + posterW + "px; height:" + posterH + "px}");
+                        page.itemsStyle.innerHTML = content.join("\r\n");
                     }
                 };
                 MoviesListPage.prototype.showMenu = function () {
@@ -119,20 +163,32 @@
                     this.menu.classList.remove("visible");
                 };
                 MoviesListPage.url = "/pages/movies/list/movieslist.html";
-                MoviesListPage.moviesViews = {
-                    "wall": {
+                MoviesListPage.moviesGroups = {
+                    "none": {
                         groupKind: null,
-                        groupField: null,
-                        template: BtPo.Templates.movieposter
+                        groupField: null
                     },
                     "alphabetic": {
                         groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
-                        groupField: 'title',
-                        template: BtPo.Templates.movieposter
+                        groupField: 'title'
                     },
                     "year": {
                         groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
-                        groupField: 'year',
+                        groupField: 'year'
+                    },
+                    "studio": {
+                        groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
+                        groupField: 'studio'
+                    }
+                };
+                MoviesListPage.moviesViews = {
+                    "poster": {
+                        template: BtPo.Templates.movieposter
+                    },
+                    "bigposter": {
+                        template: BtPo.Templates.movieposter
+                    },
+                    "detailed": {
                         template: BtPo.Templates.movieposter
                     }
                 };

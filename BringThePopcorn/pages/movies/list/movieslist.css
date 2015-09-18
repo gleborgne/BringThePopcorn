@@ -37,13 +37,9 @@
 .page-movieslist .movieslist .movie .bg.pic.imageLoaded {
   opacity: 1;
 }
-.page-movieslist.view-wall .zoomedinlist.win-listview .win-gridlayout .win-container,
-.page-movieslist.view-alphabetic .zoomedinlist.win-listview .win-gridlayout .win-container,
-.page-movieslist.view-year .zoomedinlist.win-listview .win-gridlayout .win-container {
+.page-movieslist .zoomedinlist.win-listview .win-gridlayout .win-container {
   margin: 0 1px 1px 0;
 }
-.page-movieslist.view-wall .zoomedinlist.win-listview .win-vertical .win-gridlayout.win-surface,
-.page-movieslist.view-alphabetic .zoomedinlist.win-listview .win-vertical .win-gridlayout.win-surface,
-.page-movieslist.view-year .zoomedinlist.win-listview .win-vertical .win-gridlayout.win-surface {
+.page-movieslist .zoomedinlist.win-listview .win-vertical .win-gridlayout.win-surface {
   margin: 0;
 }

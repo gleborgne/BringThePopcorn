@@ -7,6 +7,7 @@ if (BtPo.debug) {
     WinJSContrib.UI.Pages.verboseTraces = true;
     WinJSContrib.Logs.configure("WinJSContrib.UI.Pages", { level: WinJSContrib.Logs.Levels.debug, appenders: ["DefaultConsole"] });
     WinJSContrib.Logs.configure("KDP.API", { level: WinJSContrib.Logs.Levels.info, appenders: ["DefaultConsole"] });
+    WinJSContrib.Logs.configure("KDP.API.Websocket", { level: WinJSContrib.Logs.Levels.debug, appenders: ["DefaultConsole"] });
 }
 var BtPo;
 (function (BtPo) {

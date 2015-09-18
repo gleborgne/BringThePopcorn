@@ -25,3 +25,8 @@ input[type=range]::-ms-track {
   color: transparent;
   border: none;
 }
+input[type=checkbox]::-ms-check {
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+}

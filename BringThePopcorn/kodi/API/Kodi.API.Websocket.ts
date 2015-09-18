@@ -1,5 +1,5 @@
 ﻿module Kodi.API.Websocket {
-    var logger = WinJSContrib.Logs.getLogger("KDP.API");
+    var logger = WinJSContrib.Logs.getLogger("KDP.API.Websocket");
     export var current;
 
     function socketOpen(evt) {

@@ -2,6 +2,7 @@
     export class DataLoaderControl {
         public static url = "/controls/loader/loader.html";
         element: HTMLElement;
+        message: HTMLElement;
         container: HTMLElement;
         content: HTMLElement;
 
@@ -40,6 +41,7 @@
                 return WinJS.Navigation.navigate("/pages/startup/startup.html", { clearNavigationHistory: true });
             }).then(function () {
                 WinJS.Application.queueEvent({ type: "ServerChanged" });
+                WinJS.UI.Animation.fadeOut(page.message);
                 page.container.classList.add('exit');
                 //return WinJSContrib.UI.afterTransition(page.container);
                 return WinJS.Promise.timeout(700);

@@ -35,6 +35,7 @@
                     return WinJS.Navigation.navigate("/pages/startup/startup.html", { clearNavigationHistory: true });
                 }).then(function () {
                     WinJS.Application.queueEvent({ type: "ServerChanged" });
+                    WinJS.UI.Animation.fadeOut(page.message);
                     page.container.classList.add('exit');
                     //return WinJSContrib.UI.afterTransition(page.container);
                     return WinJS.Promise.timeout(700);
