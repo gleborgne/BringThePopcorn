@@ -32,7 +32,7 @@ gulp.task('clean', function(cb) {
 gulp.task('Iconfont', function(){
   gulp.src(['basefont/*.svg'])
   	.pipe(iconfont({
-      fontName: 'kodipassion',
+      fontName: 'bringthepopcorn',
       //fixedWidth: true,
       normalize: true,
       centerHorizontally: true,
@@ -42,16 +42,16 @@ gulp.task('Iconfont', function(){
       gulp.src('font-template.css')
         .pipe(consolidate('lodash', {
           glyphs: codepoints,
-          fontName: 'kodipassion',
+          fontName: 'bringthepopcorn',
           fontPath: '',
-          className: 'kdp'
+          className: 'btpo'
         }))
         .pipe(bom())
-        .pipe(rename('kodipassion.css'))
-        .pipe(gulp.dest('../KodiPassion/dist/fonts/'));
+        .pipe(rename('bringthepopcorn.css'))
+        .pipe(gulp.dest('../BringThePopcorn/dist/fonts/'));
     })
 
-    .pipe(gulp.dest('../KodiPassion/dist/fonts/'));
+    .pipe(gulp.dest('../BringThePopcorn/dist/fonts/'));
 });
 
 

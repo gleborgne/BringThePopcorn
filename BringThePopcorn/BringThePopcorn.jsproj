@@ -70,6 +70,11 @@
     <Content Include="controls\reactplaylist\reactplaylist.js.map" />
     <Content Include="controls\reactplaylist\reactplaylist.jsx" />
     <Content Include="controls\reactplaylist\reactplaylist.less" />
+    <Content Include="dist\fonts\bringthepopcorn.css" />
+    <Content Include="dist\fonts\bringthepopcorn.eot" />
+    <Content Include="dist\fonts\bringthepopcorn.svg" />
+    <Content Include="dist\fonts\bringthepopcorn.ttf" />
+    <Content Include="dist\fonts\bringthepopcorn.woff" />
     <Content Include="images\logos\BringThePopcorn.svg" />
     <Content Include="images\logos\Popcorn.svg" />
     <Content Include="images\logos\PopcornRounded.svg" />
@@ -141,11 +146,6 @@
     <Content Include="css\items.less" />
     <Content Include="css\reset.less" />
     <Content Include="default.html" />
-    <Content Include="dist\fonts\kodipassion.css" />
-    <Content Include="dist\fonts\kodipassion.eot" />
-    <Content Include="dist\fonts\kodipassion.svg" />
-    <Content Include="dist\fonts\kodipassion.ttf" />
-    <Content Include="dist\fonts\kodipassion.woff" />
     <Content Include="dist\kodi.js" />
     <Content Include="dist\kodi.js.map" />
     <Content Include="dist\winjscontrib-custom.css" />

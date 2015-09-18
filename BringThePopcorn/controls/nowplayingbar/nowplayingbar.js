@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var NowPlayingBarControl = (function () {
@@ -22,7 +22,7 @@
                         var e = err;
                     });
                 };
-                KodiPassion.mapKodiApi(element);
+                BtPo.mapKodiApi(element);
                 return WinJS.Binding.processAll(this.element, Kodi.NowPlaying.current);
             };
             NowPlayingBarControl.prototype.toggleView = function () {
@@ -65,6 +65,6 @@
         })();
         UI.NowPlayingBarControl = NowPlayingBarControl;
         UI.NowPlayingSummary = WinJS.UI.Pages.define(NowPlayingBarControl.url, NowPlayingBarControl);
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=nowplayingbar.js.map

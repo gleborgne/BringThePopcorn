@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI.Pages {
+﻿module BtPo.UI.Pages {
 
     export class AlbumsArtistsPage {
         public static url = "/pages/albums/artists/artists.html";

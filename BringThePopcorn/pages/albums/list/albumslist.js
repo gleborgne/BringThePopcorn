@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var Pages;
@@ -73,7 +73,7 @@
                 };
                 AlbumsListPage.prototype.pickGenre = function () {
                     var page = this;
-                    KodiPassion.UI.GenrePicker.pick(page.genres).then(function (genre) {
+                    BtPo.UI.GenrePicker.pick(page.genres).then(function (genre) {
                         if (genre) {
                             if (genre === "all") {
                                 page.selectedGenre = null;
@@ -106,17 +106,17 @@
                     "wall": {
                         groupKind: null,
                         groupField: null,
-                        template: KodiPassion.Templates.album
+                        template: BtPo.Templates.album
                     },
                     "alphabetic": {
                         groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                         groupField: 'title',
-                        template: KodiPassion.Templates.album
+                        template: BtPo.Templates.album
                     },
                     "year": {
                         groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                         groupField: 'year',
-                        template: KodiPassion.Templates.album
+                        template: BtPo.Templates.album
                     }
                 };
                 return AlbumsListPage;
@@ -124,6 +124,6 @@
             Pages.AlbumsListPage = AlbumsListPage;
             WinJS.UI.Pages.define(AlbumsListPage.url, AlbumsListPage);
         })(Pages = UI.Pages || (UI.Pages = {}));
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=albumslist.js.map

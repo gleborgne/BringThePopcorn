@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI {
+﻿module BtPo.UI {
 
     export class RemoteControllerControl {
         public static url = "/controls/remote/remote.html";
@@ -15,7 +15,7 @@
         profilesFlyout: WinJS.UI.Flyout;
 
         processed(element, options) {
-            KodiPassion.mapKodiApi(element);
+            BtPo.mapKodiApi(element);
             this.loadLanguages();
             this.loadSubtitles();
             this.rangeVolume.onchange = () => {
@@ -87,7 +87,7 @@
 
         shutdown() {
             this.shutdownFlyout.hide();
-            WinJSContrib.Alerts.messageBox({ content: "This will turn off your media server. After a few seconds, this application Kodi Passion will not be able to reach your media server any more. \r\n\r\nDo you want to proceed ?", title: 'Shutdown media server ?', commands: [{ label: 'Yes' }, { label: 'No', isDefault: true }] }).done(function (c) {
+            WinJSContrib.Alerts.messageBox({ content: "This will turn off your media server. After a few seconds, this application will not be able to reach your media server any more. \r\n\r\nDo you want to proceed ?", title: 'Shutdown media server ?', commands: [{ label: 'Yes' }, { label: 'No', isDefault: true }] }).done(function (c) {
                 if (c.label == 'Yes')
                     Kodi.API.System.shutdown().done(function () {
                         WinJS.Navigation.navigate("/pages/startup/startup.html");

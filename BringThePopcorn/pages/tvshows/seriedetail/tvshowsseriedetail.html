@@ -22,16 +22,16 @@
         <div class="episode">
             <div class="poster">
                 <div class="bg" data-win-bind="display: thumbnail Kodi.Utils.toThumbnailBg"></div>
-                <div class="played kdp-check" data-win-bind="display: lastplayed WinJSContrib.Bindings.showIf"></div>
+                <div class="played btpo-check" data-win-bind="display: lastplayed WinJSContrib.Bindings.showIf"></div>
             </div>
             <div class="desc">
                 <div class="label"><span data-win-bind="innerText: label"></span> (<span data-win-bind="innerText: runtime Kodi.Utils.toDuration"></span>)</div>
                 <div class="plot" data-win-bind="innerText: plot"></div>
             </div>
             <div class="actions">
-                <button class="btndownload kdp-download blink" style="display:none"></button>
-                <button class="btnplaylocal kdp-playlocal blink" style="display:none"></button>
-                <button class="btnplay kdp-play blink"></button>
+                <button class="btndownload btpo-download blink" style="display:none"></button>
+                <button class="btnplaylocal btpo-playlocal blink" style="display:none"></button>
+                <button class="btnplay btpo-play blink"></button>
             </div>
         </div>
     </div>
@@ -47,13 +47,13 @@
             </div>
             <!--<div class="actions">
                 <button member="btnDownloadMovie" tap="downloadMovie" style="display: none">
-                    <i class="kdp-download"></i>
+                    <i class="btpo-download"></i>
                 </button>
                 <button member="btnPlayMovieLocal" data-win-options="{ kind: 'round' }" tap="playMovieLocal" style="display: none">
-                    <i class="kdp-play"></i>
+                    <i class="btpo-play"></i>
                 </button>
                 <button member="btnPlayMovie" data-win-options="{ kind: 'round' }" tap="playMovie">
-                    <i class="kdp-play"></i>
+                    <i class="btpo-play"></i>
                 </button>
             </div>-->
         </header>

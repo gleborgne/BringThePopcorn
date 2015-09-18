@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI.Pages {
+﻿module BtPo.UI.Pages {
                 
     export class HomePage {
         public static url = "/pages/home/home.html";
@@ -142,7 +142,7 @@
                 var container = document.createDocumentFragment();
                 var p = [];
                 data.recentMusic.albums.slice(0, 12).forEach((a) => {
-                    p.push(KodiPassion.Templates.album.render(a).then((rendered) => {
+                    p.push(BtPo.Templates.album.render(a).then((rendered) => {
                         container.appendChild(rendered);
                         WinJSContrib.UI.tap(rendered, function () {
                             WinJS.Navigation.navigate("/pages/albums/detail/albumsdetail.html", { album: a, navigateStacked: true });
@@ -203,7 +203,7 @@
 
         moviesGenres() {
             if (this.data && this.data.movieGenres && this.data.movieGenres.genres) {
-                KodiPassion.UI.GenrePicker.pick(this.data.movieGenres.genres).then(function (genre) {
+                BtPo.UI.GenrePicker.pick(this.data.movieGenres.genres).then(function (genre) {
                     if (genre) {
                         if (genre === "all") {
                             WinJS.Navigation.navigate("/pages/movies/list/movieslist.html");
@@ -217,7 +217,7 @@
 
         tvshowsGenres() {
             if (this.data && this.data.tvshowGenres && this.data.tvshowGenres.genres) {
-                KodiPassion.UI.GenrePicker.pick(this.data.tvshowGenres.genres).then(function (genre) {
+                BtPo.UI.GenrePicker.pick(this.data.tvshowGenres.genres).then(function (genre) {
                     if (genre) {
                         if (genre === "all") {
                             WinJS.Navigation.navigate("/pages/tvshows/list/tvshowslist.html");
@@ -231,7 +231,7 @@
 
         albumsGenres() {
             if (this.data && this.data.tvshowGenres && this.data.tvshowGenres.genres) {
-                KodiPassion.UI.GenrePicker.pick(this.data.musicGenres.genres).then(function (genre) {
+                BtPo.UI.GenrePicker.pick(this.data.musicGenres.genres).then(function (genre) {
                     if (genre) {
                         if (genre === "all") {
                             WinJS.Navigation.navigate("/pages/albums/list/albumslist.html");

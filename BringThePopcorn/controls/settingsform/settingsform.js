@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var SettingsFormControl = (function () {
@@ -47,6 +47,6 @@
         })();
         UI.SettingsFormControl = SettingsFormControl;
         UI.SettingsForm = WinJS.UI.Pages.define(SettingsFormControl.url, SettingsFormControl);
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=settingsform.js.map

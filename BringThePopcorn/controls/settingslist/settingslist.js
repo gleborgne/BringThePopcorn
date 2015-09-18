@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var SettingsListControl = (function () {
@@ -35,7 +35,7 @@
                                 return Kodi.API.testServerSetting(setting).then(function (res) {
                                     _this.clearIntervals();
                                     Kodi.API.currentSettings = setting;
-                                    return KodiPassion.UI.DataLoader.showLoader(true);
+                                    return BtPo.UI.DataLoader.showLoader(true);
                                 }, function (err) {
                                     console.error(err);
                                 });
@@ -59,7 +59,7 @@
                             return Kodi.API.testServerSetting(setting).then(function (res) {
                                 _this.clearIntervals();
                                 Kodi.API.currentSettings = setting;
-                                return KodiPassion.UI.DataLoader.showLoader(true);
+                                return BtPo.UI.DataLoader.showLoader(true);
                             }, function (err) {
                                 console.error(err);
                                 return WinJS.Promise.wrapError(err);
@@ -116,6 +116,6 @@
         })();
         UI.SettingsListControl = SettingsListControl;
         UI.SettingsList = WinJS.UI.Pages.define(SettingsListControl.url, SettingsListControl);
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=settingslist.js.map

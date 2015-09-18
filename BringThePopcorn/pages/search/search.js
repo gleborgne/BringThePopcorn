@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var Pages;
@@ -62,7 +62,7 @@
                     return WinJSContrib.Promise.waterfall(searchResult, function (s) {
                         s.label = s.item.label;
                         s.thumbnail = s.item.thumbnail;
-                        return KodiPassion.Templates.search.render(s).then(function (rendered) {
+                        return BtPo.Templates.search.render(s).then(function (rendered) {
                             _this.resultItems.appendChild(rendered);
                             WinJSContrib.UI.tap(rendered, function () {
                                 return _this.data.then(function (data) {
@@ -98,6 +98,6 @@
             Pages.SearchPage = SearchPage;
             WinJS.UI.Pages.define(SearchPage.url, SearchPage);
         })(Pages = UI.Pages || (UI.Pages = {}));
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=search.js.map

@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI.Pages {
+﻿module BtPo.UI.Pages {
 
     export class AlbumsDetailPage {
         public static url = "/pages/albums/detail/albumsdetail.html";
@@ -23,13 +23,13 @@
                 var p = [];
                 var elts = [];
                 songs.forEach((s) => {
-                    p.push(KodiPassion.Templates.song.render(s).then((rendered) => {
+                    p.push(BtPo.Templates.song.render(s).then((rendered) => {
                         rendered.style.opacity = "0";
                         elts.push(rendered);
                         container.appendChild(rendered);
 
-                        var btnplay = rendered.querySelector(".kdp-play");
-                        var btnadd = rendered.querySelector(".kdp-add");
+                        var btnplay = rendered.querySelector(".btpo-play");
+                        var btnadd = rendered.querySelector(".btpo-add");
 
                         WinJSContrib.UI.tap(btnplay, () => {
                             return Kodi.API.Music.playSong(s.songid);

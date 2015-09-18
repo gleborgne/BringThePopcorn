@@ -99,13 +99,13 @@
   margin: 0;
   background-color: black;
 }
-.nowplayingbar .actions .btntoggle .kdp-chevron-down {
+.nowplayingbar .actions .btntoggle .btpo-chevron-down {
   display: none;
 }
-.nowplaying-expanded .nowplayingbar .actions .btntoggle .kdp-chevron-down {
+.nowplaying-expanded .nowplayingbar .actions .btntoggle .btpo-chevron-down {
   display: inline;
 }
-.nowplaying-expanded .nowplayingbar .actions .btntoggle .kdp-chevron-up {
+.nowplaying-expanded .nowplayingbar .actions .btntoggle .btpo-chevron-up {
   display: none;
 }
 @media screen and (max-width: 800px) {

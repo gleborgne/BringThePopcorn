@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI {
+﻿module BtPo.UI {
 
     export class SettingsListControl {
         public static url = "/controls/settingslist/settingslist.html";
@@ -40,7 +40,7 @@
                             return Kodi.API.testServerSetting(setting).then((res) => {
                                 this.clearIntervals();
                                 Kodi.API.currentSettings = setting;
-                                return KodiPassion.UI.DataLoader.showLoader(true);
+                                return BtPo.UI.DataLoader.showLoader(true);
                             }, function (err) {
                                 console.error(err);
                             });
@@ -70,7 +70,7 @@
                         return Kodi.API.testServerSetting(setting).then((res) => {
                             this.clearIntervals();
                             Kodi.API.currentSettings = setting;
-                            return KodiPassion.UI.DataLoader.showLoader(true);
+                            return BtPo.UI.DataLoader.showLoader(true);
                         }, function (err) {
                             console.error(err);
                             return WinJS.Promise.wrapError(err);

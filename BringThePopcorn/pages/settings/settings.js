@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var Pages;
@@ -18,6 +18,6 @@
             Pages.SettingsPage = SettingsPage;
             WinJS.UI.Pages.define(SettingsPage.url, SettingsPage);
         })(Pages = UI.Pages || (UI.Pages = {}));
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=settings.js.map

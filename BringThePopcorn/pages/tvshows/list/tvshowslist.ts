@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI.Pages {
+﻿module BtPo.UI.Pages {
 
     export class TvShowsListPage {
         public static url = "/pages/tvshows/list/tvshowslist.html";
@@ -100,7 +100,7 @@
 
         pickGenre() {
             var page = this;
-            KodiPassion.UI.GenrePicker.pick(page.genres).then(function (genre) {
+            BtPo.UI.GenrePicker.pick(page.genres).then(function (genre) {
                 if (genre) {
                     if (genre === "all") {
                         page.selectedGenre = null;

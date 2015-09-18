@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>Bring the popcorn</title>
     <!-- WinJS references -->
-    <link href="/dist/fonts/kodipassion.css" rel="stylesheet" />
+    <link href="/dist/fonts/bringthepopcorn.css" rel="stylesheet" />
     <link href="/fonts/cooperhewitt/CooperHewitt.css" rel="stylesheet" />
     <link href="/scripts/WinJS/css/ui-dark.css" rel="stylesheet" />
     <script src="/scripts/jquery-2.1.4.js"></script>
@@ -36,7 +36,7 @@
         
     </script>
 
-    <!-- KodiPassion references -->
+    <!-- BringThePopcorn references -->
     <script src="/controls/menu/menu.js"></script>
     <script src="/controls/nowplayingbar/nowplayingbar.js"></script>
     <script src="/controls/loader/loader.js"></script>
@@ -61,18 +61,18 @@
                 <div id="pageshost" data-win-control="WinJSContrib.UI.PageControlNavigator" data-win-options="{home: '/pages/home/home.html'}"></div>
             </div>
             <div id="nowplaying">
-                <div id="nowplayingbar" data-win-control="KodiPassion.UI.NowPlayingSummary"></div>
+                <div id="nowplayingbar" data-win-control="BtPo.UI.NowPlayingSummary"></div>
                 <div id="nowplayingcontent">
                     <div class="menubar">
                         <div class="menu selected" target="nowplaying-remote">remote</div>
                         <div class="menu" target="nowplaying-playlist">playing</div>
                     </div>
-                    <div id="nowplaying-playlist" class="panel playlist" data-win-control="KodiPassion.UI.PlayingContent"></div>
-                    <div id="nowplaying-remote" class="panel remote selected" data-win-control="KodiPassion.UI.RemoteController"></div>
+                    <div id="nowplaying-playlist" class="panel playlist" data-win-control="BtPo.UI.PlayingContent"></div>
+                    <div id="nowplaying-remote" class="panel remote selected" data-win-control="BtPo.UI.RemoteController"></div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="menu" data-win-control="KodiPassion.UI.MainMenu"></div>
+    <div id="menu" data-win-control="BtPo.UI.MainMenu"></div>
 </body>
 </html>

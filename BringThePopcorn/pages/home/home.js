@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var Pages;
@@ -133,7 +133,7 @@
                         var container = document.createDocumentFragment();
                         var p = [];
                         data.recentMusic.albums.slice(0, 12).forEach(function (a) {
-                            p.push(KodiPassion.Templates.album.render(a).then(function (rendered) {
+                            p.push(BtPo.Templates.album.render(a).then(function (rendered) {
                                 container.appendChild(rendered);
                                 WinJSContrib.UI.tap(rendered, function () {
                                     WinJS.Navigation.navigate("/pages/albums/detail/albumsdetail.html", { album: a, navigateStacked: true });
@@ -186,7 +186,7 @@
                 };
                 HomePage.prototype.moviesGenres = function () {
                     if (this.data && this.data.movieGenres && this.data.movieGenres.genres) {
-                        KodiPassion.UI.GenrePicker.pick(this.data.movieGenres.genres).then(function (genre) {
+                        BtPo.UI.GenrePicker.pick(this.data.movieGenres.genres).then(function (genre) {
                             if (genre) {
                                 if (genre === "all") {
                                     WinJS.Navigation.navigate("/pages/movies/list/movieslist.html");
@@ -200,7 +200,7 @@
                 };
                 HomePage.prototype.tvshowsGenres = function () {
                     if (this.data && this.data.tvshowGenres && this.data.tvshowGenres.genres) {
-                        KodiPassion.UI.GenrePicker.pick(this.data.tvshowGenres.genres).then(function (genre) {
+                        BtPo.UI.GenrePicker.pick(this.data.tvshowGenres.genres).then(function (genre) {
                             if (genre) {
                                 if (genre === "all") {
                                     WinJS.Navigation.navigate("/pages/tvshows/list/tvshowslist.html");
@@ -214,7 +214,7 @@
                 };
                 HomePage.prototype.albumsGenres = function () {
                     if (this.data && this.data.tvshowGenres && this.data.tvshowGenres.genres) {
-                        KodiPassion.UI.GenrePicker.pick(this.data.musicGenres.genres).then(function (genre) {
+                        BtPo.UI.GenrePicker.pick(this.data.musicGenres.genres).then(function (genre) {
                             if (genre) {
                                 if (genre === "all") {
                                     WinJS.Navigation.navigate("/pages/albums/list/albumslist.html");
@@ -235,6 +235,6 @@
             Pages.HomePage = HomePage;
             WinJS.UI.Pages.define(HomePage.url, HomePage);
         })(Pages = UI.Pages || (UI.Pages = {}));
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=home.js.map

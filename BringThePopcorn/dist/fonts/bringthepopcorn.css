@@ -1,0 +1,110 @@
+﻿/*
+this is a template for icon fonts
+ */
+
+ @font-face {
+  font-family: "bringthepopcorn";
+  src: url('bringthepopcorn.eot');
+  src: url('bringthepopcorn.eot?#iefix') format('eot'),
+    url('bringthepopcorn.woff') format('woff'),
+    url('bringthepopcorn.ttf') format('truetype'),
+    url('bringthepopcorn.svg#bringthepopcorn') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.btpo-add:before,
+.btpo-artist:before,
+.btpo-check:before,
+.btpo-chevron-down:before,
+.btpo-chevron-left:before,
+.btpo-chevron-right:before,
+.btpo-chevron-up:before,
+.btpo-close:before,
+.btpo-connect:before,
+.btpo-download:before,
+.btpo-edit:before,
+.btpo-eject:before,
+.btpo-favourites:before,
+.btpo-file:before,
+.btpo-forward:before,
+.btpo-home:before,
+.btpo-info:before,
+.btpo-language:before,
+.btpo-menu:before,
+.btpo-movie:before,
+.btpo-music:before,
+.btpo-pause:before,
+.btpo-photo:before,
+.btpo-play:before,
+.btpo-playlocal:before,
+.btpo-power:before,
+.btpo-refresh:before,
+.btpo-remotecontrol:before,
+.btpo-rewind:before,
+.btpo-save:before,
+.btpo-search:before,
+.btpo-settings:before,
+.btpo-share:before,
+.btpo-speaker-mute:before,
+.btpo-speaker-off:before,
+.btpo-speaker-on:before,
+.btpo-stop:before,
+.btpo-subtitle:before,
+.btpo-television:before,
+.btpo-wakeup:before,
+.btpo-zoom-minus:before,
+.btpo-zoom-plus:before {
+  font-family: "bringthepopcorn";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+.btpo-add:before { content: "\E001" }
+.btpo-artist:before { content: "\E002" }
+.btpo-check:before { content: "\E003" }
+.btpo-chevron-down:before { content: "\E004" }
+.btpo-chevron-left:before { content: "\E005" }
+.btpo-chevron-right:before { content: "\E006" }
+.btpo-chevron-up:before { content: "\E007" }
+.btpo-close:before { content: "\E008" }
+.btpo-connect:before { content: "\E009" }
+.btpo-download:before { content: "\E00A" }
+.btpo-edit:before { content: "\E00B" }
+.btpo-eject:before { content: "\E00C" }
+.btpo-favourites:before { content: "\E00D" }
+.btpo-file:before { content: "\E00E" }
+.btpo-forward:before { content: "\E00F" }
+.btpo-home:before { content: "\E010" }
+.btpo-info:before { content: "\E011" }
+.btpo-language:before { content: "\E012" }
+.btpo-menu:before { content: "\E013" }
+.btpo-movie:before { content: "\E014" }
+.btpo-music:before { content: "\E015" }
+.btpo-pause:before { content: "\E016" }
+.btpo-photo:before { content: "\E017" }
+.btpo-play:before { content: "\E018" }
+.btpo-playlocal:before { content: "\E019" }
+.btpo-power:before { content: "\E01A" }
+.btpo-refresh:before { content: "\E01B" }
+.btpo-remotecontrol:before { content: "\E01C" }
+.btpo-rewind:before { content: "\E01D" }
+.btpo-save:before { content: "\E01E" }
+.btpo-search:before { content: "\E01F" }
+.btpo-settings:before { content: "\E020" }
+.btpo-share:before { content: "\E021" }
+.btpo-speaker-mute:before { content: "\E022" }
+.btpo-speaker-off:before { content: "\E023" }
+.btpo-speaker-on:before { content: "\E024" }
+.btpo-stop:before { content: "\E025" }
+.btpo-subtitle:before { content: "\E026" }
+.btpo-television:before { content: "\E027" }
+.btpo-wakeup:before { content: "\E028" }
+.btpo-zoom-minus:before { content: "\E029" }
+.btpo-zoom-plus:before { content: "\E02A" }

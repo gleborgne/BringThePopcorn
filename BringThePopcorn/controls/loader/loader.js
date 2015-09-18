@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var DataLoaderControl = (function () {
@@ -58,9 +58,9 @@
             if (transitionIn)
                 e.style.opacity = '0';
             document.body.appendChild(e);
-            var loader = new KodiPassion.UI.DataLoader(e, { transitionIn: transitionIn, startupArgs: startupArgs });
+            var loader = new BtPo.UI.DataLoader(e, { transitionIn: transitionIn, startupArgs: startupArgs });
             currentLoader = loader;
         };
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=loader.js.map

@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI.Pages {
+﻿module BtPo.UI.Pages {
 
     export class SettingsServerDetailPage {
         public static url = "/pages/settings/serverdetail/serverdetail.html";

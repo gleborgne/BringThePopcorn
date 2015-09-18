@@ -1,9 +1,9 @@
-﻿module KodiPassion.UI.Pages{
+﻿module BtPo.UI.Pages{
     export class SettingsPage {
         public static url = "/pages/settings/settings.html";
 
         availablesettings: HTMLElement;
-        serversettings: KodiPassion.UI.SettingsListControl;
+        serversettings: BtPo.UI.SettingsListControl;
 
         processed(element, options) {
         }

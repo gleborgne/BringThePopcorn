@@ -8,26 +8,27 @@ interface JQuery {
 }
 
 declare var dynamics: any;
-module KodiPassion {
+
+module BtPo {
     export var debug = true;
 }
 
 WinJSContrib.DataContainer.WinRTFilesContainer.makeCurrent();
 
-if (KodiPassion.debug) {
+if (BtPo.debug) {
     WinJSContrib.UI.Pages.verboseTraces = true;
     WinJSContrib.Logs.configure("WinJSContrib.UI.Pages", { level: WinJSContrib.Logs.Levels.debug, appenders: ["DefaultConsole"] });
     WinJSContrib.Logs.configure("KDP.API", { level: WinJSContrib.Logs.Levels.info, appenders: ["DefaultConsole"] });
 }
 
-module KodiPassion.Templates {
+module BtPo.Templates {
     export var search = new WinJS.Binding.Template(null, { href: "/templates/searchitem.html", extractChild: true });
     export var album = new WinJS.Binding.Template(null, { href: "/templates/album.html", extractChild: true });
     export var song = new WinJS.Binding.Template(null, { href: "/templates/song.html", extractChild: true });
     export var movieposter = new WinJS.Binding.Template(null, { href: "/templates/movieposter.html", extractChild: true });
 }
 
-module KodiPassion {
+module BtPo {
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
 
@@ -158,7 +159,7 @@ module KodiPassion {
             if (currentSetting && currentSetting.host) {
                 return Kodi.API.testServerSetting(currentSetting).then(function (p) {
                     Kodi.API.currentSettings = currentSetting;
-                    return KodiPassion.UI.DataLoader.showLoader(false, args);
+                    return BtPo.UI.DataLoader.showLoader(false, args);
                 }, function (err) {
                     return WinJS.Navigation.navigate("/pages/startup/startup.html");
                 });

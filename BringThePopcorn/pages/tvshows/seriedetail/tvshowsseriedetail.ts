@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI.Pages {
+﻿module BtPo.UI.Pages {
 
     export class TvShowsDetailPage {
         public static url = "/pages/tvshows/seriedetail/tvshowsseriedetail.html";

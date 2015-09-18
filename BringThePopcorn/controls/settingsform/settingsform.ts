@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI{
+﻿module BtPo.UI{
     export class SettingsFormControl {
         public static url = "/controls/settingsform/settingsform.html";
 

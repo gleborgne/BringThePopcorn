@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI.Pages {
+﻿module BtPo.UI.Pages {
 
     export class AlbumsListPage {
         public static url = "/pages/albums/list/albumslist.html";
@@ -17,17 +17,17 @@
             "wall": {
                 groupKind: null,
                 groupField: null,
-                template: KodiPassion.Templates.album
+                template: BtPo.Templates.album
             },
             "alphabetic": {
                 groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                 groupField: 'title',
-                template: KodiPassion.Templates.album
+                template: BtPo.Templates.album
             },
             "year": {
                 groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                 groupField: 'year',
-                template: KodiPassion.Templates.album
+                template: BtPo.Templates.album
             }
         }
 
@@ -106,7 +106,7 @@
 
         pickGenre() {
             var page = this;
-            KodiPassion.UI.GenrePicker.pick(page.genres).then(function (genre) {
+            BtPo.UI.GenrePicker.pick(page.genres).then(function (genre) {
                 if (genre) {
                     if (genre === "all") {
                         page.selectedGenre = null;

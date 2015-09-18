@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var Pages;
@@ -83,7 +83,7 @@
                 };
                 MoviesListPage.prototype.pickGenre = function () {
                     var page = this;
-                    KodiPassion.UI.GenrePicker.pick(page.genres).then(function (genre) {
+                    BtPo.UI.GenrePicker.pick(page.genres).then(function (genre) {
                         if (genre) {
                             if (genre === "all") {
                                 page.selectedGenre = null;
@@ -123,17 +123,17 @@
                     "wall": {
                         groupKind: null,
                         groupField: null,
-                        template: KodiPassion.Templates.movieposter
+                        template: BtPo.Templates.movieposter
                     },
                     "alphabetic": {
                         groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                         groupField: 'title',
-                        template: KodiPassion.Templates.movieposter
+                        template: BtPo.Templates.movieposter
                     },
                     "year": {
                         groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
                         groupField: 'year',
-                        template: KodiPassion.Templates.movieposter
+                        template: BtPo.Templates.movieposter
                     }
                 };
                 return MoviesListPage;
@@ -141,6 +141,6 @@
             Pages.MoviesListPage = MoviesListPage;
             WinJS.UI.Pages.define(MoviesListPage.url, MoviesListPage);
         })(Pages = UI.Pages || (UI.Pages = {}));
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=movieslist.js.map

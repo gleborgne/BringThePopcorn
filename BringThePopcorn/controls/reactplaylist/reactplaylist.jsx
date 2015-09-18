@@ -1,5 +1,5 @@
-﻿var KodiPassion = KodiPassion || {};
-KodiPassion.UI = KodiPassion.UI || {};
+﻿var BtPo = BtPo || {};
+BtPo.UI = BtPo.UI || {};
 (function () {
     'use strict';
     var CSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -16,8 +16,8 @@ KodiPassion.UI = KodiPassion.UI || {};
                     </div>
                 </div>
                 <div className="actions">
-                    <button className="blink btnplay kdp-play"></button>
-                    <button className="blink btnremove kdp-close"></button>
+                    <button className="blink btnplay btpo-play"></button>
+                    <button className="blink btnremove btpo-close"></button>
                 </div>
             </div>);
         }
@@ -148,5 +148,5 @@ KodiPassion.UI = KodiPassion.UI || {};
         }
     }
 
-    KodiPassion.UI.ReactPlayListControl = ReactPlayListControl;
+    BtPo.UI.ReactPlayListControl = ReactPlayListControl;
 })();

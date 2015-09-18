@@ -2,11 +2,11 @@
     var DataSources: any;
 }
 
-declare module KodiPassion.UI {
+declare module BtPo.UI {
     var GenrePicker: any;
 }
 
-module KodiPassion.UI.Pages {
+module BtPo.UI.Pages {
     export class MoviesListPage {
         public static url = "/pages/movies/list/movieslist.html";
 
@@ -24,17 +24,17 @@ module KodiPassion.UI.Pages {
             "wall": {
                 groupKind: null,
                 groupField: null,
-                template: KodiPassion.Templates.movieposter
+                template: BtPo.Templates.movieposter
             },
             "alphabetic": {
                 groupKind: WinJSContrib.UI.DataSources.Grouping.alphabetic,
                 groupField: 'title',
-                template: KodiPassion.Templates.movieposter
+                template: BtPo.Templates.movieposter
             },
             "year": {
                 groupKind: WinJSContrib.UI.DataSources.Grouping.byField,
                 groupField: 'year',
-                template: KodiPassion.Templates.movieposter
+                template: BtPo.Templates.movieposter
             }
         }
 
@@ -123,7 +123,7 @@ module KodiPassion.UI.Pages {
 
         pickGenre() {
             var page = this;
-            KodiPassion.UI.GenrePicker.pick(page.genres).then(function (genre) {
+            BtPo.UI.GenrePicker.pick(page.genres).then(function (genre) {
                 if (genre) {
                     if (genre === "all") {
                         page.selectedGenre = null;

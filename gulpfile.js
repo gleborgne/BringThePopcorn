@@ -32,7 +32,7 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('styles', function() {
-	return gulp.src(['**/*.less', '!**/bin/**/*.less', '!**/bld/**/*.less'], { cwd: 'KodiPassion',  base : '.' })
+	return gulp.src(['**/*.less', '!**/bin/**/*.less', '!**/bld/**/*.less'], { cwd: 'BringThePopcorn',  base : '.' })
 	.pipe(plumber({errorHandler: onError}))
 	.pipe(less())
 	.pipe(bom())
@@ -48,15 +48,15 @@ var tsKodiProject = ts.createProject({
 
 gulp.task('compilekodi', function () {
     var tsResult = gulp.src([
-		'KodiPassion/typings/**/*.d.ts',
-		'KodiPassion/Kodi/**/*.ts',
+		'BringThePopcorn/typings/**/*.d.ts',
+		'BringThePopcorn/Kodi/**/*.ts',
     ], { base: '.' })
 	.pipe(plumber({ errorHandler: onError }))
 	.pipe(sourcemaps.init())
 	.pipe(ts(tsKodiProject));
 
     return merge([
-        tsResult.dts.pipe(flatten()).pipe(concat('kodi.d.ts')).pipe(bom()).pipe(gulp.dest('KodiPassion/dist')),
+        tsResult.dts.pipe(flatten()).pipe(concat('kodi.d.ts')).pipe(bom()).pipe(gulp.dest('BringThePopcorn/dist')),
         tsResult.js
             .pipe(concat('kodi.js'))
         	.pipe(sourcemaps.write(".",{
@@ -72,7 +72,7 @@ gulp.task('compilekodi', function () {
                 }
             }))
             .pipe(bom())
-        	.pipe(gulp.dest('KodiPassion/dist'))
+        	.pipe(gulp.dest('BringThePopcorn/dist'))
     ]);
 });
 
@@ -101,7 +101,7 @@ gulp.task('compilewinjscontrib', function () {
             'scripts/winjscontrib/js/winjscontrib.ui.aspectratio.js',
             'scripts/winjscontrib/js/winjscontrib.ui.visualstate.js',
             
-        ], { base: '.', cwd: 'KodiPassion' })
+        ], { base: '.', cwd: 'BringThePopcorn' })
 	    .pipe(plumber({ errorHandler: onError }))
 	    .pipe(sourcemaps.init())
         .pipe(uglify())
@@ -119,7 +119,7 @@ gulp.task('compilewinjscontrib', function () {
             }
         }))
         .pipe(bom())
-        .pipe(gulp.dest('KodiPassion/dist')),
+        .pipe(gulp.dest('BringThePopcorn/dist')),
 
         gulp.src([
 		    'scripts/winjscontrib/css/winjscontrib.ui.css',
@@ -128,7 +128,7 @@ gulp.task('compilewinjscontrib', function () {
             'scripts/winjscontrib/css/winjscontrib.ui.globalprogress.css',
             'scripts/winjscontrib/css/winjscontrib.ui.hamburger.css',
             'scripts/winjscontrib/css/winjscontrib.ui.elasticbutton.css',
-        ], { base: '.', cwd: 'KodiPassion' })
+        ], { base: '.', cwd: 'BringThePopcorn' })
 	    .pipe(plumber({ errorHandler: onError }))
 	    .pipe(sourcemaps.init())
         .pipe(minifycss())
@@ -146,7 +146,7 @@ gulp.task('compilewinjscontrib', function () {
             }
         }))
         .pipe(bom())
-        .pipe(gulp.dest('KodiPassion/dist'))
+        .pipe(gulp.dest('BringThePopcorn/dist'))
     ]);
 });
 
@@ -160,15 +160,15 @@ var tsPagesProject = ts.createProject({
 
 gulp.task('compilepages', function () {
     var tsResult = gulp.src([
-		'KodiPassion/typings/**/*.d.ts',
-		'KodiPassion/dist/kodi.d.ts',
-        'KodiPassion/js/**/*.ts',
-		'KodiPassion/pages/**/*.ts',
-        'KodiPassion/controls/**/*.ts',
+		'BringThePopcorn/typings/**/*.d.ts',
+		'BringThePopcorn/dist/kodi.d.ts',
+        'BringThePopcorn/js/**/*.ts',
+		'BringThePopcorn/pages/**/*.ts',
+        'BringThePopcorn/controls/**/*.ts',
     ], { base: '.' })
 	.pipe(plumber({ errorHandler: onError }))
 	.pipe(sourcemaps.init())
-	.pipe(ts(tsKodiProject));
+	.pipe(ts(tsPagesProject));
 
     return merge([
         tsResult.js
@@ -210,12 +210,18 @@ gulp.task('compilejsx', function () {
         .pipe(gulp.dest(''))
 });
 
-gulp.task('watch', function() {
-    gulp.watch(['KodiPassion/**/*.less', '!KodiPassion/**/bin/**/*.less', '!KodiPassion/**/bld/**/*.less'], ['styles']);
-    gulp.watch(['KodiPassion/kodi/**/*.ts'], ['compilekodi']);
-    gulp.watch(['KodiPassion/pages/**/*.ts', 'KodiPassion/controls/**/*.ts', 'KodiPassion/js/**/*.ts'], ['compilepages']);
-    gulp.watch(['KodiPassion/pages/**/*.jsx', 'KodiPassion/controls/**/*.jsx', 'KodiPassion/js/**/*.jsx'], ['compilejsx']);
+gulp.task('buildpages', ['compilepages', 'compilejsx', 'compilekodi'], function () {
 });
 
-gulp.task('default', ['clean', 'styles'], function() {
+gulp.task('build', ['clean', 'styles', 'compilewinjscontrib', 'buildpages'], function () {
+});
+
+gulp.task('watch', function() {
+    gulp.watch(['BringThePopcorn/**/*.less', '!BringThePopcorn/**/bin/**/*.less', '!BringThePopcorn/**/bld/**/*.less'], ['styles']);
+    gulp.watch(['BringThePopcorn/kodi/**/*.ts'], ['compilekodi']);
+    gulp.watch(['BringThePopcorn/pages/**/*.ts', 'BringThePopcorn/controls/**/*.ts', 'BringThePopcorn/js/**/*.ts'], ['compilepages']);
+    gulp.watch(['BringThePopcorn/pages/**/*.jsx', 'BringThePopcorn/controls/**/*.jsx', 'BringThePopcorn/js/**/*.jsx'], ['compilejsx']);
+});
+
+gulp.task('default', ['build'], function() {
 });

@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI.Pages {
+﻿module BtPo.UI.Pages {
     WinJSContrib.Search.workerPath = "/scripts/winjscontrib/js/winjscontrib.search.worker.js";
 
     export class SearchPage {
@@ -64,7 +64,7 @@
             return WinJSContrib.Promise.waterfall(searchResult, (s) => {
                 s.label = s.item.label;
                 s.thumbnail = s.item.thumbnail;
-                return KodiPassion.Templates.search.render(s).then((rendered) => {
+                return BtPo.Templates.search.render(s).then((rendered) => {
                     this.resultItems.appendChild(rendered);
                     WinJSContrib.UI.tap(rendered, () => {
                         return this.data.then((data) => {

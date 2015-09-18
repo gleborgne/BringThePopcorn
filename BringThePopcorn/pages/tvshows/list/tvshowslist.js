@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var Pages;
@@ -67,7 +67,7 @@
                 };
                 TvShowsListPage.prototype.pickGenre = function () {
                     var page = this;
-                    KodiPassion.UI.GenrePicker.pick(page.genres).then(function (genre) {
+                    BtPo.UI.GenrePicker.pick(page.genres).then(function (genre) {
                         if (genre) {
                             if (genre === "all") {
                                 page.selectedGenre = null;
@@ -119,6 +119,6 @@
             Pages.TvShowsListPage = TvShowsListPage;
             WinJS.UI.Pages.define(TvShowsListPage.url, TvShowsListPage);
         })(Pages = UI.Pages || (UI.Pages = {}));
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=tvshowslist.js.map

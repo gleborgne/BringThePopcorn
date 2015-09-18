@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var GenrePickerControl = (function () {
@@ -20,7 +20,7 @@
             }
             GenrePickerControl.prototype.render = function () {
                 var ctrl = this;
-                ctrl.element.innerHTML = '<div class="btnclose"><i class="kdp-close"></i></div><div class="genre-items"></div>';
+                ctrl.element.innerHTML = '<div class="btnclose"><i class="btpo-close"></i></div><div class="genre-items"></div>';
                 ctrl.itemsContainer = ctrl.element.querySelector(".genre-items");
                 ctrl.btnclose = ctrl.element.querySelector(".btnclose");
                 WinJSContrib.UI.tap(ctrl.btnclose, function () {
@@ -85,7 +85,7 @@
         UI.GenrePickerControl = GenrePickerControl;
         UI.GenrePicker = WinJS.Class.mix(GenrePickerControl, WinJS.Utilities.eventMixin, WinJS.Utilities.createEventProperties("myevent"));
         UI.GenrePicker.pick = function (genres, selectedgenre) {
-            var ctrl = new KodiPassion.UI.GenrePicker();
+            var ctrl = new BtPo.UI.GenrePicker();
             var container = document.getElementById("pageshostwrapper");
             ctrl.element.style.opacity = '0';
             container.appendChild(ctrl.element);
@@ -100,6 +100,6 @@
                 });
             });
         };
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=genrepicker.js.map

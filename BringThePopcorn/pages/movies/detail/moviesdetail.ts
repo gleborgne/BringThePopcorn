@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI.Pages {
+﻿module BtPo.UI.Pages {
     var actortemplate = new WinJS.Binding.Template(null, { href: '/templates/actor.html', extractChild: true });
             
     export class MovieDetailPage {

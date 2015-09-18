@@ -42,11 +42,21 @@
             <div class="menuoverlay" tap="hideMenu" tap-options="{ disableAnimation : true }"></div>
             <div class="menu">
                 <div class="menu-group">
+                    <h3>Group</h3>
+                    <div class="item" grouping="" tap="setGroupingMenu">none</div>
+                    <div class="item" grouping="alphabetic" tap="setGroupingMenu">alphabetic</div>
+                    <div class="item" grouping="year" tap="setGroupingMenu">year</div>
+                </div> 
+                <div class="menu-group">
                     <h3>View</h3>
-                    <div class="item" view="wall" tap="setViewMenu">wall</div>
-                    <div class="item" view="alphabetic" tap="setViewMenu">alphabetic</div>
-                    <div class="item" view="year" tap="setViewMenu">year</div>
-                    <div class="item">large</div>
+                    <div class="item" view="poster" tap="setViewMenu">poster</div>
+                    <div class="item" view="alphabetic" tap="setViewMenu">detailed</div>
+                </div> 
+                <div class="menu-group">
+                    <h3>Filter</h3>
+                    <div class="item">
+                        <input type="checkbox" id="onlyUnplayed" name="onlyUnplayed" member /><label for="onlyUnplayed">show only unplayed items</label>
+                    </div>
                 </div> 
             </div>
         </div>

@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var PlayingContentControl = (function () {
@@ -128,7 +128,7 @@
                     if (movie) {
                         _this.currentContent = document.createElement("DIV");
                         _this.element.appendChild(_this.currentContent);
-                        var page = new KodiPassion.UI.Pages.MovieDetail(_this.currentContent, { movie: movie });
+                        var page = new BtPo.UI.Pages.MovieDetail(_this.currentContent, { movie: movie });
                     }
                 });
             };
@@ -137,12 +137,12 @@
             PlayingContentControl.prototype.showReactPlayList = function (items) {
                 var elt = document.createElement("DIV");
                 this.element.appendChild(elt);
-                var playlistctrl = new KodiPassion.UI.ReactPlayListControl(elt);
+                var playlistctrl = new BtPo.UI.ReactPlayListControl(elt);
                 this.currentContent = playlistctrl.element;
                 playlistctrl.items = items;
             };
             PlayingContentControl.prototype.showPlayList = function (items) {
-                var playlistctrl = new KodiPassion.UI.PlayListControl();
+                var playlistctrl = new BtPo.UI.PlayListControl();
                 this.currentContent = playlistctrl.element;
                 this.element.appendChild(this.currentContent);
                 playlistctrl.items = items;
@@ -183,6 +183,6 @@
             return PlayingContentControl;
         })();
         UI.PlayingContent = WinJS.Class.mix(WinJS.Utilities.markSupportedForProcessing(PlayingContentControl), WinJS.Utilities.eventMixin, WinJS.Utilities.createEventProperties("myevent"));
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=playingcontent.js.map

@@ -1,9 +1,9 @@
-﻿module KodiPassion.UI.Pages {
+﻿module BtPo.UI.Pages {
 
     export class StartUpPage {
         public static url = "/pages/startup/startup.html";
 
-        serversettings: KodiPassion.UI.SettingsListControl;
+        serversettings: BtPo.UI.SettingsListControl;
         eventTracker: WinJSContrib.UI.EventTracker;
         messages: HTMLElement;
 

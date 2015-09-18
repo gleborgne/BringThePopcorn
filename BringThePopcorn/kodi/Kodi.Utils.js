@@ -142,13 +142,13 @@
             if (data) {
                 var classname = null;
                 if (data == "music")
-                    classname = "kdp-music";
+                    classname = "btpo-music";
                 if (data == "artists")
-                    classname = "kdp-artist";
+                    classname = "btpo-artist";
                 if (data == "tvshows")
-                    classname = "kdp-television";
+                    classname = "btpo-television";
                 if (data == "movies")
-                    classname = "kdp-movie";
+                    classname = "btpo-movie";
                 if (classname)
                     dest.classList.add(classname);
             }

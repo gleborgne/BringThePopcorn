@@ -2,7 +2,7 @@
     Velocity: any;
 }
 
-module KodiPassion.UI{
+module BtPo.UI{
     export class NowPlayingBarControl {
         public static url = "/controls/nowplayingbar/nowplayingbar.html";
         element: HTMLElement;
@@ -30,7 +30,7 @@ module KodiPassion.UI{
                 });
             }
 
-            KodiPassion.mapKodiApi(element);
+            BtPo.mapKodiApi(element);
             return WinJS.Binding.processAll(this.element, Kodi.NowPlaying.current);
         }
 

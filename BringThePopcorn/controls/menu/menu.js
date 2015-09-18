@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var MainMenuControl = (function () {
@@ -12,6 +12,6 @@
             return MainMenuControl;
         })();
         UI.MainMenu = WinJS.UI.Pages.define(MainMenuControl.url, MainMenuControl);
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=menu.js.map

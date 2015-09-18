@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI {
+﻿module BtPo.UI {
     export class PlayListControl {
         public element: HTMLElement;
         eventTracker: WinJSContrib.UI.EventTracker;

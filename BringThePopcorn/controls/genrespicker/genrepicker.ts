@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI {
+﻿module BtPo.UI {
     export class GenrePickerControl {
         element: HTMLElement;
         eventTracker: WinJSContrib.UI.EventTracker;
@@ -28,7 +28,7 @@
 
         render() {
             var ctrl = this;
-            ctrl.element.innerHTML = '<div class="btnclose"><i class="kdp-close"></i></div><div class="genre-items"></div>';
+            ctrl.element.innerHTML = '<div class="btnclose"><i class="btpo-close"></i></div><div class="genre-items"></div>';
             ctrl.itemsContainer = <HTMLElement>ctrl.element.querySelector(".genre-items");
             ctrl.btnclose = <HTMLElement>ctrl.element.querySelector(".btnclose");
             WinJSContrib.UI.tap(ctrl.btnclose, function () {
@@ -100,7 +100,7 @@
         WinJS.Utilities.createEventProperties("myevent"));
 
     GenrePicker.pick = function (genres, selectedgenre) {
-        var ctrl = new KodiPassion.UI.GenrePicker();
+        var ctrl = new BtPo.UI.GenrePicker();
         var container = document.getElementById("pageshostwrapper");
         ctrl.element.style.opacity = '0';
         container.appendChild(ctrl.element);

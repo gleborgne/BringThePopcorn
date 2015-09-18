@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI {
+﻿module BtPo.UI {
     export declare var ReactPlayListControl: any;
 
     class PlayingContentControl {
@@ -149,7 +149,7 @@
                     this.currentContent = document.createElement("DIV");
                     this.element.appendChild(this.currentContent);
 
-                    var page = new KodiPassion.UI.Pages.MovieDetail(this.currentContent, { movie: movie });
+                    var page = new BtPo.UI.Pages.MovieDetail(this.currentContent, { movie: movie });
                 }
             });
         }
@@ -160,13 +160,13 @@
         showReactPlayList(items) {
             var elt = document.createElement("DIV");
             this.element.appendChild(elt);
-            var playlistctrl = new KodiPassion.UI.ReactPlayListControl(elt);
+            var playlistctrl = new BtPo.UI.ReactPlayListControl(elt);
             this.currentContent = playlistctrl.element
             playlistctrl.items = items;
         }
 
         showPlayList(items) {
-            var playlistctrl = new KodiPassion.UI.PlayListControl();
+            var playlistctrl = new BtPo.UI.PlayListControl();
             this.currentContent = playlistctrl.element
             this.element.appendChild(this.currentContent);
             playlistctrl.items = items;

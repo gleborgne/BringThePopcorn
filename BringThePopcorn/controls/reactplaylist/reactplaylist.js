@@ -8,8 +8,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var KodiPassion = KodiPassion || {};
-KodiPassion.UI = KodiPassion.UI || {};
+var BtPo = BtPo || {};
+BtPo.UI = BtPo.UI || {};
 (function () {
     'use strict';
     var CSSTransitionGroup = React.addons.CSSTransitionGroup;
@@ -56,8 +56,8 @@ KodiPassion.UI = KodiPassion.UI || {};
                     React.createElement(
                         "div",
                         { className: "actions" },
-                        React.createElement("button", { className: "blink btnplay kdp-play" }),
-                        React.createElement("button", { className: "blink btnremove kdp-close" })
+                        React.createElement("button", { className: "blink btnplay btpo-play" }),
+                        React.createElement("button", { className: "blink btnremove btpo-close" })
                     )
                 );
             }
@@ -222,6 +222,6 @@ KodiPassion.UI = KodiPassion.UI || {};
         return ReactPlayListControl;
     })();
 
-    KodiPassion.UI.ReactPlayListControl = ReactPlayListControl;
+    BtPo.UI.ReactPlayListControl = ReactPlayListControl;
 })();
-//# sourceMappingURL=../../../KodiPassion/controls/reactplaylist/reactplaylist.js.map
+//# sourceMappingURL=../../../../../../BringThePopcorn/bld/Release/PackageLayout/controls/reactplaylist/reactplaylist.js.map

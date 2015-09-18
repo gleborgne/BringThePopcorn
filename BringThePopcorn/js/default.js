@@ -1,25 +1,25 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
-    KodiPassion.debug = true;
-})(KodiPassion || (KodiPassion = {}));
+﻿var BtPo;
+(function (BtPo) {
+    BtPo.debug = true;
+})(BtPo || (BtPo = {}));
 WinJSContrib.DataContainer.WinRTFilesContainer.makeCurrent();
-if (KodiPassion.debug) {
+if (BtPo.debug) {
     WinJSContrib.UI.Pages.verboseTraces = true;
     WinJSContrib.Logs.configure("WinJSContrib.UI.Pages", { level: WinJSContrib.Logs.Levels.debug, appenders: ["DefaultConsole"] });
     WinJSContrib.Logs.configure("KDP.API", { level: WinJSContrib.Logs.Levels.info, appenders: ["DefaultConsole"] });
 }
-var KodiPassion;
-(function (KodiPassion) {
+var BtPo;
+(function (BtPo) {
     var Templates;
     (function (Templates) {
         Templates.search = new WinJS.Binding.Template(null, { href: "/templates/searchitem.html", extractChild: true });
         Templates.album = new WinJS.Binding.Template(null, { href: "/templates/album.html", extractChild: true });
         Templates.song = new WinJS.Binding.Template(null, { href: "/templates/song.html", extractChild: true });
         Templates.movieposter = new WinJS.Binding.Template(null, { href: "/templates/movieposter.html", extractChild: true });
-    })(Templates = KodiPassion.Templates || (KodiPassion.Templates = {}));
-})(KodiPassion || (KodiPassion = {}));
-var KodiPassion;
-(function (KodiPassion) {
+    })(Templates = BtPo.Templates || (BtPo.Templates = {}));
+})(BtPo || (BtPo = {}));
+var BtPo;
+(function (BtPo) {
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
     WinJSContrib.UI.enableSystemBackButton = true;
@@ -136,7 +136,7 @@ var KodiPassion;
             if (currentSetting && currentSetting.host) {
                 return Kodi.API.testServerSetting(currentSetting).then(function (p) {
                     Kodi.API.currentSettings = currentSetting;
-                    return KodiPassion.UI.DataLoader.showLoader(false, args);
+                    return BtPo.UI.DataLoader.showLoader(false, args);
                 }, function (err) {
                     return WinJS.Navigation.navigate("/pages/startup/startup.html");
                 });
@@ -178,6 +178,6 @@ var KodiPassion;
             processItem(items[i]);
         }
     }
-    KodiPassion.mapKodiApi = mapKodiApi;
-})(KodiPassion || (KodiPassion = {}));
+    BtPo.mapKodiApi = mapKodiApi;
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=default.js.map

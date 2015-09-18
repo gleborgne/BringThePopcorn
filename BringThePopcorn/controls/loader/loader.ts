@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI {
+﻿module BtPo.UI {
     export class DataLoaderControl {
         public static url = "/controls/loader/loader.html";
         element: HTMLElement;
@@ -63,7 +63,7 @@
             e.style.opacity = '0';
 
         document.body.appendChild(e);
-        var loader = new KodiPassion.UI.DataLoader(e, { transitionIn: transitionIn, startupArgs: startupArgs });
+        var loader = new BtPo.UI.DataLoader(e, { transitionIn: transitionIn, startupArgs: startupArgs });
         currentLoader = loader;
     }
 }

@@ -22,18 +22,18 @@
         </div>
         <div class="playercommands" data-win-bind="display : enabled WinJSContrib.Bindings.showIf">
             <div class="playercommands-items">
-                <button class="cmd kdp-rewind blink"  kodiapi="Kodi.API.Player.previous"></button>
-                <button class="cmd kdp-play blink" kodiapi="Kodi.API.Player.play" data-win-bind="display: speed WinJSContrib.Bindings.hideIf"></button>
-                <button class="cmd kdp-pause blink" kodiapi="Kodi.API.Player.pause" data-win-bind="display: speed WinJSContrib.Bindings.showIf"></button>
-                <button class="cmd kdp-stop blink" kodiapi="Kodi.API.Player.stop"></button>
-                <button class="cmd kdp-forward blink" kodiapi="Kodi.API.Player.next"></button>
+                <button class="cmd btpo-rewind blink"  kodiapi="Kodi.API.Player.previous"></button>
+                <button class="cmd btpo-play blink" kodiapi="Kodi.API.Player.play" data-win-bind="display: speed WinJSContrib.Bindings.hideIf"></button>
+                <button class="cmd btpo-pause blink" kodiapi="Kodi.API.Player.pause" data-win-bind="display: speed WinJSContrib.Bindings.showIf"></button>
+                <button class="cmd btpo-stop blink" kodiapi="Kodi.API.Player.stop"></button>
+                <button class="cmd btpo-forward blink" kodiapi="Kodi.API.Player.next"></button>
             </div>
         </div>
         <div class="spacer" tap="toggleView" data-win-bind="display : enabled WinJSContrib.Bindings.hideIf"></div>
         <div class="actions" tap="toggleView">
             <button class="cmd btntoggle" member="togglebtn">
-                <i class="kdp-chevron-up"></i>
-                <i class="kdp-chevron-down"></i>
+                <i class="btpo-chevron-up"></i>
+                <i class="btpo-chevron-down"></i>
             </button>
         </div>
     </div>

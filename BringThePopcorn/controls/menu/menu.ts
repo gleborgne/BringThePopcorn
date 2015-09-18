@@ -1,4 +1,4 @@
-﻿module KodiPassion.UI{
+﻿module BtPo.UI{
 
     class MainMenuControl {
         static url = "/controls/menu/menu.html";

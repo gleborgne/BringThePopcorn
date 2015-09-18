@@ -1,8 +1,8 @@
-﻿declare module KodiPassion.UI {
+﻿declare module BtPo.UI {
     var DataLoader: any;
 }
 
-module KodiPassion.UI.Pages{
+module BtPo.UI.Pages{
     export class BootstrapPage {
         public static url = "/pages/bootstrap/bootstrap.html";
         defaultname: string;
@@ -28,7 +28,7 @@ module KodiPassion.UI.Pages{
                 return Kodi.API.testServerSetting(setting).then(function () {
                     Kodi.Settings.save(page.defaultname, setting, true);
                     Kodi.API.currentSettings = setting;
-                    return KodiPassion.UI.DataLoader.showLoader(true);
+                    return BtPo.UI.DataLoader.showLoader(true);
                 }, function () {
                     page.messages.innerText = "Server cannot be reached. Please verify that your Kodi or XBMC is running and check it's configuration. Also check your network settings like firewall configuration";
                 });

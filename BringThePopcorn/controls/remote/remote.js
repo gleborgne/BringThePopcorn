@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var RemoteControllerControl = (function () {
@@ -7,7 +7,7 @@
             }
             RemoteControllerControl.prototype.processed = function (element, options) {
                 var _this = this;
-                KodiPassion.mapKodiApi(element);
+                BtPo.mapKodiApi(element);
                 this.loadLanguages();
                 this.loadSubtitles();
                 this.rangeVolume.onchange = function () {
@@ -73,7 +73,7 @@
             };
             RemoteControllerControl.prototype.shutdown = function () {
                 this.shutdownFlyout.hide();
-                WinJSContrib.Alerts.messageBox({ content: "This will turn off your media server. After a few seconds, this application Kodi Passion will not be able to reach your media server any more. \r\n\r\nDo you want to proceed ?", title: 'Shutdown media server ?', commands: [{ label: 'Yes' }, { label: 'No', isDefault: true }] }).done(function (c) {
+                WinJSContrib.Alerts.messageBox({ content: "This will turn off your media server. After a few seconds, this application will not be able to reach your media server any more. \r\n\r\nDo you want to proceed ?", title: 'Shutdown media server ?', commands: [{ label: 'Yes' }, { label: 'No', isDefault: true }] }).done(function (c) {
                     if (c.label == 'Yes')
                         Kodi.API.System.shutdown().done(function () {
                             WinJS.Navigation.navigate("/pages/startup/startup.html");
@@ -174,6 +174,6 @@
         })();
         UI.RemoteControllerControl = RemoteControllerControl;
         UI.RemoteController = WinJS.UI.Pages.define(RemoteControllerControl.url, RemoteControllerControl);
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=remote.js.map

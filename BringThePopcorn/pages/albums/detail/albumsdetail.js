@@ -1,5 +1,5 @@
-﻿var KodiPassion;
-(function (KodiPassion) {
+﻿var BtPo;
+(function (BtPo) {
     var UI;
     (function (UI) {
         var Pages;
@@ -24,12 +24,12 @@
                         var p = [];
                         var elts = [];
                         songs.forEach(function (s) {
-                            p.push(KodiPassion.Templates.song.render(s).then(function (rendered) {
+                            p.push(BtPo.Templates.song.render(s).then(function (rendered) {
                                 rendered.style.opacity = "0";
                                 elts.push(rendered);
                                 container.appendChild(rendered);
-                                var btnplay = rendered.querySelector(".kdp-play");
-                                var btnadd = rendered.querySelector(".kdp-add");
+                                var btnplay = rendered.querySelector(".btpo-play");
+                                var btnadd = rendered.querySelector(".btpo-add");
                                 WinJSContrib.UI.tap(btnplay, function () {
                                     return Kodi.API.Music.playSong(s.songid);
                                 });
@@ -56,6 +56,6 @@
             Pages.AlbumsDetailPage = AlbumsDetailPage;
             WinJS.UI.Pages.define(AlbumsDetailPage.url, AlbumsDetailPage);
         })(Pages = UI.Pages || (UI.Pages = {}));
-    })(UI = KodiPassion.UI || (KodiPassion.UI = {}));
-})(KodiPassion || (KodiPassion = {}));
+    })(UI = BtPo.UI || (BtPo.UI = {}));
+})(BtPo || (BtPo = {}));
 //# sourceMappingURL=albumsdetail.js.map
