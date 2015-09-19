@@ -4,8 +4,6 @@
     (function (API) {
         var Player;
         (function (Player) {
-            Player.currentPlayer;
-            Player.currentPlayerProperties;
             var lastItem;
             function playerCall(methodname, data, playerid, forceCheck) {
                 if (typeof data === "undefined") {
@@ -174,4 +172,3 @@
         })(Player = API.Player || (API.Player = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.API.Player.js.map

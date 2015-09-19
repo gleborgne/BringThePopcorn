@@ -40,8 +40,11 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>14538270-1c70-4b16-af89-b8cb2ebeae3b</ProjectGuid>
-    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
     <TypeScriptEmitBOM>true</TypeScriptEmitBOM>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TypeScriptJSXEmit>react</TypeScriptJSXEmit>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
@@ -70,6 +73,7 @@
     <Content Include="controls\reactplaylist\reactplaylist.js.map" />
     <Content Include="controls\reactplaylist\reactplaylist.jsx" />
     <Content Include="controls\reactplaylist\reactplaylist.less" />
+    <TypeScriptCompile Include="controls\reactplaylist\reactplaylist.tsx" />
     <Content Include="dist\fonts\bringthepopcorn.css" />
     <Content Include="dist\fonts\bringthepopcorn.eot" />
     <Content Include="dist\fonts\bringthepopcorn.svg" />
@@ -363,6 +367,8 @@
     <TypeScriptCompile Include="typings\typings\lodash\lodash.d.ts" />
     <TypeScriptCompile Include="typings\typings\moment\moment-node.d.ts" />
     <TypeScriptCompile Include="typings\typings\moment\moment.d.ts" />
+    <TypeScriptCompile Include="typings\typings\react\react-global.d.ts" />
+    <TypeScriptCompile Include="typings\typings\react\react.d.ts" />
     <TypeScriptCompile Include="typings\typings\snapsvg\snapsvg.d.ts" />
     <TypeScriptCompile Include="typings\typings\tsd.d.ts" />
     <TypeScriptCompile Include="typings\typings\winjs\winjs.d.ts" />

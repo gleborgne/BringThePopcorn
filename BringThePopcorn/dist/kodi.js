@@ -1143,8 +1143,6 @@ var Kodi;
     (function (API) {
         var Player;
         (function (Player) {
-            Player.currentPlayer;
-            Player.currentPlayerProperties;
             var lastItem;
             function playerCall(methodname, data, playerid, forceCheck) {
                 if (typeof data === "undefined") {
@@ -1323,8 +1321,6 @@ var Kodi;
         var apiId = 0;
         var apiVersion = '2.0';
         API.defaultCallTimeout = 10;
-        API.currentSettings;
-        API.version;
         function redirectToSettings(error) {
             if (error === 'noplayer')
                 return WinJS.Promise.wrap();
@@ -1454,7 +1450,7 @@ var Kodi;
         }
         API.kodiRequest = kodiRequest;
         function kodiThumbnail(thumburl) {
-            var uri = API.currentSettings.host + ':' + API.currentSettings.port + '/vfs/' + encodeURIComponent(thumburl);
+            var uri = API.currentSettings.host + ((API.currentSettings.port != 80) ? ':' + API.currentSettings.port : '') + '/vfs/' + encodeURIComponent(thumburl);
             if (!WinJSContrib.Utils.startsWith(uri, 'http://'))
                 uri = 'http://' + uri;
             return uri;
@@ -1887,7 +1883,6 @@ var Kodi;
         var Websocket;
         (function (Websocket) {
             var logger = WinJSContrib.Logs.getLogger("KDP.API.Websocket");
-            Websocket.current;
             function socketOpen(evt) {
                 logger.verbose('websocket opened');
             }

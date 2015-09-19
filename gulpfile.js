@@ -16,12 +16,12 @@ var bom = require('gulp-bom');
 var babel = require('gulp-babel');
 
 var onError = function(err) {
-	notify.onError({
-		title:    "Gulp",
-		subtitle: "Failure!",
-		message:  "Error: <%= error.message %>",
-		sound:    "Beep"
-	})(err);
+	//notify.onError({
+	//	title:    "Gulp",
+	//	subtitle: "Failure!",
+	//	message:  "Error: <%= error.message %>",
+	//	sound:    "Beep"
+	//})(err);
 
 	this.emit('end');
 };
@@ -154,6 +154,7 @@ var tsPagesProject = ts.createProject({
     declarationFiles: false,
     noExternalResolve: true,
     target: 'ES5',
+    jsx : 'react',
     noEmitOnError: false,
     isolatedCompilation: true
 });
@@ -164,7 +165,10 @@ gulp.task('compilepages', function () {
 		'BringThePopcorn/dist/kodi.d.ts',
         'BringThePopcorn/js/**/*.ts',
 		'BringThePopcorn/pages/**/*.ts',
+		'BringThePopcorn/pages/**/*.tsx',
         'BringThePopcorn/controls/**/*.ts',
+        'BringThePopcorn/controls/**/*.tsx',
+        //'BringThePopcorn/controls/reactplaylist/reactplaylist.tsx',
     ], { base: '.' })
 	.pipe(plumber({ errorHandler: onError }))
 	.pipe(sourcemaps.init())
@@ -189,28 +193,7 @@ gulp.task('compilepages', function () {
     ]);
 });
 
-gulp.task('compilejsx', function () {
-    gulp.src('**/*.jsx')
-        .pipe(plumber({ errorHandler: onError }))
-        .pipe(sourcemaps.init())
-        .pipe(babel())
-        .pipe(sourcemaps.write(".", {
-                sourceRoot: function (file) {
-                    var sources = [];
-                    file.sourceMap.sources.forEach(function (s) {
-                        var filename = s.substr(s.lastIndexOf('/') + 1);
-                        console.log(filename)
-                        sources.push(filename);
-                    });
-                    file.sourceMap.sources = sources;
-                    return ' ';
-                }
-            }))
-        .pipe(bom())
-        .pipe(gulp.dest(''))
-});
-
-gulp.task('buildpages', ['compilepages', 'compilejsx', 'compilekodi'], function () {
+gulp.task('buildpages', ['compilepages', 'compilekodi'], function () {
 });
 
 gulp.task('build', ['clean', 'styles', 'compilewinjscontrib', 'buildpages'], function () {
@@ -219,8 +202,7 @@ gulp.task('build', ['clean', 'styles', 'compilewinjscontrib', 'buildpages'], fun
 gulp.task('watch', function() {
     gulp.watch(['BringThePopcorn/**/*.less', '!BringThePopcorn/**/bin/**/*.less', '!BringThePopcorn/**/bld/**/*.less'], ['styles']);
     gulp.watch(['BringThePopcorn/kodi/**/*.ts'], ['compilekodi']);
-    gulp.watch(['BringThePopcorn/pages/**/*.ts', 'BringThePopcorn/controls/**/*.ts', 'BringThePopcorn/js/**/*.ts'], ['compilepages']);
-    gulp.watch(['BringThePopcorn/pages/**/*.jsx', 'BringThePopcorn/controls/**/*.jsx', 'BringThePopcorn/js/**/*.jsx'], ['compilejsx']);
+    gulp.watch(['BringThePopcorn/pages/**/*.ts', 'BringThePopcorn/controls/**/*.ts', 'BringThePopcorn/controls/**/*.tsx', 'BringThePopcorn/js/**/*.ts'], ['compilepages']);
 });
 
 gulp.task('default', ['build'], function() {

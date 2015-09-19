@@ -5,7 +5,6 @@
         var Websocket;
         (function (Websocket) {
             var logger = WinJSContrib.Logs.getLogger("KDP.API.Websocket");
-            Websocket.current;
             function socketOpen(evt) {
                 logger.verbose('websocket opened');
             }
@@ -70,4 +69,3 @@
         })(Websocket = API.Websocket || (API.Websocket = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.API.Websocket.js.map

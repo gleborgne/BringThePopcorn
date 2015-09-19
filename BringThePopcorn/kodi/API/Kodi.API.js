@@ -7,8 +7,6 @@
         var apiId = 0;
         var apiVersion = '2.0';
         API.defaultCallTimeout = 10;
-        API.currentSettings;
-        API.version;
         function redirectToSettings(error) {
             if (error === 'noplayer')
                 return WinJS.Promise.wrap();
@@ -138,7 +136,7 @@
         }
         API.kodiRequest = kodiRequest;
         function kodiThumbnail(thumburl) {
-            var uri = API.currentSettings.host + ':' + API.currentSettings.port + '/vfs/' + encodeURIComponent(thumburl);
+            var uri = API.currentSettings.host + ((API.currentSettings.port != 80) ? ':' + API.currentSettings.port : '') + '/vfs/' + encodeURIComponent(thumburl);
             if (!WinJSContrib.Utils.startsWith(uri, 'http://'))
                 uri = 'http://' + uri;
             return uri;
@@ -283,4 +281,3 @@ var Kodi;
         })(System = API.System || (API.System = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.API.js.map

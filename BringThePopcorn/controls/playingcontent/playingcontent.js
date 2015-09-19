@@ -2,6 +2,7 @@
 (function (BtPo) {
     var UI;
     (function (UI) {
+        //export declare var ReactPlayListControl: any;
         var PlayingContentControl = (function () {
             function PlayingContentControl(element, options) {
                 var _this = this;
@@ -185,4 +186,5 @@
         UI.PlayingContent = WinJS.Class.mix(WinJS.Utilities.markSupportedForProcessing(PlayingContentControl), WinJS.Utilities.eventMixin, WinJS.Utilities.createEventProperties("myevent"));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=playingcontent.js.map
+
+//# sourceMappingURL=../../../BringThePopcorn/controls/playingcontent/playingcontent.js.map

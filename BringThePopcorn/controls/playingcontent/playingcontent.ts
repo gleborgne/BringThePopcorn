@@ -1,5 +1,5 @@
 ﻿module BtPo.UI {
-    export declare var ReactPlayListControl: any;
+    //export declare var ReactPlayListControl: any;
 
     class PlayingContentControl {
         element: HTMLElement;

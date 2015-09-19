@@ -159,7 +159,7 @@
     }
     
     export function kodiThumbnail(thumburl) {
-        var uri = API.currentSettings.host + ':' + API.currentSettings.port + '/vfs/' + encodeURIComponent(thumburl);
+        var uri = API.currentSettings.host + ((API.currentSettings.port != 80) ? ':' + API.currentSettings.port : '') + '/vfs/' + encodeURIComponent(thumburl);
         if (!WinJSContrib.Utils.startsWith(uri, 'http://'))
             uri = 'http://' + uri;
         return uri;
