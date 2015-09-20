@@ -233,12 +233,18 @@ var Kodi;
     (function (API) {
         var Files;
         (function (Files) {
+            var File = (function () {
+                function File() {
+                }
+                return File;
+            })();
+            Files.File = File;
             function getPicturesDirectory(directory) {
-                return API.kodiRequest('Files.GetDirectory', { directory: directory, media: 'pictures', properties: ["title", "file", "thumbnail"] }, false, true);
+                return getDirectory('pictures', directory);
             }
             Files.getPicturesDirectory = getPicturesDirectory;
             function getPicturesSources() {
-                return API.kodiRequest('Files.GetSources', { media: 'pictures' }, false, true);
+                return getSources('pictures');
             }
             Files.getPicturesSources = getPicturesSources;
             function download(path) {
@@ -281,3 +287,4 @@ var Kodi;
         })(System = API.System || (API.System = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
+//# sourceMappingURL=Kodi.API.js.map

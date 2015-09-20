@@ -1,0 +1,135 @@
+﻿@import "../../css/apptheme.less";
+
+.pagefiles {
+    header[role=banner] {
+        padding : 0;
+        .bc {
+            font-family: 'Segoe UI Symbol';
+            color: white;
+            background-color: transparent;
+            border: none;
+            width: 48px;
+            height : 48px;
+            text-align:center;
+            line-height: 48px;
+            transition : opacity 200ms ease-out;
+
+            &:disabled{
+                opacity : 0.2;
+            }
+        }
+    }
+
+    section[role=main] {
+        display: -ms-grid;
+        -ms-grid-rows: 1fr;
+        -ms-grid-columns: 1fr;
+        width: 100%;
+        height: 100%;
+
+        #filesList {
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+
+            &.win-listview {
+                .win-surface {
+                    margin-top: 5px;
+                }
+
+                > .win-vertical .win-container {
+                    margin: 0 5px 5px 5px;
+                }
+
+                .win-itemcontainer {
+                    .win-itembox {
+                        background-color: #2A2A2A;
+                    }
+                }
+            }
+
+            .file-item {
+                position: relative;
+                overflow: hidden;
+                height: 48px;
+
+                .hflex();
+
+                .picto {
+                    position: relative;                    
+                    display: block;
+                    width: 48px;
+                    height: 48px;
+                    line-height: 48px;
+                    text-align: center;
+                    color: #999;
+                    background-color: #444;
+                    flex-shrink: 0;
+
+                    .thumbnail{
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        background-size: cover;
+                        left: 0;
+                        top: 0;
+                    }
+                }
+
+                .label {
+                    flex: 1;
+                    padding: 8px 16px;
+                    /*white-space: nowrap;
+                    text-overflow: ellipsis;*/
+                }
+
+                .actions{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: fadeout(#444, 6%);
+                    transform: translateY(100%);
+                    transition : transform 250ms @easeOutQuad;
+                    text-align:right;
+                    padding : 4px 8px;
+                    box-sizing:border-box;
+
+                    button{
+                        .roundButton(40px);
+                        line-height:40px;
+                        font-size: 16pt;
+                        border : 1px solid @kodiBlue;
+                        color :white;
+                        background-color: transparent;
+                        color :@kodiBlue;
+                        margin-right: 10px;
+                    }
+                }
+
+                &.showActions {
+                    .actions{
+                        transform: translateY(0);
+                    }
+                }
+            }
+        }
+
+        #mediacontainer {
+            background-color: #222;
+            position: relative;
+            overflow-x:hidden;
+            overflow-y:auto;
+
+            .mediaitem{
+                text-transform : uppercase;
+                padding : 8px 16px;
+                margin-bottom : 5px;
+                background-color:#2A2A2A;
+                font-size : 1.2rem;
+            }
+        }
+    }
+}

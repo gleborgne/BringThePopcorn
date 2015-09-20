@@ -168,7 +168,7 @@ var Kodi;
             library.musicSources = data[3];
             library.hasAlbums = (library.music && library.music.albums && library.music.albums.length > 0);
             library.hasMusic = library.hasAlbums || (library.musicSources && library.musicSources.sources && library.musicSources.sources.length > 0);
-            library.hasRecentMusic = (library.recentMusic && library.recentMusic.albums && library.recentMusic.albums.length);
+            library.hasRecentMusic = (library.recentMusic && library.recentMusic.albums && library.recentMusic.albums.length > 0);
             if (library.hasRecentMusic) {
                 library.recentMusic.albums.sort(function (a, b) {
                     return b.albumid - a.albumid;
@@ -254,7 +254,7 @@ var Kodi;
             searchIndex = new WinJSContrib.Search.IndexGroup(Data.SearchDefinitions);
             buildMusicLibrary(tmplibrary, data[0], searchIndex);
             buildVideoLibrary(tmplibrary, data[1], searchIndex);
-            tmplibrary.pictures = data[2];
+            tmplibrary.picturesSources = data[2];
             tmplibrary.profiles = (data[3] ? data[3].profiles : []);
             tmplibrary.currentprofile = null;
             if (tmplibrary.profiles.length) {
@@ -272,18 +272,31 @@ var Kodi;
         }
         function showHideMenus() {
             if (!library.movies || !library.movies.movies || !library.movies.movies.length) {
-                $(' #menumovies').hide();
+                $(' .menumovies').hide();
+            }
+            else {
+                $(' .menumovies').show();
             }
             if (!library.music || !library.music.albums || !library.music.albums.length) {
-                $('#menumusic, #menuartists').hide();
+                $('.menumusic, .menuartists').hide();
+            }
+            else {
+                $('.menumusic, .menuartists').show();
             }
             if (!library.tvshows || !library.tvshows.tvshows || !library.tvshows.tvshows.length) {
-                $('#menutvshows').hide();
+                $('.menutvshows').hide();
             }
-            if (!library.pictures || !library.pictures.sources || !library.pictures.sources.length) {
-                $('#menupictures').hide();
+            else {
+                $('.menutvshows').show();
+            }
+            if (!library.picturesSources || !library.picturesSources.sources || !library.picturesSources.sources.length) {
+                $('.menupictures').hide();
+            }
+            else {
+                $('.menupictures').show();
             }
         }
+        Data.showHideMenus = showHideMenus;
         function checkConnectivity() {
             if (!Kodi.API.currentSettings || !Kodi.API.currentSettings.host) {
                 Kodi.API.currentSettings = Kodi.Settings.load();
@@ -1238,7 +1251,7 @@ var Kodi;
                 if (recursive) {
                     arg = { item: { directory: path } };
                 }
-                return API.kodiRequest('Player.Open', arg);
+                return API.kodiRequest('Player.Open', arg, true);
             }
             Player.open = open;
             function add(path, recursive) {
@@ -1246,7 +1259,7 @@ var Kodi;
                 if (recursive) {
                     arg = { playlistid: 0, item: { directory: path } };
                 }
-                return API.kodiRequest('Playlist.Add', arg);
+                return API.kodiRequest('Playlist.Add', arg, true);
             }
             Player.add = add;
             function moveTo(playerid, index) {
@@ -1547,12 +1560,18 @@ var Kodi;
     (function (API) {
         var Files;
         (function (Files) {
+            var File = (function () {
+                function File() {
+                }
+                return File;
+            })();
+            Files.File = File;
             function getPicturesDirectory(directory) {
-                return API.kodiRequest('Files.GetDirectory', { directory: directory, media: 'pictures', properties: ["title", "file", "thumbnail"] }, false, true);
+                return getDirectory('pictures', directory);
             }
             Files.getPicturesDirectory = getPicturesDirectory;
             function getPicturesSources() {
-                return API.kodiRequest('Files.GetSources', { media: 'pictures' }, false, true);
+                return getSources('pictures');
             }
             Files.getPicturesSources = getPicturesSources;
             function download(path) {

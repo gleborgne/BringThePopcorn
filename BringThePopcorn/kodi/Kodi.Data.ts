@@ -37,9 +37,20 @@
         recentMovies: API.Videos.Movies.MoviesResultSet;
         recentMusic: API.Music.AlbumsResultSet;
         tvshowRecentEpisodes: API.Videos.TVShows.EpisodesResultSet;
-        pictures: any;
+        videoSources: API.Files.SourceResultSet;
+        hasVideos: boolean;
+        hasMovies: boolean;
+        hasRecentMovies: boolean;
+        hasTvshows: boolean;
+        hasRecentTvshows: boolean;
+        musicSources: API.Files.SourceResultSet;
+        hasAlbums: boolean;
+        hasMusic: boolean;
+        hasRecentMusic: boolean;
+        picturesSources: API.Files.SourceResultSet;
         profiles: any;
         currentprofile: any;
+        moviesets: API.Videos.Movies.MoviesSetResultSet;
     }
 
     export var SearchDefinitions = {
@@ -115,7 +126,7 @@
         ];
     }
 
-    function buildMusicLibrary(library, data, searchIndex?) {
+    function buildMusicLibrary(library: IMediaLibrary, data, searchIndex?) {
         var artists = [];
         var allAlbums = data[0];
         if (allAlbums && allAlbums.albums && allAlbums.albums.length) {
@@ -161,7 +172,7 @@
         library.musicSources = data[3];
         library.hasAlbums = (library.music && library.music.albums && library.music.albums.length > 0);
         library.hasMusic = library.hasAlbums || (library.musicSources && library.musicSources.sources && library.musicSources.sources.length > 0);
-        library.hasRecentMusic = (library.recentMusic && library.recentMusic.albums && library.recentMusic.albums.length);
+        library.hasRecentMusic = (library.recentMusic && library.recentMusic.albums && library.recentMusic.albums.length > 0);
 
         if (library.hasRecentMusic) {
             library.recentMusic.albums.sort(function (a, b) {
@@ -170,7 +181,7 @@
         }
     }
 
-    function buildVideoLibrary(library, data, searchIndex?) {
+    function buildVideoLibrary(library: IMediaLibrary, data, searchIndex?) {
         var pics = [];
         function selectMoviePictures(movie) {
             if (pics.length > pictureslimit)
@@ -265,7 +276,7 @@
         searchIndex = new WinJSContrib.Search.IndexGroup(SearchDefinitions);
         buildMusicLibrary(tmplibrary, data[0], searchIndex);
         buildVideoLibrary(tmplibrary, data[1], searchIndex);
-        tmplibrary.pictures = data[2];
+        tmplibrary.picturesSources = data[2];
         tmplibrary.profiles = (data[3] ? data[3].profiles : []);
         tmplibrary.currentprofile = null;
         if (tmplibrary.profiles.length) {
@@ -282,18 +293,26 @@
         }
     }
 
-    function showHideMenus() {
+    export function showHideMenus() {
         if (!library.movies || !library.movies.movies || !library.movies.movies.length) {
-            $(' #menumovies').hide();
+            $(' .menumovies').hide();
+        } else {
+            $(' .menumovies').show();
         }
         if (!library.music || !library.music.albums || !library.music.albums.length) {
-            $('#menumusic, #menuartists').hide();
+            $('.menumusic, .menuartists').hide();
+        } else {
+            $('.menumusic, .menuartists').show();
         }
         if (!library.tvshows || !library.tvshows.tvshows || !library.tvshows.tvshows.length) {
-            $('#menutvshows').hide();
+            $('.menutvshows').hide();
+        } else {
+            $('.menutvshows').show();
         }
-        if (!library.pictures || !library.pictures.sources || !library.pictures.sources.length) {
-            $('#menupictures').hide();
+        if (!library.picturesSources || !library.picturesSources.sources || !library.picturesSources.sources.length) {
+            $('.menupictures').hide();
+        } else {
+            $('.menupictures').show();
         }
     }
 

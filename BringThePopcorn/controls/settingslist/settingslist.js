@@ -118,5 +118,4 @@
         UI.SettingsList = WinJS.UI.Pages.define(SettingsListControl.url, SettingsListControl);
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
-//# sourceMappingURL=../../../BringThePopcorn/controls/settingslist/settingslist.js.map
+//# sourceMappingURL=settingslist.js.map

@@ -142,5 +142,4 @@ var BtPo;
         UI.ReactPlayListControl = ReactPlayListControl;
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
-//# sourceMappingURL=../../../BringThePopcorn/controls/reactplaylist/reactplaylist.js.map
+//# sourceMappingURL=reactplaylist.js.map

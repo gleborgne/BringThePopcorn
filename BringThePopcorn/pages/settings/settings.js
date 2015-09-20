@@ -20,5 +20,4 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
-//# sourceMappingURL=../../../BringThePopcorn/pages/settings/settings.js.map
+//# sourceMappingURL=settings.js.map

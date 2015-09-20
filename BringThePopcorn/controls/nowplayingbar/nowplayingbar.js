@@ -67,5 +67,4 @@
         UI.NowPlayingSummary = WinJS.UI.Pages.define(NowPlayingBarControl.url, NowPlayingBarControl);
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
-//# sourceMappingURL=../../../BringThePopcorn/controls/nowplayingbar/nowplayingbar.js.map
+//# sourceMappingURL=nowplayingbar.js.map

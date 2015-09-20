@@ -172,7 +172,9 @@ body {
     .fragment {
         width: 100%;
         height: 100%;
-        .vflex(auto);
+        display: -ms-grid;
+        -ms-grid-rows : auto 1fr;
+        -ms-grid-columns : 1fr;
 
         > header[role=banner] {
             .hflex();
@@ -205,7 +207,7 @@ body {
         }
 
         > section[role=main] {
-            flex: 1;
+            -ms-grid-row: 2;
         }
     }
 }

@@ -36,5 +36,4 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
-//# sourceMappingURL=../../../../BringThePopcorn/pages/settings/serverdetail/serverdetail.js.map
+//# sourceMappingURL=serverdetail.js.map

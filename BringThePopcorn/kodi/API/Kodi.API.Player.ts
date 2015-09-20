@@ -92,7 +92,7 @@
         if (recursive) {
             arg = { item: { directory: path } }
         }
-        return API.kodiRequest<any>('Player.Open', arg);
+        return API.kodiRequest<any>('Player.Open', arg, true);
     }
 
     export function add(path, recursive) {
@@ -100,7 +100,7 @@
         if (recursive) {
             arg = { playlistid: 0, item: { directory: path } }
         }
-        return API.kodiRequest<any>('Playlist.Add', arg);
+        return API.kodiRequest<any>('Playlist.Add', arg, true);
     }
 
     export function moveTo(playerid, index) {

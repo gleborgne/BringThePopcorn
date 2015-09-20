@@ -186,5 +186,4 @@
         UI.PlayingContent = WinJS.Class.mix(WinJS.Utilities.markSupportedForProcessing(PlayingContentControl), WinJS.Utilities.eventMixin, WinJS.Utilities.createEventProperties("myevent"));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
-//# sourceMappingURL=../../../BringThePopcorn/controls/playingcontent/playingcontent.js.map
+//# sourceMappingURL=playingcontent.js.map

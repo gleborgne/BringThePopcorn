@@ -14,5 +14,4 @@
         UI.MainMenu = WinJS.UI.Pages.define(MainMenuControl.url, MainMenuControl);
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
-//# sourceMappingURL=../../../BringThePopcorn/controls/menu/menu.js.map
+//# sourceMappingURL=menu.js.map

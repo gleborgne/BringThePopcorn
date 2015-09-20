@@ -167,5 +167,4 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
-//# sourceMappingURL=../../../../BringThePopcorn/pages/tvshows/list/tvshowslist.js.map
+//# sourceMappingURL=tvshowslist.js.map

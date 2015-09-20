@@ -127,7 +127,7 @@
             library.musicSources = data[3];
             library.hasAlbums = (library.music && library.music.albums && library.music.albums.length > 0);
             library.hasMusic = library.hasAlbums || (library.musicSources && library.musicSources.sources && library.musicSources.sources.length > 0);
-            library.hasRecentMusic = (library.recentMusic && library.recentMusic.albums && library.recentMusic.albums.length);
+            library.hasRecentMusic = (library.recentMusic && library.recentMusic.albums && library.recentMusic.albums.length > 0);
             if (library.hasRecentMusic) {
                 library.recentMusic.albums.sort(function (a, b) {
                     return b.albumid - a.albumid;
@@ -213,7 +213,7 @@
             searchIndex = new WinJSContrib.Search.IndexGroup(Data.SearchDefinitions);
             buildMusicLibrary(tmplibrary, data[0], searchIndex);
             buildVideoLibrary(tmplibrary, data[1], searchIndex);
-            tmplibrary.pictures = data[2];
+            tmplibrary.picturesSources = data[2];
             tmplibrary.profiles = (data[3] ? data[3].profiles : []);
             tmplibrary.currentprofile = null;
             if (tmplibrary.profiles.length) {
@@ -231,18 +231,31 @@
         }
         function showHideMenus() {
             if (!library.movies || !library.movies.movies || !library.movies.movies.length) {
-                $(' #menumovies').hide();
+                $(' .menumovies').hide();
+            }
+            else {
+                $(' .menumovies').show();
             }
             if (!library.music || !library.music.albums || !library.music.albums.length) {
-                $('#menumusic, #menuartists').hide();
+                $('.menumusic, .menuartists').hide();
+            }
+            else {
+                $('.menumusic, .menuartists').show();
             }
             if (!library.tvshows || !library.tvshows.tvshows || !library.tvshows.tvshows.length) {
-                $('#menutvshows').hide();
+                $('.menutvshows').hide();
             }
-            if (!library.pictures || !library.pictures.sources || !library.pictures.sources.length) {
-                $('#menupictures').hide();
+            else {
+                $('.menutvshows').show();
+            }
+            if (!library.picturesSources || !library.picturesSources.sources || !library.picturesSources.sources.length) {
+                $('.menupictures').hide();
+            }
+            else {
+                $('.menupictures').show();
             }
         }
+        Data.showHideMenus = showHideMenus;
         function checkConnectivity() {
             if (!Kodi.API.currentSettings || !Kodi.API.currentSettings.host) {
                 Kodi.API.currentSettings = Kodi.Settings.load();
@@ -371,3 +384,4 @@
         });
     })(Data = Kodi.Data || (Kodi.Data = {}));
 })(Kodi || (Kodi = {}));
+//# sourceMappingURL=Kodi.Data.js.map

@@ -71,9 +71,20 @@ declare module Kodi.Data {
         recentMovies: API.Videos.Movies.MoviesResultSet;
         recentMusic: API.Music.AlbumsResultSet;
         tvshowRecentEpisodes: API.Videos.TVShows.EpisodesResultSet;
-        pictures: any;
+        videoSources: API.Files.SourceResultSet;
+        hasVideos: boolean;
+        hasMovies: boolean;
+        hasRecentMovies: boolean;
+        hasTvshows: boolean;
+        hasRecentTvshows: boolean;
+        musicSources: API.Files.SourceResultSet;
+        hasAlbums: boolean;
+        hasMusic: boolean;
+        hasRecentMusic: boolean;
+        picturesSources: API.Files.SourceResultSet;
         profiles: any;
         currentprofile: any;
+        moviesets: API.Videos.Movies.MoviesSetResultSet;
     }
     var SearchDefinitions: {
         movies: {
@@ -109,6 +120,7 @@ declare module Kodi.Data {
             };
         };
     };
+    function showHideMenus(): void;
     function checkConnectivity(): WinJS.Promise<any>;
     function loadRootData(forceLoad?: boolean): WinJS.IPromise<IMediaLibrary>;
     function checkSystemProperties(): void;
@@ -359,11 +371,23 @@ declare module Kodi.API.PlayList {
     function insertSong(playlistid: any, position: any, songId: any): WinJS.Promise<{}>;
 }
 declare module Kodi.API.Files {
-    function getPicturesDirectory(directory: any): WinJS.Promise<{}>;
-    function getPicturesSources(): WinJS.Promise<{}>;
+    interface SourceResultSet extends ApiResultSet {
+        sources: File[];
+    }
+    interface FilesResultSet extends ApiResultSet {
+        files: File[];
+    }
+    class File {
+        title: string;
+        file: string;
+        filetype: string;
+        thumbnail: string;
+    }
+    function getPicturesDirectory(directory: any): WinJS.Promise<FilesResultSet>;
+    function getPicturesSources(): WinJS.Promise<SourceResultSet>;
     function download(path: any): WinJS.Promise<{}>;
-    function getDirectory(media: any, directory: any): WinJS.Promise<{}>;
-    function getSources(media: any): WinJS.Promise<{}>;
+    function getDirectory(media: any, directory: any): WinJS.Promise<FilesResultSet>;
+    function getSources(media: any): WinJS.Promise<SourceResultSet>;
 }
 declare module Kodi.API.System {
     function shutdown(): WinJS.Promise<{}>;

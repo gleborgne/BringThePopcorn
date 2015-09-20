@@ -29,6 +29,7 @@
                 }).then(function (data) {
                     document.body.classList.remove("unconnected");
                     Kodi.NowPlaying.init();
+                    Kodi.Data.showHideMenus();
                     return WinJS.Navigation.navigate("/pages/home/home.html", { clearNavigationHistory: true });
                 }, function (err) {
                     document.body.classList.add("unconnected");
@@ -64,5 +65,4 @@
         };
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
-//# sourceMappingURL=../../../BringThePopcorn/controls/loader/loader.js.map
+//# sourceMappingURL=loader.js.map

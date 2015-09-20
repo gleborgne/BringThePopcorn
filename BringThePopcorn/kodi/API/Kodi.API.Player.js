@@ -99,7 +99,7 @@
                 if (recursive) {
                     arg = { item: { directory: path } };
                 }
-                return API.kodiRequest('Player.Open', arg);
+                return API.kodiRequest('Player.Open', arg, true);
             }
             Player.open = open;
             function add(path, recursive) {
@@ -107,7 +107,7 @@
                 if (recursive) {
                     arg = { playlistid: 0, item: { directory: path } };
                 }
-                return API.kodiRequest('Playlist.Add', arg);
+                return API.kodiRequest('Playlist.Add', arg, true);
             }
             Player.add = add;
             function moveTo(playerid, index) {
@@ -172,3 +172,4 @@
         })(Player = API.Player || (API.Player = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
+//# sourceMappingURL=Kodi.API.Player.js.map

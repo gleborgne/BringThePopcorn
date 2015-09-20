@@ -257,12 +257,27 @@ module Kodi.API.PlayList {
 }
 
 module Kodi.API.Files {
+    export interface SourceResultSet extends ApiResultSet {
+        sources: File[];
+    }
+
+    export interface FilesResultSet extends ApiResultSet {
+        files: File[];
+    }
+
+    export class File {
+        title: string;
+        file: string;
+        filetype: string;
+        thumbnail: string;
+    }
+
     export function getPicturesDirectory(directory) {
-        return kodiRequest('Files.GetDirectory', { directory: directory, media: 'pictures', properties: ["title", "file", "thumbnail"] }, false, true);
+        return getDirectory('pictures', directory);
     }
 
     export function getPicturesSources() {
-        return kodiRequest('Files.GetSources', { media: 'pictures' }, false, true);
+        return getSources('pictures');
     }
 
     export function download(path) {
@@ -270,11 +285,11 @@ module Kodi.API.Files {
     }
 
     export function getDirectory(media, directory) {
-        return kodiRequest('Files.GetDirectory', { directory: directory, media: media, properties: ["title", "file", "thumbnail"] }, false, true);
+        return kodiRequest<FilesResultSet>('Files.GetDirectory', { directory: directory, media: media, properties: ["title", "file", "thumbnail"] }, false, true);
     }
 
     export function getSources(media) {
-        return kodiRequest('Files.GetSources', { media: media }, false, true);
+        return kodiRequest<SourceResultSet>('Files.GetSources', { media: media }, false, true);
     }
 }
 

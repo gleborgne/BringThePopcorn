@@ -85,6 +85,12 @@
     <Content Include="images\SplashScreen.scale-150.png" />
     <Content Include="images\Square44x44Logo.targetsize-256_altform-unplated.png" />
     <Content Include="js\searchworker.js" />
+    <Content Include="pages\files\files.css" />
+    <Content Include="pages\files\files.js" />
+    <Content Include="pages\files\files.js.map" />
+    <Content Include="pages\files\files.less" />
+    <Content Include="pages\files\files.html" />
+    <TypeScriptCompile Include="pages\files\files.ts" />
     <Content Include="scripts\react\react-with-addons.js" />
     <Content Include="scripts\react\react.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.core.js" />

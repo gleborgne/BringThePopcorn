@@ -49,5 +49,4 @@
         UI.SettingsForm = WinJS.UI.Pages.define(SettingsFormControl.url, SettingsFormControl);
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
-//# sourceMappingURL=../../../BringThePopcorn/controls/settingsform/settingsform.js.map
+//# sourceMappingURL=settingsform.js.map

@@ -27,6 +27,7 @@ this is a template for icon fonts
 .btpo-eject:before,
 .btpo-favourites:before,
 .btpo-file:before,
+.btpo-folder:before,
 .btpo-forward:before,
 .btpo-home:before,
 .btpo-info:before,
@@ -80,31 +81,32 @@ this is a template for icon fonts
 .btpo-eject:before { content: "\E00C" }
 .btpo-favourites:before { content: "\E00D" }
 .btpo-file:before { content: "\E00E" }
-.btpo-forward:before { content: "\E00F" }
-.btpo-home:before { content: "\E010" }
-.btpo-info:before { content: "\E011" }
-.btpo-language:before { content: "\E012" }
-.btpo-menu:before { content: "\E013" }
-.btpo-movie:before { content: "\E014" }
-.btpo-music:before { content: "\E015" }
-.btpo-pause:before { content: "\E016" }
-.btpo-photo:before { content: "\E017" }
-.btpo-play:before { content: "\E018" }
-.btpo-playlocal:before { content: "\E019" }
-.btpo-power:before { content: "\E01A" }
-.btpo-refresh:before { content: "\E01B" }
-.btpo-remotecontrol:before { content: "\E01C" }
-.btpo-rewind:before { content: "\E01D" }
-.btpo-save:before { content: "\E01E" }
-.btpo-search:before { content: "\E01F" }
-.btpo-settings:before { content: "\E020" }
-.btpo-share:before { content: "\E021" }
-.btpo-speaker-mute:before { content: "\E022" }
-.btpo-speaker-off:before { content: "\E023" }
-.btpo-speaker-on:before { content: "\E024" }
-.btpo-stop:before { content: "\E025" }
-.btpo-subtitle:before { content: "\E026" }
-.btpo-television:before { content: "\E027" }
-.btpo-wakeup:before { content: "\E028" }
-.btpo-zoom-minus:before { content: "\E029" }
-.btpo-zoom-plus:before { content: "\E02A" }
+.btpo-folder:before { content: "\E00F" }
+.btpo-forward:before { content: "\E010" }
+.btpo-home:before { content: "\E011" }
+.btpo-info:before { content: "\E012" }
+.btpo-language:before { content: "\E013" }
+.btpo-menu:before { content: "\E014" }
+.btpo-movie:before { content: "\E015" }
+.btpo-music:before { content: "\E016" }
+.btpo-pause:before { content: "\E017" }
+.btpo-photo:before { content: "\E018" }
+.btpo-play:before { content: "\E019" }
+.btpo-playlocal:before { content: "\E01A" }
+.btpo-power:before { content: "\E01B" }
+.btpo-refresh:before { content: "\E01C" }
+.btpo-remotecontrol:before { content: "\E01D" }
+.btpo-rewind:before { content: "\E01E" }
+.btpo-save:before { content: "\E01F" }
+.btpo-search:before { content: "\E020" }
+.btpo-settings:before { content: "\E021" }
+.btpo-share:before { content: "\E022" }
+.btpo-speaker-mute:before { content: "\E023" }
+.btpo-speaker-off:before { content: "\E024" }
+.btpo-speaker-on:before { content: "\E025" }
+.btpo-stop:before { content: "\E026" }
+.btpo-subtitle:before { content: "\E027" }
+.btpo-television:before { content: "\E028" }
+.btpo-wakeup:before { content: "\E029" }
+.btpo-zoom-minus:before { content: "\E02A" }
+.btpo-zoom-plus:before { content: "\E02B" }

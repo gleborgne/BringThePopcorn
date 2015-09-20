@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>files</title>
+
+    <link href="files.css" rel="stylesheet" />
+    <script src="files.js"></script>
+</head>
+<body>
+    <div class="pagefiles fragment">
+        <header class="page-header" aria-label="Header content" role="banner">
+            <button class="bc" tap="navback" disabled member="btnup">&#xE0D5;</button>
+            <h1 class="titlearea win-type-ellipsis">
+                <span class="pagetitle" member="pagetitle">files</span>
+            </h1>
+            <div class="actions" member="currentItemActions">
+                <button class="btpo-play btn currentItemAction" member="btnplay" tap="playCurrent"></button>
+                <button class="btpo-add btn currentItemAction" member="btnadd" tap="addCurrent"></button>
+            </div>
+        </header>
+        <section class="page-section" aria-label="Main content" role="main">       
+            <div id="folderitemtemplate" member data-win-control="WinJS.Binding.Template">
+                <div class="file-item folder">
+                    <div class="picto">
+                        <div class="btpo-folder"></div>                        
+                    </div>
+                    <div class="label" data-win-bind="innerText: label"></div>
+                    <div class="actions"></div>
+                </div>
+            </div>     
+            <div id="fileitemtemplate" member data-win-control="WinJS.Binding.Template">
+                <div class="file-item file">
+                    <div class="picto">
+                        <div class="btpo-file"></div>
+                        <div class="thumbnail" data-win-bind="src : thumbnail Kodi.Utils.toThumbnailBg"></div>
+                    </div>
+                    <div class="label" data-win-bind="innerText: label"></div>
+                    <div class="actions">
+                        <button class="btpo-play"></button>
+                        <button class="btpo-add"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="filesList" member data-win-control="WinJS.UI.ListView" data-win-options="{ tapBehavior: 'none', selectionMode: 'none', layout: { type: WinJS.UI.ListLayout, orientation: 'vertical' }}">
+
+            </div>
+            <div id="mediacontainer" member>
+                <div class="mediaitem" mediatype="videos" tap="picmedia">
+                    <i class="btpo-movie"></i> Videos
+                </div>
+                <div class="mediaitem" mediatype="music" tap="picmedia">
+                    <i class="btpo-music"></i> Music
+                </div>
+                <div class="mediaitem" mediatype="pictures" tap="picmedia">
+                    <i class="btpo-photo"></i> Images
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
