@@ -1,6 +1,7 @@
 ﻿declare module WinJSContrib.UI {
     var FOWrapper: any;
     var enableSystemBackButton: boolean;
+    var enableSystemBackButtonVisibility: boolean;
 }
 
 interface JQuery {
@@ -35,7 +36,8 @@ module BtPo {
     var activation = Windows.ApplicationModel.Activation;
 
     
-    WinJSContrib.UI.enableSystemBackButton = true;
+    WinJSContrib.UI.enableSystemBackButton = false;
+    WinJSContrib.UI.enableSystemBackButtonVisibility = true;
     WinJSContrib.UI.defaultTapBehavior.awaitAnim = true;
     WinJSContrib.UI.defaultTapBehavior.animDown = function (elt) {
         var w = elt.clientWidth;

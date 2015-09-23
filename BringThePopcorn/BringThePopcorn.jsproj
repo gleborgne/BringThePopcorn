@@ -63,6 +63,7 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
     <PackageCertificateThumbprint>971FCFD46593E555EF59CC1E381E71E61AA59CFA</PackageCertificateThumbprint>
+    <AppxBundle>Never</AppxBundle>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifest Include="package.appxmanifest">
@@ -99,6 +100,7 @@
     <Content Include="scripts\winjscontrib\js\winjscontrib.search.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.search.worker.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.ui.datasourcemanager.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.navigator.js" />
     <Content Include="todo.txt" />
     <TypeScriptCompile Include="controls\genrespicker\genrepicker.ts" />
     <Content Include="controls\genrespicker\genrepicker.js" />
