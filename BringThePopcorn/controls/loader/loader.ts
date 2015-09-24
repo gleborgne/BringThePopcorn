@@ -42,7 +42,8 @@
             }).then(function () {
                 WinJS.Application.queueEvent({ type: "ServerChanged" });
                 WinJS.UI.Animation.fadeOut(page.message);
-                page.container.classList.add('exit');
+                if (page.container)
+                    page.container.classList.add('exit');
                 //return WinJSContrib.UI.afterTransition(page.container);
                 return WinJS.Promise.timeout(700);
             }).then(function () {

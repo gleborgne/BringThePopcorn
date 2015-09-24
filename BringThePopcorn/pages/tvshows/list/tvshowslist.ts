@@ -188,11 +188,11 @@
         }
 
         showMenu() {
-            this.menu.classList.add("visible");
+            if (this.menu) this.menu.classList.add("visible");
         }
 
         hideMenu() {
-            this.menu.classList.remove("visible");
+            if (this.menu) this.menu.classList.remove("visible");
         }
     }
     

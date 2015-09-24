@@ -1,7 +1,7 @@
 ﻿declare module WinJSContrib.Logs.Appenders {
     interface ILogAppender {
         clone(): any;
-        format(message: string, level: Logs.Levels): any;
+        format(logger: Logs.Logger, message: string, level: Logs.Levels): any;
         log(logger: Logs.Logger, message: string, level: Logs.Levels): any;
         group(title: string): any;
         groupCollapsed(title: string): any;
@@ -41,7 +41,7 @@
          * @function WinJSContrib.Logs.Appenders.ConsoleAppender.prototype.groupEnd
          */
         groupEnd(): void;
-        format(message: string, level: Logs.Levels): string;
+        format(logger: Logger, message: string, level: Logs.Levels): string;
     }
 }
 declare module WinJSContrib.Logs {
@@ -82,7 +82,9 @@ declare module WinJSContrib.Logs {
     }
     interface ILoggerConfig {
         level: Logs.Levels;
-        hideLevelInMessage?: boolean;
+        prefix?: string;
+        showLevelInMessage?: boolean;
+        showLoggerNameInMessage?: boolean;
         appenders?: any[];
     }
     var defaultConfig: ILoggerConfig;
@@ -104,13 +106,22 @@ declare module WinJSContrib.Logs {
     class Logger {
         appenders: Array<WinJSContrib.Logs.Appenders.ILogAppender>;
         _config: ILoggerConfig;
+        _level: Logs.Levels;
         name: string;
+        static noop: (message: string, ...args: any[]) => void;
+        static getLogFn: (level: Levels) => (message: string) => void;
+        static verbose: (message: string) => void;
+        static debug: (message: string) => void;
+        static info: (message: string) => void;
+        static warn: (message: string) => void;
+        static error: (message: string) => void;
         /**
          * @class WinJSContrib.Logs.Logger
          * @param {Object} config logger configuration
          */
         constructor(config: any);
         Config: ILoggerConfig;
+        Level: Logs.Levels;
         /**
          * add appender to logger
          * @function WinJSContrib.Logs.Logger.prototype.addAppender
@@ -124,14 +135,6 @@ declare module WinJSContrib.Logs {
          * @param {WinJSContrib.Logs.Levels} log level
          */
         log(message: string, level: Logs.Levels, ...args: any[]): void;
-        /**
-         * format log entry
-         * @function WinJSContrib.Logs.Logger.prototype.format
-         * @param {string} message log message
-         * @param {string} group group/category for the entry
-         * @param {WinJSContrib.Logs.Levels} log level
-         */
-        format(message: string, level: Logs.Levels): string;
         /**
          * add debug log entry
          * @function WinJSContrib.Logs.Logger.prototype.debug

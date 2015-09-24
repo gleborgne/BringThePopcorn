@@ -122,10 +122,12 @@
                     }
                 };
                 MoviesListPage.prototype.showMenu = function () {
-                    this.menu.classList.add("visible");
+                    if (this.menu)
+                        this.menu.classList.add("visible");
                 };
                 MoviesListPage.prototype.hideMenu = function () {
-                    this.menu.classList.remove("visible");
+                    if (this.menu)
+                        this.menu.classList.remove("visible");
                 };
                 MoviesListPage.url = "/pages/movies/list/movieslist.html";
                 MoviesListPage.moviesGroups = {
@@ -167,4 +169,3 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=movieslist.js.map

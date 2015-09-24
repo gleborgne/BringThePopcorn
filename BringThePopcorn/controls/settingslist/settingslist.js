@@ -37,7 +37,7 @@
                                     Kodi.API.currentSettings = setting;
                                     return BtPo.UI.DataLoader.showLoader(true);
                                 }, function (err) {
-                                    console.error(err);
+                                    console.info(err);
                                 });
                             }, 4000));
                         }
@@ -118,4 +118,3 @@
         UI.SettingsList = WinJS.UI.Pages.define(SettingsListControl.url, SettingsListControl);
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=settingslist.js.map

@@ -72,7 +72,7 @@
                     return itemPromise.then((item) => {
                         return this.flipviewtemplate.render(item.data).then((rendered) => {
                             WinJSContrib.UI.tap(rendered, (elt) => {
-                                if (!this.element.classList.contains("inactive")) {
+                                if (this.element && !this.element.classList.contains("inactive")) {
                                     WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true });
                                 }
                             }, { disableAnimation: true })
@@ -108,7 +108,7 @@
                     return itemPromise.then((item) => {
                         return this.flipviewtemplate.render(item.data).then((rendered) => {
                             WinJSContrib.UI.tap(rendered, (elt) => {
-                                if (!this.element.classList.contains("inactive")) {
+                                if (this.element && !this.element.classList.contains("inactive")) {
                                     WinJS.Navigation.navigate("/pages/tvshows/seriedetail/tvshowsseriedetail.html", { tvshow: item.data, navigateStacked: true });
                                 }
                             }, { disableAnimation: true })

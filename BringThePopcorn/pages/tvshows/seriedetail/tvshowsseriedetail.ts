@@ -27,8 +27,8 @@
                     if (seasons.seasons.length == 1) {
                         var season = seasons.seasons[0];
                         return Kodi.API.Videos.TVShows.getTVShowEpisodes(season.tvshowid, season.season).then(function (episodes) {
-                            (<any>season).episodes = episodes;
-                            return seasons;
+                            (<any>season).episodes = episodes.episodes;
+                            return seasons.seasons;
                         });
                     }
                     return seasons.seasons;

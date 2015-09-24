@@ -4,7 +4,7 @@
     (function (UI) {
         var GenrePickerControl = (function () {
             function GenrePickerControl(element, options) {
-                var ctrl = this;
+                var _this = this;
                 this.element = element || document.createElement('DIV');
                 options = options || {};
                 this.element.winControl = this;
@@ -14,34 +14,38 @@
                 this.eventTracker = new WinJSContrib.UI.EventTracker();
                 var nav = WinJS.Navigation;
                 this.eventTracker.addEvent(nav, "beforenavigate", function (arg) {
-                    ctrl.__pickComplete();
+                    _this.__pickComplete();
                 });
                 WinJS.UI.setOptions(this, options);
             }
             GenrePickerControl.prototype.render = function () {
-                var ctrl = this;
-                ctrl.element.innerHTML = '<div class="btnclose"><i class="btpo-close"></i></div><div class="genre-items"></div>';
-                ctrl.itemsContainer = ctrl.element.querySelector(".genre-items");
-                ctrl.btnclose = ctrl.element.querySelector(".btnclose");
-                WinJSContrib.UI.tap(ctrl.btnclose, function () {
-                    ctrl.__pickComplete();
+                var _this = this;
+                if (!this.element)
+                    return;
+                this.element.innerHTML = '<div class="btnclose"><i class="btpo-close"></i></div><div class="genre-items"></div>';
+                this.itemsContainer = this.element.querySelector(".genre-items");
+                this.btnclose = this.element.querySelector(".btnclose");
+                WinJSContrib.UI.tap(this.btnclose, function () {
+                    _this.__pickComplete();
                 });
             };
             GenrePickerControl.prototype.pickGenre = function (genres, selected) {
-                var ctrl = this;
+                var _this = this;
                 var p = new WinJS.Promise(function (complete, error) {
-                    ctrl.__pickComplete = complete;
-                    ctrl.__pickError = error;
+                    _this.__pickComplete = complete;
+                    _this.__pickError = error;
                 });
                 this.genres = genres;
                 this.selected = selected;
-                ctrl.renderGenres();
+                this.renderGenres();
                 return p;
             };
             GenrePickerControl.prototype.renderGenres = function () {
-                var ctrl = this;
-                ctrl.itemsContainer.innerHTML = "";
-                if (ctrl.genres) {
+                var _this = this;
+                if (!this.itemsContainer)
+                    return;
+                this.itemsContainer.innerHTML = "";
+                if (this.genres) {
                     var container = document.createDocumentFragment();
                     var items = [];
                     var e = document.createElement("DIV");
@@ -49,35 +53,37 @@
                     e.style.opacity = "0";
                     e.innerText = "all";
                     WinJSContrib.UI.tap(e, function () {
-                        ctrl.__pickComplete("all");
+                        _this.__pickComplete("all");
                     });
                     items.push(e);
                     container.appendChild(e);
-                    ctrl.genres.forEach(function (genre) {
+                    this.genres.forEach(function (genre) {
                         var e = document.createElement("DIV");
                         e.className = "genre";
                         e.style.opacity = "0";
                         e.innerText = genre.label;
                         WinJSContrib.UI.tap(e, function () {
-                            ctrl.__pickComplete(genre);
+                            _this.__pickComplete(genre);
                         });
                         items.push(e);
                         container.appendChild(e);
                     });
-                    ctrl.itemsContainer.appendChild(container);
+                    this.itemsContainer.appendChild(container);
                     WinJS.UI.Animation.enterPage(items);
                 }
             };
             GenrePickerControl.prototype.dispose = function () {
                 WinJS.Utilities.disposeSubTree(this.element);
                 this.element = null;
-                this.eventTracker.dispose();
+                if (this.eventTracker) {
+                    this.eventTracker.dispose();
+                }
             };
             GenrePickerControl.prototype.hide = function () {
-                var ctrl = this;
-                return WinJSContrib.UI.Animation.fadeOut(ctrl.element, { duration: 100 }).then(function () {
-                    $(ctrl.element).remove();
-                    ctrl.dispose();
+                var _this = this;
+                return WinJSContrib.UI.Animation.fadeOut(this.element, { duration: 100 }).then(function () {
+                    $(_this.element).remove();
+                    _this.dispose();
                 });
             };
             return GenrePickerControl;
@@ -102,4 +108,3 @@
         };
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=genrepicker.js.map

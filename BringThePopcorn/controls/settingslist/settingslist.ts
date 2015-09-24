@@ -42,7 +42,7 @@
                                 Kodi.API.currentSettings = setting;
                                 return BtPo.UI.DataLoader.showLoader(true);
                             }, function (err) {
-                                console.error(err);
+                                console.info(err);
                             });
                         }, 4000));
                     }

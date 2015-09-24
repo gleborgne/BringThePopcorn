@@ -82,10 +82,12 @@ var WinJSContrib;
                 };
                 ConsoleAppender.prototype.format = function (logger, message, level) {
                     var finalMessage = "";
+                    if (logger.Config && logger.Config.prefix)
+                        finalMessage += logger.Config.prefix + " # ";
                     if (this.config.showLoggerNameInMessage)
-                        finalMessage += logger.name + " - ";
+                        finalMessage += logger.name + " # ";
                     if (this.config.showLevelInMessage)
-                        finalMessage += Logs.logginLevelToString(level) + " - ";
+                        finalMessage += Logs.logginLevelToString(level) + " # ";
                     finalMessage += message;
                     return finalMessage;
                 };
@@ -463,41 +465,25 @@ var WinJSContrib;
                     args[_i - 1] = arguments[_i];
                 }
             };
-            Logger.verbose = function (message) {
-                var args = [];
-                for (var _i = 1; _i < arguments.length; _i++) {
-                    args[_i - 1] = arguments[_i];
-                }
-                this.log(message, Logs.Levels.verbose, args);
+            Logger.getLogFn = function (level) {
+                return function (message) {
+                    var args = null;
+                    if (arguments.length > 1) {
+                        args = [];
+                        for (var i = 1; i < arguments.length; i++) {
+                            args.push(arguments[i]);
+                        }
+                        this.log(message, level, args);
+                    }
+                    else
+                        this.log(message, level);
+                };
             };
-            Logger.debug = function (message) {
-                var args = [];
-                for (var _i = 1; _i < arguments.length; _i++) {
-                    args[_i - 1] = arguments[_i];
-                }
-                this.log(message, Logs.Levels.debug, args);
-            };
-            Logger.info = function (message) {
-                var args = [];
-                for (var _i = 1; _i < arguments.length; _i++) {
-                    args[_i - 1] = arguments[_i];
-                }
-                this.log(message, Logs.Levels.info, args);
-            };
-            Logger.warn = function (message) {
-                var args = [];
-                for (var _i = 1; _i < arguments.length; _i++) {
-                    args[_i - 1] = arguments[_i];
-                }
-                this.log(message, Logs.Levels.warn, args);
-            };
-            Logger.error = function (message) {
-                var args = [];
-                for (var _i = 1; _i < arguments.length; _i++) {
-                    args[_i - 1] = arguments[_i];
-                }
-                this.log(message, Logs.Levels.error, args);
-            };
+            Logger.verbose = Logger.getLogFn(Logs.Levels.verbose);
+            Logger.debug = Logger.getLogFn(Logs.Levels.debug);
+            Logger.info = Logger.getLogFn(Logs.Levels.info);
+            Logger.warn = Logger.getLogFn(Logs.Levels.warn);
+            Logger.error = Logger.getLogFn(Logs.Levels.error);
             return Logger;
         })();
         Logs.Logger = Logger;
@@ -1913,6 +1899,8 @@ var WinJSContrib;
         }
         UI.removeElementAnimation = removeElementAnimation;
         function bindAction(el, element, control) {
+            if (!el)
+                return;
             el.classList.add('page-action');
             var actionName = el.dataset.pageAction || el.getAttribute('tap');
             var action = control[actionName];
@@ -1935,8 +1923,6 @@ var WinJSContrib;
                         });
                         if (tmp) {
                             actionArgs = tmp;
-                        }
-                        else {
                         }
                     }
                     return p.then(function () {
@@ -1964,6 +1950,8 @@ var WinJSContrib;
         }
         UI.bindPageActions = bindPageActions;
         function bindLink(el, element) {
+            if (!el)
+                return;
             el.classList.add('page-link');
             var applink = el.getAttribute('applink');
             var target = el.dataset.pageLink || el.getAttribute('linkto');
@@ -2039,6 +2027,8 @@ var WinJSContrib;
         }
         UI.parentNavigator = parentNavigator;
         function bindMember(el, element, control) {
+            if (!el)
+                return;
             el.classList.add('page-member');
             var memberName = el.dataset.pageMember || el.getAttribute('member');
             if (!memberName)
@@ -2584,7 +2574,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.addClass = function (classname) {
-                this.element.classList.add(classname);
+                if (this.element)
+                    this.element.classList.add(classname);
                 return this;
             };
             /**
@@ -2594,7 +2585,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.className = function (classname) {
-                this.element.className = classname;
+                if (this.element)
+                    this.element.className = classname;
                 return this;
             };
             /**
@@ -2604,7 +2596,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.opacity = function (opacity) {
-                this.element.style.opacity = opacity;
+                if (this.element)
+                    this.element.style.opacity = opacity;
                 return this;
             };
             /**
@@ -2614,7 +2607,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.display = function (display) {
-                this.element.style.display = display;
+                if (this.element)
+                    this.element.style.display = display;
                 return this;
             };
             /**
@@ -2623,7 +2617,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.hide = function () {
-                this.element.style.display = 'none';
+                if (this.element)
+                    this.element.style.display = 'none';
                 return this;
             };
             /**
@@ -2633,7 +2628,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.visibility = function (visibility) {
-                this.element.style.visibility = visibility;
+                if (this.element)
+                    this.element.style.visibility = visibility;
                 return this;
             };
             /**
@@ -2643,7 +2639,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.text = function (text) {
-                this.element.textContent = text;
+                if (this.element)
+                    this.element.textContent = text;
                 return this;
             };
             /**
@@ -2653,7 +2650,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.html = function (text) {
-                this.element.innerHTML = text;
+                if (this.element)
+                    this.element.innerHTML = text;
                 return this;
             };
             /**
@@ -2664,7 +2662,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.attr = function (name, val) {
-                this.element.setAttribute(name, val);
+                if (this.element)
+                    this.element.setAttribute(name, val);
                 return this;
             };
             /**
@@ -2675,7 +2674,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.style = function (name, val) {
-                this.element.style[name] = val;
+                if (this.element)
+                    this.element.style[name] = val;
                 return this;
             };
             /**
@@ -2700,7 +2700,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.appendTo = function (elt) {
-                elt.appendChild(this.element);
+                if (this.element && elt)
+                    elt.appendChild(this.element);
                 return this;
             };
             /**
@@ -2711,7 +2712,8 @@ var WinJSContrib;
              * @returns {WinJSContrib.UI.FluentDOM}
              */
             FluentDOM.prototype.tap = function (callback, options) {
-                WinJSContrib.UI.tap(this.element, callback, options);
+                if (this.element)
+                    WinJSContrib.UI.tap(this.element, callback, options);
                 return this;
             };
             /**

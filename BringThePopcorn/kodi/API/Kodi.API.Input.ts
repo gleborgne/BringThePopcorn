@@ -4,7 +4,8 @@
     //}
     
     export function mute(mute:boolean) {
-        Kodi.NowPlaying.current.muted = mute;
+        if (Kodi.NowPlaying.current)
+            Kodi.NowPlaying.current.muted = mute;
         return API.kodiRequest<any>('Application.SetMute', { mute: mute });
     }
 
@@ -17,7 +18,8 @@
     }
     
     export function volume(volume) {
-        Kodi.NowPlaying.current.volume = volume;
+        if (Kodi.NowPlaying.current)
+            Kodi.NowPlaying.current.volume = volume;
         return API.kodiRequest<any>('Application.SetVolume', { volume: volume });
     }
 

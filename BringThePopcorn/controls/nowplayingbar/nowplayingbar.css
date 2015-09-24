@@ -25,6 +25,11 @@
   width: 100%;
   height: 100%;
 }
+.nowplayingbar .loading-state progress {
+  width: 32px;
+  height: 32px;
+  color: #12b2e7;
+}
 .nowplayingbar .desc {
   flex: 1;
   width: 100%;

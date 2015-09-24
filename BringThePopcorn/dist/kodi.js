@@ -68,10 +68,7 @@ var Kodi;
         };
         var searchIndex = null;
         var library;
-        var searchResults = {};
-        function activeAllMenus() {
-            $('#menumovies, #menumusic, #menuartists, #menutvshow, #menupictures').show();
-        }
+        //var searchResults = {};
         function DistinctArray(array, ignorecase) {
             if (typeof ignorecase == "undefined" || array == null || array.length == 0)
                 return null;
@@ -101,16 +98,7 @@ var Kodi;
         function videoDataCalls() {
             return [
                 Kodi.API.Videos.Movies.getAllMovies(),
-                Kodi.API.Videos.TVShows.getAllTVShows().then(function (tvshows) {
-                    if (tvshows && tvshows.tvshows) {
-                        return WinJSContrib.Promise.parallel(tvshows.tvshows, function (tvshow) {
-                            return Kodi.API.Videos.TVShows.loadTVShow(tvshow);
-                        }).then(function () {
-                            return tvshows;
-                        });
-                    }
-                    return tvshows;
-                }),
+                Kodi.API.Videos.TVShows.getAllTVShows(),
                 Kodi.API.Videos.Movies.getMovieGenres(),
                 Kodi.API.Videos.TVShows.getTVShowsGenres(),
                 Kodi.API.Videos.Movies.getRecentMovies(),
@@ -247,7 +235,7 @@ var Kodi;
             library.moviesets = data[6];
         }
         function buildLibrary(data) {
-            var tmplibrary = {};
+            var tmplibrary = { syncdate: new Date() };
             if (searchIndex) {
                 searchIndex.dispose();
             }
@@ -264,11 +252,14 @@ var Kodi;
                 });
             }
             library = tmplibrary;
-            searchIndex.save();
-            if (searchIndex) {
-                searchIndex.dispose();
-                searchIndex = null;
-            }
+            searchIndex.save().then(function () {
+                if (searchIndex) {
+                    searchIndex.dispose();
+                    searchIndex = null;
+                }
+            });
+            WinJSContrib.DataContainer.current.save("library-" + Kodi.API.currentSettings.name, library);
+            return tmplibrary;
         }
         function showHideMenus() {
             if (!library.movies || !library.movies.movies || !library.movies.movies.length) {
@@ -318,19 +309,36 @@ var Kodi;
             var prom = new WinJS.Promise(function (complete, error) {
                 Kodi.API.properties().done(function (sysprops) {
                     if (sysprops) {
-                        Kodi.NowPlaying.current.volume = sysprops.volume;
-                        Kodi.NowPlaying.current.muted = sysprops.muted;
+                        if (Kodi.NowPlaying.current) {
+                            Kodi.NowPlaying.current.volume = sysprops.volume;
+                            Kodi.NowPlaying.current.muted = sysprops.muted;
+                        }
                         Kodi.API.version = sysprops.version;
                     }
-                    searchResults = {};
-                    WinJS.Promise.join(rootDataCalls()).done(function (data) {
-                        activeAllMenus();
-                        buildLibrary(data);
-                        showHideMenus();
-                        WinJS.Application.queueEvent({ type: 'appdata.changed', catalog: library });
-                        complete(library);
-                    }, function (err) {
-                        error(err);
+                    //searchResults = {};
+                    var loadFromAPI = function () {
+                        Kodi.NowPlaying.current.loadingLibrary = true;
+                        return WinJS.Promise.join(rootDataCalls()).then(function (data) {
+                            buildLibrary(data);
+                            showHideMenus();
+                            WinJS.Application.queueEvent({ type: 'appdata.changed', catalog: library });
+                            Kodi.NowPlaying.current.loadingLibrary = false;
+                        }, function (err) {
+                            Kodi.NowPlaying.current.loadingLibrary = false;
+                            return WinJS.Promise.wrapError(err);
+                        });
+                    };
+                    WinJSContrib.DataContainer.current.read("library-" + Kodi.API.currentSettings.name).then(function (savedlibrary) {
+                        if (savedlibrary) {
+                            library = savedlibrary;
+                            showHideMenus();
+                            complete(library);
+                            loadFromAPI().then(function () {
+                            }, function () {
+                            });
+                            return;
+                        }
+                        loadFromAPI().then(complete, error);
                     });
                 }, function (err) {
                     error(err);
@@ -341,8 +349,10 @@ var Kodi;
         Data.loadRootData = loadRootData;
         function checkSystemProperties() {
             Kodi.API.properties().done(function (sysprops) {
-                Kodi.NowPlaying.current.volume = sysprops.volume;
-                Kodi.NowPlaying.current.muted = sysprops.muted;
+                if (Kodi.NowPlaying.current) {
+                    Kodi.NowPlaying.current.volume = sysprops.volume;
+                    Kodi.NowPlaying.current.muted = sysprops.muted;
+                }
             });
         }
         Data.checkSystemProperties = checkSystemProperties;
@@ -434,7 +444,7 @@ var Kodi;
             id: null, position: 0, progress: 0, enabled: 0, speed: 0, label: '', time: '', totaltime: '', type: null,
             thumbnail: undefined, playerid: null, playlistid: null, volume: 0, muted: false, reachable: 0,
             subtitleenabled: false, currentsubtitle: null, currentaudiostream: null, expanded: false,
-            checking: false, hasLanguages: false, hasSubtitles: false, hasLanguagesOrSubtitles: false,
+            checking: false, hasLanguages: false, hasSubtitles: false, hasLanguagesOrSubtitles: false, loadingLibrary: false,
             isPlaying: false, isPlayingMusic: false, isPlayingVideo: false, isPlayingTvShow: false, isPlayingMovie: false
         });
         NowPlaying.current = new ObservablePlaying();
@@ -481,6 +491,8 @@ var Kodi;
         NowPlaying.checkError = checkError;
         function check(standby) {
             return new WinJS.Promise(function (complete, error) {
+                if (!NowPlaying.current)
+                    NowPlaying.current = new ObservablePlaying();
                 if (standby) {
                     NowPlaying.current.checking = true;
                 }
@@ -943,7 +955,8 @@ var Kodi;
             //    return API.kodiRequest<any>('Application.GetProperties', { properties: ["muted", "volume", "version"] });
             //}
             function mute(mute) {
-                Kodi.NowPlaying.current.muted = mute;
+                if (Kodi.NowPlaying.current)
+                    Kodi.NowPlaying.current.muted = mute;
                 return API.kodiRequest('Application.SetMute', { mute: mute });
             }
             Input.mute = mute;
@@ -956,7 +969,8 @@ var Kodi;
             }
             Input.volumeUnmute = volumeUnmute;
             function volume(volume) {
-                Kodi.NowPlaying.current.volume = volume;
+                if (Kodi.NowPlaying.current)
+                    Kodi.NowPlaying.current.volume = volume;
                 return API.kodiRequest('Application.SetVolume', { volume: volume });
             }
             Input.volume = volume;

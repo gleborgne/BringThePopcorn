@@ -8,7 +8,8 @@
             //    return API.kodiRequest<any>('Application.GetProperties', { properties: ["muted", "volume", "version"] });
             //}
             function mute(mute) {
-                Kodi.NowPlaying.current.muted = mute;
+                if (Kodi.NowPlaying.current)
+                    Kodi.NowPlaying.current.muted = mute;
                 return API.kodiRequest('Application.SetMute', { mute: mute });
             }
             Input.mute = mute;
@@ -21,7 +22,8 @@
             }
             Input.volumeUnmute = volumeUnmute;
             function volume(volume) {
-                Kodi.NowPlaying.current.volume = volume;
+                if (Kodi.NowPlaying.current)
+                    Kodi.NowPlaying.current.volume = volume;
                 return API.kodiRequest('Application.SetVolume', { volume: volume });
             }
             Input.volume = volume;
@@ -84,4 +86,3 @@
         })(Input = API.Input || (API.Input = {}));
     })(API = Kodi.API || (Kodi.API = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.API.Input.js.map

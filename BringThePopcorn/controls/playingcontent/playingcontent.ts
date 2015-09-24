@@ -40,37 +40,40 @@
         manageSmallScreenMenu(menu: HTMLElement) {
             var targetid = menu.getAttribute("target");
             if (targetid) {
-                var target = <HTMLElement>document.getElementById(targetid);
+                
                 WinJSContrib.UI.tap(menu, function () {
-                    var currentSelection = $("#nowplayingcontent .panel.selected");
-                    if (!target.classList.contains("selected") || currentSelection.length > 1) {
-                        $("#nowplayingcontent .menubar .menu.selected").removeClass("selected");
+                    var target = <HTMLElement>document.getElementById(targetid);
+                    if (target) {
+                        var currentSelection = $("#nowplayingcontent .panel.selected");
+                        if (!target.classList.contains("selected") || currentSelection.length > 1) {
+                            $("#nowplayingcontent .menubar .menu.selected").removeClass("selected");
 
-                        menu.classList.add("selected");
+                            menu.classList.add("selected");
 
-                        if (currentSelection.length) {
-                            dynamics.animate(currentSelection.get(0), { translateX: currentSelection.outerWidth() + 50 }, {
+                            if (currentSelection.length) {
+                                dynamics.animate(currentSelection.get(0), { translateX: currentSelection.outerWidth() + 50 }, {
+                                    type: dynamics.spring,
+                                    duration: 350,
+                                    frequency: 1,
+                                    friction: 200,
+                                    complete: function () {
+                                        currentSelection.removeClass("selected");
+                                        currentSelection.get(0).style.transform = "";
+                                    }
+                                });
+                            }
+
+                            dynamics.animate(target, { translateX: 0 }, {
                                 type: dynamics.spring,
-                                duration: 350,
-                                frequency: 1,
-                                friction: 200,
+                                duration: 500,
+                                frequency: 100,
+                                friction: 210,
                                 complete: function () {
-                                    currentSelection.removeClass("selected");
-                                    currentSelection.get(0).style.transform = "";
+                                    target.classList.add("selected");
+                                    target.style.transform = "";
                                 }
                             });
                         }
-
-                        dynamics.animate(target, { translateX: 0 }, {
-                            type: dynamics.spring,
-                            duration: 500,
-                            frequency: 100,
-                            friction: 210,
-                            complete: function () {
-                                target.classList.add("selected");
-                                target.style.transform = "";
-                            }
-                        });
                     }
                 });
             }

@@ -17,8 +17,8 @@
                             if (seasons.seasons.length == 1) {
                                 var season = seasons.seasons[0];
                                 return Kodi.API.Videos.TVShows.getTVShowEpisodes(season.tvshowid, season.season).then(function (episodes) {
-                                    season.episodes = episodes;
-                                    return seasons;
+                                    season.episodes = episodes.episodes;
+                                    return seasons.seasons;
                                 });
                             }
                             return seasons.seasons;
@@ -166,4 +166,3 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=tvshowsseriedetail.js.map

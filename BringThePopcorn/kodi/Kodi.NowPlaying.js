@@ -6,7 +6,7 @@
             id: null, position: 0, progress: 0, enabled: 0, speed: 0, label: '', time: '', totaltime: '', type: null,
             thumbnail: undefined, playerid: null, playlistid: null, volume: 0, muted: false, reachable: 0,
             subtitleenabled: false, currentsubtitle: null, currentaudiostream: null, expanded: false,
-            checking: false, hasLanguages: false, hasSubtitles: false, hasLanguagesOrSubtitles: false,
+            checking: false, hasLanguages: false, hasSubtitles: false, hasLanguagesOrSubtitles: false, loadingLibrary: false,
             isPlaying: false, isPlayingMusic: false, isPlayingVideo: false, isPlayingTvShow: false, isPlayingMovie: false
         });
         NowPlaying.current = new ObservablePlaying();
@@ -53,6 +53,8 @@
         NowPlaying.checkError = checkError;
         function check(standby) {
             return new WinJS.Promise(function (complete, error) {
+                if (!NowPlaying.current)
+                    NowPlaying.current = new ObservablePlaying();
                 if (standby) {
                     NowPlaying.current.checking = true;
                 }
@@ -165,4 +167,3 @@
         NowPlaying.init = init;
     })(NowPlaying = Kodi.NowPlaying || (Kodi.NowPlaying = {}));
 })(Kodi || (Kodi = {}));
-//# sourceMappingURL=Kodi.NowPlaying.js.map

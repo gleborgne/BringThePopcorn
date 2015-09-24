@@ -122,10 +122,12 @@
                     }
                 };
                 TvShowsListPage.prototype.showMenu = function () {
-                    this.menu.classList.add("visible");
+                    if (this.menu)
+                        this.menu.classList.add("visible");
                 };
                 TvShowsListPage.prototype.hideMenu = function () {
-                    this.menu.classList.remove("visible");
+                    if (this.menu)
+                        this.menu.classList.remove("visible");
                 };
                 TvShowsListPage.url = "/pages/tvshows/list/tvshowslist.html";
                 TvShowsListPage.tvshowsGroups = {
@@ -167,4 +169,3 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=tvshowslist.js.map

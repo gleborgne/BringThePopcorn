@@ -110,10 +110,12 @@
                     }
                 };
                 AlbumsListPage.prototype.showMenu = function () {
-                    this.menu.classList.add("visible");
+                    if (this.menu)
+                        this.menu.classList.add("visible");
                 };
                 AlbumsListPage.prototype.hideMenu = function () {
-                    this.menu.classList.remove("visible");
+                    if (this.menu)
+                        this.menu.classList.remove("visible");
                 };
                 AlbumsListPage.url = "/pages/albums/list/albumslist.html";
                 AlbumsListPage.albumsGroups = {
@@ -151,4 +153,3 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=albumslist.js.map

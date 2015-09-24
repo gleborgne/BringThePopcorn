@@ -14,4 +14,3 @@
         UI.MainMenu = WinJS.UI.Pages.define(MainMenuControl.url, MainMenuControl);
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=menu.js.map

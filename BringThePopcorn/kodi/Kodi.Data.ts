@@ -22,6 +22,7 @@
     WinJS.Application.addEventListener("MusicLibrary.OnRemove", _invalidate);
 
     export interface IMediaLibrary {
+        syncdate: Date,
         artists: API.Music.Artist[];
         musicPictures: any[];
         moviesPictures: any[];
@@ -61,11 +62,7 @@
     };
     var searchIndex = null;
     var library: IMediaLibrary;
-    var searchResults = {};
-
-    function activeAllMenus() {
-        $('#menumovies, #menumusic, #menuartists, #menutvshow, #menupictures').show();
-    }
+    //var searchResults = {};
 
     function DistinctArray(array, ignorecase) {
         if (typeof ignorecase == "undefined" || array == null || array.length == 0)
@@ -98,7 +95,7 @@
     function videoDataCalls() {
         return [
             Kodi.API.Videos.Movies.getAllMovies(),
-            Kodi.API.Videos.TVShows.getAllTVShows().then(function (tvshows) {
+            Kodi.API.Videos.TVShows.getAllTVShows(), /*.then(function (tvshows) {
                 if (tvshows && tvshows.tvshows) {
                     return WinJSContrib.Promise.parallel(tvshows.tvshows, function (tvshow: Kodi.API.Videos.TVShows.TVShow) {
                         return Kodi.API.Videos.TVShows.loadTVShow(tvshow);
@@ -107,7 +104,7 @@
                     });
                 }
                 return tvshows;
-            }),
+            }),*/
             Kodi.API.Videos.Movies.getMovieGenres(),
             Kodi.API.Videos.TVShows.getTVShowsGenres(),
             Kodi.API.Videos.Movies.getRecentMovies(),
@@ -268,7 +265,7 @@
     }
 
     function buildLibrary(data) {
-        var tmplibrary = <IMediaLibrary>{};
+        var tmplibrary = <IMediaLibrary>{ syncdate: new Date() };
         if (searchIndex) {
             searchIndex.dispose();
         }
@@ -286,11 +283,14 @@
             })
         }
         library = tmplibrary;
-        searchIndex.save();
-        if (searchIndex) {
-            searchIndex.dispose();
-            searchIndex = null;
-        }
+        searchIndex.save().then(function () {
+            if (searchIndex) {
+                searchIndex.dispose();
+                searchIndex = null;
+            }
+        });
+        WinJSContrib.DataContainer.current.save("library-" + Kodi.API.currentSettings.name, library);
+        return tmplibrary;
     }
 
     export function showHideMenus() {
@@ -340,21 +340,42 @@
         var prom = new WinJS.Promise<IMediaLibrary>(function (complete, error) {
             Kodi.API.properties().done(function (sysprops) {
                 if (sysprops) {
-                    Kodi.NowPlaying.current.volume = sysprops.volume;
-                    Kodi.NowPlaying.current.muted = sysprops.muted;
+                    if (Kodi.NowPlaying.current) {
+                        Kodi.NowPlaying.current.volume = sysprops.volume;
+                        Kodi.NowPlaying.current.muted = sysprops.muted;
+                    }
 
                     Kodi.API.version = sysprops.version;
                 }
 
-                searchResults = {};
-                WinJS.Promise.join(rootDataCalls()).done(function (data) {
-                    activeAllMenus();
-                    buildLibrary(data);
-                    showHideMenus();
-                    WinJS.Application.queueEvent({ type: 'appdata.changed', catalog: library });
-                    complete(library);
-                }, function (err) {
-                    error(err);
+                //searchResults = {};
+                var loadFromAPI = function () {
+                    Kodi.NowPlaying.current.loadingLibrary = true;
+                    return WinJS.Promise.join(rootDataCalls()).then(function (data) {
+                        buildLibrary(data);
+                        showHideMenus();
+                        WinJS.Application.queueEvent({ type: 'appdata.changed', catalog: library });
+                        Kodi.NowPlaying.current.loadingLibrary = false;
+                    }, function (err) {
+                        Kodi.NowPlaying.current.loadingLibrary = false;
+                        return WinJS.Promise.wrapError(err);
+                    });
+                }
+
+                WinJSContrib.DataContainer.current.read<IMediaLibrary>("library-" + Kodi.API.currentSettings.name).then(function (savedlibrary) {
+                    if (savedlibrary) {
+                        library = savedlibrary;
+                        showHideMenus();
+                        complete(library);
+
+                        loadFromAPI().then(function () {
+                        }, function () {
+                        });
+
+                        return;
+                    }
+
+                    loadFromAPI().then(complete, error);
                 });
             }, function (err) {
                 error(err);
@@ -365,8 +386,10 @@
 
     export function checkSystemProperties() {
         Kodi.API.properties().done(function (sysprops) {
-            Kodi.NowPlaying.current.volume = sysprops.volume;
-            Kodi.NowPlaying.current.muted = sysprops.muted;
+            if (Kodi.NowPlaying.current) {
+                Kodi.NowPlaying.current.volume = sysprops.volume;
+                Kodi.NowPlaying.current.muted = sysprops.muted;
+            }
         });
     }
 
@@ -400,7 +423,7 @@
 
         return false;
     }
-        
+
     export function scanMovies() {
         var text = "Your media center will scan the library for new movies. Unfortunately, you won't get notified in this app when the task is over (upgrade to XBMC 12 to get this feature). \r\n\r\nDo you want to proceed ?";
         if (Kodi.API.Websocket.isReady()) {

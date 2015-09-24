@@ -68,7 +68,7 @@
                             return itemPromise.then(function (item) {
                                 return _this.flipviewtemplate.render(item.data).then(function (rendered) {
                                     WinJSContrib.UI.tap(rendered, function (elt) {
-                                        if (!_this.element.classList.contains("inactive")) {
+                                        if (_this.element && !_this.element.classList.contains("inactive")) {
                                             WinJS.Navigation.navigate("/pages/movies/detail/moviesdetail.html", { movie: item.data, navigateStacked: true });
                                         }
                                     }, { disableAnimation: true });
@@ -102,7 +102,7 @@
                             return itemPromise.then(function (item) {
                                 return _this.flipviewtemplate.render(item.data).then(function (rendered) {
                                     WinJSContrib.UI.tap(rendered, function (elt) {
-                                        if (!_this.element.classList.contains("inactive")) {
+                                        if (_this.element && !_this.element.classList.contains("inactive")) {
                                             WinJS.Navigation.navigate("/pages/tvshows/seriedetail/tvshowsseriedetail.html", { tvshow: item.data, navigateStacked: true });
                                         }
                                     }, { disableAnimation: true });
@@ -237,4 +237,3 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=home.js.map

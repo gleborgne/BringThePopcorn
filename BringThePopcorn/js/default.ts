@@ -129,6 +129,7 @@ module BtPo {
     });
 
     function appInit(args) {
+        WinJSContrib.Logs.getLogger("WinJSContrib.DataContainer.WinRT", { level: WinJSContrib.Logs.Levels.verbose, appenders: ["DefaultConsole"] });
         var pageshost = document.getElementById("pageshost");
 
         pageshost.winControl.fragmentInjector = function (pagecontrol) {

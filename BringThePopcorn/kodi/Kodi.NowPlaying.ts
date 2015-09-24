@@ -6,6 +6,7 @@
         progress: number;
         expanded: boolean;
         active: boolean;
+        loadingLibrary: boolean;
         enabled: boolean;
         label: string;
         time: string;
@@ -40,7 +41,7 @@
         id: null, position: 0, progress: 0, enabled: 0, speed: 0, label: '', time: '', totaltime: '', type: null,
         thumbnail: undefined, playerid: null, playlistid: null, volume: 0, muted: false, reachable: 0,
         subtitleenabled: false, currentsubtitle: null, currentaudiostream: null, expanded : false,
-        checking: false, hasLanguages: false, hasSubtitles: false, hasLanguagesOrSubtitles: false,
+        checking: false, hasLanguages: false, hasSubtitles: false, hasLanguagesOrSubtitles: false, loadingLibrary: false,
         isPlaying: false, isPlayingMusic: false, isPlayingVideo: false, isPlayingTvShow: false, isPlayingMovie: false
     });
 
@@ -95,6 +96,9 @@
 
     export function check(standby?) {
         return new WinJS.Promise(function (complete, error) {
+            if (!current)
+                current = new ObservablePlaying();
+
             if (standby) {
                 current.checking = true;
             }

@@ -30,6 +30,9 @@
             </div>
         </div>
         <div class="spacer" tap="toggleView" data-win-bind="display : enabled WinJSContrib.Bindings.hideIf"></div>
+        <div class="loading-state" data-win-bind="display : loadingLibrary WinJSContrib.Bindings.showIf">
+            <progress class="win-ring"></progress>
+        </div>
         <div class="actions" tap="toggleView">
             <button class="cmd btntoggle" member="togglebtn">
                 <i class="btpo-chevron-up"></i>

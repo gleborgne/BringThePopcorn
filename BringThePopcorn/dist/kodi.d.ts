@@ -56,6 +56,7 @@ interface JQuery {
 
 declare module Kodi.Data {
     interface IMediaLibrary {
+        syncdate: Date;
         artists: API.Music.Artist[];
         musicPictures: any[];
         moviesPictures: any[];
@@ -138,6 +139,7 @@ declare module Kodi.NowPlaying {
         progress: number;
         expanded: boolean;
         active: boolean;
+        loadingLibrary: boolean;
         enabled: boolean;
         label: string;
         time: string;
