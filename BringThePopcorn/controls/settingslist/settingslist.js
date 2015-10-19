@@ -47,11 +47,24 @@
                         var btnedit = elt.querySelector(".btnedit");
                         var btnconnect = elt.querySelector(".btnconnect");
                         var btnwakeup = elt.querySelector(".btnwakeup");
+                        var btnremove = elt.querySelector(".btnremove");
                         if (s == defaultsetting) {
                             var e = elt.querySelector(".name");
                             e.innerText = setting.name + ' (default)';
                             addInterval();
                         }
+                        WinJSContrib.UI.tap(btnremove, function () {
+                            WinJSContrib.Alerts.confirm("remove server settings", "Do you really want to remove " + setting.name + " ?", "yes", "no").then(function (confirmed) {
+                                var current = Kodi.API.currentSettings ? Kodi.API.currentSettings.name : null;
+                                Kodi.Settings.remove(setting.name);
+                                if (current == setting.name) {
+                                    return WinJS.Navigation.navigate("/pages/startup/startup.html");
+                                }
+                                else {
+                                    _this.renderSettings();
+                                }
+                            });
+                        });
                         WinJSContrib.UI.tap(btnedit, function () {
                             WinJS.Navigation.navigate("/pages/settings/serverdetail/serverdetail.html", { setting: s, navigateStacked: true });
                         });
@@ -84,7 +97,7 @@
                             btnwakeup.style.display = "none";
                         }
                         container.appendChild(elt);
-                        if (Kodi.API.currentSettings && setting.host == Kodi.API.currentSettings.host) {
+                        if (Kodi.API.currentSettings && setting.name == Kodi.API.currentSettings.name) {
                             elt.classList.add("current");
                         }
                     }));
@@ -118,3 +131,4 @@
         UI.SettingsList = WinJS.UI.Pages.define(SettingsListControl.url, SettingsListControl);
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
+//# sourceMappingURL=settingslist.js.map

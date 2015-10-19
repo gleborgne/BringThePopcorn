@@ -1,4 +1,7 @@
-﻿var BtPo;
+﻿//app insight 
+//https://github.com/Microsoft/ApplicationInsights-JS/blob/master/API-reference.md
+//https://azure.microsoft.com/fr-fr/documentation/articles/app-insights-javascript/
+var BtPo;
 (function (BtPo) {
     BtPo.debug = true;
 })(BtPo || (BtPo = {}));
@@ -274,3 +277,4 @@ var BtPo;
         ListHelpers.renderMenu = renderMenu;
     })(ListHelpers = BtPo.ListHelpers || (BtPo.ListHelpers = {}));
 })(BtPo || (BtPo = {}));
+//# sourceMappingURL=default.js.map

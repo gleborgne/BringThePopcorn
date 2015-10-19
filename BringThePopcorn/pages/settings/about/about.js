@@ -5,6 +5,7 @@
         processed: function (element, options) {
             var version = Windows.ApplicationModel.Package.current.id.version;
             this.versionNumber.innerText = version.major + '.' + version.minor + '.' + version.build + "." + version.revision;
+            //throw new Error("oula la la la")
         }
     });
 })();

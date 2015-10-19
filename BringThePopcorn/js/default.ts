@@ -1,4 +1,8 @@
-﻿declare module WinJSContrib.UI {
+﻿//app insight 
+//https://github.com/Microsoft/ApplicationInsights-JS/blob/master/API-reference.md
+//https://azure.microsoft.com/fr-fr/documentation/articles/app-insights-javascript/
+
+declare module WinJSContrib.UI {
     var FOWrapper: any;
     var enableSystemBackButton: boolean;
     var enableSystemBackButtonVisibility: boolean;

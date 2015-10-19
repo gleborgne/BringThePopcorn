@@ -53,6 +53,7 @@ this is a template for icon fonts
 .btpo-stop:before,
 .btpo-subtitle:before,
 .btpo-television:before,
+.btpo-trash:before,
 .btpo-wakeup:before,
 .btpo-zoom-minus:before,
 .btpo-zoom-plus:before {
@@ -107,6 +108,7 @@ this is a template for icon fonts
 .btpo-stop:before { content: "\E026" }
 .btpo-subtitle:before { content: "\E027" }
 .btpo-television:before { content: "\E028" }
-.btpo-wakeup:before { content: "\E029" }
-.btpo-zoom-minus:before { content: "\E02A" }
-.btpo-zoom-plus:before { content: "\E02B" }
+.btpo-trash:before { content: "\E029" }
+.btpo-wakeup:before { content: "\E02A" }
+.btpo-zoom-minus:before { content: "\E02B" }
+.btpo-zoom-plus:before { content: "\E02C" }

@@ -84,3 +84,4 @@
         Settings.list = list;
     })(Settings = Kodi.Settings || (Kodi.Settings = {}));
 })(Kodi || (Kodi = {}));
+//# sourceMappingURL=Kodi.Settings.js.map

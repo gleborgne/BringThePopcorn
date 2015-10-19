@@ -53,6 +53,7 @@
                     var btnedit = <HTMLElement>elt.querySelector(".btnedit");
                     var btnconnect = <HTMLElement>elt.querySelector(".btnconnect");
                     var btnwakeup = <HTMLElement>elt.querySelector(".btnwakeup");
+                    var btnremove = <HTMLElement>elt.querySelector(".btnremove");
 
                     if (s == defaultsetting) {
                         var e = <HTMLElement>elt.querySelector(".name")
@@ -60,7 +61,18 @@
                         addInterval();
                     }
 
-                    
+                    WinJSContrib.UI.tap(btnremove, () => {
+                        WinJSContrib.Alerts.confirm("remove server settings", "Do you really want to remove " + setting.name + " ?", "yes", "no").then((confirmed) => {
+                            var current = Kodi.API.currentSettings ? Kodi.API.currentSettings.name : null;
+                            Kodi.Settings.remove(setting.name);
+                            
+                            if (current == setting.name) {
+                                return WinJS.Navigation.navigate("/pages/startup/startup.html");
+                            } else {
+                                this.renderSettings();
+                            }
+                        });
+                    });
 
                     WinJSContrib.UI.tap(btnedit, () => {
                         WinJS.Navigation.navigate("/pages/settings/serverdetail/serverdetail.html", { setting: s, navigateStacked: true });
@@ -97,7 +109,7 @@
 
                     container.appendChild(elt);
 
-                    if (Kodi.API.currentSettings && setting.host == Kodi.API.currentSettings.host) {
+                    if (Kodi.API.currentSettings && setting.name == Kodi.API.currentSettings.name) {
                         elt.classList.add("current");
                     }
                 }));
