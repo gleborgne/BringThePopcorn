@@ -17,11 +17,52 @@ var BtPo = BtPo || {};
         return;
     }
         
+    function wrapError(err) {
+        var isError = Object.prototype.toString.call(err) === "[object Error]";
+        if (!isError) {
+            var res = new Error(err.message);
+            res.stack = err.stack;
+
+            if (err.detail) {
+                if (err.detail.message) {
+                    res.message = err.exception.message;
+                }
+                if (err.detail.stack) {
+                    res.stack = err.exception.stack;
+                }
+
+                if (err.detail.exception) {
+                    if (err.detail.exception.message) {
+                        res.message = err.detail.exception.message;
+                    }
+                    if (err.detail.exception.stack) {
+                        res.stack = err.detail.exception.stack;
+                    }
+                }
+            }
+
+            if (err.exception) {
+                if (err.exception.message) {
+                    res.message = err.exception.message;
+                }
+                if (err.exception.stack) {
+                    res.stack = err.exception.stack;
+                }
+            }
+        } else {
+            var res = err;
+        }
+
+        return res;
+    }
+    WinJS.Application.addEventListener("mcn-taperror", function (arg) {
+        BtPo.tracker.trackException(wrapError(arg.error), "Unhandled");
+    });
 
     BtPo.tracker = new Microsoft.ApplicationInsights.AppInsights({
         endpointUrl: "http://dc.services.visualstudio.com/v2/track",
-        enableDebug: true,
-        autoCollectErrors: true,
+        //enableDebug: true,
+        //autoCollectErrors: true,
         instrumentationKey: BtPo.trackerInstrumentationKey
     });
 
@@ -32,14 +73,17 @@ var BtPo = BtPo || {};
     }
 
     function getHardwareId() {
-        var token = Windows.System.Profile.HardwareIdentification.getPackageSpecificToken(null);
-        var hardwareId = token.id;
-        var dataReader = Windows.Storage.Streams.DataReader.fromBuffer(hardwareId);
+        var ht = Windows.System.Profile.HardwareIdentification.getPackageSpecificToken(null);
 
-        var bytes = [];
-        dataReader.readBytes(bytes);
+        var reader = Windows.Storage.Streams.DataReader.fromBuffer(ht.id);
+        var arr = new Array(ht.id.length);
+        reader.readBytes(arr);
 
-        return bytes.toString();
+        var id = "";
+        for (var j = 0; j < arr.length; j++) {
+            id += arr[j].toString();
+        }
+        return id;
     }
 
     function getNewtworkAdapter() {
@@ -67,19 +111,21 @@ var BtPo = BtPo || {};
     BtPo.tracker.context.addTelemetryInitializer(function (envelope) {
         merge(envelope.tags, tagsComplement);
         var telemetryItem = envelope.data.baseData;
-        var msprefix = "Microsoft.ApplicationInsights.";
-        var itemType = null;
-        if (envelope.name.indexOf(msprefix) == 0) {
-            itemType = envelope.name.substr(msprefix.length);
-            var newenveloppe = msprefix + envelope.iKey.replace(/-/g, '') + '.' + itemType;
-            envelope.name = newenveloppe;
-        }
+        if (telemetryItem){
+            var msprefix = "Microsoft.ApplicationInsights.";
+            var itemType = null;
+            if (envelope.name && envelope.name.indexOf(msprefix) == 0) {
+                itemType = envelope.name.substr(msprefix.length);
+                var newenveloppe = msprefix + envelope.iKey.replace(/-/g, '') + '.' + itemType;
+                envelope.name = newenveloppe;
+            }
 
-        if (itemType === "Exception" && telemetryItem.exceptions) {
-            telemetryItem.exceptions.forEach(function (e) {
-                e.id = 62619566;
-                e.typeName = e.message;
-            });
+            if (itemType === "Exception" && telemetryItem.exceptions && telemetryItem.exceptions.length) {
+                telemetryItem.exceptions.forEach(function (e) {
+                    e.id = 62619566;
+                    e.typeName = e.message;
+                });
+            }
         }
     });
 
@@ -90,7 +136,7 @@ var BtPo = BtPo || {};
 
     WinJS.Application.addEventListener("error", function (arg) {
         arg.detail.setPromise(WinJS.Promise.timeout(10000));
-        BtPo.tracker.trackException(arg.detail.error, "Unhandled");
+        BtPo.tracker.trackException(wrapError(arg.detail.error), "Unhandled");
         BtPo.tracker.flush();
 
         WinJS.Navigation.navigate("/pages/errorpage/errorpage.html");
