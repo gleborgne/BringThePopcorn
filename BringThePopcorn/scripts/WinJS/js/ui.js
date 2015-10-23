@@ -40951,15 +40951,17 @@ define('WinJS/Controls/Flyout',[
                         return;
                     }
 
-                    // May need to adjust top by viewport offset
-                    if (this._currentPosition.top < 0) {
-                        // Need to attach to bottom
-                        this._element.style.bottom = _Overlay._Overlay._keyboardInfo._visibleDocBottomOffset + "px";
-                        this._element.style.top = "auto";
-                    } else {
-                        // Normal, attach to top
-                        this._element.style.top = this._currentPosition.top + "px";
-                        this._element.style.bottom = "auto";
+                    if (this._currentPosition && this._element){
+                        // May need to adjust top by viewport offset
+                        if (this._currentPosition.top < 0) {
+                            // Need to attach to bottom
+                            this._element.style.bottom = _Overlay._Overlay._keyboardInfo._visibleDocBottomOffset + "px";
+                            this._element.style.top = "auto";
+                        } else {
+                            // Normal, attach to top
+                            this._element.style.top = this._currentPosition.top + "px";
+                            this._element.style.bottom = "auto";
+                        }
                     }
                 },
 
