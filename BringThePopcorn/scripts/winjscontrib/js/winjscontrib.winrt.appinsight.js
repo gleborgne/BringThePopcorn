@@ -3,10 +3,16 @@ WinJSContrib.WinRT = WinJSContrib.WinRT || {};
 var __global = this;
 
 /**
+AppInsight Javascript sdk works well for web applications but it lacks some meta for Windows web application.
+This wrapper is injecting those metadata and automatically add error tracking that will bubble in your applicationinsight dashboard
+
+
 To use appinsight, you must reference this file, and the appinsight js sdk (available here :https://github.com/Microsoft/ApplicationInsights-js)
 then, just new up an instance of AppInsight wrapper with your instrumentation key :
 var appinsightWrapper = new WinJSContrib.WinRT.AppInsight({ instrumentationKey: "appinsightInstrumentationkeyIGotOnAzurePortal" });
 appinsightWrapper.tracker.trackEvent("app start");
+
+
 */
 
 (function () {
@@ -76,8 +82,9 @@ appinsightWrapper.tracker.trackEvent("app start");
 				}
 				component.tracker.flush();
 
-				WinJS.Navigation.navigate("/pages/errorpage/errorpage.html");
-				return true;
+				if (component.onerror) {
+					return component.onerror(arg);
+				}
 			});
 		} else {
 			window.addEventListener("error", function (err, url, lineNumber) {
@@ -105,6 +112,9 @@ appinsightWrapper.tracker.trackEvent("app start");
 					component.tracker.trackException("unknown error", "Unhandled", arg.error || arg.detail);
 				}
 				component.tracker.flush();
+				if (component.ontaperror) {
+					return component.ontaperror(arg);
+				}
 			});
 		}
 	};
@@ -161,6 +171,14 @@ appinsightWrapper.tracker.trackEvent("app start");
 		}
 
 		return null;
+	}
+
+	WinJSContrib.WinRT.AppInsight.prototype.wrapWinJSNavigation = function (disablePageArguments) {
+		var component = this;
+		WinJS.Navigation.addEventListener("navigated", function (arg) {
+			var navargs = arg.detail;
+			component.tracker.trackPageView(null, navargs.location, disablePageArguments ? null : navargs.state);
+		});
 	}
 
 	function merge(source, addendum) {

@@ -11,5 +11,13 @@ var BtPo = BtPo || {};
 
     BtPo.appInsight = new WinJSContrib.WinRT.AppInsight({ instrumentationKey: BtPo.trackerInstrumentationKey });
     BtPo.appInsight.tracker.trackEvent("app start");
-    return;
+    BtPo.appInsight.wrapWinJSNavigation(false);
+    BtPo.appInsight.onerror = function (err) {
+        WinJS.Navigation.navigate("/pages/errorpage/errorpage.html");
+        return true;
+    }
+
+    BtPo.appInsight.ontaperror = function (err) {
+        //
+    }
 })();

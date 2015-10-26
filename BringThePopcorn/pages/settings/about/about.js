@@ -11,6 +11,7 @@
             //        ctrl.throwError();
             //    };
             //}
+            //ctrl.throwError();
         },
 
         throwError: function () {
