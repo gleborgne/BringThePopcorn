@@ -108,6 +108,7 @@
     <Content Include="scripts\winjscontrib\js\winjscontrib.search.worker.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.ui.datasourcemanager.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.ui.navigator.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.appinsight.js" />
     <Content Include="todo.txt" />
     <TypeScriptCompile Include="controls\genrespicker\genrepicker.ts" />
     <Content Include="controls\genrespicker\genrepicker.js" />
