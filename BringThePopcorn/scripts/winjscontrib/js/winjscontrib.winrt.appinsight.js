@@ -74,6 +74,7 @@ appinsightWrapper.tracker.trackEvent("app start");
 
 		if (__global.WinJS) {
 			WinJS.Application.addEventListener("error", function (arg) {
+				arg.detail.setPromise(WinJS.Promise.timeout(5000));
 				var err = component.wrapError(arg.detail);
 				if (err) {
 					component.tracker.trackException(err, "Unhandled");

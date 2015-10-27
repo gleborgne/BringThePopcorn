@@ -21,7 +21,7 @@
                 };
                 SettingsServerDetailPage.prototype.saveSetting = function () {
                     if (this.settingsForm.validate()) {
-                        if (this.settingName == Kodi.API.currentSettings.name) {
+                        if (Kodi.API.currentSettings && this.settingName == Kodi.API.currentSettings.name) {
                             Kodi.API.currentSettings = this.settingsForm.setting;
                         }
                         Kodi.Settings.save(this.settingName || this.settingsForm.setting.name, this.settingsForm.setting, this.isDefault);
