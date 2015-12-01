@@ -131,4 +131,5 @@
         UI.SettingsList = WinJS.UI.Pages.define(SettingsListControl.url, SettingsListControl);
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
+
 //# sourceMappingURL=settingslist.js.map

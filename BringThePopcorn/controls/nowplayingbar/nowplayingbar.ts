@@ -67,7 +67,10 @@ module BtPo.UI{
                 //}
                // var target = ctrl.container.clientHeight - ctrl.element.clientHeight;
                 //$.Velocity.hook(ctrl.playingElt, "top", "0");
-                WinJSContrib.UI.Application.navigator.pageControl.foWrapper.blurTo(0, 90);
+                var currentPage = WinJSContrib.UI.Application.navigator.pageControl;
+                if (currentPage && currentPage.foWrapper) {
+                    currentPage.foWrapper.blurTo(0, 90);
+                }
                 document.body.classList.remove("nowplaying-expanded");
                 Kodi.NowPlaying.current.expanded = false;
             }

@@ -108,10 +108,11 @@ appinsightWrapper.tracker.trackEvent("app start");
 
 				var err = component.wrapError(arg.error || arg.detail.error);
 				if (err) {
-					component.tracker.trackException(err, "Unhandled");
+				    component.tracker.trackException(err, "Unhandled tap error");
 				} else {
-					component.tracker.trackException("unknown error", "Unhandled", arg.error || arg.detail);
+					component.tracker.trackException("unknown tap error", "Unhandled tap error", arg.error || arg.detail);
 				}
+
 				component.tracker.flush();
 				if (component.ontaperror) {
 					return component.ontaperror(arg);

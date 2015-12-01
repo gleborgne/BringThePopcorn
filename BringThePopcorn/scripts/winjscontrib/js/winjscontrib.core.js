@@ -2309,7 +2309,7 @@ var WinJSContrib;
             var ptDown = function (event) {
                 var elt = event.currentTarget || event.target;
                 var tracking = elt.mcnTapTracking;
-                if (tracking && (event.button === undefined || event.button === 0 || (tracking.allowRickClickTap && event.button === 2))) {
+                if (!elt.disabled && tracking && (event.button === undefined || event.button === 0 || (tracking.allowRickClickTap && event.button === 2))) {
                     if (tracking.lock) {
                         if (event.pointerId && event.currentTarget.setPointerCapture)
                             event.currentTarget.setPointerCapture(event.pointerId);
@@ -2377,7 +2377,7 @@ var WinJSContrib;
                                     event.stopPropagation();
                                     event.preventDefault();
                                     var res = tracking.callback(elt, event);
-                                    if (WinJS.Promise.is(res)) {
+                                    if (res && WinJS.Promise.is(res)) {
                                         elt.disabled = true;
                                         WinJS.Utilities.addClass(elt, 'tap-working');
                                         res.then(function () {
