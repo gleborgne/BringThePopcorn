@@ -136,6 +136,11 @@ module BtPo {
         WinJSContrib.Logs.getLogger("WinJSContrib.DataContainer.WinRT", { level: WinJSContrib.Logs.Levels.verbose, appenders: ["DefaultConsole"] });
         var pageshost = document.getElementById("pageshost");
 
+        var qualifiers = (<any>Windows.ApplicationModel.Resources.Core.ResourceContext).getForCurrentView();
+        if (qualifiers.qualifierValues.DeviceFamily !== "Desktop") {
+            WinJSContrib.UI.FOWrapper.disabled = true;
+        }
+
         pageshost.winControl.fragmentInjector = function (pagecontrol) {
             var parent = pagecontrol.element.parentElement;
             var wrapper = new WinJSContrib.UI.FOWrapper();
@@ -174,6 +179,8 @@ module BtPo {
                 });
             }
         }
+
+        
 
         return WinJS.Navigation.navigate("/pages/bootstrap/bootstrap.html");
     }

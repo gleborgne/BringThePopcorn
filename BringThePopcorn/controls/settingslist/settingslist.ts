@@ -112,6 +112,8 @@
                     if (Kodi.API.currentSettings && setting.name == Kodi.API.currentSettings.name) {
                         elt.classList.add("current");
                     }
+
+                    WinJSContrib.UI.Pages.preload("/pages/settings/serverdetail/serverdetail.html");
                 }));
             });
 

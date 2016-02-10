@@ -112,6 +112,10 @@ var BtPo;
     function appInit(args) {
         WinJSContrib.Logs.getLogger("WinJSContrib.DataContainer.WinRT", { level: WinJSContrib.Logs.Levels.verbose, appenders: ["DefaultConsole"] });
         var pageshost = document.getElementById("pageshost");
+        var qualifiers = Windows.ApplicationModel.Resources.Core.ResourceContext.getForCurrentView();
+        if (qualifiers.qualifierValues.DeviceFamily !== "Desktop") {
+            WinJSContrib.UI.FOWrapper.disabled = true;
+        }
         pageshost.winControl.fragmentInjector = function (pagecontrol) {
             var parent = pagecontrol.element.parentElement;
             var wrapper = new WinJSContrib.UI.FOWrapper();
@@ -277,5 +281,4 @@ var BtPo;
         ListHelpers.renderMenu = renderMenu;
     })(ListHelpers = BtPo.ListHelpers || (BtPo.ListHelpers = {}));
 })(BtPo || (BtPo = {}));
-
 //# sourceMappingURL=default.js.map

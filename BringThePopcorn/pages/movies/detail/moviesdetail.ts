@@ -94,10 +94,12 @@
                     this.headerposter.style.opacity = '0';
                 }
             } else {
-                var val = (dif / h) + '';
-                this.headerbanner.style.opacity = val;
-                if (posterinbanner) {
-                    this.headerposter.style.opacity = val;
+                var val = (dif / h).toFixed(2) + '';
+                if (this.headerbanner.style.opacity != val) {
+                    this.headerbanner.style.opacity = val;
+                    if (posterinbanner) {
+                        this.headerposter.style.opacity = val;
+                    }
                 }
             }
         }

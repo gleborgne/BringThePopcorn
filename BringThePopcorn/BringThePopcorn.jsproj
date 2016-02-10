@@ -40,10 +40,19 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>14538270-1c70-4b16-af89-b8cb2ebeae3b</ProjectGuid>
-    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
     <TypeScriptEmitBOM>true</TypeScriptEmitBOM>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TypeScriptJSXEmit>react</TypeScriptJSXEmit>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <TypeScriptJSXEmit>react</TypeScriptJSXEmit>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TypeScriptJSXEmit>react</TypeScriptJSXEmit>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <TypeScriptJSXEmit>react</TypeScriptJSXEmit>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -107,6 +116,7 @@
     <Content Include="scripts\winjscontrib\js\winjscontrib.search.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.search.worker.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.ui.datasourcemanager.js" />
+    <Content Include="scripts\winjscontrib\js\winjscontrib.ui.fowrapper.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.ui.navigator.js" />
     <Content Include="scripts\winjscontrib\js\winjscontrib.winrt.appinsight.js" />
     <Content Include="todo.txt" />

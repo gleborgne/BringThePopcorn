@@ -80,7 +80,7 @@ gulp.task('compilewinjscontrib', function () {
     
     return merge([
         gulp.src([
-		    //'scripts/winjscontrib/js/winjscontrib.core.js',
+		    'scripts/winjscontrib/js/winjscontrib.core.js',
             'scripts/winjscontrib/js/winjscontrib.ui.webcomponents.js',
             'scripts/winjscontrib/js/winjscontrib.winrt.core.js',
 		    'scripts/winjscontrib/js/winjscontrib.winrt.upnp.js',
@@ -91,7 +91,7 @@ gulp.task('compilewinjscontrib', function () {
             //'scripts/winjscontrib/js/winjscontrib.search.js',
             'scripts/winjscontrib/js/winjscontrib.ui.jquery.js',
             'scripts/winjscontrib/js/winjscontrib.ui.dataform.js',
-            //'scripts/winjscontrib/js/winjscontrib.ui.navigator.js',
+            'scripts/winjscontrib/js/winjscontrib.ui.navigator.js',
             'scripts/winjscontrib/js/winjscontrib.ui.animation.js',
             'scripts/winjscontrib/js/winjscontrib.ui.elasticbutton.js',
             'scripts/winjscontrib/js/winjscontrib.ui.fowrapper.js',
@@ -104,7 +104,7 @@ gulp.task('compilewinjscontrib', function () {
         ], { base: '.', cwd: 'BringThePopcorn' })
 	    .pipe(plumber({ errorHandler: onError }))
 	    .pipe(sourcemaps.init())
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(concat('winjscontrib-custom.js'))
         .pipe(sourcemaps.write(".", {
             sourceRoot: function (file) {

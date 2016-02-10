@@ -19,6 +19,9 @@
             });
         }
 
+        ready(element, options) {
+        }
+
         pageNavActivate() {
             this.serversettings.renderSettings();
         }

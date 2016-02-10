@@ -100,6 +100,7 @@
                         if (Kodi.API.currentSettings && setting.name == Kodi.API.currentSettings.name) {
                             elt.classList.add("current");
                         }
+                        WinJSContrib.UI.Pages.preload("/pages/settings/serverdetail/serverdetail.html");
                     }));
                 });
                 return WinJS.Promise.join(p).then(function () {
@@ -131,5 +132,4 @@
         UI.SettingsList = WinJS.UI.Pages.define(SettingsListControl.url, SettingsListControl);
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
 //# sourceMappingURL=settingslist.js.map

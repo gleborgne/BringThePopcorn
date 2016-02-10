@@ -1,5 +1,5 @@
 ﻿/* 
- * WinJS Contrib v2.1.0.4
+ * WinJS Contrib v2.1.0.6
  * licensed under MIT license (see http://opensource.org/licenses/MIT)
  * sources available at https://github.com/gleborgne/winjscontrib
  */
@@ -144,7 +144,7 @@
          */
         {
             /**
-             * @field {
+             * @field 
              * @type HTMLElement
              */
             content: {
@@ -154,7 +154,7 @@
             },
 
             /**
-             * @field {
+             * @field 
              * @type HTMLElement
              */
             display: {

@@ -51,10 +51,12 @@
                         }
                     }
                     else {
-                        var val = (dif / h) + '';
-                        this.headerbanner.style.opacity = val;
-                        if (posterinbanner) {
-                            this.headerposter.style.opacity = val;
+                        var val = (dif / h).toFixed(2) + '';
+                        if (this.headerbanner.style.opacity != val) {
+                            this.headerbanner.style.opacity = val;
+                            if (posterinbanner) {
+                                this.headerposter.style.opacity = val;
+                            }
                         }
                     }
                 };
@@ -166,5 +168,4 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
 //# sourceMappingURL=tvshowsseriedetail.js.map

@@ -1,5 +1,5 @@
 ﻿/* 
- * WinJS Contrib v2.1.0.4
+ * WinJS Contrib v2.1.0.6
  * licensed under MIT license (see http://opensource.org/licenses/MIT)
  * sources available at https://github.com/gleborgne/winjscontrib
  */
@@ -397,8 +397,8 @@
          * @param {string[]} destProperty path to DOM element property targeted by binding
          */
         DataFormBinding: WinJS.Binding.initializer(function (source, sourceProperty, dest, destProperty) {
-            if (dest.binded && dest.winControl)
-                dest.winControl.dispose();
+            //if (dest.binded && dest.winControl)
+            //    dest.winControl.dispose();
 
             var dataform = WinJSContrib.UI.parentDataForm(dest);
             var options = WinJSContrib.UI.DataForm.DefaultBindingOptions;
@@ -434,15 +434,36 @@
                 if (typeof data === "undefined")
                     data = null;
 
-                data = converter.fromObject(data, options);
-
-                WinJSContrib.Utils.writeProperty(dest, destProperty, data);
+                if (dest.nodeName == "INPUT" && dest.type == "radio") {
+                    var fieldname = dest.name;
+                    if (dest.value == data) {
+                        dest.checked = true;
+                    }
+                } else {
+                    data = converter.fromObject(data, options);
+                    WinJSContrib.Utils.writeProperty(dest, destProperty, data);
+                }
             }
 
             function updateObjectFromInput() {
                 dataform.checkState();
                 if (!dest.id || dataform.validator.element(dest)) {
-                    var val = WinJSContrib.Utils.getProperty(dest, destProperty).propValue;
+                    var val = null;
+                    if (dest.nodeName == "INPUT" && dest.type == "radio") {
+                        var fieldname = dest.name;
+                        if (dest.form && dest.form[fieldname] && dest.form[fieldname].length) {
+                            for (var i = 0, l = dest.form[fieldname].length; i < l ; i++) {
+                                var field = dest.form[fieldname][i];
+                                if (field.checked){
+                                    val = field.value;
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        val = WinJSContrib.Utils.getProperty(dest, destProperty).propValue;
+                    }
+
                     if (val !== undefined)
                         val = converter.fromInput(val, options);
 

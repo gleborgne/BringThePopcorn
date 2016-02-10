@@ -1,5 +1,5 @@
 ﻿/* 
- * WinJS Contrib v2.1.0.4
+ * WinJS Contrib v2.1.0.6
  * licensed under MIT license (see http://opensource.org/licenses/MIT)
  * sources available at https://github.com/gleborgne/winjscontrib
  */
@@ -488,6 +488,31 @@ var WinJSContrib;
 
             bindingDesc[sourceProperty] = setVal;
             return WinJS.Binding.bind(source, bindingDesc);
+        });
+
+        /**
+         * Add tap by looking for a function in parent scope control, and add binded item to tap callback
+         * @function
+         * @param {Object} source object owning data
+         * @param {string[]} sourceProperty path to object data
+         * @param {HTMLElement} dest DOM element targeted by binding
+         * @param {string[]} destProperty path to DOM element property targeted by binding
+         */
+        WinJSContrib.Bindings.itemTap = WinJS.Binding.initializer(function twoWayOnChangeBinding(source, sourceProperty, dest, destProperty) {
+            //defer tap binding to let element being appended to DOM
+            setImmediate(function () {
+                var scope = WinJSContrib.Utils.getScopeControl(dest);
+                if (scope) {
+                    var tapCallback = WinJSContrib.Utils.readProperty(scope, destProperty);
+                    var lockpointer = dest.hasAttribute("lockpointer");
+                    if (tapCallback && typeof tapCallback == "function") {
+                        WinJSContrib.UI.tap(dest, function (arg) {
+                            var item = WinJSContrib.Utils.readProperty(source, sourceProperty);                            
+                            tapCallback.call(scope, { target : arg, detail: { element: arg, item: item } });
+                        }, { lock: lockpointer });
+                    }
+                }
+            });
         });
 
         /** 

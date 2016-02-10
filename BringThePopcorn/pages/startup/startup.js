@@ -18,6 +18,8 @@
                         }
                     });
                 };
+                StartUpPage.prototype.ready = function (element, options) {
+                };
                 StartUpPage.prototype.pageNavActivate = function () {
                     this.serversettings.renderSettings();
                 };
@@ -29,5 +31,4 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-
 //# sourceMappingURL=startup.js.map
