@@ -110,4 +110,5 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=moviesdetail.js.map
+
+//# sourceMappingURL=../../../../BringThePopcorn/pages/movies/detail/moviesdetail.js.map

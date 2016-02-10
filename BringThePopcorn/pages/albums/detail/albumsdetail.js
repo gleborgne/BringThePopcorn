@@ -58,4 +58,5 @@
         })(Pages = UI.Pages || (UI.Pages = {}));
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=albumsdetail.js.map
+
+//# sourceMappingURL=../../../../BringThePopcorn/pages/albums/detail/albumsdetail.js.map

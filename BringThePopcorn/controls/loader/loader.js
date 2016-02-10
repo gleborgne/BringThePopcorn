@@ -66,4 +66,5 @@
         };
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=loader.js.map
+
+//# sourceMappingURL=../../../BringThePopcorn/controls/loader/loader.js.map

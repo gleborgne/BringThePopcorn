@@ -176,4 +176,5 @@
         UI.RemoteController = WinJS.UI.Pages.define(RemoteControllerControl.url, RemoteControllerControl);
     })(UI = BtPo.UI || (BtPo.UI = {}));
 })(BtPo || (BtPo = {}));
-//# sourceMappingURL=remote.js.map
+
+//# sourceMappingURL=../../../BringThePopcorn/controls/remote/remote.js.map
