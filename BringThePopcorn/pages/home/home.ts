@@ -201,6 +201,14 @@
             Kodi.API.Videos.Movies.clean();
         }
 
+        scanMusic() {
+            Kodi.API.Music.scan();
+        }
+
+        cleanMusic() {
+            Kodi.API.Music.clean();
+        }
+
         moviesGenres() {
             if (this.data && this.data.movieGenres && this.data.movieGenres.genres) {
                 BtPo.UI.GenrePicker.pick(this.data.movieGenres.genres).then(function (genre) {
