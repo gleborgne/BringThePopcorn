@@ -99,6 +99,10 @@
         return API.kodiRequest('AudioLibrary.Scan', {});
     }
 
+    export function clean() {
+        return API.kodiRequest('AudioLibrary.Clean', {});
+    }
+
 
     //export function getFiles() : WinJS.Promise<any>  {
     //    return xbmcRequest('Files.GetSources', { "media": "music", "sort": { "method": "label", "order": "ascending" } });
